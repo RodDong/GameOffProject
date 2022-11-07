@@ -56,3 +56,9 @@ TagManager:
   - name: ForeGround
     uniqueID: 2434191169
     locked: 0
+  - name: Dialogues
+    uniqueID: 4205663895
+    locked: 0
+  - name: UI
+    uniqueID: 4267873615
+    locked: 0

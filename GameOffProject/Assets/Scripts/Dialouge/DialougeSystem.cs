@@ -66,12 +66,20 @@ public class DialougeSystem : MonoBehaviour
     {
         textFinished = false;
         textLabel.text = "";
+
+        if(index >= dialouge.Count){
+            index = 0;
+            gameObject.SetActive(false);
+        }
+        
         for (int i = 0; i < dialouge[index].Length; i++)
         {
             textLabel.text += dialouge[index][i];
             yield return new WaitForSeconds(waitSeconds);
         }
+
         index++;
+        
         textFinished = true;
     }
 }
