@@ -13,7 +13,8 @@ public class PlayerMove : MonoBehaviour
     enum State{
         Idle,
         Walk,
-        Sit
+        Sit,
+        Talk
     }
 
     float deltaTime;
@@ -73,14 +74,19 @@ public class PlayerMove : MonoBehaviour
     }
 
     void UpdateState(){
-        if(mCurState == State.Idle){
-            UpdateIdle();
-        }
-        if(mCurState == State.Walk){
-            UpdateWalk();
-        }
-        if(mCurState == State.Sit){
-            UpdateSit();
+        switch (mCurState) {
+            case State.Idle:
+                UpdateIdle();
+                break;
+            case State.Walk:
+                UpdateWalk();
+                break;
+            case State.Sit:
+                UpdateSit();
+                break;
+            case State.Talk:
+                UpdateTalk();
+                break;
         }
     }
 
@@ -98,6 +104,10 @@ public class PlayerMove : MonoBehaviour
     }
 
     void UpdateSit(){
+
+    }
+
+    void UpdateTalk() {
 
     }
 }
