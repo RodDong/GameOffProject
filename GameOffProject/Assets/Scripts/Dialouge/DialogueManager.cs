@@ -30,6 +30,10 @@ public class DialogueManager : MonoBehaviour
     
     private bool choiceMade = false; // used to keep track of choice status
 
+    private bool panelFadeIn = false;
+
+    private bool panelFadeOut = false;
+
     private Coroutine displayLineCoroutine;
 
     private static DialogueManager instance;
@@ -55,6 +59,7 @@ public class DialogueManager : MonoBehaviour
     private void Start() 
     {
         dialogueIsPlaying = false;
+        dialoguePanel.GetComponent<CanvasGroup>().alpha = 0.0f;
         dialoguePanel.SetActive(false);
 
         // get the layout animator
@@ -73,11 +78,11 @@ public class DialogueManager : MonoBehaviour
     private void Update() 
     {
         // return right away if dialogue isn't playing
+        UpdateDialoguePanel();
         if (!dialogueIsPlaying) 
         {
             return;
         }
-
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 
@@ -92,6 +97,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
+        panelFadeIn = true;
         dialoguePanel.SetActive(true);
 
         // reset portrait, layout, and speaker
@@ -105,12 +111,55 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator ExitDialogueMode() 
     {
         yield return new WaitForSeconds(0.2f);
-
+        
         dialogueIsPlaying = false;
+        panelFadeOut = true;
         dialoguePanel.SetActive(false);
+        
         dialogueText.text = "";
 
         player.ExitDialogueMode();
+    }
+
+    private void UpdateDialoguePanel()
+    {
+        if (panelFadeIn)
+        {
+            FadeIn();
+        }
+
+        if (panelFadeOut)
+        {
+            FadeOut();
+        }
+    }
+
+    private void FadeIn()
+    {
+        CanvasGroup dialoguePanelCanvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
+        
+        if(dialoguePanelCanvasGroup.alpha < 1.0f)
+        {
+            dialoguePanelCanvasGroup.alpha += Time.deltaTime;
+        }
+        else
+        {
+            panelFadeIn = false;
+        }
+    }
+
+    private void FadeOut()
+    {
+        CanvasGroup dialoguePanelCanvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
+        
+        if(dialoguePanelCanvasGroup.alpha > 0.0f)
+        {
+            dialoguePanelCanvasGroup.alpha -= Time.deltaTime;
+        }
+        else
+        {
+            panelFadeOut = false;
+        }
     }
 
     private void ContinueStory() 
