@@ -8,15 +8,16 @@ using UnityEngine.EventSystems;
 public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
-    [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private float typingSpeed = 0.1f;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
-    // [SerializeField] private TextMeshProUGUI displayNameText;
-    // [SerializeField] private Animator portraitAnimator;
+    [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private Animator portraitAnimator;
     // private Animator layoutAnimator;
+    [SerializeField] private PlayerMove player;
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -80,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 
-            && (Input.GetKeyDown(KeyCode.R) || choiceMade))
+            && (Input.GetMouseButtonDown(0) || choiceMade))
         {
             choiceMade = false;
             ContinueStory();
@@ -94,8 +95,8 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         // reset portrait, layout, and speaker
-        // displayNameText.text = "???";
-        // portraitAnimator.Play("default");
+        displayNameText.text = "???";
+        portraitAnimator.Play("default");
         // layoutAnimator.Play("right");
 
         ContinueStory();
@@ -108,6 +109,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        player.ExitDialogueMode();
     }
 
     private void ContinueStory() 
@@ -131,6 +134,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line) 
     {
+        
         // empty the dialogue text
         dialogueText.text = "";
         // hide items while text is typing
@@ -141,12 +145,16 @@ public class DialogueManager : MonoBehaviour
 
         bool isAddingRichTextTag = false;
 
+        int i = 0;
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
-        {
+        {   
+            i++;
+            print(i);
             // if the submit button is pressed, finish up displaying the line right away
-            // if (InputManager.GetInstance().GetSubmitPressed()) 
+            if (i > 5 && Input.GetMouseButton(0)) 
             {
+                Debug.Log("Early Exit");
                 dialogueText.text = line;
                 break;
             }
@@ -202,10 +210,10 @@ public class DialogueManager : MonoBehaviour
             switch (tagKey) 
             {
                 case SPEAKER_TAG:
-                    // displayNameText.text = tagValue;
+                    displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
-                    // portraitAnimator.Play(tagValue);
+                    portraitAnimator.Play(tagValue);
                     break;
                 case LAYOUT_TAG:
                     // layoutAnimator.Play(tagValue);

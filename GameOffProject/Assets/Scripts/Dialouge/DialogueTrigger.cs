@@ -12,6 +12,8 @@ public class DialogueTrigger : MonoBehaviour
 
     private bool playerInRange;
 
+    private PlayerMove playerObject;
+
     private void Awake() 
     {
         playerInRange = false;
@@ -23,8 +25,9 @@ public class DialogueTrigger : MonoBehaviour
         if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying) 
         {
             visualCue.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.R)) 
+            if (Input.GetMouseButtonUp(0)) 
             {
+                playerObject.EnterDialogueMode();
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
             }
         }
@@ -38,6 +41,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            playerObject = collider.gameObject.GetComponent<PlayerMove>();
             playerInRange = true;
         }
     }
@@ -46,6 +50,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            playerObject = null;
             playerInRange = false;
         }
     }

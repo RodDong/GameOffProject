@@ -39,17 +39,20 @@ public class PlayerMove : MonoBehaviour
         Vector3 playerScale = mPlayerTransform.localScale;
 
         faceRight = playerScale.x < 0;
-
+        
         ProcessInput(deltaTime);
         UpdatePlayerHorizontalVelocity();
         UpdateState();
     }
 
     void ProcessInput(float deltaTime){
-
         Vector2 mPlayerScale = mPlayerTransform.localScale;
 
         //A to move left, D to move right
+        if (mCurState == State.Talk) {
+            return;
+        }
+
         if(Input.GetKey(KeyCode.A)){
             if(faceRight){
                 mPlayerScale.x *= -1;
@@ -67,7 +70,27 @@ public class PlayerMove : MonoBehaviour
         mPlayerTransform.localScale = mPlayerScale;
     }
 
+    public void EnterDialogueMode() {
+        if (mCurState == State.Talk) {
+            Debug.LogError("Trying to enter dialogue mode when already in dialogue mode");
+        } else {
+            mCurState = State.Talk;
+        }
+    }
+
+    public void ExitDialogueMode() {
+        if (mCurState != State.Talk) {
+            Debug.LogError("Trying to exit dialogue mode when not in dialogue mode");
+        } else {
+            mCurState = State.Idle;
+        }
+    }
+
     void UpdatePlayerHorizontalVelocity(){
+        if (mCurState == State.Talk) {
+            return;
+        }
+        
         Vector2 tempV = mPlayerRigidBody.velocity;
         tempV.x = Input.GetAxisRaw("Horizontal") * mPlayerSpeed;
         mPlayerRigidBody.velocity = tempV;
