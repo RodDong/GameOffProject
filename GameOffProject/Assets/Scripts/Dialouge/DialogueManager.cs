@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
+    [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private PlayerMove player;
 
@@ -40,6 +41,7 @@ public class DialogueManager : MonoBehaviour
 
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
+    private const string TACHIE_TAG = "tachie";
     private const string LAYOUT_TAG = "layout";
 
     private void Awake() 
@@ -263,6 +265,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case PORTRAIT_TAG:
                     portraitAnimator.Play(tagValue);
+                    break;
+                case TACHIE_TAG:
+                    tachieAnimator.Play(tagValue);
                     break;
                 case LAYOUT_TAG:
                     // layoutAnimator.Play(tagValue);
