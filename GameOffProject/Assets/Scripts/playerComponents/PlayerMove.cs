@@ -9,12 +9,14 @@ public class PlayerMove : MonoBehaviour
     Collider2D mPlayerCollider;
     Rigidbody2D mPlayerRigidBody;
     Transform mPlayerTransform;
+    [SerializeField] GameObject battleUI;
 
     enum State{
         Idle,
         Walk,
         Sit,
-        Talk
+        Talk,
+        Battle
     }
 
     float deltaTime;
@@ -84,6 +86,7 @@ public class PlayerMove : MonoBehaviour
         } else {
             mCurState = State.Idle;
         }
+        mCurState = State.Battle;
     }
 
     void UpdatePlayerHorizontalVelocity(){
@@ -110,6 +113,9 @@ public class PlayerMove : MonoBehaviour
             case State.Talk:
                 UpdateTalk();
                 break;
+            case State.Battle:
+                UpdateBattle();
+                break;
         }
     }
 
@@ -132,5 +138,12 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateTalk() {
 
+    }
+
+    void UpdateBattle()
+    {
+        mCurState = State.Idle;
+        battleUI.SetActive(true);
+        transform.parent.gameObject.SetActive(false);
     }
 }

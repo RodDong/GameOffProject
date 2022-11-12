@@ -2436,6 +2436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df3401d7b3146c43bd0bf54858d6efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleUI: {fileID: 1834850490}
   mPlayerSpeed: 3
 --- !u!95 &1156033449
 Animator:
@@ -3607,6 +3608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 126556769}
+  gamObjectsInScene: {fileID: 1930688376}
   maxHealth: 100
 --- !u!1 &1854394775
 GameObject:
