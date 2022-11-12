@@ -3602,6 +3602,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1857458781}
   displayNameText: {fileID: 885501412}
   portraitAnimator: {fileID: 1854394777}
+  tachieObject: {fileID: 1146104328}
   tachieAnimator: {fileID: 1146104330}
   player: {fileID: 1156033448}
   choices:

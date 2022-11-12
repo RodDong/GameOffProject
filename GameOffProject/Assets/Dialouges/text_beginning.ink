@@ -1,15 +1,15 @@
 
-... // # fades out, sense of unexpectedness. an alarm clock cracks into the depth of dream
+... #speaker:P #portrait:neutural #tachie:none // # fades out, sense of unexpectedness. an alarm clock cracks into the depth of dream
 
 
 
  
 // #fade in. he finally recovers full conciousness staring into himself from the mirror. pale light, pale face. tiredness float everywhere. warm water running in the sink. shirt collar fits uncomfortably around the neck. another morning, at least the clock shows so. 
  
- ...
+ ... 
 
 
-P. "What was it... again? "
+P. "What was it... again? " 
 
 P. *sigh*
 

@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
+    [SerializeField] private GameObject tachieObject;
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private PlayerMove player;
@@ -265,6 +266,8 @@ public class DialogueManager : MonoBehaviour
                     portraitAnimator.Play(tagValue);
                     break;
                 case TACHIE_TAG:
+                    Debug.Log(tagValue == "none");
+                    tachieObject.SetActive(tagValue != "none");
                     tachieAnimator.Play(tagValue);
                     break;
                 case LAYOUT_TAG:
