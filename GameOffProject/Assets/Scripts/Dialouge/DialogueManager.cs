@@ -201,11 +201,9 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {   
             i++;
-            print(i);
             // if the submit button is pressed, finish up displaying the line right away
             if (i > 5 && Input.GetMouseButton(0)) 
             {
-                Debug.Log("Early Exit");
                 dialogueText.text = line;
                 break;
             }
