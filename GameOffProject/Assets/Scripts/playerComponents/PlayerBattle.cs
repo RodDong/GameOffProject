@@ -87,7 +87,7 @@ public class PlayerBattle : MonoBehaviour
 
     void RegenerateHealth(float heal)
     {
-        curHealth += heal;
+        curHealth = Mathf.Min(curHealth + heal, maxHealth);
     }
 
     void TakeDamage(float damage)
