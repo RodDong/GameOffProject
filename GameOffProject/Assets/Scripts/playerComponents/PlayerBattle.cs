@@ -8,18 +8,22 @@ public class PlayerBattle : MonoBehaviour
 
     enum State
     {
+        Preparation,
         PlayerTurn,
         EnemyTurn,
         Death,
         Win
     }
 
+    public GameObject enemy;
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
 
     [SerializeField]
     float maxHealth;
     float curHealth;
+    
+    PlayerStatus playerStatus;
 
     State mCurState;
 
@@ -27,6 +31,7 @@ public class PlayerBattle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // initialize player status
         curHealth = maxHealth;
         mCurState = State.PlayerTurn;
         gameObject.SetActive(false);
@@ -43,6 +48,9 @@ public class PlayerBattle : MonoBehaviour
     {
         switch (mCurState)
         {
+            case State.Preparation:
+                UpdatePlayerTurn();
+                break;
             case State.PlayerTurn:
                 UpdatePlayerTurn();
                 break;
