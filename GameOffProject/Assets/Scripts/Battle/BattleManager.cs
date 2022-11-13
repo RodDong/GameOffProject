@@ -14,20 +14,19 @@ public class BattleManager : MonoBehaviour
         Win
     }
 
-    public GameObject enemy;
-    public GameObject player;
+    //public GameObject enemy;
+    GameObject player;
 
     [SerializeField] GameObject battleUI;
 
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
 
-    [SerializeField]
     float maxHealth;
     float curHealth;
 
     PlayerStatus playerStatus;
-    EnemyStatus enemyStatus;
+    //EnemyStatus enemyStatus;
 
     State mCurState;
 
@@ -37,13 +36,15 @@ public class BattleManager : MonoBehaviour
         mCurState = State.Preparation;
         battleUI.SetActive(false);
 
+        player = GameObject.FindGameObjectWithTag("Player");
+
         // initialize player status
         playerStatus = player.GetComponent<PlayerStatus>();
         maxHealth = playerStatus.getMaxHealth();
         curHealth = maxHealth;
 
         // initialize enemy status
-        enemyStatus = enemy.GetComponent<EnemyStatus>();
+        //enemyStatus = enemy.GetComponent<EnemyStatus>();
 
     }
 
@@ -88,6 +89,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdatePlayerTurn()
     {
+
         //Player Standby Phase
 
         //Player Battle Phase
@@ -97,6 +99,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdateEnemyTurn()
     {
+
         //Enemy Standby Phase
 
         //Enemy Battle Phase
@@ -129,5 +132,20 @@ public class BattleManager : MonoBehaviour
     {
         gamObjectsInScene.SetActive(true);
         battleUI.SetActive(false);
+    }
+
+    public void UseSkill1()
+    {
+        Skill skill = playerStatus.GetSkills()[0];
+    }
+
+    public void UseSkill2()
+    {
+
+    }
+
+    public void UseSkill3()
+    {
+
     }
 }

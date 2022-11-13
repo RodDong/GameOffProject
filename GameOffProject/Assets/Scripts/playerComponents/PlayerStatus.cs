@@ -19,6 +19,9 @@ public class PlayerStatus : MonoBehaviour
 
     // Current Skills: List of size 3?4
     private List<Skill> skills;
+
+    public List<Skill> GetSkills() {return skills;}
+
     private EyeBrow equippedEyebrow;
     private Eye equippedEyes;
     private Mouth equippedMouth;
