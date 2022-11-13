@@ -25,6 +25,9 @@ public class PlayerStatus : MonoBehaviour
     // idx 1: defense skill
     // idx 2: buff/debuff skill
     private List<Skill> skills;
+
+    public List<Skill> GetSkills() {return skills;}
+
     private EyeBrow equippedEyebrow;
     private Eye equippedEyes;
     private Mouth equippedMouth;
