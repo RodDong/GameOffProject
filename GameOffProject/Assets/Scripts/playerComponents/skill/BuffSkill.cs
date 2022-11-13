@@ -30,17 +30,18 @@ public class BuffSkill : Skill
         }
     }
 
-    public BuffType processBuff() {
-        if (duration > 0) {
-            switch(id) {
-                case BuffSkillId.TEST_BUFF_SKILL_1:
-                    duration -= 1;
-                    return BuffType.TEST_BUFF_1;
-                default:
-                    return BuffType.None;
-            }
-        } else {
-            return BuffType.None;
-        }
-    }
+    // move to buff class
+    // public BuffType processBuff() {
+    //     if (duration > 0) {
+    //         switch(id) {
+    //             case BuffSkillId.TEST_BUFF_SKILL_1:
+    //                 duration -= 1;
+    //                 return BuffType.TEST_BUFF_1;
+    //             default:
+    //                 return BuffType.None;
+    //         }
+    //     } else {
+    //         return BuffType.None;
+    //     }
+    // }
 }

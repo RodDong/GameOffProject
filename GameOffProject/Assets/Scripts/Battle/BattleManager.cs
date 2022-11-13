@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Skill;
 
 public class BattleManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class BattleManager : MonoBehaviour
     float curHealth;
 
     PlayerStatus playerStatus;
-    //EnemyStatus enemyStatus;
+    EnemyStatus enemyStatus;
 
     State mCurState;
 
@@ -44,7 +45,7 @@ public class BattleManager : MonoBehaviour
         curHealth = maxHealth;
 
         // initialize enemy status
-        //enemyStatus = enemy.GetComponent<EnemyStatus>();
+        enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
     }
 
@@ -134,22 +135,50 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
     }
 
-    public void UseSkill1()
-    {
-        Skill skill = playerStatus.GetSkills()[0];
-        Skill.SkillType type = skill.getSkillType();
-        
+    // skill slot 1: attack skill
+    // skill slot 2: defense skill
+    // skill slot 3: buff/debuff skill
+    public void processAttackSkill() {
+        AttackSkill attackSkill = (AttackSkill) playerStatus.GetSkills()[0];
+        SkillAttribute attribute = attackSkill.GetSkillAttribute();
+        float playerATK = playerStatus.getATKbyAttribute(attribute);
+        float targetDEF = enemyStatus.getDEFbyAttribute(attribute);
+        enemyStatus.TakeDamage(attackSkill.getAttackSkillDamage(playerATK, targetDEF));
+
+        mCurState = State.EnemyTurn;
     }
 
-    public void UseSkill2()
-    {
-        Skill skill = playerStatus.GetSkills()[1];
-        Skill.SkillType type = skill.getSkillType();
+    public void processDefenseSkill() {
+        DefenseSkill defenseSkill = (DefenseSkill) playerStatus.GetSkills()[1];
+        SkillAttribute attribute = defenseSkill.GetSkillAttribute();
+
+        // process defense skill
+
+        mCurState = State.EnemyTurn;
     }
 
-    public void UseSkill3()
-    {
+    public void processEffectSkill() {
         Skill skill = playerStatus.GetSkills()[2];
-        Skill.SkillType type = skill.getSkillType();
+        SkillType type = skill.getSkillType();
+        switch(type) {
+            case SkillType.BUFF:
+                processBuffSkill((BuffSkill) skill);
+                break;
+            case SkillType.DEBUFF:
+                processDebuffSkill((DebuffSkill) skill);
+                break;
+            default:
+                break;
+        }
+
+        mCurState = State.EnemyTurn;
+    }
+
+    public void processBuffSkill(BuffSkill skill) {
+        // process buff skill
+    }
+
+    public void processDebuffSkill(DebuffSkill skill) {
+        // process debuff skill
     }
 }

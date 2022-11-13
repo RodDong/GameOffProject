@@ -30,17 +30,18 @@ public class DebuffSkill : Skill
         }
     }
 
-    public DebuffType processDebuff() {
-        if (duration > 0) {
-            switch(id) {
-                case DebuffSkillId.TEST_DEBUFF_SKILL_1:
-                    duration -= 1;
-                    return DebuffType.TEST_DEBUFF_1;
-                default:
-                    return DebuffType.None;
-            }
-        } else {
-            return DebuffType.None;
-        }
-    }
+    // move to debuff class
+    // public DebuffType processDebuff() {
+    //     if (duration > 0) {
+    //         switch(id) {
+    //             case DebuffSkillId.TEST_DEBUFF_SKILL_1:
+    //                 duration -= 1;
+    //                 return DebuffType.TEST_DEBUFF_1;
+    //             default:
+    //                 return DebuffType.None;
+    //         }
+    //     } else {
+    //         return DebuffType.None;
+    //     }
+    // }
 }

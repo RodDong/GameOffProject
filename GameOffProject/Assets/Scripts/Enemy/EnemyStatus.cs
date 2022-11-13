@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Skill;
 
-public class EnemyStatus
+public class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float health;
@@ -20,6 +21,32 @@ public class EnemyStatus
         } else {
             health -= damage;
             return false;
+        }
+    }
+
+    public float getATKbyAttribute(SkillAttribute attribute) {
+        switch(attribute) {
+            case SkillAttribute.HAPPY:
+                return happyATK;
+            case SkillAttribute.SAD:
+                return sadATK;
+            case SkillAttribute.ANGRY:
+                return angryATK;
+            default:
+                return 0.0f;
+        }
+    }
+
+    public float getDEFbyAttribute(SkillAttribute attribute) {
+        switch(attribute) {
+            case SkillAttribute.HAPPY:
+                return happyDEF;
+            case SkillAttribute.SAD:
+                return sadDEF;
+            case SkillAttribute.ANGRY:
+                return angryDEF;
+            default:
+                return 0.0f;
         }
     }
 

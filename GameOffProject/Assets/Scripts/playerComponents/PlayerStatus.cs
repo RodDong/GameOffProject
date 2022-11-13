@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static Eye;
 using static EyeBrow;
 using static Mouth;
+using static Skill;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -74,6 +75,32 @@ public class PlayerStatus : MonoBehaviour
 
     public float getMaxHealth() {
         return MAX_HEALTH;
+    }
+
+    public float getATKbyAttribute(SkillAttribute attribute) {
+        switch(attribute) {
+            case SkillAttribute.HAPPY:
+                return happyATK;
+            case SkillAttribute.SAD:
+                return sadATK;
+            case SkillAttribute.ANGRY:
+                return angryATK;
+            default:
+                return 0.0f;
+        }
+    }
+
+    public float getDEFbyAttribute(SkillAttribute attribute) {
+        switch(attribute) {
+            case SkillAttribute.HAPPY:
+                return happyDEF;
+            case SkillAttribute.SAD:
+                return sadDEF;
+            case SkillAttribute.ANGRY:
+                return angryDEF;
+            default:
+                return 0.0f;
+        }
     }
 
     public void setHappyATK(float happyATK) {
