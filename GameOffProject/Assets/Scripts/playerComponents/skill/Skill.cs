@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static AttackSkill;
-public class Skill : MonoBehaviour
+public class Skill
 {
     public enum SkillType {
         ATTACK,

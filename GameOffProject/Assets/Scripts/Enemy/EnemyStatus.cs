@@ -6,6 +6,12 @@ public class EnemyStatus : MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float health;
+    protected float happyATK;
+    protected float happyDEF;
+    protected float sadATK;
+    protected float sadDEF;
+    protected float angryATK;
+    protected float angryDEF;
 
 
     // Start is called before the first frame update
