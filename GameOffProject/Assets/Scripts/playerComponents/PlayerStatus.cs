@@ -37,6 +37,7 @@ public class PlayerStatus : MonoBehaviour
     private List<Mouth> ownedMouth = new List<Mouth>();
 
     private void Awake() {
+        // for test purposes -
         equippedEyebrow = new EyeBrow(EyeBrowId.TEST_EYEBROW_1);
         equippedEyes = new Eye(EyeId.TEST_EYE_1);
         equippedMouth = new Mouth(MouthId.TEST_MOUTH_1);
@@ -44,6 +45,8 @@ public class PlayerStatus : MonoBehaviour
         ownedEyebrows.Add(equippedEyebrow);
         ownedEyes.Add(equippedEyes);
         ownedMouth.Add(equippedMouth);
+        updateStatus();
+        // - for test purposes
     }
 
     // Start is called before the first frame update

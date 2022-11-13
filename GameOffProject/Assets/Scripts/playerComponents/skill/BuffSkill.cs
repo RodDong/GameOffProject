@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Buff;
 
 public class BuffSkill : Skill
 {
-    public enum BuffType {
-        None,
-        TEST_BUFF_1
-    }
     public enum BuffSkillId {
         TEST_BUFF_SKILL_1,
         TEST_BUFF_SKILL_HAPPY,
@@ -15,7 +12,7 @@ public class BuffSkill : Skill
         TEST_BUFF_SKILL_ANGRY
     }
     private BuffSkillId id;
-    private int duration;
+    private Buff buff;
     public BuffSkill(BuffSkillId id) {
         this.id = id;
 
@@ -25,23 +22,12 @@ public class BuffSkill : Skill
                 attribute = SkillAttribute.SAD;
                 displayName = "test buff";
                 power = 50;
-                duration = 3;
+                buff = new Buff(BuffId.TEST_BUFF_1);
                 break;
         }
     }
 
-    // move to buff class
-    // public BuffType processBuff() {
-    //     if (duration > 0) {
-    //         switch(id) {
-    //             case BuffSkillId.TEST_BUFF_SKILL_1:
-    //                 duration -= 1;
-    //                 return BuffType.TEST_BUFF_1;
-    //             default:
-    //                 return BuffType.None;
-    //         }
-    //     } else {
-    //         return BuffType.None;
-    //     }
-    // }
+    public Buff getBuff() {
+        return buff;
+    }
 }

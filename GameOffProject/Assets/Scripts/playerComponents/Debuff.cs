@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buff
+public class Debuff
 {
-    public enum BuffId {
-        // attack up
-        TEST_BUFF_1,
+    public enum DebuffId {
+        // miss rate
+        TEST_DEBUFF_1,
     }
 
-    private BuffId id;
+    private DebuffId id;
     private int duration;
 
-    public Buff(BuffId id) {
+    public Debuff(DebuffId id) {
         switch(id) {
-            case BuffId.TEST_BUFF_1:
+            case DebuffId.TEST_DEBUFF_1:
                 duration = 3;
                 break;
             default:
                 break;
         }
     }
-
-    public bool processBuff() {
+    
+    public bool processDebuff() {
         if (duration > 0) {
             duration -= 1;
             return true;

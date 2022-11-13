@@ -14,6 +14,19 @@ public class EnemyStatus: MonoBehaviour
     protected float angryATK;
     protected float angryDEF;
 
+    private void Awake() {
+        // for test purposes -
+        MAX_HEALTH = 500.0f;
+        health = MAX_HEALTH;
+        happyATK = 50.0f;
+        happyDEF = 50.0f;
+        sadATK = 50.0f;
+        sadDEF = 50.0f;
+        angryATK = 50.0f;
+        angryDEF = 50.0f;
+        // - for test purposes
+    }
+
     public bool TakeDamage(float damage) {
         if (health <= damage) {
             health = 0;

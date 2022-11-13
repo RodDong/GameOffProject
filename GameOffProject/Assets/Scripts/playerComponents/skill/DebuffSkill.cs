@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Debuff;
 
 public class DebuffSkill : Skill
 {
-    public enum DebuffType {
-        None,
-        TEST_DEBUFF_1
-    }
     public enum DebuffSkillId {
         TEST_DEBUFF_SKILL_1,
         TEST_DEBUFF_SKILL_HAPPY,
@@ -15,7 +12,7 @@ public class DebuffSkill : Skill
         TEST_DEBUFF_SKILL_ANGRY
     }
     private DebuffSkillId id;
-    private int duration;
+    private Debuff debuff;
     public DebuffSkill(DebuffSkillId id) {
         this.id = id;
 
@@ -25,23 +22,8 @@ public class DebuffSkill : Skill
                 attribute = SkillAttribute.SAD;
                 displayName = "test debuff";
                 power = 50;
-                duration = 3;
+                debuff = new Debuff(DebuffId.TEST_DEBUFF_1);
                 break;
         }
     }
-
-    // move to debuff class
-    // public DebuffType processDebuff() {
-    //     if (duration > 0) {
-    //         switch(id) {
-    //             case DebuffSkillId.TEST_DEBUFF_SKILL_1:
-    //                 duration -= 1;
-    //                 return DebuffType.TEST_DEBUFF_1;
-    //             default:
-    //                 return DebuffType.None;
-    //         }
-    //     } else {
-    //         return DebuffType.None;
-    //     }
-    // }
 }
