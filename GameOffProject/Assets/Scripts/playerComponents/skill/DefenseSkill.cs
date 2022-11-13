@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class DefenseSkill : Skill
 {
+    private const float k = 1.0f;
     public enum DefenseSkillId {
         TEST_DEFENSE_SKILL_1,
+        TEST_DEFENSE_SKILL_HAPPY,
+        TEST_DEFENSE_SKILL_SAD,
+        TEST_DEFENSE_SKILL_ANGRY
     }
     private DefenseSkillId id;
+    private int immuneCounter;
+    private int reflectCounter;
     public DefenseSkill(DefenseSkillId id) {
         this.id = id;
 
@@ -15,8 +21,33 @@ public class DefenseSkill : Skill
             case DefenseSkillId.TEST_DEFENSE_SKILL_1:
                 type = SkillType.DEFENSE;
                 attribute = SkillAttribute.HAPPY;
+                displayName = "test defense";
                 power = 50;
+                immuneCounter = 1;
                 break;
         }
+    }
+
+    public bool processImmune() {
+        if (immuneCounter > 0) {
+            immuneCounter -= 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public bool processReflect() {
+        if (reflectCounter > 0) {
+            reflectCounter -= 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // heal = (targetATK/100)*power*k
+    public float getHealAmount(float targetATK) {
+        return (targetATK/100.0f) * power * k;
     }
 }

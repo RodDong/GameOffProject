@@ -31,4 +31,23 @@ public class PlayerStatus : MonoBehaviour
         // initialize eyes, eyebrow, mouth
         // initialize skills based on equipments.
     }
+
+    public float getHappyATK() {
+        return happyATK;
+    }
+    public float getHappyDEF() {
+        return happyDEF;
+    }
+    public float getSadATK() {
+        return sadATK;
+    }
+    public float getSadDEF() {
+        return sadDEF;
+    }
+    public float getAngryATK() {
+        return angryATK;
+    }
+    public float getAngryDEF() {
+        return angryDEF;
+    }
 }

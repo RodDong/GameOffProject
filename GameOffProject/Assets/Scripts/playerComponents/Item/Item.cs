@@ -11,6 +11,8 @@ public class Item : MonoBehaviour
     protected float angryATK;
     protected float angryDEF;
     protected Skill skill;
+    protected string displayName;
+    protected string imageSrc;
 
     public float getHappyATK() {
         return happyATK;
@@ -32,5 +34,12 @@ public class Item : MonoBehaviour
     }
     public Skill getSkill() {
         return skill;
+    }
+
+    public string getDisplayName() {
+        return displayName;
+    }
+    public string getImageSrc() {
+        return imageSrc;
     }
 }

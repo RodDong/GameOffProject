@@ -8,6 +8,9 @@ public class Mouth : Item
 {
     public enum MouthId {
         TEST_MOUTH_1,
+        TEST_MOUTH_HAPPY,
+        TEST_MOUTH_SAD,
+        TEST_MOUTH_ANGRY
     }
     private MouthId id;
 
@@ -23,6 +26,37 @@ public class Mouth : Item
                 angryATK = 50f;
                 angryDEF = 50f;
                 skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
+                displayName = "test mouth";
+                break;
+            case MouthId.TEST_MOUTH_HAPPY:
+                happyATK = 50f;
+                happyDEF = 50f;
+                sadATK = 50f;
+                sadDEF = 50f;
+                angryATK = 50f;
+                angryDEF = 50f;
+                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
+                displayName = "test mouth happy";
+                break;
+            case MouthId.TEST_MOUTH_SAD:
+                happyATK = 50f;
+                happyDEF = 50f;
+                sadATK = 50f;
+                sadDEF = 50f;
+                angryATK = 50f;
+                angryDEF = 50f;
+                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
+                displayName = "test mouth sad";
+                break;
+            case MouthId.TEST_MOUTH_ANGRY:
+                happyATK = 50f;
+                happyDEF = 50f;
+                sadATK = 50f;
+                sadDEF = 50f;
+                angryATK = 50f;
+                angryDEF = 50f;
+                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
+                displayName = "test mouth angry";
                 break;
         }
     }
