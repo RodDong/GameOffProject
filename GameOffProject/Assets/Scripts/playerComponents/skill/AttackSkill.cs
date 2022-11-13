@@ -25,7 +25,7 @@ public class AttackSkill : Skill
         }
     }
 
-    // damage = random(0.95, 1.05) * (atk/def)*power*k
+    // damage = random(0.95, 1.05) * (atk/def) * power * k
     public float getAttackSkillDamage(float attackerATK, float targetDEF) {
         return getSkillRandom() * (attackerATK / targetDEF) * power * k;
     }

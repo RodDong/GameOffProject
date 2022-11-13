@@ -46,8 +46,8 @@ public class DefenseSkill : Skill
         }
     }
 
-    // heal = (targetATK/100)*power*k
+    // heal = random(0.95, 1.05) * (targetATK/100) * power * k
     public float getHealAmount(float targetATK) {
-        return (targetATK/100.0f) * power * k;
+        return getSkillRandom() * (targetATK/100.0f) * power * k;
     }
 }
