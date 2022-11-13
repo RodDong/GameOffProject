@@ -39,7 +39,7 @@ public class BattleManager : MonoBehaviour
 
         // initialize player status
         playerStatus = player.GetComponent<PlayerStatus>();
-        maxHealth = playerStatus.maxHealth;
+        maxHealth = playerStatus.getMaxHealth();
         curHealth = maxHealth;
 
         // initialize enemy status

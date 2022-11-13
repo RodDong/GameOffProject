@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private const float MAX_HEALTH = 120;
+    public const float MAX_HEALTH = 120;
     private float currentHealth;
     private float happyATK;
     private float happyDEF;
@@ -49,5 +49,9 @@ public class PlayerStatus : MonoBehaviour
     }
     public float getAngryDEF() {
         return angryDEF;
+    }
+
+    public float getMaxHealth() {
+        return MAX_HEALTH;
     }
 }
