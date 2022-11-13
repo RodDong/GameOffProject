@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyStatus : MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float health;
@@ -20,8 +20,8 @@ public class Enemy : MonoBehaviour
         
     }
 
-    bool TakeDamage(float damage) {
-        return false;
+    void TakeDamage(float damage) {
+        health -= damage;
     }
 
     void makeMove() {
