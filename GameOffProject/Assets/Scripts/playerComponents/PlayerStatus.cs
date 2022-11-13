@@ -20,7 +20,7 @@ public class PlayerStatus : MonoBehaviour
     // Current Skills: List of size 3?4
     private List<Skill> skills;
     private EyeBrow equippedEyebrow;
-    private Eyes equippedEyes;
+    private Eye equippedEyes;
     private Mouth equippedMouth;
 
 
@@ -31,5 +31,4 @@ public class PlayerStatus : MonoBehaviour
         // initialize eyes, eyebrow, mouth
         // initialize skills based on equipments.
     }
-
 }

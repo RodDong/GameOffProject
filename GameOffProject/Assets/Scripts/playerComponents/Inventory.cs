@@ -5,13 +5,13 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     List<EyeBrow> allEyebrow;
-    List<Eyes> allEyes;
+    List<Eye> allEyes;
     List<Mouth> allMouth;
     List<EyeBrow> ownedEyebrow;
-    List<Eyes> ownedEyes;
+    List<Eye> ownedEyes;
     List<Mouth> ownedMouth;
     EyeBrow equipedEyebrow;
-    Eyes equipedEyes;
+    Eye equipedEyes;
     Mouth equipedMouth; 
 
     // Start is called before the first frame update
