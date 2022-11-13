@@ -137,15 +137,19 @@ public class BattleManager : MonoBehaviour
     public void UseSkill1()
     {
         Skill skill = playerStatus.GetSkills()[0];
+        Skill.SkillType type = skill.getSkillType();
+        
     }
 
     public void UseSkill2()
     {
-
+        Skill skill = playerStatus.GetSkills()[1];
+        Skill.SkillType type = skill.getSkillType();
     }
 
     public void UseSkill3()
     {
-
+        Skill skill = playerStatus.GetSkills()[2];
+        Skill.SkillType type = skill.getSkillType();
     }
 }
