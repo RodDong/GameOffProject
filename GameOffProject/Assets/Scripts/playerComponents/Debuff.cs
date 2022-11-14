@@ -22,12 +22,8 @@ public class Debuff
         }
     }
     
-    public bool processDebuff() {
-        if (duration > 0) {
-            duration -= 1;
-            return true;
-        } else {
-            return false;
-        }
+    public bool decreaseCounter() {
+        duration -= 1;
+        return duration <= 0;
     }
 }
