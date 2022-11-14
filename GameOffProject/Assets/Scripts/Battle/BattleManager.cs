@@ -174,11 +174,11 @@ public class BattleManager : MonoBehaviour
         mCurState = State.EnemyTurn;
     }
 
-    public void processBuffSkill(BuffSkill skill) {
+    void processBuffSkill(BuffSkill skill) {
         // process buff skill
     }
 
-    public void processDebuffSkill(DebuffSkill skill) {
+    void processDebuffSkill(DebuffSkill skill) {
         // process debuff skill
     }
 }
