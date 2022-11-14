@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 using static Eye;
 using static EyeBrow;
 using static Mouth;
@@ -17,6 +19,12 @@ public class PlayerStatus : MonoBehaviour
     private float sadDEF;
     private float angryATK;
     private float angryDEF;
+
+    [SerializeField] GameObject Buttons;
+    [SerializeField] Button buttonPrefab;
+    [SerializeField] GameObject Description;
+    [SerializeField] GameObject Stats;
+    
 
     // a list of currently active BUFFs
     // ? a list of currently active DeBUFFs? Maybe put this on enemy status
@@ -35,6 +43,8 @@ public class PlayerStatus : MonoBehaviour
     private List<EyeBrow> ownedEyebrows = new List<EyeBrow>();
     private List<Eye> ownedEyes = new List<Eye>();
     private List<Mouth> ownedMouth = new List<Mouth>();
+
+    private List<Button> skillSet = new List<Button>();
 
     private void Awake() {
         // for test purposes -
@@ -55,6 +65,11 @@ public class PlayerStatus : MonoBehaviour
         currentHealth = MAX_HEALTH;
         // initialize eyes, eyebrow, mouth
         // initialize skills based on equipments.
+    }
+
+    void Update()
+    {
+        DisplayStats();
     }
 
     public float getHappyATK() {
@@ -186,5 +201,89 @@ public class PlayerStatus : MonoBehaviour
         // idx 2: buff/debuff skill
         newSkills.Add(equippedMouth.getSkill());
         setSkills(newSkills);
+    }
+
+    public void DisplayStats()
+    {
+        string happyAttack = "HappyAttack: ";
+        happyAttack += getHappyATK() + "\n";
+
+        string angryAttack = "AngryAttack: ";
+        angryAttack += getAngryATK() + "\n";
+
+        string sadAttack = "SadAttack: ";
+        sadAttack += getSadATK() + "\n";
+
+        string happyDefense = "HappyDefense: ";
+        happyDefense += getHappyDEF() + "\n";
+
+        string angryDefense = "AngryDefense: ";
+        angryDefense += getAngryDEF() + "\n";
+
+        string sadDefense = "SadDefense: ";
+        sadDefense += getSadDEF() + "\n";
+
+        string stats = happyAttack + angryAttack + sadAttack + happyDefense + angryDefense + sadDefense;
+
+        Stats.GetComponentInChildren<TextMeshProUGUI>().text = stats;
+    }
+
+    public void DisplayEyeBrowInv()
+    {
+        float posX = -200.0f;
+        float posY = -30.0f;
+        for (int i = 0; i < ownedEyebrows.Count; i++)
+        {
+            Button tempButton = Button.Instantiate(buttonPrefab);
+            Transform tempButtonTrans = tempButton.GetComponent<Transform>();
+            tempButtonTrans.SetParent(Buttons.transform);
+            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
+            tempButtonTrans.localScale = new Vector3(1.25f,1.25f,0);
+            Item curItem = ownedEyebrows[i];
+            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem);});
+            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyebrows[i].getDisplayName();
+            posY -= 60.0f;
+        }
+    }
+
+    public void DisplayEyesInv()
+    {
+        float posX = -200.0f;
+        float posY = -30.0f;
+        for (int i = 0; i < ownedEyes.Count; i++)
+        {
+            Button tempButton = Button.Instantiate(buttonPrefab);
+            Transform tempButtonTrans = tempButton.GetComponent<Transform>();
+            tempButtonTrans.SetParent(Buttons.transform);
+            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
+            tempButtonTrans.localScale = new Vector3(1.25f,1.25f,0);
+            Item curItem = ownedEyes[i];
+            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem);});
+            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
+            posY -= 60.0f;
+        }
+    }
+
+    public void DisplayMouthInv()
+    {
+        float posX = -200.0f;
+        float posY = -30.0f;
+        for (int i = 0; i < ownedMouth.Count; i++)
+        {
+            Button tempButton = Button.Instantiate(buttonPrefab);
+            Transform tempButtonTrans = tempButton.transform;
+            tempButtonTrans.SetParent(Buttons.transform);
+            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
+            tempButtonTrans.localScale = new Vector3(1.25f,1.25f,0);
+            Item curItem = ownedMouth[i];
+            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
+            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
+            posY -= 60.0f;
+        }
+    }
+
+    public void DisplayDescription(Item item)
+    {
+        Description.GetComponent<TextMeshProUGUI>().text = item.getDescription();
     }
 }

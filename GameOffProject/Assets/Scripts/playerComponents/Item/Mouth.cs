@@ -27,6 +27,7 @@ public class Mouth : Item
                 angryDEF = 50f;
                 skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth";
+                itemDescription = "test description";
                 break;
             case MouthId.TEST_MOUTH_HAPPY:
                 happyATK = 50f;

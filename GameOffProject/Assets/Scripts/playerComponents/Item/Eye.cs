@@ -26,6 +26,7 @@ public class Eye : Item
                 angryDEF = 50f;
                 skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_1);
                 displayName = "test eye";
+                itemDescription = "test description";
                 break;
             case EyeId.TEST_EYE_HAPPY:
                 happyATK = 50f;

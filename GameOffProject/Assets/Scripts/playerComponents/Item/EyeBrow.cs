@@ -26,6 +26,7 @@ public class EyeBrow : Item
                 angryDEF = 50f;
                 skill = new DefenseSkill(DefenseSkillId.TEST_DEFENSE_SKILL_1);
                 displayName = "test eyebrow";
+                itemDescription = "test description";
                 break;
             case EyeBrowId.TEST_EYEBROW_HAPPY:
                 happyATK = 50f;

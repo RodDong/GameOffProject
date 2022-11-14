@@ -13,6 +13,7 @@ public class Item
     protected Skill skill;
     protected string displayName;
     protected string imageSrc;
+    protected string itemDescription;
 
     public float getHappyATK() {
         return happyATK;
@@ -41,5 +42,9 @@ public class Item
     }
     public string getImageSrc() {
         return imageSrc;
+    }
+    public string getDescription()
+    {
+        return itemDescription;
     }
 }
