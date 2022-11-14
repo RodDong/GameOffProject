@@ -25,8 +25,40 @@ public class PlayerStatus : MonoBehaviour
     // idx 0: attack skill
     // idx 1: defense skill
     // idx 2: buff/debuff skill
-    private List<Skill> skills;
+   
+    private List<Buff> buffs;
+    private List<Debuff> debuffs; 
 
+    // process round counters for buffs and debuffs
+    public void updateBuffDebuffStatus() {
+        for (int i = buffs.Count - 1; i >= 0; i--) {
+            if (buffs[i].decreaseCounter()) {
+                buffs.RemoveAt(i);
+            }
+        }
+        for (int i = debuffs.Count - 1; i >= 0; i--) {
+            if (debuffs[i].decreaseCounter()) {
+                debuffs.RemoveAt(i);
+            }
+        }
+    }
+
+    public bool activateBuff(Buff buff) {
+        for (int i = 0; i < buffs.Count; i++) {
+            if (buffs[i].GetBuffId() == buff.GetBuffId()) {
+                buffs[i].resetDuration();
+                return true;
+            }
+        }
+        buffs.Insert(0, buff);
+        return false;
+    }
+
+    public void clearBuff() {
+        buffs.Clear();
+    }
+
+    private List<Skill> skills;
     public List<Skill> GetSkills() {return skills;}
 
     private EyeBrow equippedEyebrow;
@@ -55,6 +87,22 @@ public class PlayerStatus : MonoBehaviour
         currentHealth = MAX_HEALTH;
         // initialize eyes, eyebrow, mouth
         // initialize skills based on equipments.
+    }
+
+    public bool TakeDamage(float damage, SkillAttribute type) {
+        currentHealth -= damage / getDEFbyAttribute(type);
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+            return true;
+        }
+        return false;
+    }
+
+    public void ProcessHealing(float healAmount) {
+        currentHealth += healAmount;
+        if (currentHealth > MAX_HEALTH) {
+            currentHealth = MAX_HEALTH;
+        }
     }
 
     public float getHappyATK() {
