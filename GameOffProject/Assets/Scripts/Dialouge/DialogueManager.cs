@@ -266,7 +266,6 @@ public class DialogueManager : MonoBehaviour
                     portraitAnimator.Play(tagValue);
                     break;
                 case TACHIE_TAG:
-                    Debug.Log(tagValue == "none");
                     tachieObject.SetActive(tagValue != "none");
                     tachieAnimator.Play(tagValue);
                     break;

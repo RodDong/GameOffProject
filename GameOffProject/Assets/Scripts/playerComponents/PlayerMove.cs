@@ -84,6 +84,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void ExitDialogueMode() {
+        
         if (mCurState != State.Talk) {
             Debug.LogError("Trying to exit dialogue mode when not in dialogue mode");
         } else {
@@ -152,7 +153,6 @@ public class PlayerMove : MonoBehaviour
     {
         InventoryUI.SetActive(false);
         InventoryButton.SetActive(false);
-        mCurState = State.Idle;
         battleUI.SetActive(true);
         transform.parent.gameObject.SetActive(false);
     }
