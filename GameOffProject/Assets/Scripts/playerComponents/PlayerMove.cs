@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     Transform mPlayerTransform;
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject InventoryUI, InventoryButton;
+    Animator playerAnimator;
 
     enum State{
         Idle,
@@ -34,6 +35,7 @@ public class PlayerMove : MonoBehaviour
         mPos = mPlayerTransform.position;
         mPlayerCollider = mPlayer.GetComponent<Collider2D>();
         mPlayerRigidBody = mPlayer.GetComponent<Rigidbody2D>();
+        playerAnimator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -126,6 +128,7 @@ public class PlayerMove : MonoBehaviour
         if(mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
         }
+        playerAnimator.Play("Idle");
     }
 
     void UpdateWalk(){
@@ -133,6 +136,7 @@ public class PlayerMove : MonoBehaviour
         if(mPlayerRigidBody.velocity == Vector2.zero){
             mCurState = State.Idle;
         }
+        playerAnimator.Play("PlayerWalk");
     }
 
     void UpdateSit(){
