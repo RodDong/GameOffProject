@@ -141,7 +141,7 @@ public class BattleManager : MonoBehaviour
     // skill slot 1: attack skill
     // skill slot 2: defense skill
     // skill slot 3: buff/debuff skill
-    public void processAttackSkill() {
+/*    public void processAttackSkill() {
         AttackSkill attackSkill = (AttackSkill) playerStatus.GetSkills()[0];
         SkillAttribute attribute = attackSkill.GetSkillAttribute();
         float playerATK = playerStatus.getATKbyAttribute(attribute);
@@ -149,7 +149,7 @@ public class BattleManager : MonoBehaviour
         enemyStatus.TakeDamage(attackSkill.getAttackSkillDamage(playerATK, targetDEF));
 
         mCurState = State.EnemyTurn;
-    }
+    }*/
 
     public void processDefenseSkill() {
         DefenseSkill defenseSkill = (DefenseSkill) playerStatus.GetSkills()[1];
