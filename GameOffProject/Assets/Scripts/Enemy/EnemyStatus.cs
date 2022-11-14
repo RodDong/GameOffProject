@@ -13,6 +13,10 @@ public class EnemyStatus: MonoBehaviour
     protected float sadDEF;
     protected float angryATK;
     protected float angryDEF;
+    protected int hitsTakenCounter;
+    protected int attackCounter;
+    protected List<Buff> buffs;
+    protected List<Debuff> debuffs;
 
     private void Awake() {
         // for test purposes -
