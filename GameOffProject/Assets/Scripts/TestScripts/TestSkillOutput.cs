@@ -43,7 +43,7 @@ public class TestSkillOutput : MonoBehaviour
             case SkillType.DEFENSE:
                 switch (skill.GetSkillAttribute()) {
                     case SkillAttribute.HAPPY:
-                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus.getHappyATK()));
+                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
                         break;
                     case SkillAttribute.SAD:
                         playerStatus.activateBuff(new Buff(Buff.BuffId.IMMUNE));
