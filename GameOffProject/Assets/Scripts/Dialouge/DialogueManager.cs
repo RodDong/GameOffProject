@@ -20,7 +20,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private PlayerMove player;
-
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -82,6 +81,7 @@ public class DialogueManager : MonoBehaviour
     {
         // return right away if dialogue isn't playing
         UpdateDialoguePanel();
+        
         if (!dialogueIsPlaying) 
         {
             return;

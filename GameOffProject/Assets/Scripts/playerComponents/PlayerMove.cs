@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D mPlayerRigidBody;
     Transform mPlayerTransform;
     [SerializeField] GameObject battleUI;
+    [SerializeField] GameObject InventoryUI, InventoryButton;
 
     enum State{
         Idle,
@@ -121,27 +122,32 @@ public class PlayerMove : MonoBehaviour
 
     //TODO: update player based on player state
     void UpdateIdle(){
+        InventoryButton.SetActive(true);
         if(mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
         }
     }
 
     void UpdateWalk(){
+        InventoryButton.SetActive(true);
         if(mPlayerRigidBody.velocity == Vector2.zero){
             mCurState = State.Idle;
         }
     }
 
     void UpdateSit(){
-
+        InventoryButton.SetActive(true);
     }
 
     void UpdateTalk() {
-
+        InventoryUI.SetActive(false);
+        InventoryButton.SetActive(false);
     }
 
     void UpdateBattle()
     {
+        InventoryUI.SetActive(false);
+        InventoryButton.SetActive(false);
         mCurState = State.Idle;
         battleUI.SetActive(true);
         transform.parent.gameObject.SetActive(false);

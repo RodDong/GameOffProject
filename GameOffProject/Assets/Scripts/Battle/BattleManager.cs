@@ -19,7 +19,6 @@ public class BattleManager : MonoBehaviour
     GameObject player;
 
     [SerializeField] GameObject battleUI;
-
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
 
@@ -30,6 +29,9 @@ public class BattleManager : MonoBehaviour
     EnemyStatus enemyStatus;
 
     State mCurState;
+    bool isInBattle = false;
+    public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
+    public bool GetIsInBattle() { return isInBattle; }
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,7 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         UpdateHealth();
         UpdateCurState();
     }
