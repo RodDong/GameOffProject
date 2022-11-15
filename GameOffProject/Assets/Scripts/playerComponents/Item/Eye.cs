@@ -12,6 +12,9 @@ public class Eye : Item
         TEST_EYE_ANGRY
     }
     private EyeId id;
+    public EyeId getID() {
+        return id;
+    }
 
     public Eye(EyeId id) {
         this.id = id;

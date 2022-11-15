@@ -13,6 +13,9 @@ public class PlayerStatus : MonoBehaviour
 {
     public const float MAX_HEALTH = 120;
     private float currentHealth;
+    public float getCurrentHealth() {
+        return currentHealth;
+    } 
     private float happyATK;
     private float happyDEF;
     private float sadATK;
