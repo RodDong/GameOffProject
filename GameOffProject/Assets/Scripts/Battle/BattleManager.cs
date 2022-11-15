@@ -278,7 +278,15 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
             if (Item.Equals(eb, ownedEBs[i])) {
-                EyeBrow neweb = ownedEBs[(i-1)%n];
+                EyeBrow neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEBs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEBs[(i - 1) % n];
+                }
                 playerStatus.setEquippedEyeBrow(neweb);
                 playerStatus.updateStatus();
                 eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
@@ -308,8 +316,18 @@ public class BattleManager : MonoBehaviour
         int n = ownedEs.Count;
         for (int i = 0; i < n; i++)
         {
+
             if (Item.Equals(eb, ownedEs[i])) {
-                Eye neweb = ownedEs[(i-1)%n];
+
+                Eye neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEs[(i - 1) % n];
+                }
                 playerStatus.setEquippedEyes(neweb);
                 playerStatus.updateStatus();
                 eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
@@ -340,7 +358,15 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
             if (Item.Equals(eb, ownedEs[i])) {
-                Mouth neweb = ownedEs[(i-1)%n];
+                Mouth neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEs[(i - 1) % n];
+                }
                 playerStatus.setEquippedMouth(neweb);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());

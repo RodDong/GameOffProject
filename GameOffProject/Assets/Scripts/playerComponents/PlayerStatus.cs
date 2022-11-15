@@ -83,6 +83,8 @@ public class PlayerStatus : MonoBehaviour
         equippedMouth = new Mouth(MouthId.TEST_MOUTH_1);
 
         ownedEyebrows.Add(equippedEyebrow);
+        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_HAPPY));
+        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_SAD));
         ownedEyes.Add(equippedEyes);
         ownedMouth.Add(equippedMouth);
         updateStatus();

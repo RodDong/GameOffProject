@@ -48,6 +48,10 @@ public class EyeBrow : Item
                 angryDEF = 50f;
                 skill = new DefenseSkill(DefenseSkillId.TEST_DEFENSE_SKILL_1);
                 displayName = "test eyebrow happy";
+                itemDescription = "test description";
+                imageSrc = imgRoot + "1EyebrowH_N";
+                highLightedImage = imgRoot + "1EyebrowH_H";
+                selectedImage = imgRoot + "1EyebrowH_S";
                 break;
             case EyeBrowId.TEST_EYEBROW_SAD:
                 happyATK = 50f;
@@ -58,6 +62,10 @@ public class EyeBrow : Item
                 angryDEF = 50f;
                 skill = new DefenseSkill(DefenseSkillId.TEST_DEFENSE_SKILL_1);
                 displayName = "test eyebrow sad";
+                itemDescription = "test description";
+                imageSrc = imgRoot + "1EyebrowS_N";
+                highLightedImage = imgRoot + "1EyebrowS_H";
+                selectedImage = imgRoot + "1EyebrowS_S";
                 break;
             case EyeBrowId.TEST_EYEBROW_ANGRY:
                 happyATK = 50f;
@@ -68,6 +76,9 @@ public class EyeBrow : Item
                 angryDEF = 50f;
                 skill = new DefenseSkill(DefenseSkillId.TEST_DEFENSE_SKILL_1);
                 displayName = "test eyebrow angry";
+                imageSrc = imgRoot + "1EyebrowA_N";
+                highLightedImage = imgRoot + "1EyebrowA_H";
+                selectedImage = imgRoot + "1EyebrowA_S";
                 break;
         }
     }
