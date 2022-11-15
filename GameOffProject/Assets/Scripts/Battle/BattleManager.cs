@@ -53,11 +53,12 @@ public class BattleManager : MonoBehaviour
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
         // mask UI
-        
-        
+
+
     }
 
-    void Update() {
+    void Update()
+    {
         // nothing to do here.
         // all state transition is either instantanious or based on timer
         // or based user input
@@ -72,7 +73,7 @@ public class BattleManager : MonoBehaviour
             eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
             mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
         }
-        
+
     }
 
     void UpdateCurState()
@@ -139,15 +140,18 @@ public class BattleManager : MonoBehaviour
     }
 
     #region Handle Skill Button Click
-    void handleKeyboardInput() {
+    void handleKeyboardInput()
+    {
         // TODO:
         // Q E, A D, Z C to change equipment
         // W, S, X for detailed item info
         // J K L for skills
     }
 
-    void useSkill(int skillSlotNumber) {
-        switch (skillSlotNumber) {
+    void useSkill(int skillSlotNumber)
+    {
+        switch (skillSlotNumber)
+        {
             case 0:
                 if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
                     processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
@@ -156,20 +160,20 @@ public class BattleManager : MonoBehaviour
                 else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_ANGRY)
                     processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_ANGRY));
                 break;
-            case 1: 
+            case 1:
                 if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
                     processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_HAPPY));
                 else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
                     processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_SAD));
                 else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
-            case 2: 
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY)); break;
+            case 2:
                 if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
                     processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
                 else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
                     processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
                 else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY)); break;
             default: return;
         }
     }
@@ -178,17 +182,21 @@ public class BattleManager : MonoBehaviour
 
     #region Process Skills
 
-    public void processSkill(Skill skill) {
-        switch (skill.getSkillType()) {
+    public void processSkill(Skill skill)
+    {
+        switch (skill.getSkillType())
+        {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
                 enemyStatus.TakeDamage(atkSkill.getAttackSkillDamage(playerStatus, enemyStatus));
-                if (skill.GetSkillAttribute() == SkillAttribute.ANGRY) {
+                if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
+                {
                     playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
                 }
                 break;
             case SkillType.DEFENSE:
-                switch (skill.GetSkillAttribute()) {
+                switch (skill.GetSkillAttribute())
+                {
                     case SkillAttribute.HAPPY:
                         playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
                         break;
@@ -201,7 +209,8 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
             case SkillType.BUFF:
-                switch (skill.GetSkillAttribute()) {
+                switch (skill.GetSkillAttribute())
+                {
                     case SkillAttribute.HAPPY:
                         playerStatus.activateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                         break;
@@ -214,8 +223,8 @@ public class BattleManager : MonoBehaviour
                         break;
                 }
                 break;
-            }
         }
+    }
 
     // skill slot 1: attack skill
     // skill slot 2: defense skill
@@ -230,8 +239,9 @@ public class BattleManager : MonoBehaviour
             mCurState = State.EnemyTurn;
         }*/
 
-    public void processDefenseSkill() {
-        DefenseSkill defenseSkill = (DefenseSkill) playerStatus.GetSkills()[1];
+    public void processDefenseSkill()
+    {
+        DefenseSkill defenseSkill = (DefenseSkill)playerStatus.GetSkills()[1];
         SkillAttribute attribute = defenseSkill.GetSkillAttribute();
 
         // process defense skill
@@ -239,15 +249,17 @@ public class BattleManager : MonoBehaviour
         mCurState = State.EnemyTurn;
     }
 
-    public void processEffectSkill() {
+    public void processEffectSkill()
+    {
         Skill skill = playerStatus.GetSkills()[2];
         SkillType type = skill.getSkillType();
-        switch(type) {
+        switch (type)
+        {
             case SkillType.BUFF:
-                processBuffSkill((BuffSkill) skill);
+                processBuffSkill((BuffSkill)skill);
                 break;
             case SkillType.DEBUFF:
-                processDebuffSkill((DebuffSkill) skill);
+                processDebuffSkill((DebuffSkill)skill);
                 break;
             default:
                 break;
@@ -256,28 +268,35 @@ public class BattleManager : MonoBehaviour
         mCurState = State.EnemyTurn;
     }
 
-    void processBuffSkill(BuffSkill skill) {
+    void processBuffSkill(BuffSkill skill)
+    {
         // process buff skill
     }
 
-    void processDebuffSkill(DebuffSkill skill) {
+    void processDebuffSkill(DebuffSkill skill)
+    {
         // process debuff skill
     }
     #endregion
 
     #region Update Equipment UI
-    public void rightUpdateEyebrow() {
+    public void rightUpdateEyebrow()
+    {
         List<EyeBrow> ownedEyebrows = playerStatus.getOwnedEyeBrows();
         EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
         int n = ownedEyebrows.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(equippedEyebrow, ownedEyebrows[i])) {
+            if (Item.Equals(equippedEyebrow, ownedEyebrows[i]))
+            {
                 EyeBrow newEyebrow;
-                if (i >= n - 1) {
+                if (i >= n - 1)
+                {
                     newEyebrow = ownedEyebrows[0];
-                } else {
-                    newEyebrow = ownedEyebrows[Mathf.Clamp(i+1, 0, n-1)];
+                }
+                else
+                {
+                    newEyebrow = ownedEyebrows[Mathf.Clamp(i + 1, 0, n - 1)];
                 }
                 playerStatus.setEquippedEyeBrow(newEyebrow);
                 playerStatus.updateStatus();
@@ -286,13 +305,15 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    public void leftUpdateEyebrow() {
+    public void leftUpdateEyebrow()
+    {
         List<EyeBrow> ownedEyebrows = playerStatus.getOwnedEyeBrows();
         EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
         int n = ownedEyebrows.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(equippedEyebrow, ownedEyebrows[i])) {
+            if (Item.Equals(equippedEyebrow, ownedEyebrows[i]))
+            {
                 EyeBrow newEyebrow;
                 if (i <= 0)
                 {
@@ -300,7 +321,7 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
-                    newEyebrow = ownedEyebrows[Mathf.Clamp(i-1, 0, n-1)];
+                    newEyebrow = ownedEyebrows[Mathf.Clamp(i - 1, 0, n - 1)];
                 }
                 playerStatus.setEquippedEyeBrow(newEyebrow);
                 playerStatus.updateStatus();
@@ -309,19 +330,24 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    
-    public void rightUpdateEye() {
+
+    public void rightUpdateEye()
+    {
         List<Eye> ownedEyes = playerStatus.getOwnedEyes();
         Eye equippedEyes = playerStatus.getEquippedEyes();
         int n = ownedEyes.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(equippedEyes, ownedEyes[i])) {
+            if (Item.Equals(equippedEyes, ownedEyes[i]))
+            {
                 Eye newEyes;
-                if (i >= n - 1) {
+                if (i >= n - 1)
+                {
                     newEyes = ownedEyes[0];
-                } else {
-                    newEyes = ownedEyes[Mathf.Clamp(i+1, 0, n-1)];
+                }
+                else
+                {
+                    newEyes = ownedEyes[Mathf.Clamp(i + 1, 0, n - 1)];
                 }
                 playerStatus.setEquippedEyes(newEyes);
                 playerStatus.updateStatus();
@@ -330,13 +356,15 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    public void leftUpdateEye() {
+    public void leftUpdateEye()
+    {
         List<Eye> ownedEyes = playerStatus.getOwnedEyes();
         Eye equippedEyes = playerStatus.getEquippedEyes();
         int n = ownedEyes.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(equippedEyes, ownedEyes[i])) {
+            if (Item.Equals(equippedEyes, ownedEyes[i]))
+            {
                 Eye newEyes;
                 if (i <= 0)
                 {
@@ -344,7 +372,7 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
-                    newEyes = ownedEyes[Mathf.Clamp(i-1, 0, n-1)];
+                    newEyes = ownedEyes[Mathf.Clamp(i - 1, 0, n - 1)];
                 }
                 playerStatus.setEquippedEyes(newEyes);
                 playerStatus.updateStatus();
@@ -353,15 +381,17 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    
-    public void rightUpdateMouth() {
+
+    public void rightUpdateMouth()
+    {
         List<Mouth> ownedMouths = playerStatus.getOwnedMouths();
         Mouth equippedMouth = playerStatus.getEquippedMouth();
         int n = ownedMouths.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(equippedMouth, ownedMouths[i])) {
-                Mouth newMouth = ownedMouths[Mathf.Clamp(i+1, 0, n-1)];
+            if (Item.Equals(equippedMouth, ownedMouths[i]))
+            {
+                Mouth newMouth = ownedMouths[Mathf.Clamp(i + 1, 0, n - 1)];
                 playerStatus.setEquippedMouth(newMouth);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(newMouth.getHighLightedImage());
@@ -369,23 +399,25 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    public void leftUpdateMouth() {
+    public void leftUpdateMouth()
+    {
         List<Mouth> ownedMouths = playerStatus.getOwnedMouths();
         Mouth equippedMouth = playerStatus.getEquippedMouth();
         int n = ownedMouths.Count;
         for (int i = 0; i < n; i++)
         {
-            if (Item.Equals(eb, ownedEs[i])) {
-                Mouth neweb;
+            if (Item.Equals(equippedMouth, ownedMouths[i]))
+            {
+                Mouth newMouth;
                 if (i <= 0)
                 {
-                    neweb = ownedEs[n - 1];
+                    newMouth = ownedMouths[n - 1];
                 }
                 else
                 {
-                    neweb = ownedEs[(i - 1) % n];
+                    newMouth = ownedMouths[Mathf.Clamp(i - 1, 0, n - 1)];
                 }
-                playerStatus.setEquippedMouth(neweb);
+                playerStatus.setEquippedMouth(newMouth);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(newMouth.getHighLightedImage());
                 break;
