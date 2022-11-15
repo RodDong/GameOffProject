@@ -1399,6 +1399,9 @@ MonoBehaviour:
   Description: {fileID: 295578485}
   Stats: {fileID: 325423164}
   Inventory: {fileID: 2135132141}
+  eyeButton: {fileID: 1095847729}
+  eyeBrowButton: {fileID: 104668098}
+  mouthButton: {fileID: 799858519}
 --- !u!1 &281672521
 GameObject:
   m_ObjectHideFlags: 0

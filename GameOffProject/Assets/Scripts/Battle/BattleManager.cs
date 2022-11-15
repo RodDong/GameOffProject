@@ -263,6 +263,7 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
 
+    #region Update Equipment UI
     public void rightUpdateEyebrow() {
         List<EyeBrow> ownedEBs = playerStatus.getOwnedEyeBrows();
         EyeBrow eb = playerStatus.getEquippedEyeBrow();
@@ -389,4 +390,5 @@ public class BattleManager : MonoBehaviour
         string sadStat = "SadATK: " + playerStatus.getSadATK() + "\n" + "SadDEF: " + playerStatus.getSadDEF() + "\n";
         playerStatsUI.GetComponent<TextMeshProUGUI>().text = happyStat + angryStat + sadStat;
     }
+    #endregion
 }
