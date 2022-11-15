@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Data;
 
 public class InventoryManager : MonoBehaviour
@@ -29,7 +28,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void UISwitch()
     {
-        if(Inventory.active)
+        if(Inventory.activeSelf)
         {
             Inventory.SetActive(false);
         }
