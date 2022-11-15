@@ -77,7 +77,8 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedEyeBrows[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
+            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
+            SetButtonSprite(tempButton, curItem);
             posY -= 130.0f;
         }
     }
@@ -100,7 +101,8 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedEyes[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
+            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
+            SetButtonSprite(tempButton, curItem);
             posY -= 130.0f;
         }
     }
@@ -123,13 +125,23 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedMouth[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
+            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
+            SetButtonSprite(tempButton, curItem);
             posY -= 130.0f;
         }
     }
 
     public void DisplayDescription(Item item)
     {
-        Description.GetComponent<TextMeshProUGUI>().text = item.getDescription();
+        Description.GetComponent<TextMeshProUGUI>().text = item.getDisplayName() + "\n" + item.getDescription();
+    }
+
+    private void SetButtonSprite(Button tempButton, Item curItem)
+    {
+        SpriteState sState = new SpriteState();
+        sState.selectedSprite = Resources.Load<Sprite>(curItem.getSelectedImage());
+        sState.highlightedSprite = Resources.Load<Sprite>(curItem.getHighLightedImage());
+        tempButton.spriteState = sState;
+        ((Image)tempButton.targetGraphic).sprite = Resources.Load<Sprite>(curItem.getImageSrc());
     }
 }
