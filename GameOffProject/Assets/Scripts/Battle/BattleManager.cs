@@ -93,7 +93,6 @@ public class BattleManager : MonoBehaviour
 
     void UpdatePlayerTurn()
     {
-
         //Player Standby Phase
 
         //Player Battle Phase
@@ -138,18 +137,20 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
     }
 
+    #region ProcessSkills
+
     // skill slot 1: attack skill
     // skill slot 2: defense skill
     // skill slot 3: buff/debuff skill
-/*    public void processAttackSkill() {
-        AttackSkill attackSkill = (AttackSkill) playerStatus.GetSkills()[0];
-        SkillAttribute attribute = attackSkill.GetSkillAttribute();
-        float playerATK = playerStatus.getATKbyAttribute(attribute);
-        float targetDEF = enemyStatus.getDEFbyAttribute(attribute);
-        enemyStatus.TakeDamage(attackSkill.getAttackSkillDamage(playerATK, targetDEF));
+    /*    public void processAttackSkill() {
+            AttackSkill attackSkill = (AttackSkill) playerStatus.GetSkills()[0];
+            SkillAttribute attribute = attackSkill.GetSkillAttribute();
+            float playerATK = playerStatus.getATKbyAttribute(attribute);
+            float targetDEF = enemyStatus.getDEFbyAttribute(attribute);
+            enemyStatus.TakeDamage(attackSkill.getAttackSkillDamage(playerATK, targetDEF));
 
-        mCurState = State.EnemyTurn;
-    }*/
+            mCurState = State.EnemyTurn;
+        }*/
 
     public void processDefenseSkill() {
         DefenseSkill defenseSkill = (DefenseSkill) playerStatus.GetSkills()[1];
@@ -184,4 +185,5 @@ public class BattleManager : MonoBehaviour
     void processDebuffSkill(DebuffSkill skill) {
         // process debuff skill
     }
+    #endregion
 }

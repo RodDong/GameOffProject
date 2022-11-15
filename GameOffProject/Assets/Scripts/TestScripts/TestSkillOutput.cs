@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
 using static AttackSkill;
+using TMPro;
+using System;
 
 public class TestSkillOutput : MonoBehaviour
 {
     private PlayerStatus playerStatus;
     private EnemyStatus enemyStatus;
+
+    public GameObject damageDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +31,8 @@ public class TestSkillOutput : MonoBehaviour
         SkillAttribute testAttribute = testPlayerAttackSkill.GetSkillAttribute();
         float testPlayerATK = playerStatus.getATKbyAttribute(testAttribute);
         float testTargetDEF = enemyStatus.getDEFbyAttribute(testAttribute);
-        Debug.Log("The attack damge is: " + testPlayerAttackSkill.getAttackSkillDamage(playerStatus, enemyStatus));
+        float damage = testPlayerAttackSkill.getAttackSkillDamage(playerStatus, enemyStatus);
+        DisplayDamage(damage);
     }
 
     
@@ -58,5 +64,12 @@ public class TestSkillOutput : MonoBehaviour
             case SkillType.DEBUFF:
                 break;
         }
-    }   
+    }
+
+    private void DisplayDamage(float damage)
+    {
+        GameObject d = GameObject.Instantiate<GameObject>(damageDisplay);
+        d.GetComponent<TextMeshPro>().text = Convert.ToString(damage);
+        Destroy(d, 1);
+    }
 }
