@@ -40,8 +40,8 @@ public class EyeBrow : Item
                 selectedImage = imgRoot + "1EyebrowA_S";
                 break;
             case EyeBrowId.TEST_EYEBROW_HAPPY:
-                happyATK = 50f;
-                happyDEF = 50f;
+                happyATK = 150f;
+                happyDEF = 150f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;

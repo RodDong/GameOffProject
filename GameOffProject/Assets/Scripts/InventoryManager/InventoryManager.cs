@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Data;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -94,7 +95,8 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
             tempButton.onClick.AddListener(delegate{ UpdateEquippedItems();});
-
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
             posY -= 160.0f;
@@ -121,7 +123,8 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyes((Eye)curItem); });
             tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
-
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
             posY -= 160.0f;
@@ -148,7 +151,8 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedMouth((Mouth)curItem); });
             tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
-
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
             posY -= 160.0f;
