@@ -13,8 +13,14 @@ public class Eye : Item
     }
     private EyeId id;
 
+    public bool isEqual(Eye e1, Eye e2)
+    {
+        return e1.getID() == e2.getID();
+    }
+
     public Eye(EyeId id) {
         this.id = id;
+        itemType = "Eye";
 
         switch(id) {
             case EyeId.TEST_EYE_1:

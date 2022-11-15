@@ -21,10 +21,16 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
+<<<<<<< Updated upstream
 
     float maxHealth;
     float curHealth;
 
+=======
+    [SerializeField] GameObject eyebrowUI;
+    [SerializeField] GameObject eyeUI;
+    [SerializeField] GameObject mouthUI;
+>>>>>>> Stashed changes
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
 
@@ -186,4 +192,20 @@ public class BattleManager : MonoBehaviour
         // process debuff skill
     }
     #endregion
+
+    public void rightUpdateEyebrow() {
+        List<EyeBrow> ownedEBs = playerStatus.getOwnedEyeBrows();
+        EyeBrow eb = playerStatus.getEquippedEyeBrow();
+        int n = ownedEBs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEBs[i])) {
+                EyeBrow neweb = ownedEBs[(i+1)%n];
+                playerStatus.setEquippedEyeBrow(neweb);
+                playerStatus.updateStatus();
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
 }

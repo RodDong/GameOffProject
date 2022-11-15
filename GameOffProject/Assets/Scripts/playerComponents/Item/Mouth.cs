@@ -13,9 +13,21 @@ public class Mouth : Item
         TEST_MOUTH_ANGRY
     }
     private MouthId id;
+<<<<<<< Updated upstream
+=======
+    public MouthId getID() {
+        return id;
+    }
+    
+    public bool isEqual(Mouth e1, Mouth e2)
+    {
+        return e1.getID() == e2.getID();
+    }
+>>>>>>> Stashed changes
 
     public Mouth(MouthId id) {
         this.id = id;
+        itemType = "Mouth";
 
         switch(id) {
             case MouthId.TEST_MOUTH_1:

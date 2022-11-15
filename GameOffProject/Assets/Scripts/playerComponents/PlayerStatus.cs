@@ -199,6 +199,18 @@ public class PlayerStatus : MonoBehaviour
         return equippedMouth;
     }
 
+    public void setEquippedMouth(Mouth m) {
+        equippedMouth = m;
+    }
+
+    public void setEquippedEyeBrow(EyeBrow eb) {
+        equippedEyebrow = eb;
+    }
+
+    public void setEquippedEyes(Eye e) {
+        equippedEyes = e;
+    }
+
     public void addEyebrow(EyeBrowId id) {
         ownedEyebrows.Add(new EyeBrow(id));
     }

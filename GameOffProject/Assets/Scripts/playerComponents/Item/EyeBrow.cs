@@ -13,8 +13,14 @@ public class EyeBrow : Item
     }
     private EyeBrowId id;
 
+    public bool isEqual(EyeBrow e1, EyeBrow e2)
+    {
+        return e1.getID() == e2.getID();
+    }
+
     public EyeBrow(EyeBrowId id) {
         this.id = id;
+        itemType = "EyeBrow";
         
         switch (id) {
             case EyeBrowId.TEST_EYEBROW_1:
