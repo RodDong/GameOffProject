@@ -12,10 +12,6 @@ public class EyeBrow : Item
         TEST_EYEBROW_ANGRY
     }
     private EyeBrowId id;
-    public EyeBrowId getID() {
-        return id;
-    }
-
     public EyeBrowId getID(){
         return id;
     }

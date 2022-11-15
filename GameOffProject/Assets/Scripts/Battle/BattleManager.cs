@@ -50,6 +50,13 @@ public class BattleManager : MonoBehaviour
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
+        // mask UI
+        EyeBrow eb = playerStatus.getEquippedEyeBrow();
+        Eye e = playerStatus.getEquippedEyes();
+        Mouth m = playerStatus.getEquippedMouth();
+        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getImageSrc());
+        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getImageSrc());
+        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getImageSrc());
     }
 
     void Update() {
