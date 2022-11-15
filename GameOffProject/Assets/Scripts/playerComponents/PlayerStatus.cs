@@ -89,6 +89,12 @@ public class PlayerStatus : MonoBehaviour
         ownedMouth.Add(equippedMouth);
         updateStatus();
         // - for test purposes
+
+        //initialize all clues as unfound
+        for (int i = 0; i < clueNumbers; i++)
+        {
+            allClues.Add(new Clue(-1));
+        }
     }
 
     // Start is called before the first frame update
@@ -257,5 +263,17 @@ public class PlayerStatus : MonoBehaviour
         newSkills.Add(equippedMouth.getSkill());
         setSkills(newSkills);
     }
+
+    //Clues
+    [SerializeField]
+    private int clueNumbers;
+    private List<Clue> allClues = new List<Clue>(); //clueID = -1 means not found
     
+    public void findClue(int id)
+    {
+        if (id < clueNumbers)
+            allClues[id] = new Clue(id);
+        else
+            Debug.LogError("ID exceed total number!");
+    }
 }
