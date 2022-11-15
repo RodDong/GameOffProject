@@ -13,7 +13,9 @@ public class Mouth : Item
         TEST_MOUTH_ANGRY
     }
     private MouthId id;
-
+    public MouthId getID() {
+        return id;
+    }
     public Mouth(MouthId id) {
         this.id = id;
 
