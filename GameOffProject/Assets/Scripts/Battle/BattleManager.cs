@@ -271,4 +271,81 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+    public void leftUpdateEyebrow() {
+        List<EyeBrow> ownedEBs = playerStatus.getOwnedEyeBrows();
+        EyeBrow eb = playerStatus.getEquippedEyeBrow();
+        int n = ownedEBs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEBs[i])) {
+                EyeBrow neweb = ownedEBs[(i-1)%n];
+                playerStatus.setEquippedEyeBrow(neweb);
+                playerStatus.updateStatus();
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
+    
+    public void rightUpdateEye() {
+        List<Eye> ownedEs = playerStatus.getOwnedEyes();
+        Eye eb = playerStatus.getEquippedEyes();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Eye neweb = ownedEs[(i+1)%n];
+                playerStatus.setEquippedEyes(neweb);
+                playerStatus.updateStatus();
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
+    public void leftUpdateEye() {
+        List<Eye> ownedEs = playerStatus.getOwnedEyes();
+        Eye eb = playerStatus.getEquippedEyes();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Eye neweb = ownedEs[(i-1)%n];
+                playerStatus.setEquippedEyes(neweb);
+                playerStatus.updateStatus();
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
+    
+    public void rightUpdateMouth() {
+        List<Mouth> ownedEs = playerStatus.getOwnedMouths();
+        Mouth eb = playerStatus.getEquippedMouth();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Mouth neweb = ownedEs[(i+1)%n];
+                playerStatus.setEquippedMouth(neweb);
+                playerStatus.updateStatus();
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
+    public void leftUpdateMouth() {
+        List<Mouth> ownedEs = playerStatus.getOwnedMouths();
+        Mouth eb = playerStatus.getEquippedMouth();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Mouth neweb = ownedEs[(i-1)%n];
+                playerStatus.setEquippedMouth(neweb);
+                playerStatus.updateStatus();
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                break;
+            }
+        }
+    }
 }
