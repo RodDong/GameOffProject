@@ -9,7 +9,10 @@ public class Buff
         TEST_BUFF_1,
         IMMUNE,
         REFLECT,
-        BOUNS_DAMAGE
+        BOUNS_DAMAGE,
+        LIFE_STEAL,
+        PURGE,
+        BLIND
     }
 
     private BuffId id;
@@ -30,6 +33,15 @@ public class Buff
                 duration = 1;
                 break;
             case BuffId.BOUNS_DAMAGE:
+                duration = 3;
+                break;
+            case BuffId.LIFE_STEAL:
+                duration = 3;
+                break;
+            case BuffId.PURGE:
+                duration = 1;
+                break;
+            case BuffId.BLIND:
                 duration = 3;
                 break;
             default:
