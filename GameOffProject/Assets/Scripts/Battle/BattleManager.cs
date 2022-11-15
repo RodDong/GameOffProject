@@ -56,9 +56,9 @@ public class BattleManager : MonoBehaviour
         EyeBrow eb = playerStatus.getEquippedEyeBrow();
         Eye e = playerStatus.getEquippedEyes();
         Mouth m = playerStatus.getEquippedMouth();
-        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getImageSrc());
-        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getImageSrc());
-        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getImageSrc());
+        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getHighLightedImage());
+        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getHighLightedImage());
+        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getHighLightedImage());
     }
 
     void Update() {
@@ -273,7 +273,7 @@ public class BattleManager : MonoBehaviour
                 EyeBrow neweb = ownedEBs[(i+1)%n];
                 playerStatus.setEquippedEyeBrow(neweb);
                 playerStatus.updateStatus();
-                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
@@ -296,7 +296,7 @@ public class BattleManager : MonoBehaviour
                 }
                 playerStatus.setEquippedEyeBrow(neweb);
                 playerStatus.updateStatus();
-                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
@@ -312,7 +312,7 @@ public class BattleManager : MonoBehaviour
                 Eye neweb = ownedEs[(i+1)%n];
                 playerStatus.setEquippedEyes(neweb);
                 playerStatus.updateStatus();
-                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
@@ -337,7 +337,7 @@ public class BattleManager : MonoBehaviour
                 }
                 playerStatus.setEquippedEyes(neweb);
                 playerStatus.updateStatus();
-                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
@@ -353,7 +353,7 @@ public class BattleManager : MonoBehaviour
                 Mouth neweb = ownedEs[(i+1)%n];
                 playerStatus.setEquippedMouth(neweb);
                 playerStatus.updateStatus();
-                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
@@ -376,7 +376,7 @@ public class BattleManager : MonoBehaviour
                 }
                 playerStatus.setEquippedMouth(neweb);
                 playerStatus.updateStatus();
-                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getImageSrc());
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
                 break;
             }
         }
