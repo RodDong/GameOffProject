@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
-using static EnemyStatus;
 
 public class EnemyStatus: MonoBehaviour
 {
@@ -17,8 +16,36 @@ public class EnemyStatus: MonoBehaviour
     protected int hitsTakenCounter;
     protected int attackCounter;
     protected List<Buff> buffs;
-    protected List<Debuff> debuffs;
-    protected List<Skill> skills;
+    protected List<Debuff> debuffs;   
+
+    // process round counters for buffs and debuffs
+    public void updateBuffDebuffStatus() {
+        for (int i = buffs.Count - 1; i >= 0; i--) {
+            if (buffs[i].decreaseCounter()) {
+                buffs.RemoveAt(i);
+            }
+        }
+        for (int i = debuffs.Count - 1; i >= 0; i--) {
+            if (debuffs[i].decreaseCounter()) {
+                debuffs.RemoveAt(i);
+            }
+        }
+    }
+
+    public bool activateBuff(Buff buff) {
+        for (int i = 0; i < buffs.Count; i++) {
+            if (buffs[i].GetBuffId() == buff.GetBuffId()) {
+                buffs[i].resetDuration();
+                return true;
+            }
+        }
+        buffs.Insert(0, buff);
+        return false;
+    }
+
+    public void clearBuff() {
+        buffs.Clear();
+    }
 
     private void Awake() {
         // for test purposes -

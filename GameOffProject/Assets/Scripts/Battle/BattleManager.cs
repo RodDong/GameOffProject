@@ -46,29 +46,21 @@ public class BattleManager : MonoBehaviour
 
         // initialize player status
         playerStatus = player.GetComponent<PlayerStatus>();
-        maxHealth = playerStatus.getMaxHealth();
-        curHealth = maxHealth;
 
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        UpdateHealth();
-        UpdateCurState();
+    void Update() {
+        // nothing to do here.
+        // all state transition is either instantanious or based on timer
+        // or based user input
+        handleKeyboardInput();
     }
 
     void UpdateCurState()
     {
-        if (curHealth <= 0.0f)
-        {
-            mCurState = State.Death;
-        }
-
         switch (mCurState)
         {
             case State.Preparation:
@@ -97,6 +89,7 @@ public class BattleManager : MonoBehaviour
     void UpdatePlayerTurn()
     {
         //Player Standby Phase
+        // check 
 
         //Player Battle Phase
 
@@ -119,28 +112,94 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
     }
 
-    void UpdateHealth()
+    void UpdateHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = curHealth / maxHealth;
+        healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / PlayerStatus.MAX_HEALTH;
     }
-
-    void RegenerateHealth(float heal)
-    {
-        curHealth = Mathf.Min(curHealth + heal, maxHealth);
-    }
-
-    void TakeDamage(float damage)
-    {
-        curHealth -= damage;
-    }
-
     void UpdateWin()
     {
         gamObjectsInScene.SetActive(true);
         battleUI.SetActive(false);
     }
 
-    #region ProcessSkills
+    #region Handle Skill Button Click
+    void handleKeyboardInput() {
+        // TODO:
+        // Q E, A D, Z C to change equipment
+        // W, S, X for detailed item info
+        // J K L for skills
+    }
+
+    void useSkill(int skillSlotNumber) {
+        switch (skillSlotNumber) {
+            case 0:
+                if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
+                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_SAD)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_SAD));
+                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_ANGRY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_ANGRY));
+                break;
+            case 1: 
+                if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
+                    processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_HAPPY));
+                else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
+                    processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_SAD));
+                else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
+            case 2: 
+                if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
+                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
+                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
+                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
+            default: return;
+        }
+    }
+
+    #endregion
+
+    #region Process Skills
+
+    public void processSkill(Skill skill) {
+        switch (skill.getSkillType()) {
+            case SkillType.ATTACK:
+                AttackSkill atkSkill = (AttackSkill)skill;
+                enemyStatus.TakeDamage(atkSkill.getAttackSkillDamage(playerStatus, enemyStatus));
+                if (skill.GetSkillAttribute() == SkillAttribute.ANGRY) {
+                    playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
+                }
+                break;
+            case SkillType.DEFENSE:
+                switch (skill.GetSkillAttribute()) {
+                    case SkillAttribute.HAPPY:
+                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
+                        break;
+                    case SkillAttribute.SAD:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.IMMUNE));
+                        break;
+                    case SkillAttribute.ANGRY:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.REFLECT));
+                        break;
+                }
+                break;
+            case SkillType.BUFF:
+                switch (skill.GetSkillAttribute()) {
+                    case SkillAttribute.HAPPY:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+                        break;
+                    case SkillAttribute.SAD:
+                        enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
+                        break;
+                    case SkillAttribute.ANGRY:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.BOUNS_DAMAGE));
+                        enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
+                        break;
+                }
+                break;
+            }
+        }
 
     // skill slot 1: attack skill
     // skill slot 2: defense skill
