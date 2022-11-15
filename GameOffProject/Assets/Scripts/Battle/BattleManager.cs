@@ -330,14 +330,8 @@ public class BattleManager : MonoBehaviour
             if (Item.Equals(eb, ownedEs[i])) {
 
                 Eye neweb;
-                if (i <= 0)
-                {
-                    neweb = ownedEs[n - 1];
-                }
-                else
-                {
-                    neweb = ownedEs[(i - 1) % n];
-                }
+                int j = (i - 1) % n;
+                neweb = ownedEs[j];
                 playerStatus.setEquippedEyes(neweb);
                 playerStatus.updateStatus();
                 eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
@@ -369,14 +363,8 @@ public class BattleManager : MonoBehaviour
         {
             if (Item.Equals(eb, ownedEs[i])) {
                 Mouth neweb;
-                if (i <= 0)
-                {
-                    neweb = ownedEs[n - 1];
-                }
-                else
-                {
-                    neweb = ownedEs[(i - 1) % n];
-                }
+                int j = (i - 1) % n;
+                neweb = ownedEs[j];
                 playerStatus.setEquippedMouth(neweb);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
