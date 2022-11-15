@@ -82,7 +82,7 @@ public class BattleManager : MonoBehaviour
     void UpdatePlayerTurn()
     {
         //Player Standby Phase
-        // check 
+        // check buff 
 
         //Player Battle Phase
 
@@ -126,27 +126,14 @@ public class BattleManager : MonoBehaviour
     void useSkill(int skillSlotNumber) {
         switch (skillSlotNumber) {
             case 0:
-                if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
-                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_SAD)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_SAD));
-                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_ANGRY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_ANGRY));
+                processSkill(playerStatus.getEquippedEyeBrow().getSkill());
                 break;
             case 1: 
-                if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
-                    processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_HAPPY));
-                else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
-                    processSkill(new AttackSkill(AttackSkill.AttackSkillId.TEST_ATTACK_SKILL_SAD));
-                else if (playerStatus.getEquippedEyes().getID() == Eye.EyeId.TEST_EYE_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
+                processSkill(playerStatus.getEquippedEyes().getSkill());
+                break;
             case 2: 
-                if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
-                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));
-                else if (playerStatus.getEquippedEyeBrow().getID() == EyeBrow.EyeBrowId.TEST_EYEBROW_HAPPY)
-                    processSkill(new DefenseSkill(DefenseSkill.DefenseSkillId.TEST_DEFENSE_SKILL_HAPPY));break;
+                processSkill(playerStatus.getEquippedEyeBrow().getSkill());
+                break;
             default: return;
         }
     }
