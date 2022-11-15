@@ -53,12 +53,8 @@ public class BattleManager : MonoBehaviour
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
         // mask UI
-        EyeBrow eb = playerStatus.getEquippedEyeBrow();
-        Eye e = playerStatus.getEquippedEyes();
-        Mouth m = playerStatus.getEquippedMouth();
-        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getHighLightedImage());
-        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getHighLightedImage());
-        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getHighLightedImage());
+        
+        
     }
 
     void Update() {
@@ -69,6 +65,12 @@ public class BattleManager : MonoBehaviour
         if (battleUI.active)
         {
             updatePlayerStatVisual();
+            EyeBrow eb = playerStatus.getEquippedEyeBrow();
+            Eye e = playerStatus.getEquippedEyes();
+            Mouth m = playerStatus.getEquippedMouth();
+            eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getHighLightedImage());
+            eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getHighLightedImage());
+            mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getHighLightedImage());
         }
         
     }
