@@ -13,6 +13,10 @@ public class Eye : Item
     }
     private EyeId id;
 
+    public EyeId getID(){
+        return id;
+    }
+
     public bool isEqual(Eye e1, Eye e2)
     {
         return e1.getID() == e2.getID();

@@ -13,8 +13,6 @@ public class Mouth : Item
         TEST_MOUTH_ANGRY
     }
     private MouthId id;
-<<<<<<< Updated upstream
-=======
     public MouthId getID() {
         return id;
     }
@@ -23,7 +21,6 @@ public class Mouth : Item
     {
         return e1.getID() == e2.getID();
     }
->>>>>>> Stashed changes
 
     public Mouth(MouthId id) {
         this.id = id;

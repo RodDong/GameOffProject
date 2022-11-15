@@ -13,6 +13,9 @@ public class EyeBrow : Item
     }
     private EyeBrowId id;
 
+    public EyeBrowId getID(){
+        return id;
+    }
     public bool isEqual(EyeBrow e1, EyeBrow e2)
     {
         return e1.getID() == e2.getID();

@@ -21,16 +21,13 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
-<<<<<<< Updated upstream
 
     float maxHealth;
     float curHealth;
 
-=======
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
->>>>>>> Stashed changes
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
 
