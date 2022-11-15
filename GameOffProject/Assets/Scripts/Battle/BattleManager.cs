@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Skill;
@@ -28,6 +29,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
+    [SerializeField] GameObject playerStatsUI;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
 
@@ -64,6 +66,11 @@ public class BattleManager : MonoBehaviour
         // all state transition is either instantanious or based on timer
         // or based user input
         handleKeyboardInput();
+        if (battleUI.active)
+        {
+            updatePlayerStatVisual();
+        }
+        
     }
 
     void UpdateCurState()
@@ -373,5 +380,13 @@ public class BattleManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void updatePlayerStatVisual()
+    {
+        string happyStat = "HappyATK: " + playerStatus.getHappyATK() + "\n" + "HappyDEF: " + playerStatus.getHappyDEF() + "\n";
+        string angryStat = "AngryATK: " + playerStatus.getAngryATK() + "\n" + "AngryDEF: " + playerStatus.getAngryDEF() + "\n";
+        string sadStat = "SadATK: " + playerStatus.getSadATK() + "\n" + "SadDEF: " + playerStatus.getSadDEF() + "\n";
+        playerStatsUI.GetComponent<TextMeshProUGUI>().text = happyStat + angryStat + sadStat;
     }
 }

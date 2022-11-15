@@ -5295,6 +5295,7 @@ MonoBehaviour:
   eyebrowUI: {fileID: 1979932132}
   eyeUI: {fileID: 1044526464}
   mouthUI: {fileID: 1858021264}
+  playerStatsUI: {fileID: 2039722221}
 --- !u!1 &1303663549
 GameObject:
   m_ObjectHideFlags: 0
@@ -8221,7 +8222,7 @@ GameObject:
   - component: {fileID: 2039722224}
   - component: {fileID: 2039722223}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerStats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8298,13 +8299,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
