@@ -27,6 +27,9 @@ public class Eye : Item
                 skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_1);
                 displayName = "test eye";
                 itemDescription = "test description";
+                imageSrc = imgRoot + "2EyeA_N";
+                highLightedImage = imgRoot + "2EyeA_H";
+                selectedImage = imgRoot + "2EyeA_S";
                 break;
             case EyeId.TEST_EYE_HAPPY:
                 happyATK = 50f;

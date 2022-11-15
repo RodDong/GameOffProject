@@ -15,8 +15,8 @@ public class EyeBrow : Item
 
     public EyeBrow(EyeBrowId id) {
         this.id = id;
-
-        switch(id) {
+        
+        switch (id) {
             case EyeBrowId.TEST_EYEBROW_1:
                 happyATK = 50f;
                 happyDEF = 50f;
@@ -27,6 +27,9 @@ public class EyeBrow : Item
                 skill = new DefenseSkill(DefenseSkillId.TEST_DEFENSE_SKILL_1);
                 displayName = "test eyebrow";
                 itemDescription = "test description";
+                imageSrc = imgRoot + "1EyebrowA_N";
+                highLightedImage = imgRoot + "1EyebrowA_H";
+                selectedImage = imgRoot + "1EyebrowA_S";
                 break;
             case EyeBrowId.TEST_EYEBROW_HAPPY:
                 happyATK = 50f;

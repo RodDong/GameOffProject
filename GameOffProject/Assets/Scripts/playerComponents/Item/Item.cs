@@ -13,7 +13,10 @@ public class Item
     protected Skill skill;
     protected string displayName;
     protected string imageSrc;
+    protected string highLightedImage;
+    protected string selectedImage;
     protected string itemDescription;
+    protected string imgRoot = "Art/UI/Buttons/";
 
     public float getHappyATK() {
         return happyATK;
@@ -42,6 +45,16 @@ public class Item
     }
     public string getImageSrc() {
         return imageSrc;
+    }
+
+    public string getHighLightedImage()
+    {
+        return highLightedImage;
+    }
+
+    public string getSelectedImage()
+    {
+        return selectedImage;
     }
     public string getDescription()
     {

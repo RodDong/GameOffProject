@@ -28,6 +28,9 @@ public class Mouth : Item
                 skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth";
                 itemDescription = "test description";
+                imageSrc = imgRoot + "3MouthA_N";
+                highLightedImage = imgRoot + "3MouthA_H";
+                selectedImage = imgRoot + "3MouthA_S";
                 break;
             case MouthId.TEST_MOUTH_HAPPY:
                 happyATK = 50f;
