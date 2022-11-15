@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
+using static EnemyStatus;
 
 public class EnemyStatus: MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EnemyStatus: MonoBehaviour
     protected int attackCounter;
     protected List<Buff> buffs;
     protected List<Debuff> debuffs;
+    protected List<Skill> skills;
 
     private void Awake() {
         // for test purposes -
