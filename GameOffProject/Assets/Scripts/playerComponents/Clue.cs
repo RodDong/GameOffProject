@@ -8,10 +8,12 @@ public class Clue
     private string clueName;
     private int clueId;
     private string clueContent;
+    private string clueImageSource;
 
     public string Name { get { return clueName; } }
     public string Content { get { return clueContent; } }
     public int Id { get { return clueId; } }
+    public string clueImgSrc { get { return clueImageSource; } }
 
     public Clue(int id)
     {
