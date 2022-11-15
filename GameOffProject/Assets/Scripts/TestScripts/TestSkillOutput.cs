@@ -43,7 +43,7 @@ public class TestSkillOutput : MonoBehaviour
             case SkillType.DEFENSE:
                 switch (skill.GetSkillAttribute()) {
                     case SkillAttribute.HAPPY:
-                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus.getHappyATK()));
+                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
                         break;
                     case SkillAttribute.SAD:
                         playerStatus.activateBuff(new Buff(Buff.BuffId.IMMUNE));
@@ -54,8 +54,18 @@ public class TestSkillOutput : MonoBehaviour
                 }
                 break;
             case SkillType.BUFF:
-                break;
-            case SkillType.DEBUFF:
+                switch (skill.GetSkillAttribute()) {
+                    case SkillAttribute.HAPPY:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+                        break;
+                    case SkillAttribute.SAD:
+                        enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
+                        break;
+                    case SkillAttribute.ANGRY:
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.BOUNS_DAMAGE));
+                        enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
+                        break;
+                }
                 break;
         }
     }   
