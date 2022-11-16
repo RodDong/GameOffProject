@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackSkill : Skill
 {
-    private const float k = 1.0f;
+    private const float k = 0.25f;
     public enum AttackSkillId {
         TEST_ATTACK_SKILL_1,
         TEST_ATTACK_SKILL_HAPPY,
@@ -49,7 +49,8 @@ public class AttackSkill : Skill
                 attributeMultiplier = attacker.getATKbyAttribute(SkillAttribute.ANGRY) / enemy.getDEFbyAttribute(SkillAttribute.ANGRY);
                 return getSkillRandom() * attributeMultiplier * power * k;
             case AttackSkillId.TEST_ATTACK_SKILL_1:
-                return 0.0f;
+            attributeMultiplier = attacker.getATKbyAttribute(SkillAttribute.ANGRY) / enemy.getDEFbyAttribute(SkillAttribute.ANGRY);
+                return getSkillRandom() * attributeMultiplier * power * k;
             default:
                 return 0.0f;
         }
