@@ -159,6 +159,10 @@ public class BattleManager : MonoBehaviour
                 break;
             default: return;
         }
+        if (mCurState != State.PlayerTurn) {
+            Debug.LogError("State Mismatch");
+        }
+        UpdateCurState();
     }
 
     #endregion
