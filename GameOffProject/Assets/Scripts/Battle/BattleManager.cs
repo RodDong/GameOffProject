@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Skill;
@@ -21,6 +22,14 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
+
+    float maxHealth;
+    float curHealth;
+
+    [SerializeField] GameObject eyebrowUI;
+    [SerializeField] GameObject eyeUI;
+    [SerializeField] GameObject mouthUI;
+    [SerializeField] GameObject playerStatsUI;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
 
@@ -43,6 +52,9 @@ public class BattleManager : MonoBehaviour
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
 
+        // mask UI
+        
+        
     }
 
     void Update() {
@@ -50,6 +62,17 @@ public class BattleManager : MonoBehaviour
         // all state transition is either instantanious or based on timer
         // or based user input
         handleKeyboardInput();
+        if (battleUI.active)
+        {
+            updatePlayerStatVisual();
+            EyeBrow eb = playerStatus.getEquippedEyeBrow();
+            Eye e = playerStatus.getEquippedEyes();
+            Mouth m = playerStatus.getEquippedMouth();
+            eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(eb.getHighLightedImage());
+            eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(e.getHighLightedImage());
+            mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(m.getHighLightedImage());
+        }
+        
     }
 
     void UpdateCurState()
@@ -226,6 +249,135 @@ public class BattleManager : MonoBehaviour
 
     void processDebuffSkill(DebuffSkill skill) {
         // process debuff skill
+    }
+    #endregion
+
+    #region Update Equipment UI
+    public void rightUpdateEyebrow() {
+        List<EyeBrow> ownedEBs = playerStatus.getOwnedEyeBrows();
+        EyeBrow eb = playerStatus.getEquippedEyeBrow();
+        int n = ownedEBs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEBs[i])) {
+                EyeBrow neweb = ownedEBs[(i+1)%n];
+                playerStatus.setEquippedEyeBrow(neweb);
+                playerStatus.updateStatus();
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+    public void leftUpdateEyebrow() {
+        List<EyeBrow> ownedEBs = playerStatus.getOwnedEyeBrows();
+        EyeBrow eb = playerStatus.getEquippedEyeBrow();
+        int n = ownedEBs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEBs[i])) {
+                EyeBrow neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEBs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEBs[(i - 1) % n];
+                }
+                playerStatus.setEquippedEyeBrow(neweb);
+                playerStatus.updateStatus();
+                eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+    
+    public void rightUpdateEye() {
+        List<Eye> ownedEs = playerStatus.getOwnedEyes();
+        Eye eb = playerStatus.getEquippedEyes();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Eye neweb = ownedEs[(i+1)%n];
+                playerStatus.setEquippedEyes(neweb);
+                playerStatus.updateStatus();
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+    public void leftUpdateEye() {
+        List<Eye> ownedEs = playerStatus.getOwnedEyes();
+        Eye eb = playerStatus.getEquippedEyes();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+
+            if (Item.Equals(eb, ownedEs[i])) {
+
+                Eye neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEs[(i - 1) % n];
+                }
+                playerStatus.setEquippedEyes(neweb);
+                playerStatus.updateStatus();
+                eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+    
+    public void rightUpdateMouth() {
+        List<Mouth> ownedEs = playerStatus.getOwnedMouths();
+        Mouth eb = playerStatus.getEquippedMouth();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Mouth neweb = ownedEs[(i+1)%n];
+                playerStatus.setEquippedMouth(neweb);
+                playerStatus.updateStatus();
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+    public void leftUpdateMouth() {
+        List<Mouth> ownedEs = playerStatus.getOwnedMouths();
+        Mouth eb = playerStatus.getEquippedMouth();
+        int n = ownedEs.Count;
+        for (int i = 0; i < n; i++)
+        {
+            if (Item.Equals(eb, ownedEs[i])) {
+                Mouth neweb;
+                if (i <= 0)
+                {
+                    neweb = ownedEs[n - 1];
+                }
+                else
+                {
+                    neweb = ownedEs[(i - 1) % n];
+                }
+                playerStatus.setEquippedMouth(neweb);
+                playerStatus.updateStatus();
+                mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(neweb.getHighLightedImage());
+                break;
+            }
+        }
+    }
+
+    public void updatePlayerStatVisual()
+    {
+        string happyStat = "HappyATK: " + playerStatus.getHappyATK() + "\n" + "HappyDEF: " + playerStatus.getHappyDEF() + "\n";
+        string angryStat = "AngryATK: " + playerStatus.getAngryATK() + "\n" + "AngryDEF: " + playerStatus.getAngryDEF() + "\n";
+        string sadStat = "SadATK: " + playerStatus.getSadATK() + "\n" + "SadDEF: " + playerStatus.getSadDEF() + "\n";
+        playerStatsUI.GetComponent<TextMeshProUGUI>().text = happyStat + angryStat + sadStat;
     }
     #endregion
 }

@@ -16,8 +16,15 @@ public class Mouth : Item
     public MouthId getID() {
         return id;
     }
+    
+    public bool isEqual(Mouth e1, Mouth e2)
+    {
+        return e1.getID() == e2.getID();
+    }
+
     public Mouth(MouthId id) {
         this.id = id;
+        itemType = "Mouth";
 
         switch(id) {
             case MouthId.TEST_MOUTH_1:

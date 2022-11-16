@@ -17,6 +17,7 @@ public class Item
     protected string selectedImage;
     protected string itemDescription;
     protected string imgRoot = "Art/UI/Buttons/";
+    protected string itemType;
 
     public float getHappyATK() {
         return happyATK;
@@ -60,4 +61,7 @@ public class Item
     {
         return itemDescription;
     }
+
+    // public bool isEqual;
+
 }

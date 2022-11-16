@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Data;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] GameObject Description;
     [SerializeField] GameObject Stats;
     [SerializeField] GameObject Inventory;
+    [SerializeField] Button eyeButton;
+    [SerializeField] Button eyeBrowButton;
+    [SerializeField] Button mouthButton;
     GameObject mPlayer;
     PlayerStatus mPlayerStatus;
 
@@ -21,6 +25,7 @@ public class InventoryManager : MonoBehaviour
     {
         mPlayer = GameObject.FindGameObjectWithTag("Player");
         mPlayerStatus = mPlayer.GetComponent<PlayerStatus>();
+        UpdateEquippedItems();
     }
     public void UISwitch()
     {
@@ -31,6 +36,7 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Inventory.SetActive(true);
+            DisplayStats();
         }
     }
 
@@ -59,10 +65,20 @@ public class InventoryManager : MonoBehaviour
         Stats.GetComponentInChildren<TextMeshProUGUI>().text = stats;
     }
 
+    public void UpdateEquippedItems()
+    {
+        Item equipedEyeBrow = mPlayerStatus.getEquippedEyeBrow();
+        Item equipedEye = mPlayerStatus.getEquippedEyes();
+        Item equipedMouth = mPlayerStatus.getEquippedMouth();
+        SetButtonSprite(eyeBrowButton, equipedEyeBrow);
+        SetButtonSprite(eyeButton, equipedEye);
+        SetButtonSprite(mouthButton, equipedMouth);
+    }
+
     public void DisplayEyeBrowInv()
     {
         float posX = -372.0f;
-        float posY = -10.0f;
+        float posY = -30.0f;
         List<EyeBrow> ownedEyeBrows = mPlayerStatus.getOwnedEyeBrows();
         foreach (Transform child in Buttons.transform)
         {
@@ -77,16 +93,20 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedEyeBrows[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
+            tempButton.onClick.AddListener(delegate{ UpdateEquippedItems();});
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
-            posY -= 130.0f;
+            posY -= 160.0f;
         }
     }
 
     public void DisplayEyesInv()
     {
         float posX = -372.0f;
-        float posY = -10.0f;
+        float posY = -30.0f;
         List<Eye> ownedEyes = mPlayerStatus.getOwnedEyes();
         foreach (Transform child in Buttons.transform)
         {
@@ -101,16 +121,20 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedEyes[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyes((Eye)curItem); });
+            tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
-            posY -= 130.0f;
+            posY -= 160.0f;
         }
     }
 
     public void DisplayMouthInv()
     {
         float posX = -372.0f;
-        float posY = -10.0f;
+        float posY = -30.0f;
         List<Mouth> ownedMouth = mPlayerStatus.getOwnedMouths();
         foreach (Transform child in Buttons.transform)
         {
@@ -125,9 +149,13 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
             Item curItem = ownedMouth[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedMouth((Mouth)curItem); });
+            tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
+            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
+            tempButton.onClick.AddListener(delegate { DisplayStats(); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
             SetButtonSprite(tempButton, curItem);
-            posY -= 130.0f;
+            posY -= 160.0f;
         }
     }
 

@@ -83,6 +83,8 @@ public class PlayerStatus : MonoBehaviour
         equippedMouth = new Mouth(MouthId.TEST_MOUTH_1);
 
         ownedEyebrows.Add(equippedEyebrow);
+        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_HAPPY));
+        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_SAD));
         ownedEyes.Add(equippedEyes);
         ownedMouth.Add(equippedMouth);
         updateStatus();
@@ -200,6 +202,18 @@ public class PlayerStatus : MonoBehaviour
 
     public Mouth getEquippedMouth() {
         return equippedMouth;
+    }
+
+    public void setEquippedMouth(Mouth m) {
+        equippedMouth = m;
+    }
+
+    public void setEquippedEyeBrow(EyeBrow eb) {
+        equippedEyebrow = eb;
+    }
+
+    public void setEquippedEyes(Eye e) {
+        equippedEyes = e;
     }
 
     public void addEyebrow(EyeBrowId id) {
