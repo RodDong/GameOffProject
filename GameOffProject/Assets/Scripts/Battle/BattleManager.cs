@@ -22,10 +22,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject healthBar;
     [SerializeField] GameObject gamObjectsInScene;
-
-    float maxHealth;
-    float curHealth;
-
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
@@ -170,10 +166,22 @@ public class BattleManager : MonoBehaviour
     #region Process Skills
 
     public void processSkill(Skill skill) {
+        List<Buff> activeBuffs = playerStatus.getActiveBuffs();
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
-                enemyStatus.TakeDamage(atkSkill.getAttackSkillDamage(playerStatus, enemyStatus));
+                float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus, enemyStatus);
+                foreach (Buff buff in activeBuffs) {
+                    if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE) {
+                        effectiveDamage += buff.GetBounusDamage();
+                    }
+                }
+                enemyStatus.TakeDamage(effectiveDamage);
+                foreach (Buff buff in activeBuffs) {
+                    if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL) {
+                        playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
+                    }
+                }
                 if (skill.GetSkillAttribute() == SkillAttribute.ANGRY) {
                     playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
                 }
@@ -200,7 +208,10 @@ public class BattleManager : MonoBehaviour
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.BOUNS_DAMAGE));
+                        Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
+                        float rand = Random.Range(0.0f, 1.0f);
+                        bounusDamage.GenerateBounusDamage(playerStatus, rand);
+                        playerStatus.activateBuff(bounusDamage);
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
                         break;
                 }

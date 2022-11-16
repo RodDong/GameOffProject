@@ -9,7 +9,7 @@ public class Buff
         TEST_BUFF_1,
         IMMUNE,
         REFLECT,
-        BOUNS_DAMAGE,
+        BONUS_DAMAGE,
         LIFE_STEAL,
         PURGE,
         BLIND
@@ -32,7 +32,7 @@ public class Buff
             case BuffId.REFLECT:
                 duration = 1;
                 break;
-            case BuffId.BOUNS_DAMAGE:
+            case BuffId.BONUS_DAMAGE:
                 duration = 3;
                 break;
             case BuffId.LIFE_STEAL:
@@ -51,26 +51,24 @@ public class Buff
 
     public Buff(BuffId id) {
         this.id = id;
-        switch(id) {
-            case BuffId.TEST_BUFF_1:
-                duration = 3;
-                break;
-            case BuffId.IMMUNE:
-                duration = 1;
-                break;
-            case BuffId.REFLECT:
-                duration = 1;
-                break;
-            case BuffId.BOUNS_DAMAGE:
-                duration = 3;
-                break;
-            default:
-                break;
-        }
+        resetDuration();
     }
 
     public bool decreaseCounter() {
         duration -= 1;
         return duration <= 0;
+    }
+
+    private float bounusDamageAmount;
+
+    public void GenerateBounusDamage(PlayerStatus playerStatus, float random) {
+        if (id == BuffId.BONUS_DAMAGE)
+            bounusDamageAmount = playerStatus.getATKbyAttribute(Skill.SkillAttribute.ANGRY) * random;
+        else 
+            Debug.LogWarning("This method is not avaible for this type of buff");
+    } 
+
+    public float GetBounusDamage() {
+        return bounusDamageAmount;
     }
 }

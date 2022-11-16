@@ -33,18 +33,15 @@ public class PlayerStatus : MonoBehaviour
     // idx 2: buff/debuff skill
    
     private List<Buff> buffs;
-    private List<Debuff> debuffs; 
+    public List<Buff> getActiveBuffs() {
+        return buffs;
+    } 
 
     // process round counters for buffs and debuffs
     public void updateBuffDebuffStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
                 buffs.RemoveAt(i);
-            }
-        }
-        for (int i = debuffs.Count - 1; i >= 0; i--) {
-            if (debuffs[i].decreaseCounter()) {
-                debuffs.RemoveAt(i);
             }
         }
     }

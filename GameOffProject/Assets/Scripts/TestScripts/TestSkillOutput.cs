@@ -66,7 +66,7 @@ public class TestSkillOutput : MonoBehaviour
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.BOUNS_DAMAGE));
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.BONUS_DAMAGE));
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
                         break;
                 }
