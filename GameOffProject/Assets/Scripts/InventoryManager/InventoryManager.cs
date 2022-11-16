@@ -171,6 +171,5 @@ public class InventoryManager : MonoBehaviour
         sState.highlightedSprite = Resources.Load<Sprite>(curItem.getHighLightedImage());
         tempButton.spriteState = sState;
         ((Image)tempButton.targetGraphic).sprite = Resources.Load<Sprite>(curItem.getImageSrc());
-        Debug.Log(curItem.getImageSrc());
     }
 }

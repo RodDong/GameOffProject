@@ -268,7 +268,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     private int clueNumbers;
     private List<Clue> allClues = new List<Clue>(); //clueID = -1 means not found
-    
+    public List<Clue> playerClues { get { return allClues;} }
     public void findClue(int id)
     {
         if (id < clueNumbers)
