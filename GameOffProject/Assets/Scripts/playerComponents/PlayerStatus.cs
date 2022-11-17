@@ -244,6 +244,9 @@ public class PlayerStatus : MonoBehaviour
     }
 
     private List<Clue> ownedClues = new List<Clue>();
+    public void addClue(int id) {
+        ownedClues.Add(new Clue(id));
+    }
     public Clue getClue(int id)
     {
         for (int i = 0; i < ownedClues.Count; i++) {
