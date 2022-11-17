@@ -29,6 +29,11 @@ public class Buff
         return id == ((Buff)obj).id;
     }
 
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
     private int duration;
     public void resetDuration() {
         switch(id) {
