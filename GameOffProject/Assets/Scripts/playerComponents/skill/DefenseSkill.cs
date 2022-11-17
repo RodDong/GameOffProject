@@ -5,20 +5,13 @@ using UnityEngine;
 public class DefenseSkill : Skill
 {
     private const float k = 1.0f;
-    public enum DefenseSkillId {
-        TEST_DEFENSE_SKILL_1,
-        TEST_DEFENSE_SKILL_HAPPY,
-        TEST_DEFENSE_SKILL_SAD,
-        TEST_DEFENSE_SKILL_ANGRY
-    }
-    private DefenseSkillId id;
     private int immuneCounter;
     private int reflectCounter;
-    public DefenseSkill(DefenseSkillId id) {
-        this.id = id;
+    public DefenseSkill(SkillAttribute attribute) {
+        this.attribute = attribute;
 
-        switch(id) {
-            case DefenseSkillId.TEST_DEFENSE_SKILL_1:
+        switch(attribute) {
+            case SkillAttribute.NONE:
                 type = SkillType.DEFENSE;
                 attribute = SkillAttribute.HAPPY;
                 displayName = "test defense";
@@ -29,6 +22,10 @@ public class DefenseSkill : Skill
     }
 
     public bool processImmune() {
+        if (attribute != SkillAttribute.HAPPY) {
+            Debug.LogWarning("This Skill Does Support this Function");
+        }
+
         if (immuneCounter > 0) {
             immuneCounter -= 1;
             return true;

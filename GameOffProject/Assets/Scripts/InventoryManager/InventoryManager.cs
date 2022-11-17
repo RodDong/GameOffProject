@@ -44,22 +44,22 @@ public class InventoryManager : MonoBehaviour
     public void DisplayStats()
     {
         string happyAttack = "HappyAttack: ";
-        happyAttack += mPlayerStatus.getHappyATK() + "\n";
+        happyAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n";
 
         string angryAttack = "AngryAttack: ";
-        angryAttack += mPlayerStatus.getAngryATK() + "\n";
+        angryAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n";
 
         string sadAttack = "SadAttack: ";
-        sadAttack += mPlayerStatus.getSadATK() + "\n";
+        sadAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.SAD) + "\n";
 
         string happyDefense = "HappyDefense: ";
-        happyDefense += mPlayerStatus.getHappyDEF() + "\n";
+        happyDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.HAPPY)+ "\n";
 
         string angryDefense = "AngryDefense: ";
-        angryDefense += mPlayerStatus.getAngryDEF() + "\n";
+        angryDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.ANGRY) + "\n";
 
         string sadDefense = "SadDefense: ";
-        sadDefense += mPlayerStatus.getSadDEF() + "\n";
+        sadDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.SAD) + "\n";
 
         string stats = happyAttack + angryAttack + sadAttack + happyDefense + angryDefense + sadDefense;
 

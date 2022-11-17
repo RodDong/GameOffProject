@@ -10,11 +10,7 @@ public class Skill
         BUFF,
         DEBUFF
     }
-    public enum SkillAttribute {
-        HAPPY,
-        ANGRY,
-        SAD
-    }
+   
     protected SkillType type;
     protected SkillAttribute attribute;
     protected float power;

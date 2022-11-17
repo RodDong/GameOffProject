@@ -75,13 +75,13 @@ public class PlayerStatus : MonoBehaviour
 
     private void Awake() {
         // for test purposes -
-        equippedEyebrow = new EyeBrow(EyeBrowId.TEST_EYEBROW_1);
-        equippedEyes = new Eye(EyeId.TEST_EYE_1);
-        equippedMouth = new Mouth(MouthId.TEST_MOUTH_1);
+        equippedEyebrow = new EyeBrow(SkillAttribute.NONE);
+        equippedEyes = new Eye(SkillAttribute.NONE);
+        equippedMouth = new Mouth(SkillAttribute.NONE);
 
         ownedEyebrows.Add(equippedEyebrow);
-        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_HAPPY));
-        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_SAD));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.SAD));
         ownedEyes.Add(equippedEyes);
         ownedMouth.Add(equippedMouth);
         updateStatus();
@@ -103,7 +103,13 @@ public class PlayerStatus : MonoBehaviour
     }
     
     public bool TakeDamage(float damage, SkillAttribute type) {
-        currentHealth -= damage / getDEFbyAttribute(type);
+        // if immune, takes no damage, 
+        // unless attribute is NONE, which means it is the effect of using immune
+        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+            return false;
+        }
+        
+        currentHealth -= damage * (50f / (50f + getDEFbyAttribute(type)));
         if (currentHealth <= 0) {
             currentHealth = 0;
             return true;
@@ -116,29 +122,6 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth > MAX_HEALTH) {
             currentHealth = MAX_HEALTH;
         }
-    }
-
-    public float getHappyATK() {
-        return happyATK;
-    }
-    public float getHappyDEF() {
-        return happyDEF;
-    }
-    public float getSadATK() {
-        return sadATK;
-    }
-    public float getSadDEF() {
-        return sadDEF;
-    }
-    public float getAngryATK() {
-        return angryATK;
-    }
-    public float getAngryDEF() {
-        return angryDEF;
-    }
-
-    public float getMaxHealth() {
-        return MAX_HEALTH;
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
@@ -219,16 +202,16 @@ public class PlayerStatus : MonoBehaviour
         equippedEyes = e;
     }
 
-    public void addEyebrow(EyeBrowId id) {
-        ownedEyebrows.Add(new EyeBrow(id));
+    public void addEyebrow(SkillAttribute attribute) {
+        ownedEyebrows.Add(new EyeBrow(attribute));
     }
 
-    public void addEye(EyeId id) {
-        ownedEyes.Add(new Eye(id));
+    public void addEye(SkillAttribute attribute) {
+        ownedEyes.Add(new Eye(attribute));
     }
 
-    public void addMouth(MouthId id) {
-        ownedMouth.Add(new Mouth(id));
+    public void addMouth(SkillAttribute attribute) {
+        ownedMouth.Add(new Mouth(attribute));
     }
 
     public List<EyeBrow> getOwnedEyeBrows() {

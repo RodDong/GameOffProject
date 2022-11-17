@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
+public abstract class Item
 {
     protected float happyATK;
     protected float happyDEF;
@@ -18,6 +18,7 @@ public class Item
     protected string itemDescription;
     protected string imgRoot = "Art/UI/Buttons/";
     protected string itemType;
+    protected SkillAttribute attribute;
 
     public float getHappyATK() {
         return happyATK;
@@ -62,6 +63,27 @@ public class Item
         return itemDescription;
     }
 
-    // public bool isEqual;
-
+    // override object.Equals
+    public override bool Equals(object obj)
+    {
+        //
+        // See the full list of guidelines at
+        //   http://go.microsoft.com/fwlink/?LinkID=85237
+        // and also the guidance for operator== at
+        //   http://go.microsoft.com/fwlink/?LinkId=85238
+        //
+        
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        
+        return this.attribute == ((Item)obj).attribute;
+    }
+    
+    // override object.GetHashCode
+    public override int GetHashCode()
+    {
+         return base.GetHashCode();
+    }
 }
