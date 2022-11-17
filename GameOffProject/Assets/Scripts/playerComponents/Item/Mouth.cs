@@ -2,75 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static BuffSkill;
-using static DebuffSkill;
 
 public class Mouth : Item
 {
-    public enum MouthId {
-        TEST_MOUTH_1,
-        TEST_MOUTH_HAPPY,
-        TEST_MOUTH_SAD,
-        TEST_MOUTH_ANGRY
-    }
-    private MouthId id;
-    public MouthId getID() {
-        return id;
-    }
-    
-    public bool isEqual(Mouth e1, Mouth e2)
-    {
-        return e1.getID() == e2.getID();
-    }
-
-    public Mouth(MouthId id) {
-        this.id = id;
+    public Mouth(SkillAttribute attribute) {
+        this.attribute = attribute;
         itemType = "Mouth";
 
-        switch(id) {
-            case MouthId.TEST_MOUTH_1:
+        switch(attribute) {
+            case SkillAttribute.NONE:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "3MouthA_N";
                 highLightedImage = imgRoot + "3MouthA_H";
                 selectedImage = imgRoot + "3MouthA_S";
                 break;
-            case MouthId.TEST_MOUTH_HAPPY:
+            case SkillAttribute.HAPPY:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth happy";
                 break;
-            case MouthId.TEST_MOUTH_SAD:
+            case SkillAttribute.SAD:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth sad";
                 break;
-            case MouthId.TEST_MOUTH_ANGRY:
+            case SkillAttribute.ANGRY:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new BuffSkill(BuffSkillId.TEST_BUFF_SKILL_1);
                 displayName = "test mouth angry";
                 break;
         }
+        skill = new BuffSkill(attribute);
     }
 }

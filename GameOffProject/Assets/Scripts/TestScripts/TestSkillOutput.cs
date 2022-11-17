@@ -13,31 +13,29 @@ public class TestSkillOutput : MonoBehaviour
 
     public GameObject damageDisplay;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         playerStatus = GameObject.FindObjectOfType<PlayerStatus>();
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
-    public void testAttackSkillOutput() {
+    public void testAttackSkillOutput()
+    {
         AttackSkill testPlayerAttackSkill = (AttackSkill) playerStatus.GetSkills()[0];
         SkillAttribute testAttribute = testPlayerAttackSkill.GetSkillAttribute();
         float testPlayerATK = playerStatus.getATKbyAttribute(testAttribute);
         float testTargetDEF = enemyStatus.getDEFbyAttribute(testAttribute);
         float damage = testPlayerAttackSkill.getAttackSkillDamage(playerStatus, enemyStatus);
-        DisplayDamage(damage);
+        Debug.Log("You damage the enemy by: " + damage);
     }
 
-    
-
-    public void processSkill(Skill skill) {
+    public void processSkill(Skill skill)
+    {
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
@@ -68,7 +66,7 @@ public class TestSkillOutput : MonoBehaviour
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.BOUNS_DAMAGE));
+                        playerStatus.activateBuff(new Buff(Buff.BuffId.BONUS_DAMAGE));
                         enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
                         break;
                 }
@@ -76,10 +74,10 @@ public class TestSkillOutput : MonoBehaviour
         }
     }
 
-    private void DisplayDamage(float damage)
-    {
-        GameObject d = GameObject.Instantiate<GameObject>(damageDisplay);
-        d.GetComponent<TextMeshPro>().text = Convert.ToString(damage);
-        Destroy(d, 1);
-    }
+    // private void DisplayDamage(float damage)
+    // {
+    //     GameObject d = GameObject.Instantiate<GameObject>(damageDisplay);
+    //     d.GetComponent<TextMeshPro>().text = Convert.ToString(damage);
+    //     Destroy(d, 1);
+    // }
 }

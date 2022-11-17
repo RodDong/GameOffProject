@@ -28,8 +28,6 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private bool canContinueToNextLine = false;
-    
-    private bool choiceMade = false; // used to keep track of choice status
 
     private bool panelFadeIn = false;
 
@@ -89,9 +87,8 @@ public class DialogueManager : MonoBehaviour
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine && currentStory.currentChoices.Count == 0 
-            && (Input.GetMouseButtonDown(0) || choiceMade))
+            && Input.GetMouseButtonDown(0))
         {
-            choiceMade = false;
             ContinueStory();
         }
     }
@@ -188,7 +185,8 @@ public class DialogueManager : MonoBehaviour
     {
         
         // empty the dialogue text
-        dialogueText.text = "";
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
         // hide items while text is typing
         continueIcon.SetActive(false);
         HideChoices();
@@ -197,7 +195,7 @@ public class DialogueManager : MonoBehaviour
 
         bool isAddingRichTextTag = false;
 
-        int i = 0;
+        int i = 0; // used to create a delay between input registration
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
         {   
@@ -205,7 +203,7 @@ public class DialogueManager : MonoBehaviour
             // if the submit button is pressed, finish up displaying the line right away
             if (i > 5 && Input.GetMouseButton(0)) 
             {
-                dialogueText.text = line;
+                dialogueText.maxVisibleCharacters = line.Length;
                 break;
             }
 
@@ -222,7 +220,7 @@ public class DialogueManager : MonoBehaviour
             // if not rich text, add the next letter and wait a small time
             else 
             {
-                dialogueText.text += letter;
+                dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
             }
         }
@@ -320,12 +318,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (canContinueToNextLine) 
         {
-            choiceMade = true;
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             
 
-            // ContinueStory();
+            ContinueStory();
         }
     }
 

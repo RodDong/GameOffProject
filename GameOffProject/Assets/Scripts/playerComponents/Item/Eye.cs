@@ -5,70 +5,53 @@ using static AttackSkill;
 
 public class Eye : Item
 {
-    public enum EyeId {
-        TEST_EYE_1,
-        TEST_EYE_HAPPY,
-        TEST_EYE_SAD,
-        TEST_EYE_ANGRY
-    }
-    private EyeId id;
-
-    public EyeId getID(){
-        return id;
-    }
-
-    public bool isEqual(Eye e1, Eye e2)
-    {
-        return e1.getID() == e2.getID();
-    }
-
-    public Eye(EyeId id) {
-        this.id = id;
+    public Eye(SkillAttribute attribute) {
+        this.attribute = attribute;
         itemType = "Eye";
 
-        switch(id) {
-            case EyeId.TEST_EYE_1:
+        switch(attribute) {
+            case SkillAttribute.NONE:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_1);
+                skill = new AttackSkill(SkillAttribute.NONE);
                 displayName = "test eye";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "2EyeA_N";
                 highLightedImage = imgRoot + "2EyeA_H";
                 selectedImage = imgRoot + "2EyeA_S";
                 break;
-            case EyeId.TEST_EYE_HAPPY:
+            case SkillAttribute.HAPPY:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_HAPPY);
+                skill = new AttackSkill(SkillAttribute.HAPPY);
                 displayName = "test eye happy";
                 break;
-            case EyeId.TEST_EYE_SAD:
+            case SkillAttribute.SAD:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_SAD);
+                skill = new AttackSkill(SkillAttribute.SAD);
                 displayName = "test eye sad";
                 break;
-            case EyeId.TEST_EYE_ANGRY:
+            case SkillAttribute.ANGRY:
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
                 angryATK = 50f;
                 angryDEF = 50f;
-                skill = new AttackSkill(AttackSkillId.TEST_ATTACK_SKILL_ANGRY);
+                skill = new AttackSkill(SkillAttribute.ANGRY);
                 displayName = "test eye angry";
                 break;
         }

@@ -5,19 +5,12 @@ using static Buff;
 
 public class BuffSkill : Skill
 {
-    public enum BuffSkillId {
-        TEST_BUFF_SKILL_1,
-        TEST_BUFF_SKILL_HAPPY,
-        TEST_BUFF_SKILL_SAD,
-        TEST_BUFF_SKILL_ANGRY
-    }
-    private BuffSkillId id;
     private Buff buff;
-    public BuffSkill(BuffSkillId id) {
-        this.id = id;
+    public BuffSkill(SkillAttribute attribute) {
+        this.attribute = attribute;
 
-        switch(id) {
-            case BuffSkillId.TEST_BUFF_SKILL_1:
+        switch(attribute) {
+            case SkillAttribute.NONE:
                 type = SkillType.BUFF;
                 attribute = SkillAttribute.SAD;
                 displayName = "test buff";

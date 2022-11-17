@@ -131,7 +131,7 @@ public class PlayerMove : MonoBehaviour
         if(mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
         }
-        playerAnimator.Play("Idle");
+        playerAnimator.Play("PlayerIdle");
     }
 
     void UpdateWalk(){

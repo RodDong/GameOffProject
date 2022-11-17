@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
 
-public class EnemyStatus: MonoBehaviour
+public abstract class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float health;
@@ -96,7 +96,5 @@ public class EnemyStatus: MonoBehaviour
         }
     }
 
-    void makeMove() {
-        // ???????
-    }
+    public abstract void makeMove(PlayerStatus playerStatus);
 }

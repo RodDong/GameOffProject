@@ -33,18 +33,15 @@ public class PlayerStatus : MonoBehaviour
     // idx 2: buff/debuff skill
    
     private List<Buff> buffs;
-    private List<Debuff> debuffs; 
+    public List<Buff> getActiveBuffs() {
+        return buffs;
+    } 
 
     // process round counters for buffs and debuffs
     public void updateBuffDebuffStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
                 buffs.RemoveAt(i);
-            }
-        }
-        for (int i = debuffs.Count - 1; i >= 0; i--) {
-            if (debuffs[i].decreaseCounter()) {
-                debuffs.RemoveAt(i);
             }
         }
     }
@@ -78,17 +75,23 @@ public class PlayerStatus : MonoBehaviour
 
     private void Awake() {
         // for test purposes -
-        equippedEyebrow = new EyeBrow(EyeBrowId.TEST_EYEBROW_1);
-        equippedEyes = new Eye(EyeId.TEST_EYE_1);
-        equippedMouth = new Mouth(MouthId.TEST_MOUTH_1);
+        equippedEyebrow = new EyeBrow(SkillAttribute.NONE);
+        equippedEyes = new Eye(SkillAttribute.NONE);
+        equippedMouth = new Mouth(SkillAttribute.NONE);
 
         ownedEyebrows.Add(equippedEyebrow);
-        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_HAPPY));
-        ownedEyebrows.Add(new EyeBrow(EyeBrowId.TEST_EYEBROW_SAD));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.SAD));
         ownedEyes.Add(equippedEyes);
         ownedMouth.Add(equippedMouth);
         updateStatus();
         // - for test purposes
+
+        //initialize all clues as unfound
+        for (int i = 0; i < clueNumbers; i++)
+        {
+            allClues.Add(new Clue(-1));
+        }
     }
 
     // Start is called before the first frame update
@@ -100,7 +103,13 @@ public class PlayerStatus : MonoBehaviour
     }
     
     public bool TakeDamage(float damage, SkillAttribute type) {
-        currentHealth -= damage / getDEFbyAttribute(type);
+        // if immune, takes no damage, 
+        // unless attribute is NONE, which means it is the effect of using immune
+        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+            return false;
+        }
+        
+        currentHealth -= damage * (50f / (50f + getDEFbyAttribute(type)));
         if (currentHealth <= 0) {
             currentHealth = 0;
             return true;
@@ -113,29 +122,6 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth > MAX_HEALTH) {
             currentHealth = MAX_HEALTH;
         }
-    }
-
-    public float getHappyATK() {
-        return happyATK;
-    }
-    public float getHappyDEF() {
-        return happyDEF;
-    }
-    public float getSadATK() {
-        return sadATK;
-    }
-    public float getSadDEF() {
-        return sadDEF;
-    }
-    public float getAngryATK() {
-        return angryATK;
-    }
-    public float getAngryDEF() {
-        return angryDEF;
-    }
-
-    public float getMaxHealth() {
-        return MAX_HEALTH;
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
@@ -216,16 +202,16 @@ public class PlayerStatus : MonoBehaviour
         equippedEyes = e;
     }
 
-    public void addEyebrow(EyeBrowId id) {
-        ownedEyebrows.Add(new EyeBrow(id));
+    public void addEyebrow(SkillAttribute attribute) {
+        ownedEyebrows.Add(new EyeBrow(attribute));
     }
 
-    public void addEye(EyeId id) {
-        ownedEyes.Add(new Eye(id));
+    public void addEye(SkillAttribute attribute) {
+        ownedEyes.Add(new Eye(attribute));
     }
 
-    public void addMouth(MouthId id) {
-        ownedMouth.Add(new Mouth(id));
+    public void addMouth(SkillAttribute attribute) {
+        ownedMouth.Add(new Mouth(attribute));
     }
 
     public List<EyeBrow> getOwnedEyeBrows() {
@@ -257,5 +243,17 @@ public class PlayerStatus : MonoBehaviour
         newSkills.Add(equippedMouth.getSkill());
         setSkills(newSkills);
     }
-    
+
+    //Clues
+    [SerializeField]
+    private int clueNumbers;
+    private List<Clue> allClues = new List<Clue>(); //clueID = -1 means not found
+    public List<Clue> playerClues { get { return allClues;} }
+    public void findClue(int id)
+    {
+        if (id < clueNumbers)
+            allClues[id] = new Clue(id);
+        else
+            Debug.LogError("ID exceed total number!");
+    }
 }
