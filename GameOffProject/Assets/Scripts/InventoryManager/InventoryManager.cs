@@ -87,7 +87,6 @@ public class InventoryManager : MonoBehaviour
         SetButtonSprite(mouthButton, equipedMouth);
         foreach (Transform child in Buttons.transform)
         {
-            Buttons.transform.DetachChildren();
             Destroy(child.gameObject);
         }
         for (int i = 0; i < ownedEyeBrows.Count; i++)
@@ -97,7 +96,7 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.SetParent(Buttons.transform);
             tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
-            Item curItem = ownedEyeBrows[i];
+            EyeBrow curItem = ownedEyeBrows[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
             tempButton.onClick.AddListener(delegate{ UpdateEquippedItems();});
@@ -106,7 +105,13 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeBrowButton, curItem); });
             tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyeBrows[0]); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
+
             SetButtonSprite(tempButton, curItem);
+            if (curItem.Equals(mPlayerStatus.getEquippedEyeBrow()))
+            {
+                Debug.Log("1");
+                SetButtonHighLightedSprite(tempButton, curItem);
+            }
             posY -= 160.0f;
         }
         SetButtonHighLightedSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyeBrows[0]);
@@ -122,9 +127,9 @@ public class InventoryManager : MonoBehaviour
         Item equipedMouth = mPlayerStatus.getEquippedMouth();
         SetButtonSprite(eyeBrowButton, equipedEyeBrow);
         SetButtonSprite(mouthButton, equipedMouth);
+        
         foreach (Transform child in Buttons.transform)
         {
-            Buttons.transform.DetachChildren();
             Destroy(child.gameObject);
         }
         for (int i = 0; i < ownedEyes.Count; i++)
@@ -134,7 +139,7 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.SetParent(Buttons.transform);
             tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
-            Item curItem = ownedEyes[i];
+            Eye curItem = ownedEyes[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyes((Eye)curItem); });
             tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
@@ -143,10 +148,15 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeButton, curItem); });
             tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyes[0]); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
+            
             SetButtonSprite(tempButton, curItem);
+            if (curItem.Equals(mPlayerStatus.getEquippedEyes()))
+            {
+                SetButtonHighLightedSprite(tempButton, curItem);
+            }
             posY -= 160.0f;
         }
-        SetButtonHighLightedSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyes[0]);
+        
         DisplayDescription((Item)ownedEyes[0]);
     }
 
@@ -161,7 +171,6 @@ public class InventoryManager : MonoBehaviour
         SetButtonSprite(eyeButton, equipedEye);
         foreach (Transform child in Buttons.transform)
         {
-            Buttons.transform.DetachChildren();
             Destroy(child.gameObject);
         }
         for (int i = 0; i < ownedMouth.Count; i++)
@@ -171,7 +180,7 @@ public class InventoryManager : MonoBehaviour
             tempButtonTrans.SetParent(Buttons.transform);
             tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
             tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
-            Item curItem = ownedMouth[i];
+            Mouth curItem = ownedMouth[i];
             tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
             tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedMouth((Mouth)curItem); });
             tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
@@ -180,7 +189,12 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(mouthButton, curItem); });
             tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedMouth[0]); });
             //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
+            
             SetButtonSprite(tempButton, curItem);
+            if (curItem.Equals(mPlayerStatus.getEquippedMouth()))
+            {
+                SetButtonHighLightedSprite(tempButton, curItem);
+            }
             posY -= 160.0f;
         }
         SetButtonHighLightedSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedMouth[0]);
