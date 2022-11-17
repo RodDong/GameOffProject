@@ -1370,7 +1370,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayEyeBrowInv
+        m_MethodName: UpdateEyebrowDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4839,7 +4839,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayMouthInv
+        m_MethodName: UpdateMouthDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7040,7 +7040,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayEyesInv
+        m_MethodName: UpdateEyesDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
