@@ -20,6 +20,15 @@ public class Buff
         return id;
     }
 
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType()) {
+            return false;
+        }
+
+        return id == ((Buff)obj).id;
+    }
+
     private int duration;
     public void resetDuration() {
         switch(id) {
@@ -63,12 +72,25 @@ public class Buff
 
     public void GenerateBounusDamage(PlayerStatus playerStatus, float random) {
         if (id == BuffId.BONUS_DAMAGE)
-            bounusDamageAmount = playerStatus.getATKbyAttribute(Skill.SkillAttribute.ANGRY) * random;
+            bounusDamageAmount = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
         else 
             Debug.LogWarning("This method is not avaible for this type of buff");
     } 
 
     public float GetBounusDamage() {
         return bounusDamageAmount;
+    }
+
+    private float blindChance;
+
+    public void GenerateBlindPercentage(PlayerStatus playerStatus, float random) {
+        if (id == BuffId.BLIND)
+            blindChance = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
+        else 
+            Debug.LogWarning("This method is not avaible for this type of buff");
+    } 
+
+    public float GetBlindPercentage() {
+        return blindChance;
     }
 }

@@ -47,6 +47,9 @@ public class BattleManager : MonoBehaviour
 
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
+        if (enemyStatus == null) {
+            Debug.LogWarning("No Enemy Object in Scene");
+        }
 
         // mask UI
 
@@ -198,6 +201,7 @@ public class BattleManager : MonoBehaviour
                         break;
                     case SkillAttribute.SAD:
                         playerStatus.activateBuff(new Buff(Buff.BuffId.IMMUNE));
+                        playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
                         break;
                     case SkillAttribute.ANGRY:
                         playerStatus.activateBuff(new Buff(Buff.BuffId.REFLECT));
@@ -218,7 +222,9 @@ public class BattleManager : MonoBehaviour
                         float rand = Random.Range(0.0f, 1.0f);
                         bounusDamage.GenerateBounusDamage(playerStatus, rand);
                         playerStatus.activateBuff(bounusDamage);
-                        enemyStatus.activateBuff(new Buff(Buff.BuffId.BLIND));
+                        Buff blind = new Buff(Buff.BuffId.BLIND);
+                        blind.GenerateBlindPercentage(playerStatus, 1 - rand);
+                        enemyStatus.activateBuff(blind);
                         break;
                 }
                 break;
@@ -257,9 +263,6 @@ public class BattleManager : MonoBehaviour
             case SkillType.BUFF:
                 processBuffSkill((BuffSkill)skill);
                 break;
-            case SkillType.DEBUFF:
-                processDebuffSkill((DebuffSkill)skill);
-                break;
             default:
                 break;
         }
@@ -270,11 +273,6 @@ public class BattleManager : MonoBehaviour
     void processBuffSkill(BuffSkill skill)
     {
         // process buff skill
-    }
-
-    void processDebuffSkill(DebuffSkill skill)
-    {
-        // process debuff skill
     }
     #endregion
 
@@ -426,9 +424,12 @@ public class BattleManager : MonoBehaviour
 
     public void updatePlayerStatVisual()
     {
-        string happyStat = "HappyATK: " + playerStatus.getHappyATK() + "\n" + "HappyDEF: " + playerStatus.getHappyDEF() + "\n";
-        string angryStat = "AngryATK: " + playerStatus.getAngryATK() + "\n" + "AngryDEF: " + playerStatus.getAngryDEF() + "\n";
-        string sadStat = "SadATK: " + playerStatus.getSadATK() + "\n" + "SadDEF: " + playerStatus.getSadDEF() + "\n";
+        string happyStat = "HappyATK: " + playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n" 
+        + "HappyDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY) + "\n";
+        string angryStat = "AngryATK: " + playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n" + "AngryDEF: " 
+        + playerStatus.getDEFbyAttribute(SkillAttribute.ANGRY) + "\n";
+        string sadStat = "SadATK: " + playerStatus.getATKbyAttribute(SkillAttribute.SAD) + "\n" 
+        + "SadDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.SAD) + "\n";
         playerStatsUI.GetComponent<TextMeshProUGUI>().text = happyStat + angryStat + sadStat;
     }
     #endregion
