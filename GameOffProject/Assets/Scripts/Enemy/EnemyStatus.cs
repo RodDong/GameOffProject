@@ -6,7 +6,7 @@ using static Skill;
 public abstract class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
-    protected float health;
+    protected float currentHealth;
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;
@@ -16,23 +16,17 @@ public abstract class EnemyStatus: MonoBehaviour
     protected int hitsTakenCounter;
     protected int attackCounter;
     protected List<Buff> buffs;
-    protected List<Debuff> debuffs;   
 
     // process round counters for buffs and debuffs
-    public void updateBuffDebuffStatus() {
+    public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
                 buffs.RemoveAt(i);
             }
         }
-        for (int i = debuffs.Count - 1; i >= 0; i--) {
-            if (debuffs[i].decreaseCounter()) {
-                debuffs.RemoveAt(i);
-            }
-        }
     }
 
-    public bool activateBuff(Buff buff) {
+    public bool ActivateBuff(Buff buff) {
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -43,14 +37,14 @@ public abstract class EnemyStatus: MonoBehaviour
         return false;
     }
 
-    public void clearBuff() {
+    public void ClearBuff() {
         buffs.Clear();
     }
 
     private void Awake() {
         // for test purposes -
         MAX_HEALTH = 500.0f;
-        health = MAX_HEALTH;
+        currentHealth = MAX_HEALTH;
         happyATK = 50.0f;
         happyDEF = 50.0f;
         sadATK = 50.0f;
@@ -60,14 +54,19 @@ public abstract class EnemyStatus: MonoBehaviour
         // - for test purposes
     }
 
-    public bool TakeDamage(float damage) {
-        if (health <= damage) {
-            health = 0;
-            return true;
-        } else {
-            health -= damage;
-            return false;
+     public float TakeDamage(float damage, SkillAttribute type) {
+        // if immune, takes no damage, 
+        // unless attribute is NONE, which means it is the effect of using immune
+        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+            return 0;
         }
+        
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        currentHealth -= effectiveDamage;
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+        }
+        return effectiveDamage;
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
