@@ -177,13 +177,13 @@ public class BattleManager : MonoBehaviour
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
-                float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus, enemyStatus);
+                float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
                 foreach (Buff buff in activeBuffs) {
                     if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE) {
                         effectiveDamage += buff.GetBounusDamage();
                     }
                 }
-                enemyStatus.TakeDamage(effectiveDamage);
+                enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
                 foreach (Buff buff in activeBuffs) {
                     if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL) {
                         playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);

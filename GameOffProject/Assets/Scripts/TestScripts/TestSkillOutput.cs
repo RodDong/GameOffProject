@@ -30,7 +30,7 @@ public class TestSkillOutput : MonoBehaviour
         SkillAttribute testAttribute = testPlayerAttackSkill.GetSkillAttribute();
         float testPlayerATK = playerStatus.getATKbyAttribute(testAttribute);
         float testTargetDEF = enemyStatus.getDEFbyAttribute(testAttribute);
-        float damage = testPlayerAttackSkill.getAttackSkillDamage(playerStatus, enemyStatus);
+        float damage = testPlayerAttackSkill.getAttackSkillDamage(playerStatus);
         Debug.Log("You damage the enemy by: " + damage);
     }
 
@@ -39,7 +39,7 @@ public class TestSkillOutput : MonoBehaviour
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
-                enemyStatus.TakeDamage(atkSkill.getAttackSkillDamage(playerStatus, enemyStatus));
+                enemyStatus.TakeDamage(atkSkill.getAttackSkillDamage(playerStatus), skill.GetSkillAttribute());
                 if (skill.GetSkillAttribute() == SkillAttribute.ANGRY) {
                     playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
                 }

@@ -14,7 +14,7 @@ public class Enemy : EnemyStatus
         }
         playerStatus.TakeDamage(effectiveDamage, SkillAttribute.HAPPY);
         if (playerStatus.getActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))) {
-            TakeDamage(effectiveDamage);
+            TakeDamage(effectiveDamage, SkillAttribute.HAPPY);
         }
     }
 }
