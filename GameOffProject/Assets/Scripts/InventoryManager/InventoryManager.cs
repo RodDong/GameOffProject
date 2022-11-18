@@ -104,17 +104,14 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { DisplayStats(); });
             tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeBrowButton, curItem); });
             tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyeBrows[0]); });
-            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyeBrows[i].getDisplayName();
 
             SetButtonSprite(tempButton, curItem);
             if (curItem.Equals(mPlayerStatus.getEquippedEyeBrow()))
             {
-                Debug.Log("1");
                 SetButtonHighLightedSprite(tempButton, curItem);
             }
             posY -= 160.0f;
         }
-        SetButtonHighLightedSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyeBrows[0]);
         DisplayDescription((Item)ownedEyeBrows[0]);
     }
 
@@ -147,7 +144,6 @@ public class InventoryManager : MonoBehaviour
             tempButton.onClick.AddListener(delegate { DisplayStats(); });
             tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeButton, curItem); });
             tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyes[0]); });
-            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedEyes[i].getDisplayName();
             
             SetButtonSprite(tempButton, curItem);
             if (curItem.Equals(mPlayerStatus.getEquippedEyes()))
@@ -197,7 +193,6 @@ public class InventoryManager : MonoBehaviour
             }
             posY -= 160.0f;
         }
-        SetButtonHighLightedSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedMouth[0]);
         DisplayDescription((Item)ownedMouth[0]);
     }
 
