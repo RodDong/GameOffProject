@@ -682,9 +682,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 22b71f9dcdf7f8d4694b87cc62086397, type: 3}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 3667c805bc76ccc4ba9c154699183a8b, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: aab1de9200584e14ab16247f7cb20d89, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 3667c805bc76ccc4ba9c154699183a8b, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -698,7 +698,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayEyeBrowInv
+        m_MethodName: UpdateEyebrowDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3367,7 +3367,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayMouthInv
+        m_MethodName: UpdateMouthDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4636,7 +4636,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 230845893}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: DisplayEyesInv
+        m_MethodName: UpdateEyesDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

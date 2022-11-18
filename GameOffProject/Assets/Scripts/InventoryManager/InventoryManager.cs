@@ -9,22 +9,25 @@ using System.Data;
 public class InventoryManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject Buttons;
-    [SerializeField] Button buttonPrefab;
-    [SerializeField] GameObject Description;
-    [SerializeField] GameObject Stats;
-    [SerializeField] GameObject Inventory;
-    [SerializeField] Button eyeButton;
-    [SerializeField] Button eyeBrowButton;
-    [SerializeField] Button mouthButton;
-    GameObject mPlayer;
-    PlayerStatus mPlayerStatus;
+    [SerializeField] private GameObject Buttons;
+    [SerializeField] private Button buttonPrefab;
+    [SerializeField] private GameObject Description;
+    [SerializeField] private GameObject Stats;
+    [SerializeField] private GameObject Inventory;
+    [SerializeField] private Button eyeButton;
+    [SerializeField] private Button eyeBrowButton;
+    [SerializeField] private Button mouthButton;
+    private GameObject player;
+    private PlayerStatus playerStatus;
 
     void Start()
     {
-        mPlayer = GameObject.FindGameObjectWithTag("Player");
-        mPlayerStatus = mPlayer.GetComponent<PlayerStatus>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStatus = player.GetComponent<PlayerStatus>();
         UpdateEquippedItems();
+        eyeBrowButton.onClick.AddListener(delegate {HighlightItemIcon(eyeBrowButton, playerStatus.getEquippedEyeBrow());});
+        eyeButton.onClick.AddListener(delegate {HighlightItemIcon(eyeButton, playerStatus.getEquippedEyes());});
+        mouthButton.onClick.AddListener(delegate {HighlightItemIcon(mouthButton, playerStatus.getEquippedMouth());});
     }
     public void UISwitch()
     {
@@ -35,31 +38,31 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Inventory.SetActive(true);
-            DisplayEyeBrowInv();
-            SetButtonHighLightedSprite(eyeBrowButton, mPlayer.GetComponent<PlayerStatus>().getEquippedEyeBrow());
-            DisplayStats();
+            UpdateEyebrowDisplay();
+            HighlightItemIcon(eyeBrowButton, player.GetComponent<PlayerStatus>().getEquippedEyeBrow());
+            UpdateStatus();
         }
     }
 
-    public void DisplayStats()
+    public void UpdateStatus()
     {
         string happyAttack = "HappyAttack: ";
-        happyAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n";
+        happyAttack += playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n";
 
         string angryAttack = "AngryAttack: ";
-        angryAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n";
+        angryAttack += playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n";
 
         string sadAttack = "SadAttack: ";
-        sadAttack += mPlayerStatus.getATKbyAttribute(SkillAttribute.SAD) + "\n";
+        sadAttack += playerStatus.getATKbyAttribute(SkillAttribute.SAD) + "\n";
 
         string happyDefense = "HappyDefense: ";
-        happyDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.HAPPY)+ "\n";
+        happyDefense += playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY)+ "\n";
 
         string angryDefense = "AngryDefense: ";
-        angryDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.ANGRY) + "\n";
+        angryDefense += playerStatus.getDEFbyAttribute(SkillAttribute.ANGRY) + "\n";
 
         string sadDefense = "SadDefense: ";
-        sadDefense += mPlayerStatus.getDEFbyAttribute(SkillAttribute.SAD) + "\n";
+        sadDefense += playerStatus.getDEFbyAttribute(SkillAttribute.SAD) + "\n";
 
         string stats = happyAttack + angryAttack + sadAttack + happyDefense + angryDefense + sadDefense;
 
@@ -68,154 +71,167 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateEquippedItems()
     {
-        Item equipedEyeBrow = mPlayerStatus.getEquippedEyeBrow();
-        Item equipedEye = mPlayerStatus.getEquippedEyes();
-        Item equipedMouth = mPlayerStatus.getEquippedMouth();
-        SetButtonSprite(eyeBrowButton, equipedEyeBrow);
-        SetButtonSprite(eyeButton, equipedEye);
-        SetButtonSprite(mouthButton, equipedMouth);
+        Item equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Item equippedEyes = playerStatus.getEquippedEyes();
+        Item equippedMouth = playerStatus.getEquippedMouth();
+        InitializeButtonSpriteState(eyeBrowButton, equippedEyebrow);
+        InitializeButtonSpriteState(eyeButton, equippedEyes);
+        InitializeButtonSpriteState(mouthButton, equippedMouth);
     }
 
-    public void DisplayEyeBrowInv()
+    public void UpdateEyebrowDisplay()
     {
         float posX = -372.0f;
         float posY = -30.0f;
-        List<EyeBrow> ownedEyeBrows = mPlayerStatus.getOwnedEyeBrows();
-        Item equipedEye = mPlayerStatus.getEquippedEyes();
-        Item equipedMouth = mPlayerStatus.getEquippedMouth();
-        SetButtonSprite(eyeButton, equipedEye);
-        SetButtonSprite(mouthButton, equipedMouth);
+        List<EyeBrow> ownedEyeBrows = playerStatus.getOwnedEyeBrows();
+        Item equippedEyes = playerStatus.getEquippedEyes();
+        Item equippedMouth = playerStatus.getEquippedMouth();
+        InitializeButtonSpriteState(eyeButton, equippedEyes);
+        InitializeButtonSpriteState(mouthButton, equippedMouth);
         foreach (Transform child in Buttons.transform)
         {
             Destroy(child.gameObject);
         }
         for (int i = 0; i < ownedEyeBrows.Count; i++)
         {
-            Button tempButton = Button.Instantiate(buttonPrefab);
-            Transform tempButtonTrans = tempButton.GetComponent<Transform>();
-            tempButtonTrans.SetParent(Buttons.transform);
-            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
-            tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
+            Button newButton = Button.Instantiate(buttonPrefab);
+            Transform newButtonTransform = newButton.GetComponent<Transform>();
+            newButtonTransform.SetParent(Buttons.transform);
+            newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
+            newButtonTransform.localScale = new Vector3(1.25f, 1.25f, 0);
             EyeBrow curItem = ownedEyeBrows[i];
-            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
-            tempButton.onClick.AddListener(delegate{ UpdateEquippedItems();});
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
-            tempButton.onClick.AddListener(delegate { DisplayStats(); });
-            tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeBrowButton, curItem); });
-            tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyeBrows[0]); });
+            newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
+            newButton.onClick.AddListener(delegate { playerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
+            newButton.onClick.AddListener(delegate { UpdateEquippedItems();});
+            newButton.onClick.AddListener(delegate { playerStatus.updateStatus(); });
+            newButton.onClick.AddListener(delegate { UpdateStatus(); });
+            newButton.onClick.AddListener(delegate { HighlightItemDetail(newButton, curItem);});
+            newButton.onClick.AddListener(delegate { HighlightItemIcon(eyeBrowButton, curItem); });
+            newButton.onClick.AddListener(delegate { InitializeButtonSpriteState(Buttons.GetComponentInChildren<Button>(), ownedEyeBrows[0]); });
 
-            SetButtonSprite(tempButton, curItem);
-            if (curItem.Equals(mPlayerStatus.getEquippedEyeBrow()))
+            InitializeButtonSpriteState(newButton, curItem);
+            if (curItem.Equals(playerStatus.getEquippedEyeBrow()))
             {
-                SetButtonHighLightedSprite(tempButton, curItem);
+                HighlightItemDetail(newButton, curItem);
             }
             posY -= 160.0f;
         }
-        DisplayDescription((Item)ownedEyeBrows[0]);
+        UpdateDescription(ownedEyeBrows[0]);
     }
 
-    public void DisplayEyesInv()
+    public void UpdateEyesDisplay()
     {
         float posX = -372.0f;
         float posY = -30.0f;
-        List<Eye> ownedEyes = mPlayerStatus.getOwnedEyes();
-        Item equipedEyeBrow = mPlayerStatus.getEquippedEyeBrow();
-        Item equipedMouth = mPlayerStatus.getEquippedMouth();
-        SetButtonSprite(eyeBrowButton, equipedEyeBrow);
-        SetButtonSprite(mouthButton, equipedMouth);
+        List<Eye> ownedEyes = playerStatus.getOwnedEyes();
+        Item equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Item equippedMouth = playerStatus.getEquippedMouth();
+        InitializeButtonSpriteState(eyeBrowButton, equippedEyebrow);
+        InitializeButtonSpriteState(mouthButton, equippedMouth);
         
         foreach (Transform child in Buttons.transform)
         {
             Destroy(child.gameObject);
         }
+
         for (int i = 0; i < ownedEyes.Count; i++)
         {
-            Button tempButton = Button.Instantiate(buttonPrefab);
-            Transform tempButtonTrans = tempButton.GetComponent<Transform>();
-            tempButtonTrans.SetParent(Buttons.transform);
-            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
-            tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
+            Button newButton = Button.Instantiate(buttonPrefab);
+            Transform newButtonTransform = newButton.GetComponent<Transform>();
+            newButtonTransform.SetParent(Buttons.transform);
+            newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
+            newButtonTransform.localScale = new Vector3(1.25f, 1.25f, 0);
             Eye curItem = ownedEyes[i];
-            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedEyes((Eye)curItem); });
-            tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
-            tempButton.onClick.AddListener(delegate { DisplayStats(); });
-            tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(eyeButton, curItem); });
-            tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedEyes[0]); });
+            newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
+            newButton.onClick.AddListener(delegate { playerStatus.setEquippedEyes((Eye)curItem); });
+            newButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
+            newButton.onClick.AddListener(delegate { playerStatus.updateStatus(); });
+            newButton.onClick.AddListener(delegate { UpdateStatus(); });
+            newButton.onClick.AddListener(delegate { HighlightItemDetail(newButton, curItem);});
+            newButton.onClick.AddListener(delegate { HighlightItemIcon(eyeButton, curItem); });
+            newButton.onClick.AddListener(delegate { InitializeButtonSpriteState(Buttons.GetComponentInChildren<Button>(), ownedEyes[0]); });
             
-            SetButtonSprite(tempButton, curItem);
-            if (curItem.Equals(mPlayerStatus.getEquippedEyes()))
+            InitializeButtonSpriteState(newButton, curItem);
+            if (curItem.Equals(playerStatus.getEquippedEyes()))
             {
-                SetButtonHighLightedSprite(tempButton, curItem);
+                HighlightItemDetail(newButton, curItem);
             }
             posY -= 160.0f;
         }
-        
-        DisplayDescription((Item)ownedEyes[0]);
+        UpdateDescription(ownedEyes[0]);
     }
 
-    public void DisplayMouthInv()
+    public void UpdateMouthDisplay()
     {
         float posX = -372.0f;
         float posY = -30.0f;
-        List<Mouth> ownedMouth = mPlayerStatus.getOwnedMouths();
-        Item equipedEyeBrow = mPlayerStatus.getEquippedEyeBrow();
-        Item equipedEye = mPlayerStatus.getEquippedEyes();
-        SetButtonSprite(eyeBrowButton, equipedEyeBrow);
-        SetButtonSprite(eyeButton, equipedEye);
+        List<Mouth> ownedMouth = playerStatus.getOwnedMouths();
+        Item equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Item equippedEyes = playerStatus.getEquippedEyes();
+        InitializeButtonSpriteState(eyeBrowButton, equippedEyebrow);
+        InitializeButtonSpriteState(eyeButton, equippedEyes);
         foreach (Transform child in Buttons.transform)
         {
             Destroy(child.gameObject);
         }
         for (int i = 0; i < ownedMouth.Count; i++)
         {
-            Button tempButton = Button.Instantiate(buttonPrefab);
-            Transform tempButtonTrans = tempButton.transform;
-            tempButtonTrans.SetParent(Buttons.transform);
-            tempButtonTrans.localPosition = new Vector3(posX, posY, 0.0f);
-            tempButtonTrans.localScale = new Vector3(1.25f, 1.25f, 0);
+            Button newButton = Button.Instantiate(buttonPrefab);
+            Transform newButtonTransform = newButton.transform;
+            newButtonTransform.SetParent(Buttons.transform);
+            newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
+            newButtonTransform.localScale = new Vector3(1.25f, 1.25f, 0);
             Mouth curItem = ownedMouth[i];
-            tempButton.onClick.AddListener(delegate { DisplayDescription(curItem); });
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.setEquippedMouth((Mouth)curItem); });
-            tempButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
-            tempButton.onClick.AddListener(delegate { mPlayerStatus.updateStatus(); });
-            tempButton.onClick.AddListener(delegate { DisplayStats(); });
-            tempButton.onClick.AddListener(delegate { SetButtonHighLightedSprite(mouthButton, curItem); });
-            tempButton.onClick.AddListener(delegate { SetButtonSprite(Buttons.GetComponentInChildren<Button>(), (Item)ownedMouth[0]); });
-            //tempButton.GetComponentInChildren<TextMeshProUGUI>().text = ownedMouth[i].getDisplayName();
+            newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
+            newButton.onClick.AddListener(delegate { playerStatus.setEquippedMouth((Mouth)curItem); });
+            newButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
+            newButton.onClick.AddListener(delegate { playerStatus.updateStatus(); });
+            newButton.onClick.AddListener(delegate { UpdateStatus(); });
+            newButton.onClick.AddListener(delegate { HighlightItemDetail(newButton, curItem);});
+            newButton.onClick.AddListener(delegate { HighlightItemIcon(mouthButton, curItem); });
+            newButton.onClick.AddListener(delegate { InitializeButtonSpriteState(Buttons.GetComponentInChildren<Button>(), ownedMouth[0]); });
             
-            SetButtonSprite(tempButton, curItem);
-            if (curItem.Equals(mPlayerStatus.getEquippedMouth()))
+            InitializeButtonSpriteState(newButton, curItem);
+            if (curItem.Equals(playerStatus.getEquippedMouth()))
             {
-                SetButtonHighLightedSprite(tempButton, curItem);
+                HighlightItemDetail(newButton, curItem);
             }
             posY -= 160.0f;
         }
-        DisplayDescription((Item)ownedMouth[0]);
+        UpdateDescription(ownedMouth[0]);
     }
 
-    public void DisplayDescription(Item item)
+    public void UpdateDescription(Item item)
     {
         Description.GetComponent<TextMeshProUGUI>().text = item.getDisplayName() + "\n" + item.getDescription();
     }
 
-    private void SetButtonSprite(Button tempButton, Item curItem)
+    private void InitializeButtonSpriteState(Button newButton, Item curItem)
     {
+        newButton.GetComponent<Image>().sprite = Resources.Load<Sprite>(curItem.getImageSrc());
         SpriteState sState = new SpriteState();
-        sState.selectedSprite = Resources.Load<Sprite>(curItem.getSelectedImage());
+        sState.selectedSprite = Resources.Load<Sprite>(curItem.getImageSrc());
         sState.highlightedSprite = Resources.Load<Sprite>(curItem.getHighLightedImage());
-        tempButton.spriteState = sState;
-        ((Image)tempButton.targetGraphic).sprite = Resources.Load<Sprite>(curItem.getImageSrc());
+        sState.pressedSprite = Resources.Load<Sprite>(curItem.getImageSrc());
+        sState.disabledSprite = Resources.Load<Sprite>(curItem.getSelectedImage());
+        newButton.spriteState = sState;
     }
 
-    private void SetButtonHighLightedSprite(Button tempButton, Item curItem)
+    private void HighlightItemIcon(Button newButton, Item curItem)
     {
-/*        SpriteState sState = new SpriteState();
-        sState.selectedSprite = Resources.Load<Sprite>(curItem.getSelectedImage());
-        sState.highlightedSprite = Resources.Load<Sprite>(curItem.getHighLightedImage());
-        tempButton.spriteState = sState;*/
-        ((Image)tempButton.targetGraphic).sprite = Resources.Load<Sprite>(curItem.getSelectedImage());
+        UpdateDescription(curItem);
+        eyeBrowButton.interactable = true;
+        eyeButton.interactable = true;
+        mouthButton.interactable = true;
+        newButton.interactable = false;
+    }
+
+    private void HighlightItemDetail(Button newButton, Item curItem)
+    {
+        UpdateDescription(curItem);
+        foreach (Button button in Buttons.GetComponentsInChildren<Button>()) {
+            button.interactable = true;
+        }
+        newButton.interactable = false;
     }
 }

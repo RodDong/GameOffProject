@@ -8,52 +8,46 @@ using System.Data;
 
 public class ClueManager : MonoBehaviour
 {
+    [SerializeField] private GameObject clueMenu;
+    [SerializeField] private GameObject clues;
+    [SerializeField] private GameObject clueDescription;
+    [SerializeField] private GameObject clueImage;
+    private PlayerStatus playerStatus;
+    private int selectedClueNum;
 
-    [SerializeField] GameObject clueButtons;
-    [SerializeField] Button buttonPrefab;
-    [SerializeField] GameObject Description;
-    [SerializeField] GameObject ClueImg;
-    [SerializeField] GameObject CluesUI;
-    public GameObject mPlayer;
-    private List<Clue> allClues;
-
-    void Start()
-    {
-        mPlayer = GameObject.FindGameObjectWithTag("Player");
-        allClues = mPlayer.GetComponent<PlayerStatus>().playerClues;
-        DisplayClues();
+    private void Start() {
+        playerStatus = GameObject.FindObjectOfType<PlayerStatus>();
+        selectedClueNum = 0;
+        clues.GetComponentsInChildren<Button>()[selectedClueNum].GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Underline;
+        Clue selectedClue = playerStatus.getClue(selectedClueNum);
+        clueDescription.GetComponent<TextMeshProUGUI>().text = selectedClue.getClueDescription();
+        clueImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(selectedClue.getClueImageSrc());
     }
 
-    [System.Obsolete]
-    public void ClueUISwitch()
-    {
-            CluesUI.SetActive(!CluesUI.active);
-    }
-
-    private void DisplayClues()
-    {
-        float posY = 0f;
-        foreach (Clue c in allClues)
-        {
-            Button tempButton = Button.Instantiate(buttonPrefab);
-            Transform tempButtonTrans = tempButton.GetComponent<Transform>();
-            tempButtonTrans.SetParent(clueButtons.transform);
-            tempButtonTrans.localPosition = new Vector3(0f, posY, 0f);
-            tempButtonTrans.localScale = new Vector3(0.6f, 0.6f, 0);
-            tempButton.onClick.AddListener(delegate { DisplayClue(c); });
-            SetClueButtonSprite(tempButton, c);
-            posY -= 67.0f;
+    public void UISwitch() {
+        if (clueMenu.activeSelf) {
+            clueMenu.SetActive(false);
+        } else {
+            Button[] clueButtons = clues.GetComponentsInChildren<Button>();
+            for (int i = 0; i < clueButtons.Length; i++) {
+                clueButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = playerStatus.getClue(i).getClueName();
+            }
+            clueMenu.SetActive(true);
         }
     }
 
-    private void SetClueButtonSprite(Button tempButton, Clue clue)
-    {
-        ((Image)tempButton.targetGraphic).sprite = Resources.Load<Sprite>(clue.clueBtnSrc);
-    }
-
-    private void DisplayClue(Clue c)
-    {
-        Description.GetComponent<TextMeshProUGUI>().text = c.Name + "\n" + c.Content;
-        ClueImg.GetComponent<Image>().sprite = Resources.Load<Sprite>(c.clueImgSrc);
+    public void updateClue(int clueNum) {
+        selectedClueNum = clueNum;
+        Clue selectedClue = playerStatus.getClue(selectedClueNum);
+        Button[] clueButtons = clues.GetComponentsInChildren<Button>();
+        for (int i = 0; i < clueButtons.Length; i++) {
+            if (i == selectedClueNum) {
+                clueButtons[i].GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Underline;
+            } else {
+                clueButtons[i].GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+            }
+        }
+        clueDescription.GetComponent<TextMeshProUGUI>().text = selectedClue.getClueDescription();
+        clueImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(selectedClue.getClueImageSrc());
     }
 }
