@@ -13,7 +13,7 @@ public class Enemy : EnemyStatus
             return; // MISS
         }
         playerStatus.TakeDamage(effectiveDamage, SkillAttribute.HAPPY);
-        if (playerStatus.getActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))) {
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))) {
             TakeDamage(effectiveDamage, SkillAttribute.HAPPY);
         }
     }

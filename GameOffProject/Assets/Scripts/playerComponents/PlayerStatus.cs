@@ -33,12 +33,12 @@ public class PlayerStatus : MonoBehaviour
     // idx 2: buff/debuff skill
    
     private List<Buff> buffs;
-    public List<Buff> getActiveBuffs() {
+    public List<Buff> GetActiveBuffs() {
         return buffs;
     } 
 
     // process round counters for buffs and debuffs
-    public void updateBuffDebuffStatus() {
+    public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
                 buffs.RemoveAt(i);
@@ -46,7 +46,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public bool activateBuff(Buff buff) {
+    public bool ActivateBuff(Buff buff) {
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -57,7 +57,7 @@ public class PlayerStatus : MonoBehaviour
         return false;
     }
 
-    public void clearBuff() {
+    public void ClearBuff() {
         buffs.Clear();
     }
 
@@ -101,19 +101,19 @@ public class PlayerStatus : MonoBehaviour
         // initialize skills based on equipments.
     }
     
-    public bool TakeDamage(float damage, SkillAttribute type) {
+    public float TakeDamage(float damage, SkillAttribute type) {
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
         if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
-            return false;
+            return 0;
         }
         
-        currentHealth -= damage * (50f / (50f + getDEFbyAttribute(type)));
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;
-            return true;
         }
-        return false;
+        return effectiveDamage;
     }
 
     public void ProcessHealing(float healAmount) {

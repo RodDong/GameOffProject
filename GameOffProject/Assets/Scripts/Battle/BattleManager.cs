@@ -173,7 +173,7 @@ public class BattleManager : MonoBehaviour
     #region Process Skills
 
     public void processSkill(Skill skill) {
-        List<Buff> activeBuffs = playerStatus.getActiveBuffs();
+        List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
                 AttackSkill atkSkill = (AttackSkill)skill;
@@ -200,11 +200,11 @@ public class BattleManager : MonoBehaviour
                         playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
                         break;
                     case SkillAttribute.SAD:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.IMMUNE));
+                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
                         playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.REFLECT));
+                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
                         break;
                 }
                 break;
@@ -212,19 +212,19 @@ public class BattleManager : MonoBehaviour
                 switch (skill.GetSkillAttribute())
                 {
                     case SkillAttribute.HAPPY:
-                        playerStatus.activateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                         break;
                     case SkillAttribute.SAD:
-                        enemyStatus.activateBuff(new Buff(Buff.BuffId.PURGE));
+                        enemyStatus.ActivateBuff(new Buff(Buff.BuffId.PURGE));
                         break;
                     case SkillAttribute.ANGRY:
                         Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
                         float rand = Random.Range(0.0f, 1.0f);
                         bounusDamage.GenerateBounusDamage(playerStatus, rand);
-                        playerStatus.activateBuff(bounusDamage);
+                        playerStatus.ActivateBuff(bounusDamage);
                         Buff blind = new Buff(Buff.BuffId.BLIND);
                         blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-                        enemyStatus.activateBuff(blind);
+                        enemyStatus.ActivateBuff(blind);
                         break;
                 }
                 break;

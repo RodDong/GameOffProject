@@ -16,23 +16,17 @@ public abstract class EnemyStatus: MonoBehaviour
     protected int hitsTakenCounter;
     protected int attackCounter;
     protected List<Buff> buffs;
-    protected List<Debuff> debuffs;   
 
     // process round counters for buffs and debuffs
-    public void updateBuffDebuffStatus() {
+    public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
                 buffs.RemoveAt(i);
             }
         }
-        for (int i = debuffs.Count - 1; i >= 0; i--) {
-            if (debuffs[i].decreaseCounter()) {
-                debuffs.RemoveAt(i);
-            }
-        }
     }
 
-    public bool activateBuff(Buff buff) {
+    public bool ActivateBuff(Buff buff) {
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -43,7 +37,7 @@ public abstract class EnemyStatus: MonoBehaviour
         return false;
     }
 
-    public void clearBuff() {
+    public void ClearBuff() {
         buffs.Clear();
     }
 
