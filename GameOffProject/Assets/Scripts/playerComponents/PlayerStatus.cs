@@ -46,19 +46,6 @@ public class PlayerStatus : MonoBehaviour
     public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
-                // This is in case if some buff need to adjust values 
-                // when they activate/finishes
-                
-                // switch (buffs[i].GetBuffId())
-                // {
-                //     case BuffId.FORTIFIED:
-                //         //restore def of player
-                //         break;
-                //     case BuffId.REDUCED:
-                //         //restore atk of player
-                //         break;
-                //     default:
-                // }
                 buffs.RemoveAt(i);
             }
         }
