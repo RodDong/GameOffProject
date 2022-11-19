@@ -70,7 +70,6 @@ public abstract class EnemyStatus: MonoBehaviour
         if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
             PlayerStatus.TakeDamage(damage, type);
         }
-        
 
         float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
         currentHealth -= effectiveDamage;
@@ -116,7 +115,9 @@ public abstract class EnemyStatus: MonoBehaviour
     public abstract void MakeMove(PlayerStatus playerStatus);
 
     public void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
-
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))){
+            TakeDamage(damage, type);
+        }
         Buff blind = buffs.Find((Buff b) => { return b.GetBuffId() == Buff.BuffId.BLIND; });
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             return; // MISS
