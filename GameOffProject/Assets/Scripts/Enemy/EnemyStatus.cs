@@ -29,14 +29,7 @@ public abstract class EnemyStatus: MonoBehaviour
     }
 
     public bool ActivateBuff(Buff buff) {
-        //play buff animation here ??? 
-
-        //purge clears all buff/debuff and exits
-        if (buff.GetBuffId == BuffId.PURGE) {
-            PlayerStatus.ClearBuff();
-            EnemyStatus.ClearBuff();
-            return false;
-        }
+        
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -76,14 +69,8 @@ public abstract class EnemyStatus: MonoBehaviour
         // unless attribute is NONE, which means it is the effect of using reflect
         if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
             PlayerStatus.TakeDamage(damage, type);
-            return 0;
         }
         
-        float fortifiedDEF = 0; 
-        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
-            // temp value for testing
-            fortifiedDEF += 100.0f;
-        }
 
         float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
         currentHealth -= effectiveDamage;
@@ -107,6 +94,13 @@ public abstract class EnemyStatus: MonoBehaviour
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
+        
+        float fortifiedDEF = 0; 
+        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
+            // temp value for testing
+            fortifiedDEF += 100.0f;
+        }
+
         switch(attribute) {
             case SkillAttribute.HAPPY:
                 return happyDEF;
@@ -115,7 +109,7 @@ public abstract class EnemyStatus: MonoBehaviour
             case SkillAttribute.ANGRY:
                 return angryDEF;
             default:
-                return 0.0f;
+                return 0.0f + fortifiedDEF;
         }
     }
 
@@ -128,8 +122,5 @@ public abstract class EnemyStatus: MonoBehaviour
             return; // MISS
         }
         playerStatus.TakeDamage(damage, SkillAttribute.HAPPY);
-        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))) {
-            TakeDamage(damage, SkillAttribute.HAPPY);
-        }
     }
 }
