@@ -117,4 +117,67 @@ public class Buff
     }
 #endregion
 
+#region Reduced
+
+    private Dictionary<SkillAttribute, float> reducedAmount = new Dictionary<SkillAttribute, float>();
+
+    public void SetAttackReduction(float amount, SkillAttribute attribute){
+        if (id == BuffId.REDUCED)
+            reducedAmount[attribute] = amount;
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+    }
+
+    public float GetAttackReduction(SkillAttribute attribute){
+        if (id == BuffId.REDUCED)
+            return reducedAmount[attribute];
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+        return 0;
+    }
+
+#endregion
+
+#region Weak
+
+    private Dictionary<SkillAttribute, float> weakenedAmount = new Dictionary<SkillAttribute, float>();
+
+    public void SetDefenseReduction(float amount, SkillAttribute attribute){
+        if (id == BuffId.WEAK)
+            weakenedAmount[attribute] = amount;
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+    }
+
+    public float GetDefenseReduction(SkillAttribute attribute){
+         if (id == BuffId.WEAK)
+            return weakenedAmount[attribute];
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+        return 0;
+    }
+
+#endregion
+
+#region Stolen
+
+    private Dictionary<SkillAttribute, float> stolenAmount = new Dictionary<SkillAttribute, float>();
+
+    public void SetStolenAmount(float amount, SkillAttribute attribute){
+        if (id == BuffId.STOLEN)
+            weakenedAmount[attribute] = amount;
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+    }
+
+    public float GetStolenAmount(SkillAttribute attribute){
+         if (id == BuffId.STOLEN)
+            return weakenedAmount[attribute];
+        else
+            Debug.LogWarning("This method is not avaible for this type of buff");
+        return 0;
+    }
+
+#endregion
+
 }

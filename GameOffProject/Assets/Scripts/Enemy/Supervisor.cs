@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Buff;
 
-public class EnemySupervisor : EnemyStatus
+public class Supervisor : EnemyStatus
 {
     int mana = 0;
     int mana2 = 0;
@@ -11,7 +11,8 @@ public class EnemySupervisor : EnemyStatus
     public override void MakeMove(PlayerStatus playerStatus)
     {
         // depending on state
-        if (mana == 5) {
+        if (mana == 50) {
+            mana = 0;
             Ultimate(playerStatus);
         } else if (mana2 == 6) {
             Secondary(playerStatus);
@@ -50,6 +51,5 @@ public class EnemySupervisor : EnemyStatus
     public override void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute)
     {
         base.DealDamage(playerStatus, damage, attribute);
-        mana++;
     }
 }

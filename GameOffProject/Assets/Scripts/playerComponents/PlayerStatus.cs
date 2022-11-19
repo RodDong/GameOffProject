@@ -127,33 +127,71 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
-        // 
+        float reduction = 0;
+        Buff reductionEffect = buffs.Find(element => element.GetBuffId() == BuffId.REDUCED);
+        if (reductionEffect != null) {
+            reduction = reductionEffect.GetAttackReduction(attribute);
+        }
 
+        float stolen = 0;
+        Buff stolenEffect = buffs.Find(element => element.GetBuffId() == BuffId.STOLEN);
+        if (stolenEffect != null) {
+            stolen = stolenEffect.GetStolenAmount(attribute);
+        }
+
+        float attributeFromItem;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyATK;
+                attributeFromItem = happyATK;
+                break;
             case SkillAttribute.SAD:
-                return sadATK;
+                attributeFromItem = sadATK;
+                break;
             case SkillAttribute.ANGRY:
-                return angryATK;
+                attributeFromItem = angryATK;
+                break;
             default:
-                return 0.0f;
+                attributeFromItem = 0.0f;
+                break;
         }
+
+        return attributeFromItem - reduction - stolen;
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
-        // 
+        if (buffs.Contains(new Buff(BuffId.BROKEN))) {
+            return 0;
+        } 
 
+        float reduction = 0;
+        Buff reductionEffect = buffs.Find(element => element.GetBuffId() == BuffId.WEAK);
+        if (reductionEffect != null) {
+            reduction = reductionEffect.GetDefenseReduction(attribute);
+        }
+
+        float stolen = 0;
+        Buff stolenEffect = buffs.Find(element => element.GetBuffId() == BuffId.STOLEN);
+        if (stolenEffect != null) {
+            stolen = stolenEffect.GetStolenAmount(attribute);
+        }
+
+        float attributeFromItem;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                attributeFromItem = happyDEF;
+                break;
             case SkillAttribute.SAD:
-                return sadDEF;
+                attributeFromItem = sadDEF;
+                break;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                attributeFromItem = angryDEF;
+                break;
             default:
-                return 0.0f;
+                attributeFromItem = 0.0f;
+                break;
         }
+
+        return attributeFromItem - reduction - stolen;
     }
 
     public void setHappyATK(float happyATK) {
