@@ -140,17 +140,9 @@ public class PlayerStatus : MonoBehaviour
         // unless attribute is NONE, which means it is the effect of using reflect
         if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
             EnemyStatus.TakeDamage(damage, type);
-            return 0;
-        }
-
-        
-        float fortifiedDEF = 0; 
-        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
-            // temp value for testing
-            fortifiedDEF += 100.0f;
         }
         
-        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type) + fortifiedDEF));
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;
