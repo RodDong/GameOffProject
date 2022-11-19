@@ -7,12 +7,23 @@ public class Buff
     public enum BuffId {
         // attack up
         TEST_BUFF_1,
-        IMMUNE,
-        REFLECT,
-        BONUS_DAMAGE,
-        LIFE_STEAL,
-        PURGE,
-        BLIND
+        IMMUNE, // Ignore all incoming damage
+        REFLECT, // When taking damage, deal same damage to source
+        BONUS_DAMAGE, // Attack deals additional damage
+        LIFE_STEAL, // Heal the attacker based on the amount of damage dealt
+        PURGE, // to be removed
+        POISON, // Deals damage per round
+        BLIND, // Attack has chance to miss
+        FORTIFIED, // All Defensive attributes increase
+        MUTE, // Cannot change items
+        SILENCED, // Cannot use skill
+        CHAOS, // Spell casts on the wrong target
+        WATCHED, // Playing under chef's rules
+        BROKEN, // All defensive attributes become 0
+        DISMEMBERED, // Max HP reduced
+        REDUCED, // Reduce attack of an attribute
+        WEAK, // Reduce defense of an attribute
+        STOLEN // Player reduce attribute, increase enemy attribute
     }
 
     private BuffId id;
