@@ -8,6 +8,8 @@ using static Eye;
 using static EyeBrow;
 using static Mouth;
 using static Skill;
+using static Buff;
+using static EnemyStatus;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class PlayerStatus : MonoBehaviour
     private float sadDEF;
     private float angryATK;
     private float angryDEF;
+
+    private bool immuneNextATK;
+    private bool reflectNextATK;
     
 
     // a list of currently active BUFFs
@@ -41,12 +46,23 @@ public class PlayerStatus : MonoBehaviour
     public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
+                switch (buffs[i].GetBuffId())
+                {
+                    case BuffId.FORTIFIED:
+                        //restore def of player
+                        break;
+                    case BuffId.REDUCED:
+                        //restore atk of player
+                        break;
+                    default:
+                }
                 buffs.RemoveAt(i);
             }
         }
     }
 
     public bool ActivateBuff(Buff buff) {
+        //play buff animation here ??? 
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -105,6 +121,14 @@ public class PlayerStatus : MonoBehaviour
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
         if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+            return 0;
+        }
+
+        // if reflect, takes no damage, and deal damage to opponent 
+        // NOT of same value since enemy DEF is different from player
+        // unless attribute is NONE, which means it is the effect of using reflect
+        if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
+            EnemyStatus.TakeDamage(damage, type);
             return 0;
         }
         
@@ -226,6 +250,9 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void updateStatus() {
+
+        //(TODO) UPDATE NEEDS TO CHECK BUFFS 
+
         setHappyATK(equippedEyebrow.getHappyATK() + equippedEyes.getHappyATK() + equippedMouth.getHappyATK());
         setHappyDEF(equippedEyebrow.getHappyDEF() + equippedEyes.getHappyDEF() + equippedMouth.getHappyDEF());
         setSadATK(equippedEyebrow.getSadATK() + equippedEyes.getSadATK() + equippedMouth.getSadATK());
