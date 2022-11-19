@@ -12,7 +12,6 @@ public class Buff
         REFLECT, // When taking damage, deal same damage to source
         BONUS_DAMAGE, // Attack deals additional damage
         LIFE_STEAL, // Heal the attacker based on the amount of damage dealt
-        PURGE, // to be removed
         POISON, // Deals damage per round
         BLIND, // Attack has chance to miss
         FORTIFIED, // All Defensive attributes increase
@@ -57,7 +56,6 @@ public class Buff
             case BuffId.REFLECT: duration = 1; break;
             case BuffId.BONUS_DAMAGE: duration = 4; break;
             case BuffId.LIFE_STEAL: duration = 2; break;
-            case BuffId.PURGE: duration = 1; break;
             case BuffId.POISON: duration = 4; break;
             case BuffId.BLIND: duration = 3; break;
             case BuffId.FORTIFIED: duration = 4; break;

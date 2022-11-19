@@ -67,13 +67,6 @@ public class PlayerStatus : MonoBehaviour
     public bool ActivateBuff(Buff buff) {
         //play buff animation here ??? 
 
-        //purge clears all buff/debuff and exits
-        if (buff.GetBuffId == BuffId.PURGE) {
-            PlayerStatus.ClearBuff();
-            EnemyStatus.ClearBuff();
-            return false;
-        }
-
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();

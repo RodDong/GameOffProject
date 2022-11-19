@@ -7,8 +7,7 @@ public class Skill
     public enum SkillType {
         ATTACK,
         DEFENSE,
-        BUFF,
-        DEBUFF
+        BUFF
     }
    
     protected SkillType type;

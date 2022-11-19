@@ -6,6 +6,9 @@ using static AttackSkill;
 using TMPro;
 using System;
 
+
+//obsolete
+
 public class TestSkillOutput : MonoBehaviour
 {
     private PlayerStatus playerStatus;
@@ -63,7 +66,6 @@ public class TestSkillOutput : MonoBehaviour
                         playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                         break;
                     case SkillAttribute.SAD:
-                        enemyStatus.ActivateBuff(new Buff(Buff.BuffId.PURGE));
                         break;
                     case SkillAttribute.ANGRY:
                         playerStatus.ActivateBuff(new Buff(Buff.BuffId.BONUS_DAMAGE));

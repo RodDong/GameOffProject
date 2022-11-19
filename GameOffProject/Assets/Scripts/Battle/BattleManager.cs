@@ -215,7 +215,8 @@ public class BattleManager : MonoBehaviour
                         playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                         break;
                     case SkillAttribute.SAD:
-                        enemyStatus.ActivateBuff(new Buff(Buff.BuffId.PURGE));
+                        PlayerStatus.ClearBuff();
+                        EnemyStatus.ClearBuff();
                         break;
                     case SkillAttribute.ANGRY:
                         Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
@@ -424,6 +425,8 @@ public class BattleManager : MonoBehaviour
 
     public void updatePlayerStatVisual()
     {
+        //update buff visuals
+        
         string happyStat = "HappyATK: " + playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n" 
         + "HappyDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY) + "\n";
         string angryStat = "AngryATK: " + playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n" + "AngryDEF: " 
