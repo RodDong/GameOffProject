@@ -6,7 +6,6 @@ public class Buff
 {
     public enum BuffId
     {
-        // attack up
         TEST_BUFF_1,
         IMMUNE, // Ignore all incoming damage
         REFLECT, // When taking damage, deal same damage to source
@@ -84,6 +83,7 @@ public class Buff
         return duration <= 0;
     }
 
+#region Bonus Damage
     private float bounusDamageAmount;
 
     public void GenerateBounusDamage(PlayerStatus playerStatus, float random)
@@ -98,7 +98,9 @@ public class Buff
     {
         return bounusDamageAmount;
     }
+#endregion
 
+#region Blind
     private float blindChance;
 
     public void GenerateBlindPercentage(PlayerStatus playerStatus, float random)
@@ -113,4 +115,6 @@ public class Buff
     {
         return blindChance;
     }
+#endregion
+
 }

@@ -10,8 +10,7 @@ public class BattleManager : MonoBehaviour
     enum State
     {
         Preparation,
-        PlayerTurn,
-        EnemyTurn,
+        Battle,
         Death,
         Win
     }
@@ -58,9 +57,12 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
+        if (mCurState == State.Preparation) { return; }
         // nothing to do here.
         // all state transition is either instantanious or based on timer
         // or based user input
+
+
         handleKeyboardInput();
         if (battleUI.activeSelf)
         {
@@ -75,49 +77,13 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    void UpdateCurState()
-    {
-        switch (mCurState)
-        {
-            case State.Preparation:
-                UpdatePreparation();
-                break;
-            case State.PlayerTurn:
-                UpdatePlayerTurn();
-                break;
-            case State.EnemyTurn:
-                UpdateEnemyTurn();
-                break;
-            case State.Death:
-                UpdatePlayerDeath();
-                break;
-            case State.Win:
-                UpdateWin();
-                break;
-        }
-    }
-
     void UpdatePreparation()
     {
-        mCurState = State.PlayerTurn;
+        mCurState = State.Battle;
     }
 
-    void UpdatePlayerTurn()
+    void ProcessEnemyTurn()
     {
-        //Player Standby Phase
-        // check buff 
-
-        //Player Battle Phase
-
-        //Player End Phase
-        mCurState = State.EnemyTurn;
-        
-        UpdateCurState();
-    }
-
-    void UpdateEnemyTurn()
-    {
-
         // delay xxx sec 
         // boss speak
         // delay 
@@ -131,11 +97,14 @@ public class BattleManager : MonoBehaviour
         //Enemy End Phase
         playerStatus.UpdateEffectStatus();
         enemyStatus.UpdateEffectStatus();
-        mCurState = State.PlayerTurn;
+        // mCurState = State.PlayerTurn;
+        // enable button interactions
+        // adjust alpha of all buttons
     }
 
     void UpdatePlayerDeath()
     {
+        mCurState = State.Death;
         gamObjectsInScene.SetActive(true);
         battleUI.SetActive(false);
     }
@@ -145,7 +114,7 @@ public class BattleManager : MonoBehaviour
         healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / PlayerStatus.MAX_HEALTH;
     }
     void UpdateWin()
-    {
+    {   
         gamObjectsInScene.SetActive(true);
         battleUI.SetActive(false);
     }
@@ -159,133 +128,111 @@ public class BattleManager : MonoBehaviour
         // J K L for skills
     }
 
-    void useSkill(int skillSlotNumber)
+    void UseSkill(int skillSlotNumber)
     {
         switch (skillSlotNumber)
         {
             case 0:
-                processSkill(playerStatus.getEquippedEyeBrow().getSkill());
+                ProcessSkill(playerStatus.getEquippedEyeBrow().getSkill());
                 break;
             case 1: 
-                processSkill(playerStatus.getEquippedEyes().getSkill());
+                ProcessSkill(playerStatus.getEquippedEyes().getSkill());
                 break;
             case 2: 
-                processSkill(playerStatus.getEquippedEyeBrow().getSkill());
+                ProcessSkill(playerStatus.getEquippedEyeBrow().getSkill());
                 break;
             default: return;
         }
-        if (mCurState != State.PlayerTurn) {
+        if (mCurState != State.Battle) {
             Debug.LogError("State Mismatch");
         }
-        UpdateCurState();
+        // disable all interactable buttons
+        // lower alpha of buttons
+        ProcessEnemyTurn();
     }
 
     #endregion
 
     #region Process Skills
 
-    public void processSkill(Skill skill) {
+    public void ProcessSkill(Skill skill) {
         List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                AttackSkill atkSkill = (AttackSkill)skill;
-                float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
-                foreach (Buff buff in activeBuffs) {
-                    if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE) {
-                        effectiveDamage += buff.GetBounusDamage();
-                    }
-                }
-                enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-                foreach (Buff buff in activeBuffs) {
-                    if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL) {
-                        playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
-                    }
-                }
-                if (skill.GetSkillAttribute() == SkillAttribute.ANGRY) {
-                    playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
-                }
+                ProcessAttackSkill(skill, activeBuffs);
                 break;
             case SkillType.DEFENSE:
-                switch (skill.GetSkillAttribute())
-                {
-                    case SkillAttribute.HAPPY:
-                        playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
-                        break;
-                    case SkillAttribute.SAD:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
-                        playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
-                        break;
-                    case SkillAttribute.ANGRY:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
-                        break;
-                }
+                ProcessDefensiveSkill(skill);
                 break;
             case SkillType.BUFF:
-                switch (skill.GetSkillAttribute())
-                {
-                    case SkillAttribute.HAPPY:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
-                        break;
-                    case SkillAttribute.SAD:
-                        playerStatus.ClearBuff();
-                        enemyStatus.ClearBuff();
-                        break;
-                    case SkillAttribute.ANGRY:
-                        Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
-                        float rand = Random.Range(0.0f, 1.0f);
-                        bounusDamage.GenerateBounusDamage(playerStatus, rand);
-                        playerStatus.ActivateBuff(bounusDamage);
-                        Buff blind = new Buff(Buff.BuffId.BLIND);
-                        blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-                        enemyStatus.ActivateBuff(blind);
-                        break;
-                }
+                ProcessEffectSkill(skill);
                 break;
         }
     }
 
-    // skill slot 1: attack skill
-    // skill slot 2: defense skill
-    // skill slot 3: buff/debuff skill
-    /*    public void processAttackSkill() {
-            AttackSkill attackSkill = (AttackSkill) playerStatus.GetSkills()[0];
-            SkillAttribute attribute = attackSkill.GetSkillAttribute();
-            float playerATK = playerStatus.getATKbyAttribute(attribute);
-            float targetDEF = enemyStatus.getDEFbyAttribute(attribute);
-            enemyStatus.TakeDamage(attackSkill.getAttackSkillDamage(playerATK, targetDEF));
-
-            mCurState = State.EnemyTurn;
-        }*/
-
-    public void processDefenseSkill()
+    private void ProcessEffectSkill(Skill skill)
     {
-        DefenseSkill defenseSkill = (DefenseSkill)playerStatus.GetSkills()[1];
-        SkillAttribute attribute = defenseSkill.GetSkillAttribute();
-
-        // process defense skill
-
-        mCurState = State.EnemyTurn;
-    }
-
-    public void processEffectSkill()
-    {
-        Skill skill = playerStatus.GetSkills()[2];
-        SkillType type = skill.getSkillType();
-        switch (type)
+        switch (skill.GetSkillAttribute())
         {
-            case SkillType.BUFF:
-                processBuffSkill((BuffSkill)skill);
+            case SkillAttribute.HAPPY:
+                playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                 break;
-            default:
+            case SkillAttribute.SAD:
+                playerStatus.ClearBuff();
+                enemyStatus.ClearBuff();
+                break;
+            case SkillAttribute.ANGRY:
+                Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
+                float rand = Random.Range(0.0f, 1.0f);
+                bounusDamage.GenerateBounusDamage(playerStatus, rand);
+                playerStatus.ActivateBuff(bounusDamage);
+                Buff blind = new Buff(Buff.BuffId.BLIND);
+                blind.GenerateBlindPercentage(playerStatus, 1 - rand);
+                enemyStatus.ActivateBuff(blind);
                 break;
         }
-
-        mCurState = State.EnemyTurn;
     }
 
-    void processBuffSkill(BuffSkill skill)
+    private void ProcessDefensiveSkill(Skill skill)
     {
-        // process buff skill
+        switch (skill.GetSkillAttribute())
+        {
+            case SkillAttribute.HAPPY:
+                playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
+                break;
+            case SkillAttribute.SAD:
+                playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
+                playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+                break;
+            case SkillAttribute.ANGRY:
+                playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
+                break;
+        }
+    }
+
+    private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs)
+    {
+        AttackSkill atkSkill = (AttackSkill)skill;
+        float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
+        foreach (Buff buff in activeBuffs)
+        {
+            if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE)
+            {
+                effectiveDamage += buff.GetBounusDamage();
+            }
+        }
+        enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+        foreach (Buff buff in activeBuffs)
+        {
+            if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL)
+            {
+                playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
+            }
+        }
+        if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
+        {
+            playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
+        }
     }
     #endregion
 

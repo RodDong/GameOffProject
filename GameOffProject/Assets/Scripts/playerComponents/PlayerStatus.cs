@@ -127,6 +127,8 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
+        // 
+
         switch(attribute) {
             case SkillAttribute.HAPPY:
                 return happyATK;
@@ -140,6 +142,8 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
+        // 
+
         switch(attribute) {
             case SkillAttribute.HAPPY:
                 return happyDEF;
