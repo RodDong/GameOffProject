@@ -46,16 +46,19 @@ public class PlayerStatus : MonoBehaviour
     public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
-                switch (buffs[i].GetBuffId())
-                {
-                    case BuffId.FORTIFIED:
-                        //restore def of player
-                        break;
-                    case BuffId.REDUCED:
-                        //restore atk of player
-                        break;
-                    default:
-                }
+                // This is in case if some buff need to adjust values 
+                // when they activate/finishes
+                
+                // switch (buffs[i].GetBuffId())
+                // {
+                //     case BuffId.FORTIFIED:
+                //         //restore def of player
+                //         break;
+                //     case BuffId.REDUCED:
+                //         //restore atk of player
+                //         break;
+                //     default:
+                // }
                 buffs.RemoveAt(i);
             }
         }
@@ -63,6 +66,14 @@ public class PlayerStatus : MonoBehaviour
 
     public bool ActivateBuff(Buff buff) {
         //play buff animation here ??? 
+
+        //purge clears all buff/debuff and exits
+        if (buff.GetBuffId == BuffId.PURGE) {
+            PlayerStatus.ClearBuff();
+            EnemyStatus.ClearBuff();
+            return false;
+        }
+
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -131,8 +142,15 @@ public class PlayerStatus : MonoBehaviour
             EnemyStatus.TakeDamage(damage, type);
             return 0;
         }
+
         
-        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        float fortifiedDEF = 0; 
+        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
+            // temp value for testing
+            fortifiedDEF += 100.0f;
+        }
+        
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type) + fortifiedDEF));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;

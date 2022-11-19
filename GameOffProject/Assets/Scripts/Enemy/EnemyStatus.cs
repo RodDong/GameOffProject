@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
 using static PlayerStatus;
+using static Buff;
 
 public abstract class EnemyStatus: MonoBehaviour
 {
@@ -28,6 +29,14 @@ public abstract class EnemyStatus: MonoBehaviour
     }
 
     public bool ActivateBuff(Buff buff) {
+        //play buff animation here ??? 
+
+        //purge clears all buff/debuff and exits
+        if (buff.GetBuffId == BuffId.PURGE) {
+            PlayerStatus.ClearBuff();
+            EnemyStatus.ClearBuff();
+            return false;
+        }
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
@@ -68,6 +77,12 @@ public abstract class EnemyStatus: MonoBehaviour
         if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
             PlayerStatus.TakeDamage(damage, type);
             return 0;
+        }
+        
+        float fortifiedDEF = 0; 
+        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
+            // temp value for testing
+            fortifiedDEF += 100.0f;
         }
 
         float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
