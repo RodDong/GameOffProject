@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Skill;
+using static PlayerStatus;
 
 public abstract class EnemyStatus: MonoBehaviour
 {
@@ -61,6 +62,14 @@ public abstract class EnemyStatus: MonoBehaviour
             return 0;
         }
         
+        // if reflect, takes no damage, and deal damage to opponent 
+        // NOT of same value since player DEF is different from enemy
+        // unless attribute is NONE, which means it is the effect of using reflect
+        if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
+            PlayerStatus.TakeDamage(damage, type);
+            return 0;
+        }
+
         float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
