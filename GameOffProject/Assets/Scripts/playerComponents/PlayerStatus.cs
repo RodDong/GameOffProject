@@ -9,7 +9,6 @@ using static EyeBrow;
 using static Mouth;
 using static Skill;
 using static Buff;
-using static EnemyStatus;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -24,9 +23,6 @@ public class PlayerStatus : MonoBehaviour
     private float sadDEF;
     private float angryATK;
     private float angryDEF;
-
-    private bool immuneNextATK;
-    private bool reflectNextATK;
     
 
     // a list of currently active BUFFs
@@ -113,13 +109,6 @@ public class PlayerStatus : MonoBehaviour
         // unless attribute is NONE, which means it is the effect of using immune
         if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
             return 0;
-        }
-
-        // if reflect, takes no damage, and deal damage to opponent 
-        // NOT of same value since enemy DEF is different from player
-        // unless attribute is NONE, which means it is the effect of using reflect
-        if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
-            EnemyStatus.TakeDamage(damage, type);
         }
         
         float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
