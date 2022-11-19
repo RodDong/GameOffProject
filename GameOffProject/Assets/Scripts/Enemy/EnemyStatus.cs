@@ -119,5 +119,17 @@ public abstract class EnemyStatus: MonoBehaviour
         }
     }
 
-    public abstract void makeMove(PlayerStatus playerStatus);
+    public abstract void MakeMove(PlayerStatus playerStatus);
+
+    public void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
+
+        Buff blind = buffs.Find((Buff b) => { return b.GetBuffId() == Buff.BuffId.BLIND; });
+        if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
+            return; // MISS
+        }
+        playerStatus.TakeDamage(damage, SkillAttribute.HAPPY);
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))) {
+            TakeDamage(damage, SkillAttribute.HAPPY);
+        }
+    }
 }
