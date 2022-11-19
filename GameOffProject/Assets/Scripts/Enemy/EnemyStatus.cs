@@ -110,8 +110,8 @@ public abstract class EnemyStatus: MonoBehaviour
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             return; // MISS
         }
-        playerStatus.TakeDamage(damage, SkillAttribute.HAPPY);
-        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))){
+        playerStatus.TakeDamage(damage, attribute);
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(BuffId.REFLECT))){
             TakeDamage(damage, attribute);
         }
     }
