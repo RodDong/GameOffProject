@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Skill;
+using static Buff;
 
 public class BattleManager : MonoBehaviour
 {
@@ -84,12 +85,20 @@ public class BattleManager : MonoBehaviour
 
     void ProcessEnemyTurn()
     {
+        // end of player turn
+        // process end of turn buffs/effects here
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(BuffId.POISON))) {
+            float poisonDmg = 5.0f;
+            playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
+        }
+
         // delay xxx sec 
         // boss speak
         // delay 
         // boss use skill
         enemyStatus.MakeMove(playerStatus);
         // delay
+
         //Enemy Standby Phase
 
         //Enemy Battle Phase
@@ -114,7 +123,7 @@ public class BattleManager : MonoBehaviour
         healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / PlayerStatus.MAX_HEALTH;
     }
     void UpdateWin()
-    {   
+    {
         gamObjectsInScene.SetActive(true);
         battleUI.SetActive(false);
     }
@@ -384,6 +393,8 @@ public class BattleManager : MonoBehaviour
 
     public void updatePlayerStatVisual()
     {
+        //update buff visuals
+
         string happyStat = "HappyATK: " + playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n" 
         + "HappyDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY) + "\n";
         string angryStat = "AngryATK: " + playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n" + "AngryDEF: " 

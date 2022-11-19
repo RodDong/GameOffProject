@@ -104,14 +104,25 @@ public class PlayerStatus : MonoBehaviour
         // initialize skills based on equipments.
     }
     
-    public float TakeDamage(float damage, SkillAttribute type) {
+    public float TakeDamage(float damage, SkillAttribute attribute) {
+        // TODO: animations
+
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
-        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+        if (buffs.Contains(new Buff(BuffId.IMMUNE)) && attribute != SkillAttribute.NONE) {
             return 0;
         }
+
+        // if break, deal true damage
+        if (buffs.Contains(new Buff(BuffId.BROKEN))) {
+            currentHealth -= damage;
+            if (currentHealth <= 0) {
+                currentHealth = 0;
+            }
+            return damage;
+        }
         
-        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(attribute)));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;
