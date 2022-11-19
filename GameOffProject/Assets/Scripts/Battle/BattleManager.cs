@@ -110,16 +110,28 @@ public class BattleManager : MonoBehaviour
         //Player Battle Phase
 
         //Player End Phase
+        mCurState = State.EnemyTurn;
+        
+        UpdateCurState();
     }
 
     void UpdateEnemyTurn()
     {
 
+        // delay xxx sec 
+        // boss speak
+        // delay 
+        // boss use skill
+        enemyStatus.MakeMove(playerStatus);
+        // delay
         //Enemy Standby Phase
 
         //Enemy Battle Phase
 
         //Enemy End Phase
+        playerStatus.UpdateEffectStatus();
+        enemyStatus.UpdateEffectStatus();
+        mCurState = State.PlayerTurn;
     }
 
     void UpdatePlayerDeath()
@@ -215,8 +227,8 @@ public class BattleManager : MonoBehaviour
                         playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
                         break;
                     case SkillAttribute.SAD:
-                        PlayerStatus.ClearBuff();
-                        EnemyStatus.ClearBuff();
+                        playerStatus.ClearBuff();
+                        enemyStatus.ClearBuff();
                         break;
                     case SkillAttribute.ANGRY:
                         Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
@@ -425,8 +437,6 @@ public class BattleManager : MonoBehaviour
 
     public void updatePlayerStatVisual()
     {
-        //update buff visuals
-        
         string happyStat = "HappyATK: " + playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n" 
         + "HappyDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY) + "\n";
         string angryStat = "AngryATK: " + playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) + "\n" + "AngryDEF: " 

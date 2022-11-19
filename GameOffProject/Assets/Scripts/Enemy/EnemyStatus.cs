@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Skill;
-using static PlayerStatus;
 using static Buff;
 
 public abstract class EnemyStatus: MonoBehaviour
@@ -57,21 +55,14 @@ public abstract class EnemyStatus: MonoBehaviour
         // - for test purposes
     }
 
-     public float TakeDamage(float damage, SkillAttribute type) {
+     public virtual float TakeDamage(float damage, SkillAttribute attribute) {
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
-        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && attribute != SkillAttribute.NONE) {
             return 0;
         }
         
-        // if reflect, takes no damage, and deal damage to opponent 
-        // NOT of same value since player DEF is different from enemy
-        // unless attribute is NONE, which means it is the effect of using reflect
-        if (buffs.Contains(new Buff(Buff.BuffId.REFLECT)) && type != SkillAttribute.NONE) {
-            PlayerStatus.TakeDamage(damage, type);
-        }
-
-        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(attribute)));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;
@@ -114,14 +105,14 @@ public abstract class EnemyStatus: MonoBehaviour
 
     public abstract void MakeMove(PlayerStatus playerStatus);
 
-    public void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
-        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))){
-            TakeDamage(damage, type);
-        }
-        Buff blind = buffs.Find((Buff b) => { return b.GetBuffId() == Buff.BuffId.BLIND; });
+    public virtual void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
+        Buff blind = buffs.Find((Buff b) => { return b.GetBuffId() == BuffId.BLIND; });
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             return; // MISS
         }
         playerStatus.TakeDamage(damage, SkillAttribute.HAPPY);
+        if (playerStatus.GetActiveBuffs().Contains(new Buff(Buff.BuffId.REFLECT))){
+            TakeDamage(damage, attribute);
+        }
     }
 }
