@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Buff
 {
-    public enum BuffId {
+    public enum BuffId
+    {
         // attack up
         TEST_BUFF_1,
         IMMUNE, // Ignore all incoming damage
@@ -27,13 +28,15 @@ public class Buff
     }
 
     private BuffId id;
-    public BuffId GetBuffId() {
+    public BuffId GetBuffId()
+    {
         return id;
     }
 
     public override bool Equals(object obj)
     {
-        if (obj == null || GetType() != obj.GetType()) {
+        if (obj == null || GetType() != obj.GetType())
+        {
             return false;
         }
 
@@ -46,67 +49,70 @@ public class Buff
     }
 
     private int duration;
-    public void resetDuration() {
-        switch(id) {
-            case BuffId.TEST_BUFF_1:
-                duration = 3;
-                break;
-            case BuffId.IMMUNE:
-                duration = 1;
-                break;
-            case BuffId.REFLECT:
-                duration = 1;
-                break;
-            case BuffId.BONUS_DAMAGE:
-                duration = 3;
-                break;
-            case BuffId.LIFE_STEAL:
-                duration = 3;
-                break;
-            case BuffId.PURGE:
-                duration = 1;
-                break;
-            case BuffId.BLIND:
-                duration = 3;
-                break;
-            default:
-                break;
+    public void resetDuration()
+    {
+        switch (id)
+        {
+            case BuffId.IMMUNE: duration = 1; break;
+            case BuffId.REFLECT: duration = 1; break;
+            case BuffId.BONUS_DAMAGE: duration = 4; break;
+            case BuffId.LIFE_STEAL: duration = 2; break;
+            case BuffId.PURGE: duration = 1; break;
+            case BuffId.POISON: duration = 4; break;
+            case BuffId.BLIND: duration = 3; break;
+            case BuffId.FORTIFIED: duration = 4; break;
+            case BuffId.MUTE: duration = 4; break;
+            case BuffId.SILENCED: duration = 2; break;
+            case BuffId.CHAOS: duration = 2; break;
+            case BuffId.WATCHED: duration = 999; break;
+            case BuffId.BROKEN: duration = 4; break;
+            case BuffId.DISMEMBERED: duration = 6; break;
+            case BuffId.REDUCED: duration = 2; break;
+            case BuffId.WEAK: duration = 4; break;
+            case BuffId.STOLEN: duration = 3; break;
+            default: break;
         }
     }
 
-    public Buff(BuffId id) {
+    public Buff(BuffId id)
+    {
         this.id = id;
         resetDuration();
     }
 
-    public bool decreaseCounter() {
+    public bool decreaseCounter()
+    {
         duration -= 1;
         return duration <= 0;
     }
 
     private float bounusDamageAmount;
 
-    public void GenerateBounusDamage(PlayerStatus playerStatus, float random) {
+    public void GenerateBounusDamage(PlayerStatus playerStatus, float random)
+    {
         if (id == BuffId.BONUS_DAMAGE)
             bounusDamageAmount = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
-        else 
+        else
             Debug.LogWarning("This method is not avaible for this type of buff");
-    } 
+    }
 
-    public float GetBounusDamage() {
+    public float GetBounusDamage()
+    {
         return bounusDamageAmount;
     }
 
     private float blindChance;
 
-    public void GenerateBlindPercentage(PlayerStatus playerStatus, float random) {
+    public void GenerateBlindPercentage(PlayerStatus playerStatus, float random)
+    {
         if (id == BuffId.BLIND)
             blindChance = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
-        else 
+        else
             Debug.LogWarning("This method is not avaible for this type of buff");
-    } 
+    }
 
-    public float GetBlindPercentage() {
+    public float GetBlindPercentage()
+    {
         return blindChance;
     }
 }
