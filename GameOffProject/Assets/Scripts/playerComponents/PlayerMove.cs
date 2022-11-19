@@ -12,7 +12,8 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D mPlayerRigidBody;
     Transform mPlayerTransform;
     [SerializeField] GameObject battleUI;
-    [SerializeField] GameObject InventoryUI, InventoryButton;
+    [SerializeField] GameObject inventoryUI, inventoryButton;
+    [SerializeField] GameObject cluesUI, cluesButton;
     Animator playerAnimator;
 
     enum State{
@@ -20,7 +21,9 @@ public class PlayerMove : MonoBehaviour
         Walk,
         Sit,
         Talk,
-        Battle
+        Battle,
+        UseInventory,
+        UseClues
     }
 
     float deltaTime;
@@ -56,7 +59,10 @@ public class PlayerMove : MonoBehaviour
         Vector2 mPlayerScale = mPlayerTransform.localScale;
 
         //A to move left, D to move right
-        if (mCurState == State.Talk) {
+        if (mCurState == State.Talk 
+            || mCurState == State.Battle 
+            || mCurState == State.UseInventory 
+            || mCurState == State.UseClues) {
             return;
         }
 
@@ -96,10 +102,14 @@ public class PlayerMove : MonoBehaviour
     }
 
     void UpdatePlayerHorizontalVelocity(){
-        if (mCurState == State.Talk) {
+        if (mCurState == State.Talk
+            || mCurState == State.Battle
+            || mCurState == State.UseInventory
+            || mCurState == State.UseClues)
+        {
             return;
         }
-        
+
         Vector2 tempV = mPlayerRigidBody.velocity;
         tempV.x = Input.GetAxisRaw("Horizontal") * mPlayerSpeed;
         mPlayerRigidBody.velocity = tempV;
@@ -122,41 +132,93 @@ public class PlayerMove : MonoBehaviour
             case State.Battle:
                 UpdateBattle();
                 break;
+            case State.UseInventory:
+                UpdateUseInventory();
+                break;
+            case State.UseClues:
+                UpdateuseClues();
+                break;
         }
     }
 
     //TODO: update player based on player state
     void UpdateIdle(){
-        InventoryButton.SetActive(true);
-        if(mPlayerRigidBody.velocity != Vector2.zero){
+        inventoryButton.SetActive(true);
+        cluesButton.SetActive(true);
+        if (mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
+        }
+        if (inventoryUI.active)
+        {
+            mCurState = State.UseInventory;
+        }else if (cluesUI.active)
+        {
+            mCurState = State.UseClues;
         }
         playerAnimator.Play("PlayerIdle");
     }
 
     void UpdateWalk(){
-        InventoryButton.SetActive(true);
-        if(mPlayerRigidBody.velocity == Vector2.zero){
+        inventoryButton.SetActive(true);
+        cluesButton.SetActive(true);
+        if (mPlayerRigidBody.velocity == Vector2.zero){
             mCurState = State.Idle;
         }
+        if (inventoryUI.active)
+        {
+            mCurState = State.UseInventory;
+        }
+        else if (cluesUI.active)
+        {
+            mCurState = State.UseClues;
+        }
         playerAnimator.Play("PlayerWalk");
+        
     }
 
     void UpdateSit(){
-        InventoryButton.SetActive(true);
+        inventoryButton.SetActive(true);
+        cluesButton.SetActive(true);
     }
 
     void UpdateTalk() {
-        InventoryUI.SetActive(false);
-        InventoryButton.SetActive(false);
+        playerAnimator.Play("PlayerIdle");
+        inventoryUI.SetActive(false);
+        inventoryButton.SetActive(false);
+        cluesUI.SetActive(false);
+        cluesButton.SetActive(false);
     }
 
     void UpdateBattle()
     {
-        InventoryUI.SetActive(false);
-        InventoryButton.SetActive(false);
+        inventoryUI.SetActive(false);
+        inventoryButton.SetActive(false);
+        cluesUI.SetActive(false);
+        cluesButton.SetActive(false);
         battleUI.SetActive(true);
         transform.parent.gameObject.SetActive(false);
+    }
+
+    void UpdateUseInventory()
+    {
+        playerAnimator.Play("PlayerIdle");
+        cluesUI.SetActive(false);
+        cluesButton.SetActive(false);
+        if (!inventoryUI.active)
+        {
+            mCurState = State.Idle;
+        }
+    }
+
+    void UpdateuseClues()
+    {
+        playerAnimator.Play("PlayerIdle");
+        inventoryUI.SetActive(false);
+        inventoryButton.SetActive(false);
+        if (!cluesUI.active)
+        {
+            mCurState = State.Idle;
+        }
     }
 
     

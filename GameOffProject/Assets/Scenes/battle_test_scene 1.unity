@@ -6475,9 +6475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 1834850490}
-  InventoryUI: {fileID: 2135132141}
-  InventoryButton: {fileID: 1198691160}
-  mPlayerSpeed: 0.8
+  inventoryUI: {fileID: 2135132141}
+  inventoryButton: {fileID: 1198691160}
+  cluesUI: {fileID: 2121569821}
+  cluesButton: {fileID: 2093296659}
+  mPlayerSpeed: 1.8
 --- !u!95 &1054226329
 Animator:
   serializedVersion: 4
@@ -6537,7 +6539,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 5.47, y: 5.47}
-    newSize: {x: 5.47, y: 5.47}
+    newSize: {x: 10.94, y: 10.94}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -6591,7 +6593,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.47, y: 5.47}
+  m_Size: {x: 10.94, y: 10.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -9483,7 +9485,7 @@ MonoBehaviour:
   portraitAnimator: {fileID: 1854394777}
   tachieObject: {fileID: 1146104328}
   tachieAnimator: {fileID: 1146104330}
-  player: {fileID: 0}
+  player: {fileID: 1054226328}
   choices:
   - {fileID: 283889183}
   - {fileID: 424331369}
