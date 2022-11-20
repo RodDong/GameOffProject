@@ -435,10 +435,25 @@ public class BattleManager : MonoBehaviour
         Eye equippedEyes = playerStatus.getEquippedEyes();
         Mouth equippedMouth = playerStatus.getEquippedMouth();
         Button[] buttons = SkillButtons.GetComponentsInChildren<Button>();
-        
-        buttons[0].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getSkillImage());
-        buttons[1].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getSkillImage());
-        buttons[2].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getSkillImage());
+        Skill DefenseSkill = equippedEyebrow.getSkill();
+        Skill AttackSkill = equippedEyes.getSkill();
+        Skill EffectSkill = equippedMouth.getSkill();
+
+
+        buttons[0].GetComponent<Image>().sprite = Resources.Load<Sprite>(DefenseSkill.getSkillImage());
+        buttons[0].GetComponentsInChildren<TextMeshProUGUI>()[0].text = DefenseSkill.getDisplayName();
+        buttons[0].GetComponentsInChildren<TextMeshProUGUI>()[1].text = DefenseSkill.getPower().ToString();
+        buttons[1].GetComponent<Image>().sprite = Resources.Load<Sprite>(AttackSkill.getSkillImage());
+        buttons[1].GetComponentsInChildren<TextMeshProUGUI>()[0].text = AttackSkill.getDisplayName();
+        buttons[1].GetComponentsInChildren<TextMeshProUGUI>()[1].text = AttackSkill.getPower().ToString();
+        buttons[2].GetComponent<Image>().sprite = Resources.Load<Sprite>(EffectSkill.getSkillImage());
+        buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[0].text = EffectSkill.getDisplayName();
+        buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[1].text = EffectSkill.getPower().ToString();
+    }
+
+    void UpdateStatusBar()
+    {
+
     }
     public void rightUpdateEyebrow()
     {

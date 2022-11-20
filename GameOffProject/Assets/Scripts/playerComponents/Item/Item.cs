@@ -14,7 +14,6 @@ public abstract class Item
     protected string displayName;
     protected string imageSrc;
     protected string highLightedImage;
-    protected string skillImage;
     protected string selectedImage;
     protected string itemDescription;
     protected string imgRoot = "Art/UI/Buttons/";
@@ -62,11 +61,6 @@ public abstract class Item
     public string getDescription()
     {
         return itemDescription;
-    }
-
-    public string getSkillImage()
-    {
-        return skillImage;
     }
 
     // override object.Equals

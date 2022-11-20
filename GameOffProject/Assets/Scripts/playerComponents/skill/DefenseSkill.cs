@@ -15,6 +15,31 @@ public class DefenseSkill : Skill
                 type = SkillType.DEFENSE;
                 attribute = SkillAttribute.HAPPY;
                 displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_angry";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.ANGRY:
+                type = SkillType.DEFENSE;
+                attribute = SkillAttribute.HAPPY;
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_angry";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.SAD:
+                type = SkillType.DEFENSE;
+                attribute = SkillAttribute.HAPPY;
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_sad";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.HAPPY:
+                type = SkillType.DEFENSE;
+                attribute = SkillAttribute.HAPPY;
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_happy";
                 power = 50;
                 immuneCounter = 1;
                 break;
