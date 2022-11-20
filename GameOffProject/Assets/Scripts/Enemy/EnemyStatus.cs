@@ -91,16 +91,23 @@ public abstract class EnemyStatus: MonoBehaviour
             fortifiedDEF += 100.0f;
         }
 
+        float baseDEF;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                baseDEF = happyDEF;
+                break;
             case SkillAttribute.SAD:
-                return sadDEF;
+                baseDEF = sadDEF;
+                break;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                baseDEF = angryDEF;
+                break;
             default:
-                return 0.0f + fortifiedDEF;
+                baseDEF = 0.0f;
+                break;
         }
+
+        return baseDEF + fortifiedDEF;
     }
 
     public abstract void MakeMove(PlayerStatus playerStatus);
