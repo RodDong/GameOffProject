@@ -12,8 +12,11 @@ using static Buff;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public const float MAX_HEALTH = 120;
+    private float MAX_HEALTH = 120;
+    public float GetMaxHealth() { return MAX_HEALTH; }
     private float currentHealth;
+    private BattleManager battleManager;
+    public void SetBattleManager(BattleManager bm) { battleManager = bm; }
     public float getCurrentHealth() {
         return currentHealth;
     } 
@@ -42,6 +45,21 @@ public class PlayerStatus : MonoBehaviour
     public void UpdateEffectStatus() {
         for (int i = buffs.Count - 1; i >= 0; i--) {
             if (buffs[i].decreaseCounter()) {
+                if (buffs[i].GetBuffId() == BuffId.MUTE)
+                {
+                    battleManager.UnMute();
+                }
+
+                if (buffs[i].GetBuffId() == BuffId.SILENCED)
+                {
+                    battleManager.UnSlience();
+                }
+
+                if(buffs[i].GetBuffId() == BuffId.DISMEMBERED)
+                {
+                    MAX_HEALTH = 120;
+                }
+
                 buffs.RemoveAt(i);
             }
         }
@@ -49,13 +67,29 @@ public class PlayerStatus : MonoBehaviour
 
     public bool ActivateBuff(Buff buff) {
         //play buff animation here ??? 
-
         for (int i = 0; i < buffs.Count; i++) {
             if (buffs[i].GetBuffId() == buff.GetBuffId()) {
                 buffs[i].resetDuration();
                 return true;
             }
         }
+
+        if(buff.GetBuffId() == BuffId.MUTE)
+        {
+            battleManager.ProcessMute();
+        }
+
+        if (buff.GetBuffId() == BuffId.SILENCED)
+        {
+            battleManager.ProcessSilence();
+        }
+
+        if (buff.GetBuffId() == BuffId.DISMEMBERED)
+        {
+            MAX_HEALTH = 80;
+            currentHealth /= 1.5f;
+        }
+
         buffs.Insert(0, buff);
         return false;
     }

@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject inventoryUI, inventoryButton;
     [SerializeField] GameObject cluesUI, cluesButton;
+    [SerializeField] BattleManager battleManager;
     Animator playerAnimator;
 
     enum State{
@@ -197,6 +198,9 @@ public class PlayerMove : MonoBehaviour
         cluesButton.SetActive(false);
         battleUI.SetActive(true);
         transform.parent.gameObject.SetActive(false);
+        battleManager.UpdateEquippedMask();
+        battleManager.UpdateSkillButtons();
+        battleManager.UpdatePlayerStatVisual();
     }
 
     void UpdateUseInventory()

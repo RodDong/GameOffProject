@@ -36,9 +36,11 @@ public class BattleManager : MonoBehaviour
     public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
     public bool GetIsInBattle() { return isInBattle; }
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         mCurState = State.Preparation;
         battleUI.SetActive(false);
 
@@ -46,13 +48,13 @@ public class BattleManager : MonoBehaviour
 
         // initialize player status
         playerStatus = player.GetComponent<PlayerStatus>();
+        playerStatus.SetBattleManager(this);
 
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
         if (enemyStatus == null) {
             Debug.LogWarning("No Enemy Object in Scene");
         }
-
         // mask UI
 
 
@@ -60,11 +62,10 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
-        if (mCurState == State.Preparation) { return; }
+        //if (mCurState == State.Preparation) { return; }
         // nothing to do here.
         // all state transition is either instantanious or based on timer
         // or based user input
-
 
         handleKeyboardInput();
     }
@@ -111,7 +112,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / PlayerStatus.MAX_HEALTH;
+        healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / playerStatus.GetMaxHealth();
     }
     void UpdateWin()
     {
@@ -265,7 +266,7 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
             case SkillAttribute.SAD:
-                playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+                playerStatus.TakeDamage(playerStatus.GetMaxHealth() / 4, SkillAttribute.NONE);
                 // default target = player
                 if (chaos) {
                     enemyStatus.ActivateBuff(new Buff(BuffId.IMMUNE));
@@ -292,7 +293,7 @@ public class BattleManager : MonoBehaviour
     //             break;
     //         case SkillAttribute.SAD:
     //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
-    //             playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+    //             playerStatus.TakeDamage(playerStatus.GetMaxHealth() / 4, SkillAttribute.NONE);
     //             break;
     //         case SkillAttribute.ANGRY:
     //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
@@ -326,6 +327,31 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    // private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs)
+    // {
+    //     AttackSkill atkSkill = (AttackSkill)skill;
+    //     float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
+    //     foreach (Buff buff in activeBuffs)
+    //     {
+    //         if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE)
+    //         {
+    //             effectiveDamage += buff.GetBounusDamage();
+    //         }
+    //     }
+    //     enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+    //     foreach (Buff buff in activeBuffs)
+    //     {
+    //         if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL)
+    //         {
+    //             playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
+    //         }
+    //     }
+    //     if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
+    //     {
+    //         playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
+    //     }
+    // }
+
     public void ProcessMute()
     {
         Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
@@ -357,6 +383,38 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+
+    public void UnMute()
+    {
+        Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    public void UnSlience()
+    {
+        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
     #endregion
 
     #region Update Equipment UI
@@ -369,6 +427,18 @@ public class BattleManager : MonoBehaviour
         eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getHighLightedImage());
         eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
         mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
+    }
+
+    public void UpdateSkillButtons()
+    {
+        EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Eye equippedEyes = playerStatus.getEquippedEyes();
+        Mouth equippedMouth = playerStatus.getEquippedMouth();
+        Button[] buttons = SkillButtons.GetComponentsInChildren<Button>();
+        
+        buttons[0].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getSkillImage());
+        buttons[1].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getSkillImage());
+        buttons[2].GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getSkillImage());
     }
     public void rightUpdateEyebrow()
     {
