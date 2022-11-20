@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buff
+public class Effect
 {
-    public enum BuffId
+    public enum EffectId
     {
-        TEST_BUFF_1,
+        TEST_Effect_1,
         IMMUNE, // Ignore all incoming damage
         REFLECT, // When taking damage, deal same damage to source
         BONUS_DAMAGE, // Attack deals additional damage
@@ -22,11 +22,13 @@ public class Buff
         DISMEMBERED, // Max HP reduced
         REDUCED, // Reduce attack of an attribute
         WEAK, // Reduce defense of an attribute
-        STOLEN // Player reduce attribute, increase enemy attribute
+        STOLEN, // Player reduce attribute, increase enemy attribute
+        HEALREDUCTION, // Player reduce heal amount
+        TAUNTED, // Player can only use attack skill
     }
 
-    private BuffId id;
-    public BuffId GetBuffId()
+    private EffectId id;
+    public EffectId GetEffectId()
     {
         return id;
     }
@@ -38,7 +40,7 @@ public class Buff
             return false;
         }
 
-        return id == ((Buff)obj).id;
+        return id == ((Effect)obj).id;
     }
 
     public override int GetHashCode()
@@ -51,27 +53,29 @@ public class Buff
     {
         switch (id)
         {
-            case BuffId.IMMUNE: duration = 1; break;
-            case BuffId.REFLECT: duration = 1; break;
-            case BuffId.BONUS_DAMAGE: duration = 4; break;
-            case BuffId.LIFE_STEAL: duration = 2; break;
-            case BuffId.POISON: duration = 4; break;
-            case BuffId.BLIND: duration = 3; break;
-            case BuffId.FORTIFIED: duration = 4; break;
-            case BuffId.MUTE: duration = 4; break;
-            case BuffId.SILENCED: duration = 2; break;
-            case BuffId.CHAOS: duration = 2; break;
-            case BuffId.WATCHED: duration = 999; break;
-            case BuffId.BROKEN: duration = 4; break;
-            case BuffId.DISMEMBERED: duration = 6; break;
-            case BuffId.REDUCED: duration = 2; break;
-            case BuffId.WEAK: duration = 4; break;
-            case BuffId.STOLEN: duration = 3; break;
+            case EffectId.IMMUNE: duration = 1; break;
+            case EffectId.REFLECT: duration = 1; break;
+            case EffectId.BONUS_DAMAGE: duration = 4; break;
+            case EffectId.LIFE_STEAL: duration = 2; break;
+            case EffectId.POISON: duration = 4; break;
+            case EffectId.BLIND: duration = 3; break;
+            case EffectId.FORTIFIED: duration = 4; break;
+            case EffectId.MUTE: duration = 4; break;
+            case EffectId.SILENCED: duration = 2; break;
+            case EffectId.CHAOS: duration = 2; break;
+            case EffectId.WATCHED: duration = 999; break;
+            case EffectId.BROKEN: duration = 4; break;
+            case EffectId.DISMEMBERED: duration = 6; break;
+            case EffectId.REDUCED: duration = 2; break;
+            case EffectId.WEAK: duration = 4; break;
+            case EffectId.STOLEN: duration = 3; break;
+            case EffectId.HEALREDUCTION: duration = 3; break;
+            case EffectId.TAUNTED: duration = 2; break;
             default: break;
         }
     }
 
-    public Buff(BuffId id)
+    public Effect(EffectId id)
     {
         this.id = id;
         resetDuration();
@@ -88,10 +92,10 @@ public class Buff
 
     public void GenerateBounusDamage(PlayerStatus playerStatus, float random)
     {
-        if (id == BuffId.BONUS_DAMAGE)
+        if (id == EffectId.BONUS_DAMAGE)
             bounusDamageAmount = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
     }
 
     public float GetBounusDamage()
@@ -105,10 +109,10 @@ public class Buff
 
     public void GenerateBlindPercentage(PlayerStatus playerStatus, float random)
     {
-        if (id == BuffId.BLIND)
+        if (id == EffectId.BLIND)
             blindChance = playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) * random;
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
     }
 
     public float GetBlindPercentage()
@@ -122,17 +126,17 @@ public class Buff
     private Dictionary<SkillAttribute, float> reducedAmount = new Dictionary<SkillAttribute, float>();
 
     public void SetAttackReduction(float amount, SkillAttribute attribute){
-        if (id == BuffId.REDUCED)
+        if (id == EffectId.REDUCED)
             reducedAmount[attribute] = amount;
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
     }
 
     public float GetAttackReduction(SkillAttribute attribute){
-        if (id == BuffId.REDUCED)
+        if (id == EffectId.REDUCED)
             return reducedAmount[attribute];
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
         return 0;
     }
 
@@ -143,17 +147,17 @@ public class Buff
     private Dictionary<SkillAttribute, float> weakenedAmount = new Dictionary<SkillAttribute, float>();
 
     public void SetDefenseReduction(float amount, SkillAttribute attribute){
-        if (id == BuffId.WEAK)
+        if (id == EffectId.WEAK)
             weakenedAmount[attribute] = amount;
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
     }
 
     public float GetDefenseReduction(SkillAttribute attribute){
-         if (id == BuffId.WEAK)
+         if (id == EffectId.WEAK)
             return weakenedAmount[attribute];
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
         return 0;
     }
 
@@ -164,20 +168,19 @@ public class Buff
     private Dictionary<SkillAttribute, float> stolenAmount = new Dictionary<SkillAttribute, float>();
 
     public void SetStolenAmount(float amount, SkillAttribute attribute){
-        if (id == BuffId.STOLEN)
-            weakenedAmount[attribute] = amount;
+        if (id == EffectId.STOLEN)
+            stolenAmount[attribute] = amount;
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
     }
 
     public float GetStolenAmount(SkillAttribute attribute){
-         if (id == BuffId.STOLEN)
-            return weakenedAmount[attribute];
+         if (id == EffectId.STOLEN)
+            return stolenAmount[attribute];
         else
-            Debug.LogWarning("This method is not avaible for this type of buff");
+            Debug.LogWarning("This method is not available for this type of Effect");
         return 0;
     }
 
 #endregion
-
 }
