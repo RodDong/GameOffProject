@@ -157,60 +157,150 @@ public class BattleManager : MonoBehaviour
 
     public void ProcessSkill(Skill skill) {
         List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
+
+        // Chaos changes target 
+        bool chaos = false;
+        if (activeBuffs.Contains(new Buff(BuffId.CHAOS))) {
+            chaos = true;
+        }
+
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                ProcessAttackSkill(skill, activeBuffs);
+                ProcessAttackSkill(skill, activeBuffs, chaos);
                 break;
             case SkillType.DEFENSE:
-                ProcessDefensiveSkill(skill);
+                ProcessDefensiveSkill(skill, chaos);
                 break;
             case SkillType.BUFF:
-                ProcessEffectSkill(skill);
+                ProcessEffectSkill(skill, chaos);
                 break;
         }
     }
 
-    private void ProcessEffectSkill(Skill skill)
+    
+    // public void ProcessSkill(Skill skill) {
+    //     List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
+    //     switch (skill.getSkillType()) {
+    //         case SkillType.ATTACK:
+    //             ProcessAttackSkill(skill, activeBuffs);
+    //             break;
+    //         case SkillType.DEFENSE:
+    //             ProcessDefensiveSkill(skill);
+    //             break;
+    //         case SkillType.BUFF:
+    //             ProcessEffectSkill(skill);
+    //             break;
+    //     }
+    // }
+
+    private void ProcessEffectSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
             case SkillAttribute.HAPPY:
-                playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+                // default target = player
+                if (chaos) {
+                    enemyStatus.ActivateBuff(new Buff(BuffId.LIFE_STEAL));
+                } else {
+                    playerStatus.ActivateBuff(new Buff(BuffId.LIFE_STEAL));
+                }
                 break;
             case SkillAttribute.SAD:
                 playerStatus.ClearBuff();
                 enemyStatus.ClearBuff();
                 break;
             case SkillAttribute.ANGRY:
-                Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
+                Buff bounusDamage = new Buff(BuffId.BONUS_DAMAGE);
                 float rand = Random.Range(0.0f, 1.0f);
                 bounusDamage.GenerateBounusDamage(playerStatus, rand);
-                playerStatus.ActivateBuff(bounusDamage);
                 Buff blind = new Buff(Buff.BuffId.BLIND);
                 blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-                enemyStatus.ActivateBuff(blind);
+                // default buff target = player, debuff target = enemy
+                // TODO: blind for player and bonusDMG for enemy
+                if (chaos) {
+                    break;
+                    enemyStatus.ActivateBuff(bounusDamage);
+                    playerStatus.ActivateBuff(blind);
+                } else {
+                    playerStatus.ActivateBuff(bounusDamage);
+                    enemyStatus.ActivateBuff(blind);
+                }
                 break;
         }
     }
+    // private void ProcessEffectSkill(Skill skill)
+    // {
+    //     switch (skill.GetSkillAttribute())
+    //     {
+    //         case SkillAttribute.HAPPY:
+    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+    //             break;
+    //         case SkillAttribute.SAD:
+    //             playerStatus.ClearBuff();
+    //             enemyStatus.ClearBuff();
+    //             break;
+    //         case SkillAttribute.ANGRY:
+    //             Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
+    //             float rand = Random.Range(0.0f, 1.0f);
+    //             bounusDamage.GenerateBounusDamage(playerStatus, rand);
+    //             playerStatus.ActivateBuff(bounusDamage);
+    //             Buff blind = new Buff(Buff.BuffId.BLIND);
+    //             blind.GenerateBlindPercentage(playerStatus, 1 - rand);
+    //             enemyStatus.ActivateBuff(blind);
+    //             break;
+    //     }
+    // }
 
-    private void ProcessDefensiveSkill(Skill skill)
+    private void ProcessDefensiveSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
             case SkillAttribute.HAPPY:
-                playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
+                float healAmount = ((DefenseSkill)skill).getHealAmount(playerStatus);
+                // default target = player
+                if (chaos) {
+                    enemyStatus.ProcessHealing(healAmount);
+                } else {
+                    playerStatus.ProcessHealing(healAmount);
+                }
                 break;
             case SkillAttribute.SAD:
-                playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
                 playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+                // default target = player
+                if (chaos) {
+                    enemyStatus.ActivateBuff(new Buff(BuffId.IMMUNE));
+                } else {
+                    playerStatus.ActivateBuff(new Buff(BuffId.IMMUNE));
+                }
                 break;
             case SkillAttribute.ANGRY:
-                playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
+                // default target = player
+                if (chaos) {
+                    enemyStatus.ActivateBuff(new Buff(BuffId.REFLECT));
+                } else {
+                    playerStatus.ActivateBuff(new Buff(BuffId.REFLECT));
+                }
                 break;
         }
     }
+    // private void ProcessDefensiveSkill(Skill skill)
+    // {
+    //     switch (skill.GetSkillAttribute())
+    //     {
+    //         case SkillAttribute.HAPPY:
+    //             playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
+    //             break;
+    //         case SkillAttribute.SAD:
+    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
+    //             playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+    //             break;
+    //         case SkillAttribute.ANGRY:
+    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
+    //             break;
+    //     }
+    // }
 
-    private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs)
+    private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs, bool chaos)
     {
         AttackSkill atkSkill = (AttackSkill)skill;
         float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
@@ -221,12 +311,13 @@ public class BattleManager : MonoBehaviour
                 effectiveDamage += buff.GetBounusDamage();
             }
         }
-        enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+        float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
         foreach (Buff buff in activeBuffs)
         {
             if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL)
             {
-                playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
+                // the denominator can be adjusted later depending on stats and life steal ratio
+                playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
             }
         }
         if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)

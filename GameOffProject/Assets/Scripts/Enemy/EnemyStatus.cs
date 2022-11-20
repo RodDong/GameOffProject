@@ -70,6 +70,13 @@ public abstract class EnemyStatus: MonoBehaviour
         return effectiveDamage;
     }
 
+    public void ProcessHealing(float healAmount) {
+        currentHealth += healAmount;
+        if (currentHealth > MAX_HEALTH) {
+            currentHealth = MAX_HEALTH;
+        }
+    }
+    
     public float getATKbyAttribute(SkillAttribute attribute) {
         switch(attribute) {
             case SkillAttribute.HAPPY:
@@ -110,7 +117,16 @@ public abstract class EnemyStatus: MonoBehaviour
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             return; // MISS
         }
-        playerStatus.TakeDamage(damage, attribute);
+        float dealtDamage = playerStatus.TakeDamage(damage, attribute);
+        // if has lifesteal by effect of chaos, heal percentage is based on player stats
+        foreach (Buff buff in buffs)
+        {
+            if (buff.GetBuffId() == BuffId.LIFE_STEAL)
+            {
+                // the denominator can be adjusted later depending on stats and life steal ratio
+                ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
+            }
+        }
         if (playerStatus.GetActiveBuffs().Contains(new Buff(BuffId.REFLECT))){
             TakeDamage(damage, attribute);
         }
