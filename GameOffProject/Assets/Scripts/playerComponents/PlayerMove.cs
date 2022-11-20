@@ -206,23 +206,28 @@ public class PlayerMove : MonoBehaviour
     void UpdateUseInventory()
     {
         playerAnimator.Play("PlayerIdle");
-        cluesUI.SetActive(false);
-        cluesButton.SetActive(false);
+    }
+
+    public void OpenInventory()
+    {
         if (!inventoryUI.activeSelf)
         {
-            mCurState = State.Idle;
+            cluesUI.SetActive(false);
+        }
+        
+    }
+
+    public void OpenClues()
+    {
+        if (!cluesUI.activeSelf)
+        {
+            inventoryUI.SetActive(false);
         }
     }
 
     void UpdateuseClues()
     {
         playerAnimator.Play("PlayerIdle");
-        inventoryUI.SetActive(false);
-        inventoryButton.SetActive(false);
-        if (!cluesUI.activeSelf)
-        {
-            mCurState = State.Idle;
-        }
     }
 
     
