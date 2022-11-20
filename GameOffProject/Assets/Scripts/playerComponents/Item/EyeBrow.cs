@@ -20,9 +20,9 @@ public class EyeBrow : Item
                 angryDEF = 50f;
                 displayName = "test eyebrow";
                 itemDescription = "test description";
-                imageSrc = imgRoot + "1EyebrowA_N";
-                highLightedImage = imgRoot + "1EyebrowA_H";
-                selectedImage = imgRoot + "1EyebrowA_S";
+                imageSrc = imgRoot + "1EyebrowDefault_N";
+                highLightedImage = imgRoot + "1EyebrowDefault_H";
+                selectedImage = imgRoot + "1EyebrowDefault_S";
                 break;
             case SkillAttribute.HAPPY:
                 happyATK = 150f;

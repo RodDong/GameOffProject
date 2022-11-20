@@ -13,6 +13,28 @@ public class AttackSkill : Skill
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.ANGRY;
                 displayName = "test attack";
+                skillImage = imgRoot + "EmptyButton/" + "atk_angry";
+                power = 50;
+                break;
+            case SkillAttribute.ANGRY:
+                type = SkillType.ATTACK;
+                attribute = SkillAttribute.ANGRY;
+                displayName = "angry attack";
+                skillImage = imgRoot + "EmptyButton/" + "atk_angry";
+                power = 50;
+                break;
+            case SkillAttribute.HAPPY:
+                type = SkillType.ATTACK;
+                attribute = SkillAttribute.HAPPY;
+                displayName = "happy attack";
+                skillImage = imgRoot + "EmptyButton/" + "atk_happy";
+                power = 50;
+                break;
+            case SkillAttribute.SAD:
+                type = SkillType.ATTACK;
+                attribute = SkillAttribute.SAD;
+                displayName = "sad attack";
+                skillImage = imgRoot + "EmptyButton/" + "atk_sad";
                 power = 50;
                 break;
         }

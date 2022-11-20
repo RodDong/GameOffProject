@@ -3095,7 +3095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96bc2af4b218b0478b1b57b185578e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clueNumbers: 5
 --- !u!114 &767987497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3109,8 +3108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 1834850490}
-  InventoryUI: {fileID: 2135132141}
-  InventoryButton: {fileID: 1198691160}
+  inventoryUI: {fileID: 2135132141}
+  inventoryButton: {fileID: 1198691160}
+  cluesUI: {fileID: 0}
+  cluesButton: {fileID: 0}
   mPlayerSpeed: 3
 --- !u!50 &767987500
 Rigidbody2D:
