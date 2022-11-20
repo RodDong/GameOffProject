@@ -89,6 +89,9 @@ public class Effect
 
 #region Bonus Damage
     private float bounusDamageAmount;
+    public void SetBonusDamage(float damage) {
+        bounusDamageAmount = damage;
+    }
 
     public void GenerateBounusDamage(PlayerStatus playerStatus, float random)
     {
