@@ -148,10 +148,10 @@ public class PlayerMove : MonoBehaviour
         if (mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
         }
-        if (inventoryUI.active)
+        if (inventoryUI.activeSelf)
         {
             mCurState = State.UseInventory;
-        }else if (cluesUI.active)
+        }else if (cluesUI.activeSelf)
         {
             mCurState = State.UseClues;
         }
@@ -164,11 +164,11 @@ public class PlayerMove : MonoBehaviour
         if (mPlayerRigidBody.velocity == Vector2.zero){
             mCurState = State.Idle;
         }
-        if (inventoryUI.active)
+        if (inventoryUI.activeSelf)
         {
             mCurState = State.UseInventory;
         }
-        else if (cluesUI.active)
+        else if (cluesUI.activeSelf)
         {
             mCurState = State.UseClues;
         }
@@ -204,7 +204,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.Play("PlayerIdle");
         cluesUI.SetActive(false);
         cluesButton.SetActive(false);
-        if (!inventoryUI.active)
+        if (!inventoryUI.activeSelf)
         {
             mCurState = State.Idle;
         }
@@ -215,7 +215,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator.Play("PlayerIdle");
         inventoryUI.SetActive(false);
         inventoryButton.SetActive(false);
-        if (!cluesUI.active)
+        if (!cluesUI.activeSelf)
         {
             mCurState = State.Idle;
         }

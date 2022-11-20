@@ -26,6 +26,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
     [SerializeField] GameObject playerStatsUI;
+    [SerializeField] GameObject MaskUI;
+    [SerializeField] GameObject SkillButtons;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
 
@@ -65,17 +67,6 @@ public class BattleManager : MonoBehaviour
 
 
         handleKeyboardInput();
-        if (battleUI.activeSelf)
-        {
-            updatePlayerStatVisual();
-            EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
-            Eye equippedEyes = playerStatus.getEquippedEyes();
-            Mouth equippedMouth = playerStatus.getEquippedMouth();
-            eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getHighLightedImage());
-            eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
-            mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
-        }
-
     }
 
     void UpdatePreparation()
@@ -243,9 +234,51 @@ public class BattleManager : MonoBehaviour
             playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
         }
     }
+
+    public void ProcessMute()
+    {
+        Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 0.1f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    public void ProcessSilence()
+    {
+        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 0.1f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
     #endregion
 
     #region Update Equipment UI
+
+    public void UpdateEquippedMask()
+    {
+        EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Eye equippedEyes = playerStatus.getEquippedEyes();
+        Mouth equippedMouth = playerStatus.getEquippedMouth();
+        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getHighLightedImage());
+        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
+        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
+    }
     public void rightUpdateEyebrow()
     {
         List<EyeBrow> ownedEyebrows = playerStatus.getOwnedEyeBrows();
@@ -391,7 +424,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void updatePlayerStatVisual()
+    public void UpdatePlayerStatVisual()
     {
         //update buff visuals
 

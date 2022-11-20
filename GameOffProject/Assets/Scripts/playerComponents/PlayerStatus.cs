@@ -33,7 +33,7 @@ public class PlayerStatus : MonoBehaviour
     // idx 1: defense skill
     // idx 2: buff/debuff skill
    
-    private List<Buff> buffs;
+    private List<Buff> buffs = new List<Buff>();
     public List<Buff> GetActiveBuffs() {
         return buffs;
     } 
@@ -139,6 +139,7 @@ public class PlayerStatus : MonoBehaviour
 
     public float getATKbyAttribute(SkillAttribute attribute) {
         float reduction = 0;
+        
         Buff reductionEffect = buffs.Find(element => element.GetBuffId() == BuffId.REDUCED);
         if (reductionEffect != null) {
             reduction = reductionEffect.GetAttackReduction(attribute);
