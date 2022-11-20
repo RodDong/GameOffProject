@@ -6,7 +6,7 @@ public class Effect
 {
     public enum EffectId
     {
-        TEST_Effect_1,
+        TEST_EFFECT_1,
         IMMUNE, // Ignore all incoming damage
         REFLECT, // When taking damage, deal same damage to source
         BONUS_DAMAGE, // Attack deals additional damage

@@ -5,7 +5,7 @@ using static Effect;
 
 public class BuffSkill : Skill
 {
-    private Effect Effect;
+    private Effect effect;
     public BuffSkill(SkillAttribute attribute) {
         this.attribute = attribute;
 
@@ -16,36 +16,36 @@ public class BuffSkill : Skill
                 displayName = "test Effect";
                 skillImage = imgRoot + "EmptyButton/" + "bubuff_angry";
                 power = 50;
-                buff = new Buff(BuffId.TEST_BUFF_1);
+                effect = new Effect(EffectId.TEST_EFFECT_1);
                 break;
             case SkillAttribute.ANGRY:
-                type = SkillType.BUFF;
+                type = SkillType.EFFECT;
                 attribute = SkillAttribute.ANGRY;
                 displayName = "angry buff";
                 skillImage = imgRoot + "EmptyButton/" + "bubuff_angry";
                 power = 50;
-                buff = new Buff(BuffId.TEST_BUFF_1);
+                effect = new Effect(EffectId.TEST_EFFECT_1);
                 break;
             case SkillAttribute.HAPPY:
-                type = SkillType.BUFF;
+                type = SkillType.EFFECT;
                 attribute = SkillAttribute.HAPPY;
                 displayName = "happy buff";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_happy";
                 power = 50;
-                buff = new Buff(BuffId.TEST_BUFF_1);
+                effect = new Effect(EffectId.TEST_EFFECT_1);
                 break;
             case SkillAttribute.SAD:
-                type = SkillType.BUFF;
+                type = SkillType.EFFECT;
                 attribute = SkillAttribute.HAPPY;
                 displayName = "sad buff";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_sad";
                 power = 50;
-                Effect = new Effect(EffectId.TEST_Effect_1);
+                effect = new Effect(EffectId.TEST_EFFECT_1);
                 break;
         }
     }
 
     public Effect getEffect() {
-        return Effect;
+        return effect;
     }
 }
