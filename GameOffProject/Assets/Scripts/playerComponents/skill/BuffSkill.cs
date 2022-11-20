@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Buff;
+using static Effect;
 
 public class BuffSkill : Skill
 {
-    private Buff buff;
+    private Effect Effect;
     public BuffSkill(SkillAttribute attribute) {
         this.attribute = attribute;
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                type = SkillType.BUFF;
+                type = SkillType.EFFECT;
                 attribute = SkillAttribute.SAD;
-                displayName = "test buff";
+                displayName = "test Effect";
                 skillImage = imgRoot + "EmptyButton/" + "bubuff_angry";
                 power = 50;
                 buff = new Buff(BuffId.TEST_BUFF_1);
@@ -29,7 +29,7 @@ public class BuffSkill : Skill
             case SkillAttribute.HAPPY:
                 type = SkillType.BUFF;
                 attribute = SkillAttribute.HAPPY;
-                displayName = "angry buff";
+                displayName = "happy buff";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_happy";
                 power = 50;
                 buff = new Buff(BuffId.TEST_BUFF_1);
@@ -37,15 +37,15 @@ public class BuffSkill : Skill
             case SkillAttribute.SAD:
                 type = SkillType.BUFF;
                 attribute = SkillAttribute.HAPPY;
-                displayName = "angry buff";
+                displayName = "sad buff";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_sad";
                 power = 50;
-                buff = new Buff(BuffId.TEST_BUFF_1);
+                Effect = new Effect(EffectId.TEST_Effect_1);
                 break;
         }
     }
 
-    public Buff getBuff() {
-        return buff;
+    public Effect getEffect() {
+        return Effect;
     }
 }

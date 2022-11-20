@@ -53,23 +53,23 @@ public class TestSkillOutput : MonoBehaviour
                         playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
                         break;
                     case SkillAttribute.SAD:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
+                        playerStatus.ActivateEffect(new Effect(Effect.EffectId.IMMUNE));
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
+                        playerStatus.ActivateEffect(new Effect(Effect.EffectId.REFLECT));
                         break;
                 }
                 break;
-            case SkillType.BUFF:
+            case SkillType.EFFECT:
                 switch (skill.GetSkillAttribute()) {
                     case SkillAttribute.HAPPY:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
+                        playerStatus.ActivateEffect(new Effect(Effect.EffectId.LIFE_STEAL));
                         break;
                     case SkillAttribute.SAD:
                         break;
                     case SkillAttribute.ANGRY:
-                        playerStatus.ActivateBuff(new Buff(Buff.BuffId.BONUS_DAMAGE));
-                        enemyStatus.ActivateBuff(new Buff(Buff.BuffId.BLIND));
+                        playerStatus.ActivateEffect(new Effect(Effect.EffectId.BONUS_DAMAGE));
+                        enemyStatus.ActivateEffect(new Effect(Effect.EffectId.BLIND));
                         break;
                 }
                 break;

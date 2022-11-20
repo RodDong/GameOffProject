@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Buff;
+using static Effect;
 
 public class Supervisor : EnemyStatus
 {
@@ -35,23 +35,23 @@ public class Supervisor : EnemyStatus
     }
 
     private void Secondary(PlayerStatus playerStatus) {
-        ActivateBuff(new Buff(BuffId.FORTIFIED));
+        ActivateEffect(new Effect(EffectId.FORTIFIED));
     }
 
     private void AngryATK(PlayerStatus playerStatus) {
         float damageAmount = 10;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
-        Buff buff = new Buff(BuffId.WEAK);
-        buff.SetDefenseReduction(10, SkillAttribute.SAD);
-        playerStatus.ActivateBuff(new Buff(BuffId.WEAK));
+        Effect Effect = new Effect(EffectId.WEAK);
+        Effect.SetDefenseReduction(10, SkillAttribute.SAD);
+        playerStatus.ActivateEffect(new Effect(EffectId.WEAK));
     }
 
     private void SadATK(PlayerStatus playerStatus) {
         float damageAmount = 10;
         DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        Buff buff = new Buff(BuffId.WEAK);
-        buff.SetDefenseReduction(10, SkillAttribute.ANGRY);
-        playerStatus.ActivateBuff(new Buff(BuffId.WEAK));
+        Effect Effect = new Effect(EffectId.WEAK);
+        Effect.SetDefenseReduction(10, SkillAttribute.ANGRY);
+        playerStatus.ActivateEffect(new Effect(EffectId.WEAK));
     }
 
 }
