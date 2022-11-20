@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Skill;
 using static Buff;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.EventSystems;
 
 public class BattleManager : MonoBehaviour
 {
@@ -28,8 +30,11 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject playerStatsUI;
     [SerializeField] GameObject MaskUI;
     [SerializeField] GameObject SkillButtons;
+    [SerializeField] GameObject StatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
+
+    int UILayer;
 
     State mCurState;
     bool isInBattle = false;
@@ -55,9 +60,7 @@ public class BattleManager : MonoBehaviour
         if (enemyStatus == null) {
             Debug.LogWarning("No Enemy Object in Scene");
         }
-        // mask UI
-
-
+        UILayer = LayerMask.NameToLayer("EffectUI");
     }
 
     void Update()
@@ -453,8 +456,40 @@ public class BattleManager : MonoBehaviour
 
     void UpdateStatusBar()
     {
-
+        
     }
+
+    private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
+    {
+        for (int index = 0; index < eventSystemRaysastResults.Count; index++)
+        {
+            RaycastResult curRaysastResult = eventSystemRaysastResults[index];
+            if (curRaysastResult.gameObject.layer == UILayer)
+                return true;
+        }
+        return false;
+    }
+
+    static List<RaycastResult> GetEventSystemRaycastResults()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        return raysastResults;
+    }
+
+
+    //Gets all event system raycast results of current mouse or touch position.
+    static List<RaycastResult> GetEventSystemRaycastResults()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        return raysastResults;
+    }
+
     public void rightUpdateEyebrow()
     {
         List<EyeBrow> ownedEyebrows = playerStatus.getOwnedEyeBrows();

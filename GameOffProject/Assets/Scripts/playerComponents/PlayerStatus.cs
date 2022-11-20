@@ -59,7 +59,6 @@ public class PlayerStatus : MonoBehaviour
                 {
                     MAX_HEALTH = 120;
                 }
-
                 buffs.RemoveAt(i);
             }
         }
