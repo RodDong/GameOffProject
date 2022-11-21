@@ -8,6 +8,7 @@ using static Effect;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEditor.Search;
 
 public class BattleManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject StatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
+    List<Transform> effectIconTransforms = new List<Transform>();
 
     int UILayer;
 
@@ -45,6 +47,7 @@ public class BattleManager : MonoBehaviour
 
     public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
     public bool GetIsInBattle() { return isInBattle; }
+    public List<Transform> GetEffectTransfroms() { return effectIconTransforms; }
 
 
     // Start is called before the first frame update
@@ -503,19 +506,27 @@ public class BattleManager : MonoBehaviour
     void UpdateStatusBar()
     {
         List<Effect> activeEffects = playerStatus.GetActiveEffects();
-        Transform[] effectsTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
-        effectsTransforms = effectsTransforms.Skip(1).ToArray();
+        Transform[] childTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
+        
+        foreach(var child in childTransforms)
+        {
+            if (child.GetComponent<Image>())
+            {
+                effectIconTransforms.Add(child);
+            }
+        }
+
         for (int i = 9; i >= activeEffects.Count; i--)
         {
-            if (effectsTransforms[i].gameObject.activeSelf)
+            if (effectIconTransforms[i].gameObject.activeSelf)
             {
-                effectsTransforms[i].gameObject.SetActive(false);
+                effectIconTransforms[i].gameObject.SetActive(false);
             }
         }
 
         for(int i = 0; i<activeEffects.Count; i++)
         {
-            Transform effectTrans = effectsTransforms[i];
+            Transform effectTrans = effectIconTransforms[i];
             if (!effectTrans.gameObject.activeSelf)
             {
                 effectTrans.gameObject.SetActive(true);
@@ -529,27 +540,6 @@ public class BattleManager : MonoBehaviour
                 effectTrans.GetComponent<Image>().sprite = debuffIcon;
             }
         }
-    }
-
-    private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)
-    {
-        for (int index = 0; index < eventSystemRaysastResults.Count; index++)
-        {
-            RaycastResult curRaysastResult = eventSystemRaysastResults[index];
-            if (curRaysastResult.gameObject.layer == UILayer)
-                return true;
-        }
-        return false;
-    }
-
-    //Gets all event system raycast results of current mouse or touch position.
-    static List<RaycastResult> GetEventSystemRaycastResults()
-    {
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
-        List<RaycastResult> raysastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, raysastResults);
-        return raysastResults;
     }
 
     public void rightUpdateEyebrow()

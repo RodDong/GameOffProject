@@ -113,6 +113,32 @@ public class Effect
         }
     }
 
+    public string GetDescription()
+    {
+        switch (this.id)
+        {
+            case EffectId.IMMUNE: return "Immune";
+            case EffectId.REFLECT: return "Reflect";
+            case EffectId.BONUS_DAMAGE: return "Bonus Damage";
+            case EffectId.LIFE_STEAL: return "Life Steal";
+            case EffectId.POISON: return "Poison";
+            case EffectId.BLIND: return "Blind";
+            case EffectId.FORTIFIED: return "Fortified";
+            case EffectId.MUTE: return "Mute";
+            case EffectId.SILENCED: return "Silenced";
+            case EffectId.CHAOS: return "Chaos";
+            case EffectId.WATCHED: return "Watched";
+            case EffectId.BROKEN: return "Broken";
+            case EffectId.DISMEMBERED: return "Disembered";
+            case EffectId.REDUCED: return "Reduced";
+            case EffectId.WEAK: return "Weak";
+            case EffectId.STOLEN: return "Stolen";
+            case EffectId.HEALREDUCTION: return "Heal Reduction";
+            case EffectId.TAUNTED: return "Taunted";
+            default: return "";
+        }
+    }
+
 #region Bonus Damage
     private float bounusDamageAmount;
 

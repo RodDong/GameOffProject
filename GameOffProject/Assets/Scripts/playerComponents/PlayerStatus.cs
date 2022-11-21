@@ -127,6 +127,9 @@ public class PlayerStatus : MonoBehaviour
         ownedClues.Add(new Clue(5));
         ownedClues.Add(new Clue(6));
         ownedClues.Add(new Clue(12));
+        Effects.Add(new Effect(EffectId.BLIND));
+        Effects.Add(new Effect(EffectId.POISON));
+        Effects.Add(new Effect(EffectId.IMMUNE));
         // - for test purposes
     }
 
