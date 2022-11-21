@@ -229,6 +229,5 @@ public class PlayerMove : MonoBehaviour
     {
         playerAnimator.Play("PlayerIdle");
     }
-
     
 }

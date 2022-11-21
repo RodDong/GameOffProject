@@ -7,6 +7,7 @@ using static Skill;
 using static Effect;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class BattleManager : MonoBehaviour
 {
@@ -38,6 +39,10 @@ public class BattleManager : MonoBehaviour
 
     State mCurState;
     bool isInBattle = false;
+
+    private Sprite buffIcon;
+    private Sprite debuffIcon;
+
     public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
     public bool GetIsInBattle() { return isInBattle; }
 
@@ -61,6 +66,10 @@ public class BattleManager : MonoBehaviour
             Debug.LogWarning("No Enemy Object in Scene");
         }
         UILayer = LayerMask.NameToLayer("EffectUI");
+
+        buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
+        debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
+
     }
 
     void Update()
@@ -71,6 +80,7 @@ public class BattleManager : MonoBehaviour
         // or based user input
 
         handleKeyboardInput();
+        UpdateStatusBar();
     }
 
     void UpdatePreparation()
@@ -492,7 +502,33 @@ public class BattleManager : MonoBehaviour
 
     void UpdateStatusBar()
     {
-        
+        List<Effect> activeEffects = playerStatus.GetActiveEffects();
+        Transform[] effectsTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
+        effectsTransforms = effectsTransforms.Skip(1).ToArray();
+        for (int i = 9; i >= activeEffects.Count; i--)
+        {
+            if (effectsTransforms[i].gameObject.activeSelf)
+            {
+                effectsTransforms[i].gameObject.SetActive(false);
+            }
+        }
+
+        for(int i = 0; i<activeEffects.Count; i++)
+        {
+            Transform effectTrans = effectsTransforms[i];
+            if (!effectTrans.gameObject.activeSelf)
+            {
+                effectTrans.gameObject.SetActive(true);
+            }
+            if (activeEffects[i].isBuff())
+            {
+                effectTrans.GetComponent<Image>().sprite = buffIcon;
+            }
+            else
+            {
+                effectTrans.GetComponent<Image>().sprite = debuffIcon;
+            }
+        }
     }
 
     private bool IsPointerOverUIElement(List<RaycastResult> eventSystemRaysastResults)

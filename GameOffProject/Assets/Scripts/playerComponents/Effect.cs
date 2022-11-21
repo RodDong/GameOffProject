@@ -87,6 +87,32 @@ public class Effect
         return duration <= 0;
     }
 
+    public bool isBuff()
+    {
+        switch (this.id)
+        {
+            case EffectId.IMMUNE: return true; 
+            case EffectId.REFLECT: return true;
+            case EffectId.BONUS_DAMAGE: return true;
+            case EffectId.LIFE_STEAL: return true;
+            case EffectId.POISON: return false;
+            case EffectId.BLIND: return false;
+            case EffectId.FORTIFIED: return true;
+            case EffectId.MUTE: return false;
+            case EffectId.SILENCED: return false;
+            case EffectId.CHAOS: return false;
+            case EffectId.WATCHED: return false;
+            case EffectId.BROKEN: return false;
+            case EffectId.DISMEMBERED: return false;
+            case EffectId.REDUCED: return false;
+            case EffectId.WEAK: return false;
+            case EffectId.STOLEN: return false;
+            case EffectId.HEALREDUCTION: return false;
+            case EffectId.TAUNTED: return false;
+            default: return true;
+        }
+    }
+
 #region Bonus Damage
     private float bounusDamageAmount;
 
