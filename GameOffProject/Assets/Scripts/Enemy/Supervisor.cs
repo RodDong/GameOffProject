@@ -31,9 +31,9 @@ public class Supervisor : EnemyStatus
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
-        Buff buff = new Buff(BuffId.BONUS_DAMAGE);
+        Effect buff = new Effect(EffectId.BONUS_DAMAGE);
         buff.SetBonusDamage(10);
-        ActivateBuff(buff);
+        ActivateEffect(buff);
         DealDamage(playerStatus, 50, SkillAttribute.ANGRY);
     }
 
@@ -43,7 +43,7 @@ public class Supervisor : EnemyStatus
 
     private void AngryATK(PlayerStatus playerStatus) {
         float damageAmount = 20;
-        Buff bonus = buffs.Find( b => { return b.GetBuffId() == BuffId.BONUS_DAMAGE; });
+        Effect bonus = Effects.Find( b => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
         if (bonus != null) {
             damageAmount += bonus.GetBounusDamage();
         }
@@ -55,7 +55,7 @@ public class Supervisor : EnemyStatus
 
     private void SadATK(PlayerStatus playerStatus) {
         float damageAmount = 20;
-        Buff bonus = buffs.Find( b => { return b.GetBuffId() == BuffId.BONUS_DAMAGE; });
+        Effect bonus = Effects.Find( b => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
         if (bonus != null) {
             damageAmount += bonus.GetBounusDamage();
         }
