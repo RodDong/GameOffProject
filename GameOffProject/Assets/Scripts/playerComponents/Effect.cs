@@ -87,6 +87,58 @@ public class Effect
         return duration <= 0;
     }
 
+    public bool isBuff()
+    {
+        switch (this.id)
+        {
+            case EffectId.IMMUNE: return true; 
+            case EffectId.REFLECT: return true;
+            case EffectId.BONUS_DAMAGE: return true;
+            case EffectId.LIFE_STEAL: return true;
+            case EffectId.POISON: return false;
+            case EffectId.BLIND: return false;
+            case EffectId.FORTIFIED: return true;
+            case EffectId.MUTE: return false;
+            case EffectId.SILENCED: return false;
+            case EffectId.CHAOS: return false;
+            case EffectId.WATCHED: return false;
+            case EffectId.BROKEN: return false;
+            case EffectId.DISMEMBERED: return false;
+            case EffectId.REDUCED: return false;
+            case EffectId.WEAK: return false;
+            case EffectId.STOLEN: return false;
+            case EffectId.HEALREDUCTION: return false;
+            case EffectId.TAUNTED: return false;
+            default: return true;
+        }
+    }
+
+    public string GetDescription()
+    {
+        switch (this.id)
+        {
+            case EffectId.IMMUNE: return "Immune";
+            case EffectId.REFLECT: return "Reflect";
+            case EffectId.BONUS_DAMAGE: return "Bonus Damage";
+            case EffectId.LIFE_STEAL: return "Life Steal";
+            case EffectId.POISON: return "Poison";
+            case EffectId.BLIND: return "Blind";
+            case EffectId.FORTIFIED: return "Fortified";
+            case EffectId.MUTE: return "Mute";
+            case EffectId.SILENCED: return "Silenced";
+            case EffectId.CHAOS: return "Chaos";
+            case EffectId.WATCHED: return "Watched";
+            case EffectId.BROKEN: return "Broken";
+            case EffectId.DISMEMBERED: return "Disembered";
+            case EffectId.REDUCED: return "Reduced";
+            case EffectId.WEAK: return "Weak";
+            case EffectId.STOLEN: return "Stolen";
+            case EffectId.HEALREDUCTION: return "Heal Reduction";
+            case EffectId.TAUNTED: return "Taunted";
+            default: return "";
+        }
+    }
+
 #region Bonus Damage
     private float bounusDamageAmount;
     public void SetBonusDamage(float damage) {
