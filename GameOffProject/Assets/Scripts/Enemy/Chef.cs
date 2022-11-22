@@ -9,7 +9,7 @@ public class Chef : EnemyStatus
     private float skillRandom = 0.5f;
     public override void MakeMove(PlayerStatus playerStatus) {
 
-        if (playerStatus.getCurrentHealth() <= playerStatus.GetMaxHealth() * 0.6) {
+        if (playerStatus.GetCurrentHealth() <= playerStatus.GetMaxHealth() * 0.6) {
             skillRandom -= 0.05f;
         } else {
             skillRandom = 0.5f;
