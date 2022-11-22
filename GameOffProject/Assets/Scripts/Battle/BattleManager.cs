@@ -200,13 +200,13 @@ public class BattleManager : MonoBehaviour
 
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                ProcessAttackSkill(skill, activeEffects, chaos, watched);
+                ProcessAttackSkill(skill, activeEffects, chaos);
                 break;
             case SkillType.DEFENSE:
-                ProcessDefensiveSkill(skill, chaos, watched);
+                ProcessDefensiveSkill(skill, chaos);
                 break;
             case SkillType.EFFECT:
-                ProcessEffectSkill(skill, chaos, watched);
+                ProcessEffectSkill(skill, chaos);
                 break;
         }
 
@@ -220,7 +220,9 @@ public class BattleManager : MonoBehaviour
                     // ?BLEED == POISON?
                     if (chefPhase == 2) {
                         // TODO: Is bleed = poison?
-                        playerStatus.ActivateEffect(new Effect(EffectId.POISON));
+                        Effect poisonEffect = new Effect(EffectId.POISON);
+                        poisonEffect.SetPoison(SkillAttribute.ANGRY, 5.0f);
+                        playerStatus.ActivateEffect(poisonEffect);
                     }
                     break;
                 case SkillAttribute.ANGRY:
@@ -235,31 +237,23 @@ public class BattleManager : MonoBehaviour
                     // WEAK the player for 2 turns (differ from weak in current effects)
                     if (chefPhase == 3) {
                         // TODO: Add negative effect for chef phase 3
+                        playerStatus.ActivateEffect(new Effect(EffectId.FRAGILE));
                     }
                     break;
                 default:
                     break;
             }
         }
+
+        // poison is processed at the end phase of player turn
+        Effect poison = playerStatus.GetEffect(EffectId.POISON);
+        if (poison.GetEffectId() != EffectId.NONE) {
+            Debug.Log("Player get poison damage by: " + poison.GetPoisonAmount());
+            playerStatus.TakeDamage(poison.GetPoisonAmount(), poison.GetPoisonAttribute());
+        }
     }
 
-    
-    // public void ProcessSkill(Skill skill) {
-    //     List<Effect> activeEffects = playerStatus.GetActiveEffects();
-    //     switch (skill.getSkillType()) {
-    //         case SkillType.ATTACK:
-    //             ProcessAttackSkill(skill, activeEffects);
-    //             break;
-    //         case SkillType.DEFENSE:
-    //             ProcessDefensiveSkill(skill);
-    //             break;
-    //         case SkillType.Effect:
-    //             ProcessEffectSkill(skill);
-    //             break;
-    //     }
-    // }
-
-    private void ProcessEffectSkill(Skill skill, bool chaos, bool watched)
+    private void ProcessEffectSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
@@ -296,7 +290,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void ProcessDefensiveSkill(Skill skill, bool chaos, bool watched)
+    private void ProcessDefensiveSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
@@ -329,10 +323,10 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos, bool watched)
+    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos)
     {
-        AttackSkill atkSkill = (AttackSkill)skill;
-        float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
+        AttackSkill attackSkill = (AttackSkill) skill;
+        float effectiveDamage = attackSkill.getAttackSkillDamage(playerStatus);
         foreach (Effect effect in activeEffects)
         {
             if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
@@ -340,7 +334,13 @@ public class BattleManager : MonoBehaviour
                 effectiveDamage += effect.GetBounusDamage();
             }
         }
+
+        if (activeEffects.Contains(new Effect(EffectId.FRAGILE))) {
+            effectiveDamage *= 0.8f;
+        }
+
         float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+
         foreach (Effect effect in activeEffects)
         {
             if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
@@ -389,6 +389,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void ProcessTaunted()
+    {
+        int index = 0;
+        foreach (Transform button in SkillButtons.transform) {
+            if (index != 1) {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+
+            index++;
+        }
+    }
+
     public void UnMute()
     {
         Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
@@ -418,6 +434,22 @@ public class BattleManager : MonoBehaviour
                 tempColor.a = 255.0f;
                 buttonSprite.color = tempColor;
             }
+        }
+    }
+
+    public void UnTaunted()
+    {
+        int index = 0;
+        foreach (Transform button in SkillButtons.transform) {
+            if (index != 1) {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+
+            index++;
         }
     }
     #endregion
@@ -477,7 +509,7 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        for(int i = 0; i<activeEffects.Count; i++)
+        for(int i = 0; i < activeEffects.Count; i++)
         {
             Transform effectTrans = playerEffectIconTransforms[i];
             if (!effectTrans.gameObject.activeSelf)

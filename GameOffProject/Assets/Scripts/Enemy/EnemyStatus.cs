@@ -35,15 +35,15 @@ public abstract class EnemyStatus: MonoBehaviour
         }
     }
 
-    public bool ActivateEffect(Effect Effect) {
+    public bool ActivateEffect(Effect effect) {
         
         for (int i = 0; i < Effects.Count; i++) {
-            if (Effects[i].GetEffectId() == Effect.GetEffectId()) {
+            if (Effects[i].GetEffectId() == effect.GetEffectId()) {
                 Effects[i].resetDuration();
                 return true;
             }
         }
-        Effects.Insert(0, Effect);
+        Effects.Add(effect);
         return false;
     }
 
@@ -76,6 +76,7 @@ public abstract class EnemyStatus: MonoBehaviour
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
+
         Debug.Log("Damage taken by enemy: " + effectiveDamage);
         return effectiveDamage * Random.Range(0.95f, 1.05f);
     }

@@ -6,13 +6,18 @@ using static Effect;
 public class Chef : EnemyStatus
 {
     private int chefPhase = 0;
-    private float skillRandom = 0.5f;
+    private float skillRandom = 0.6f;
+
+    private void Awake() {
+        MAX_HEALTH = 150.0f;
+        currentHealth = MAX_HEALTH;
+    }
     public override void MakeMove(PlayerStatus playerStatus) {
 
-        if (playerStatus.GetCurrentHealth() <= playerStatus.GetMaxHealth() * 0.6) {
-            skillRandom -= 0.05f;
+        if (playerStatus.GetCurrentHealth() <= playerStatus.GetMaxHealth() * 0.7) {
+            skillRandom -= 0.2f;
         } else {
-            skillRandom = 0.5f;
+            skillRandom = 0.6f;
         }
 
         switch (chefPhase) {
@@ -31,7 +36,6 @@ public class Chef : EnemyStatus
                         MixDamage(playerStatus);
                     } else {
                         TauntAttack(playerStatus);
-                        skillRandom += 0.2f;
                     }
                 }
                 break;
@@ -46,7 +50,6 @@ public class Chef : EnemyStatus
                         MixDamage(playerStatus);
                     } else {
                         HealReductionAttack(playerStatus);
-                        skillRandom += 0.2f;
                     }
                 }
                 break;
@@ -62,7 +65,6 @@ public class Chef : EnemyStatus
                         MixDamage(playerStatus);
                     } else {
                         TauntAttack(playerStatus);
-                        skillRandom += 0.2f;
                     }
                 }
                 break;
@@ -76,25 +78,37 @@ public class Chef : EnemyStatus
 
     private void Ultimate() {
         // chef animation/talk
+        Debug.Log("Enemy cast ultlimate");
+        Debug.Log("Current enemy phase: " + chefPhase);
         currentHealth = MAX_HEALTH;
     }
 
     private void MixDamage(PlayerStatus playerStatus) {
-        float damageAmount = 5.0f;
+        Debug.Log("Enemy cast mix damage");
+        Debug.Log("Current enemy phase: " + chefPhase);
+        float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
     }
 
     private void HealReductionAttack(PlayerStatus playerStatus) {
-        float damageAmount = 5.0f;
+        Debug.Log("Enemy cast heal reduction");
+        Debug.Log("Current enemy phase: " + chefPhase);
+        skillRandom += 0.3f;
+        float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.HEALREDUCTION));
     }
 
     private void TauntAttack(PlayerStatus playerStatus) {
-        float damageAmount = 5.0f;
+        Debug.Log("Enemy cast taunt");
+        Debug.Log("Current enemy phase: " + chefPhase);
+        skillRandom += 0.3f;
+        float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
-        playerStatus.ActivateEffect(new Effect(EffectId.TAUNTED));
+        if (!playerStatus.GetActiveEffects().Contains(new Effect(EffectId.SILENCED))) {
+            playerStatus.ActivateEffect(new Effect(EffectId.TAUNTED));
+        }
     }
 
 #endregion
