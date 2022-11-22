@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
             mCurState = State.Idle;
         }
         mCurState = State.Battle;
-        mPlayer.GetComponent<BattleManager>().SetBattleState(BattleManager.State.Battle);
+        battleManager.SetBattleState(BattleManager.State.Battle);
     }
 
     void UpdatePlayerHorizontalVelocity(){
@@ -215,7 +215,6 @@ public class PlayerMove : MonoBehaviour
         {
             cluesUI.SetActive(false);
         }
-        
     }
 
     public void OpenClues()
