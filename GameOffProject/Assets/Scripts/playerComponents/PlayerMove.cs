@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]float mPlayerSpeed = 3.0f;
     //true is right, false is left, start with left
     bool faceRight;
-    State mCurState = State.Idle;
+    [SerializeField]State mCurState = State.Idle;
 
 
     void Start()
@@ -206,6 +206,10 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateUseInventory()
     {
+        if (!inventoryUI.activeSelf)
+        {
+            mCurState = State.Idle;
+        }
         playerAnimator.Play("PlayerIdle");
     }
 
@@ -227,6 +231,10 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateuseClues()
     {
+        if (!cluesUI.activeSelf)
+        {
+            mCurState = State.Idle;
+        }
         playerAnimator.Play("PlayerIdle");
     }
     

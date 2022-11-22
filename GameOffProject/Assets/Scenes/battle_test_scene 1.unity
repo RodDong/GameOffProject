@@ -3678,13 +3678,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 1827840448, guid: 3b93a160ff1d68a40997ccd13d5b01bf, type: 3}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &462302280
@@ -7624,6 +7624,7 @@ MonoBehaviour:
   cluesButton: {fileID: 2093296659}
   battleManager: {fileID: 1271687760}
   mPlayerSpeed: 1.8
+  mCurState: 0
 --- !u!95 &1054226329
 Animator:
   serializedVersion: 4
@@ -8984,7 +8985,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 1834850490}
-  healthBar: {fileID: 126556769}
+  playerHealthBar: {fileID: 126556769}
+  enemyHealthBar: {fileID: 1416309276}
   gamObjectsInScene: {fileID: 1930688376}
   eyebrowUI: {fileID: 1979932132}
   eyeUI: {fileID: 1044526464}
@@ -10241,7 +10243,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1416309278}
   m_FillRect: {fileID: 462302278}
   m_HandleRect: {fileID: 0}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
