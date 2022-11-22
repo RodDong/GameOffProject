@@ -11,6 +11,11 @@ public abstract class EnemyStatus: MonoBehaviour
     public float GetCurrentHealth() {
         return currentHealth;
     }
+
+    public float GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;

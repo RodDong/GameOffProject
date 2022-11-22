@@ -9,6 +9,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEditor.Search;
+using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class BattleManager : MonoBehaviour
     GameObject player;
 
     [SerializeField] GameObject battleUI;
-    [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject playerHealthBar;
+    [SerializeField] GameObject enemyHealthBar;
     [SerializeField] GameObject gamObjectsInScene;
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
@@ -36,8 +38,6 @@ public class BattleManager : MonoBehaviour
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
     List<Transform> effectIconTransforms = new List<Transform>();
-
-    int UILayer;
 
     State mCurState;
     bool isInBattle = false;
@@ -65,10 +65,11 @@ public class BattleManager : MonoBehaviour
         if (enemyStatus == null) {
             Debug.LogWarning("No Enemy Object in Scene");
         }
-        UILayer = LayerMask.NameToLayer("EffectUI");
 
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
 
     }
 
@@ -121,6 +122,7 @@ public class BattleManager : MonoBehaviour
         // enable button interactions
         // adjust alpha of all buttons
         Debug.Log("Start Player Turn");
+        UpdatePlayerHealthBar();
     }
 
     void UpdatePlayerDeath()
@@ -130,9 +132,20 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
     }
 
-    void UpdateHealthBar()
+    void UpdatePlayerHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
+        float playerCurHealth = playerStatus.GetCurrentHealth();
+        float playerMaxHealth = playerStatus.GetMaxHealth();
+        playerHealthBar.GetComponentInChildren<Slider>().value = playerCurHealth / playerMaxHealth;
+        playerHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = playerCurHealth + " / " + playerMaxHealth;
+    }
+
+    void UpdateEnemyHealthBar()
+    {
+        float enemyCurHealth = enemyStatus.GetCurrentHealth();
+        float enemyMaxHealth = enemyStatus.GetMaxHealth();
+        enemyHealthBar.GetComponentInChildren<Slider>().value = enemyCurHealth / enemyMaxHealth;
+        enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = enemyCurHealth.ToString() + " / " + enemyMaxHealth.ToString();
     }
     void UpdateWin()
     {
@@ -340,6 +353,8 @@ public class BattleManager : MonoBehaviour
         {
             playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
         }
+
+        UpdateEnemyHealthBar();
     }
 
     public void ProcessMute()
