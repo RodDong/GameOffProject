@@ -34,10 +34,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject playerStatsUI;
     [SerializeField] GameObject MaskUI;
     [SerializeField] GameObject SkillButtons;
-    [SerializeField] GameObject StatusBar;
+    [SerializeField] GameObject PlayerStatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
-    List<Transform> effectIconTransforms = new List<Transform>();
+    List<Transform> playerEffectIconTransforms = new List<Transform>();
 
     State mCurState;
     bool isInBattle = false;
@@ -45,7 +45,7 @@ public class BattleManager : MonoBehaviour
     private Sprite buffIcon;
     private Sprite debuffIcon;
 
-    public List<Transform> GetEffectTransfroms() { return effectIconTransforms; }
+    public List<Transform> GetPlayerEffectTransfroms() { return playerEffectIconTransforms; }
     public void SetBattleState(State state) { mCurState = state; }
 
     // Start is called before the first frame update
@@ -81,7 +81,7 @@ public class BattleManager : MonoBehaviour
         // or based user input
 
         handleKeyboardInput();
-        UpdateStatusBar();
+        UpdatePlayerStatusBar();
     }
 
     void UpdatePreparation()
@@ -456,30 +456,30 @@ public class BattleManager : MonoBehaviour
         buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[1].text = EffectSkill.getPower().ToString();
     }
 
-    void UpdateStatusBar()
+    void UpdatePlayerStatusBar()
     {
         List<Effect> activeEffects = playerStatus.GetActiveEffects();
-        Transform[] childTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
+        Transform[] childTransforms = PlayerStatusBar.GetComponentsInChildren<Transform>(true);
         
         foreach(var child in childTransforms)
         {
             if (child.GetComponent<Image>())
             {
-                effectIconTransforms.Add(child);
+                playerEffectIconTransforms.Add(child);
             }
         }
 
         for (int i = 9; i >= activeEffects.Count; i--)
         {
-            if (effectIconTransforms[i].gameObject.activeSelf)
+            if (playerEffectIconTransforms[i].gameObject.activeSelf)
             {
-                effectIconTransforms[i].gameObject.SetActive(false);
+                playerEffectIconTransforms[i].gameObject.SetActive(false);
             }
         }
 
         for(int i = 0; i<activeEffects.Count; i++)
         {
-            Transform effectTrans = effectIconTransforms[i];
+            Transform effectTrans = playerEffectIconTransforms[i];
             if (!effectTrans.gameObject.activeSelf)
             {
                 effectTrans.gameObject.SetActive(true);
