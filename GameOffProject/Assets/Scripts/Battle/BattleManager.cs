@@ -9,6 +9,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEditor.Search;
+using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
@@ -67,6 +68,8 @@ public class BattleManager : MonoBehaviour
 
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
 
     }
 
@@ -131,12 +134,18 @@ public class BattleManager : MonoBehaviour
 
     void UpdatePlayerHealthBar()
     {
-        playerHealthBar.GetComponent<Slider>().value = playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
+        float playerCurHealth = playerStatus.GetCurrentHealth();
+        float playerMaxHealth = playerStatus.GetMaxHealth();
+        playerHealthBar.GetComponentInChildren<Slider>().value = playerCurHealth / playerMaxHealth;
+        playerHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = playerCurHealth + " / " + playerMaxHealth;
     }
 
     void UpdateEnemyHealthBar()
     {
-        enemyHealthBar.GetComponent<Slider>().value = enemyStatus.GetCurrentHealth() / enemyStatus.GetMaxHealth();
+        float enemyCurHealth = enemyStatus.GetCurrentHealth();
+        float enemyMaxHealth = enemyStatus.GetMaxHealth();
+        enemyHealthBar.GetComponentInChildren<Slider>().value = enemyCurHealth / enemyMaxHealth;
+        enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = enemyCurHealth.ToString() + " / " + enemyMaxHealth.ToString();
     }
     void UpdateWin()
     {
