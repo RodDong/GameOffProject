@@ -20,20 +20,7 @@ public class Doctor : EnemyStatus
 
         if (castOrder.Count != 0)
         {
-            int skillId = castOrder.Dequeue();
-            switch(skillId) {
-                case 0:
-                    Secondary(playerStatus);
-                    break;
-                case 1:
-                    DefReduceAttack(playerStatus);
-                    break;
-                case 2:
-                    AtkReduceAttack(playerStatus);
-                    break;
-                default:
-                    break;
-            }
+            UseSkill(castOrder.Dequeue(), playerStatus);
         } else {
             int roundsBeforeSed = Random.Range(3,4);
             bool hasReducedDef = false;
@@ -49,11 +36,28 @@ public class Doctor : EnemyStatus
                 }
             }
             castOrder.Enqueue(0);
+
+            UseSkill(castOrder.Dequeue(), playerStatus);
         }
 
         UltimateCd -= 1;
     }
 
+    private void UseSkill(int skillId, PlayerStatus playerStatus) {
+            switch(skillId) {
+                case 0:
+                    Secondary(playerStatus);
+                    break;
+                case 1:
+                    DefReduceAttack(playerStatus);
+                    break;
+                case 2:
+                    AtkReduceAttack(playerStatus);
+                    break;
+                default:
+                    break;
+            }
+    }
 
 #region doctor skills
 
