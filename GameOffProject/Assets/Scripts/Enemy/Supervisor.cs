@@ -5,7 +5,13 @@ using static Effect;
 
 public class Supervisor : EnemyStatus
 {
-    int ultimateCD = 0;
+    void Awake()
+    {
+        MAX_HEALTH = 150;
+        currentHealth = MAX_HEALTH;
+    }
+
+    int ultimateCD = 9;
     int fortifyCD = 5;
     // states
     public override void MakeMove(PlayerStatus playerStatus)
@@ -31,38 +37,36 @@ public class Supervisor : EnemyStatus
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
+        Debug.Log("Boss Supervisor Uses Ultimate");
+        float damageAmount = 50;
         Effect buff = new Effect(EffectId.BONUS_DAMAGE);
-        buff.SetBonusDamage(10);
+        buff.SetBounusDamage(50);
         ActivateEffect(buff);
-        DealDamage(playerStatus, 50, SkillAttribute.ANGRY);
+        damageAmount += buff.GetBounusDamage();
+        DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
     }
 
     private void Secondary(PlayerStatus playerStatus) {
+        Debug.Log("Boss Supervisor Uses Fortification");
         ActivateEffect(new Effect(EffectId.FORTIFIED));
     }
 
     private void AngryATK(PlayerStatus playerStatus) {
-        float damageAmount = 20;
-        Effect bonus = Effects.Find( b => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
-        if (bonus != null) {
-            damageAmount += bonus.GetBounusDamage();
-        }
+        Debug.Log("Boss Supervisor Uses Angry Attack");
+        float damageAmount = 30;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
-        Effect Effect = new Effect(EffectId.WEAK);
-        Effect.SetDefenseReduction(10, SkillAttribute.SAD);
-        playerStatus.ActivateEffect(new Effect(EffectId.WEAK));
+        Effect effect = new Effect(EffectId.WEAK);
+        effect.SetDefenseReduction(30, SkillAttribute.SAD);
+        playerStatus.ActivateEffect(effect);
     }
 
     private void SadATK(PlayerStatus playerStatus) {
-        float damageAmount = 20;
-        Effect bonus = Effects.Find( b => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
-        if (bonus != null) {
-            damageAmount += bonus.GetBounusDamage();
-        }
+        Debug.Log("Boss Supervisor Uses Sad Attack");
+        float damageAmount = 30;
         DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        Effect Effect = new Effect(EffectId.WEAK);
-        Effect.SetDefenseReduction(10, SkillAttribute.ANGRY);
-        playerStatus.ActivateEffect(new Effect(EffectId.WEAK));
+        Effect effect = new Effect(EffectId.WEAK);
+        effect.SetDefenseReduction(30, SkillAttribute.ANGRY);
+        playerStatus.ActivateEffect(effect);
     }
 
 }
