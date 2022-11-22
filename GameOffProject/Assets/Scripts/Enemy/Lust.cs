@@ -8,7 +8,7 @@ public class Lust : EnemyStatus
     float LUST_MAXHEALTH = 150.0f;
     Queue<int> castOrder = new Queue<int>();
 
-    public override void Awake() 
+    void Awake() 
     {
         currentHealth = LUST_MAXHEALTH;
     }
@@ -42,6 +42,7 @@ public class Lust : EnemyStatus
                 Ultimate(playerStatus);
                 break;
             default:
+                break;
         }
     }
 
