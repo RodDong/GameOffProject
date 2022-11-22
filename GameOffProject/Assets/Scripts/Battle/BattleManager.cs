@@ -93,22 +93,28 @@ public class BattleManager : MonoBehaviour
 
     void ProcessEnemyTurn()
     {
+        
         // end of player turn
         // process end of turn Effects/effects here
         if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
             float poisonDmg = 5.0f;
             playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
         }
-
+        Debug.Log("Ending Player Turn");
+        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
+        
+        Debug.Log("Start Enemy Turn");
         // delay xxx sec 
         // boss speak
         // delay 
         // boss use skill
         enemyStatus.MakeMove(playerStatus);
         // delay
-
+        Debug.Log("Ending Enemy Turn");
         //Enemy Standby Phase
-
+        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
         //Enemy Battle Phase
 
         //Enemy End Phase
@@ -117,6 +123,7 @@ public class BattleManager : MonoBehaviour
         // mCurState = State.PlayerTurn;
         // enable button interactions
         // adjust alpha of all buttons
+        Debug.Log("Start Player Turn");
     }
 
     void UpdatePlayerDeath()
@@ -128,7 +135,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / playerStatus.GetMaxHealth();
+        healthBar.GetComponent<Slider>().value = playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
     }
     void UpdateWin()
     {
@@ -145,7 +152,7 @@ public class BattleManager : MonoBehaviour
         // J K L for skills
     }
 
-    void UseSkill(int skillSlotNumber)
+    public void UseSkill(int skillSlotNumber)
     {
         switch (skillSlotNumber)
         {
@@ -258,7 +265,7 @@ public class BattleManager : MonoBehaviour
             case SkillAttribute.SAD:
                 playerStatus.ClearEffect();
                 enemyStatus.ClearEffect();
-
+                UpdateStatusBar();
                 break;
             case SkillAttribute.ANGRY:
                 Effect bounusDamage = new Effect(EffectId.BONUS_DAMAGE);
@@ -269,7 +276,6 @@ public class BattleManager : MonoBehaviour
                 // default Effect target = player, deEffect target = enemy
                 // TODO: blind for player and bonusDMG for enemy
                 if (chaos) {
-                    break;
                     enemyStatus.ActivateEffect(bounusDamage);
                     playerStatus.ActivateEffect(blind);
                 } else {
@@ -357,17 +363,17 @@ public class BattleManager : MonoBehaviour
     {
         AttackSkill atkSkill = (AttackSkill)skill;
         float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
-        foreach (Effect Effect in activeEffects)
+        foreach (Effect effect in activeEffects)
         {
-            if (Effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
+            if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
             {
-                effectiveDamage += Effect.GetBounusDamage();
+                effectiveDamage += effect.GetBounusDamage();
             }
         }
         float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-        foreach (Effect Effect in activeEffects)
+        foreach (Effect effect in activeEffects)
         {
-            if (Effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
+            if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
             {
                 // the denominator can be adjusted later depending on stats and life steal ratio
                 playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
@@ -653,7 +659,15 @@ public class BattleManager : MonoBehaviour
         {
             if (Item.Equals(equippedMouth, ownedMouths[i]))
             {
-                Mouth newMouth = ownedMouths[Mathf.Clamp(i + 1, 0, n - 1)];
+                Mouth newMouth;
+                if (i >= n - 1)
+                {
+                    newMouth = ownedMouths[0];
+                }
+                else
+                {
+                    newMouth = ownedMouths[Mathf.Clamp(i + 1, 0, n - 1)];
+                }
                 playerStatus.setEquippedMouth(newMouth);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(newMouth.getHighLightedImage());
