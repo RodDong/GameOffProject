@@ -36,66 +36,66 @@ public class PlayerStatus : MonoBehaviour
     // idx 1: defense skill
     // idx 2: Effect/deEffect skill
    
-    private List<Effect> Effects = new List<Effect>();
+    private List<Effect> effects = new List<Effect>();
     public List<Effect> GetActiveEffects() {
-        return Effects;
+        return effects;
     } 
 
     // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {
-        for (int i = Effects.Count - 1; i >= 0; i--) {
-            if (Effects[i].decreaseCounter()) {
-                if (Effects[i].GetEffectId() == EffectId.MUTE)
+        for (int i = effects.Count - 1; i >= 0; i--) {
+            if (effects[i].decreaseCounter()) {
+                if (effects[i].GetEffectId() == EffectId.MUTE)
                 {
                     battleManager.UnMute();
                 }
 
-                if (Effects[i].GetEffectId() == EffectId.SILENCED)
+                if (effects[i].GetEffectId() == EffectId.SILENCED)
                 {
                     battleManager.UnSlience();
                 }
 
-                if(Effects[i].GetEffectId() == EffectId.DISMEMBERED)
+                if(effects[i].GetEffectId() == EffectId.DISMEMBERED)
                 {
                     MAX_HEALTH = 120;
                 }
 
-                Effects.RemoveAt(i);
+                effects.RemoveAt(i);
             }
         }
     }
 
-    public bool ActivateEffect(Effect Effect) {
+    public bool ActivateEffect(Effect effect) {
         //play Effect animation here ??? 
-        for (int i = 0; i < Effects.Count; i++) {
-            if (Effects[i].GetEffectId() == Effect.GetEffectId()) {
-                Effects[i].resetDuration();
+        for (int i = 0; i < effects.Count; i++) {
+            if (effects[i].GetEffectId() == effect.GetEffectId()) {
+                effects[i].resetDuration();
                 return true;
             }
         }
 
-        if(Effect.GetEffectId() == EffectId.MUTE)
+        if(effect.GetEffectId() == EffectId.MUTE)
         {
             battleManager.ProcessMute();
         }
 
-        if (Effect.GetEffectId() == EffectId.SILENCED)
+        if (effect.GetEffectId() == EffectId.SILENCED)
         {
             battleManager.ProcessSilence();
         }
 
-        if (Effect.GetEffectId() == EffectId.DISMEMBERED)
+        if (effect.GetEffectId() == EffectId.DISMEMBERED)
         {
             MAX_HEALTH = 80;
             currentHealth /= 1.5f;
         }
 
-        Effects.Insert(0, Effect);
+        effects.Insert(0, effect);
         return false;
     }
 
     public void ClearEffect() {
-        Effects.Clear();
+        effects.Clear();
     }
 
     private List<Skill> skills;
@@ -154,12 +154,12 @@ public class PlayerStatus : MonoBehaviour
 
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
-        if (Effects.Contains(new Effect(EffectId.IMMUNE)) && attribute != SkillAttribute.NONE) {
+        if (effects.Contains(new Effect(EffectId.IMMUNE)) && attribute != SkillAttribute.NONE) {
             return 0;
         }
 
         // if break, deal true damage
-        if (Effects.Contains(new Effect(EffectId.BROKEN))) {
+        if (effects.Contains(new Effect(EffectId.BROKEN))) {
             currentHealth -= damage;
             if (currentHealth <= 0) {
                 currentHealth = 0;
@@ -177,7 +177,7 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void ProcessHealing(float healAmount) {
-        Effect healReductionEffect = Effects.Find(element => element.GetEffectId() == EffectId.HEALREDUCTION);
+        Effect healReductionEffect = effects.Find(element => element.GetEffectId() == EffectId.HEALREDUCTION);
         if (healReductionEffect != null) {
             healAmount *= 0.8f;
         }
@@ -191,13 +191,13 @@ public class PlayerStatus : MonoBehaviour
     public float getATKbyAttribute(SkillAttribute attribute) {
         float reduction = 0;
         
-        Effect reductionEffect = Effects.Find(element => element.GetEffectId() == EffectId.REDUCED);
+        Effect reductionEffect = effects.Find(element => element.GetEffectId() == EffectId.REDUCED);
         if (reductionEffect != null) {
             reduction = reductionEffect.GetAttackReduction(attribute);
         }
 
         float stolen = 0;
-        Effect stolenEffect = Effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
+        Effect stolenEffect = effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
         if (stolenEffect != null) {
             stolen = stolenEffect.GetStolenAmount(attribute);
         }
@@ -222,18 +222,18 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
-        if (Effects.Contains(new Effect(EffectId.BROKEN))) {
+        if (effects.Contains(new Effect(EffectId.BROKEN))) {
             return 0;
         } 
 
         float reduction = 0;
-        Effect reductionEffect = Effects.Find(element => element.GetEffectId() == EffectId.WEAK);
+        Effect reductionEffect = effects.Find(element => element.GetEffectId() == EffectId.WEAK);
         if (reductionEffect != null) {
             reduction = reductionEffect.GetDefenseReduction(attribute);
         }
 
         float stolen = 0;
-        Effect stolenEffect = Effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
+        Effect stolenEffect = effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
         if (stolenEffect != null) {
             stolen = stolenEffect.GetStolenAmount(attribute);
         }

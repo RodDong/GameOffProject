@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static BuffSkill;
 
 public class Mouth : Item
 {
@@ -63,6 +62,6 @@ public class Mouth : Item
                 selectedImage = imgRoot + "3MouthA_S";
                 break;
         }
-        skill = new BuffSkill(attribute);
+        skill = new EffectSkill(attribute);
     }
 }

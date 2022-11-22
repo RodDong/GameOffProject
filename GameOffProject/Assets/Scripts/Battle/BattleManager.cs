@@ -163,7 +163,7 @@ public class BattleManager : MonoBehaviour
                 ProcessSkill(playerStatus.getEquippedEyes().getSkill());
                 break;
             case 2: 
-                ProcessSkill(playerStatus.getEquippedEyeBrow().getSkill());
+                ProcessSkill(playerStatus.getEquippedMouth().getSkill());
                 break;
             default: return;
         }
@@ -265,7 +265,6 @@ public class BattleManager : MonoBehaviour
             case SkillAttribute.SAD:
                 playerStatus.ClearEffect();
                 enemyStatus.ClearEffect();
-                UpdateStatusBar();
                 break;
             case SkillAttribute.ANGRY:
                 Effect bounusDamage = new Effect(EffectId.BONUS_DAMAGE);
@@ -286,28 +285,6 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    // private void ProcessEffectSkill(Skill skill)
-    // {
-    //     switch (skill.GetSkillAttribute())
-    //     {
-    //         case SkillAttribute.HAPPY:
-    //             playerStatus.ActivateEffect(new Effect(Effect.EffectId.LIFE_STEAL));
-    //             break;
-    //         case SkillAttribute.SAD:
-    //             playerStatus.ClearEffect();
-    //             enemyStatus.ClearEffect();
-    //             break;
-    //         case SkillAttribute.ANGRY:
-    //             Effect bounusDamage = new Effect(Effect.EffectId.BONUS_DAMAGE);
-    //             float rand = Random.Range(0.0f, 1.0f);
-    //             bounusDamage.GenerateBounusDamage(playerStatus, rand);
-    //             playerStatus.ActivateEffect(bounusDamage);
-    //             Effect blind = new Effect(Effect.EffectId.BLIND);
-    //             blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-    //             enemyStatus.ActivateEffect(blind);
-    //             break;
-    //     }
-    // }
 
     private void ProcessDefensiveSkill(Skill skill, bool chaos, bool watched)
     {
@@ -342,23 +319,6 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    // private void ProcessDefensiveSkill(Skill skill)
-    // {
-    //     switch (skill.GetSkillAttribute())
-    //     {
-    //         case SkillAttribute.HAPPY:
-    //             playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
-    //             break;
-    //         case SkillAttribute.SAD:
-    //             playerStatus.ActivateEffect(new Effect(Effect.EffectId.IMMUNE));
-    //             playerStatus.TakeDamage(playerStatus.GetMaxHealth() / 4, SkillAttribute.NONE);
-    //             break;
-    //         case SkillAttribute.ANGRY:
-    //             playerStatus.ActivateEffect(new Effect(Effect.EffectId.REFLECT));
-    //             break;
-    //     }
-    // }
-
     private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos, bool watched)
     {
         AttackSkill atkSkill = (AttackSkill)skill;
@@ -384,31 +344,6 @@ public class BattleManager : MonoBehaviour
             playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
         }
     }
-
-    // private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects)
-    // {
-    //     AttackSkill atkSkill = (AttackSkill)skill;
-    //     float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
-    //     foreach (Effect Effect in activeEffects)
-    //     {
-    //         if (Effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
-    //         {
-    //             effectiveDamage += Effect.GetBounusDamage();
-    //         }
-    //     }
-    //     enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-    //     foreach (Effect Effect in activeEffects)
-    //     {
-    //         if (Effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
-    //         {
-    //             playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
-    //         }
-    //     }
-    //     if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
-    //     {
-    //         playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
-    //     }
-    // }
 
     public void ProcessMute()
     {
