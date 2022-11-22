@@ -5,12 +5,43 @@ using static Buff;
 
 public class Lust : EnemyStatus
 {
+    float LUST_MAXHEALTH = 150.0f;
+    Queue<int> castOrder = new Queue<int>();
+
+    public override void Awake() 
+    {
+        currentHealth = LUST_MAXHEALTH;
+    }
+
     public override void MakeMove(PlayerStatus playerStatus)
     {
         Queue<int> castOrder = new Queue<int>();
-        while (castOrder.Count != 0)
+        if (castOrder.Count == 0)
         {
-            int skillId = castOrder.Dequeue();
+            //insert random order of normal skills + 1 ult
+            int num_normalATKs = Random.Range(3,6);
+            for (int i = 0; i < num_normalATKs; i++)
+            {
+                castOrder.Enqueue(Random.Range(0, 3));
+            }
+            castOrder.Enqueue(3);
+        } 
+        int skillId = castOrder.Dequeue();
+        switch (skillId)
+        {
+            case 0:
+                HappyATK(playerStatus);
+                break;
+            case 1:
+                SadATK(playerStatus);
+                break;
+            case 2:
+                Secondary(playerStatus);
+                break;
+            case 3:
+                Ultimate(playerStatus);
+                break;
+            default:
         }
     }
 
