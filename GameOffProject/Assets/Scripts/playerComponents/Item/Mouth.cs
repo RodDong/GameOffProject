@@ -10,12 +10,12 @@ public class Mouth : Item
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 0f;
+                happyDEF = 0f;
+                sadATK = 0f;
+                sadDEF = 0f;
+                angryATK = 0f;
+                angryDEF = 0f;
                 displayName = "test mouth";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "3MouthDefault_N";
@@ -23,12 +23,12 @@ public class Mouth : Item
                 selectedImage = imgRoot + "3MouthDefault_S";
                 break;
             case SkillAttribute.HAPPY:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 30f;
+                happyDEF = 30f;
+                sadATK = 20f;
+                sadDEF = 20f;
+                angryATK = 20f;
+                angryDEF = 20f;
                 displayName = "test mouth happy";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "3MouthH_N";
@@ -36,12 +36,12 @@ public class Mouth : Item
                 selectedImage = imgRoot + "3MouthH_S";
                 break;
             case SkillAttribute.SAD:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 10f;
+                happyDEF = 10f;
+                sadATK = 10f;
+                sadDEF = 30f;
+                angryATK = 20f;
+                angryDEF = 10f;
                 displayName = "test mouth sad";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "3MouthS_N";
@@ -49,12 +49,12 @@ public class Mouth : Item
                 selectedImage = imgRoot + "3MouthS_S";
                 break;
             case SkillAttribute.ANGRY:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 30f;
+                happyDEF = 0f;
+                sadATK = 30f;
+                sadDEF = 0f;
+                angryATK = 30f;
+                angryDEF = 0f;
                 displayName = "test mouth angry";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "3MouthA_N";
