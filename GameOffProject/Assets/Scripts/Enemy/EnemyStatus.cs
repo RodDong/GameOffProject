@@ -7,6 +7,10 @@ public abstract class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float currentHealth;
+
+    public float GetCurrentHealth() {
+        return currentHealth;
+    }
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;
@@ -15,7 +19,7 @@ public abstract class EnemyStatus: MonoBehaviour
     protected float angryDEF;
     protected int hitsTakenCounter;
     protected int attackCounter;
-    protected List<Effect> Effects;
+    protected List<Effect> Effects = new List<Effect>();
 
     // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {
@@ -67,6 +71,7 @@ public abstract class EnemyStatus: MonoBehaviour
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
+        Debug.Log("Damage taken by enemy: " + effectiveDamage);
         return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
 
@@ -98,16 +103,20 @@ public abstract class EnemyStatus: MonoBehaviour
             fortifiedDEF += 100.0f;
         }
 
+        float baseDEF;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                return happyDEF + fortifiedDEF;
             case SkillAttribute.SAD:
-                return sadDEF;
+                return sadDEF + fortifiedDEF;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                return angryDEF + fortifiedDEF;
             default:
-                return 0.0f + fortifiedDEF;
+                baseDEF = 0.0f;
+                break;
         }
+
+        return baseDEF + fortifiedDEF;
     }
 
     public abstract void MakeMove(PlayerStatus playerStatus);

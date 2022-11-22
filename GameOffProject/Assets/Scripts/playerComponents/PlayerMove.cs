@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject inventoryUI, inventoryButton;
     [SerializeField] GameObject cluesUI, cluesButton;
+    [SerializeField] BattleManager battleManager;
     Animator playerAnimator;
 
     enum State{
@@ -99,6 +100,7 @@ public class PlayerMove : MonoBehaviour
             mCurState = State.Idle;
         }
         mCurState = State.Battle;
+        mPlayer.GetComponent<BattleManager>().SetBattleState(BattleManager.State.Battle);
     }
 
     void UpdatePlayerHorizontalVelocity(){
@@ -148,10 +150,10 @@ public class PlayerMove : MonoBehaviour
         if (mPlayerRigidBody.velocity != Vector2.zero){
             mCurState = State.Walk;
         }
-        if (inventoryUI.active)
+        if (inventoryUI.activeSelf)
         {
             mCurState = State.UseInventory;
-        }else if (cluesUI.active)
+        }else if (cluesUI.activeSelf)
         {
             mCurState = State.UseClues;
         }
@@ -164,11 +166,11 @@ public class PlayerMove : MonoBehaviour
         if (mPlayerRigidBody.velocity == Vector2.zero){
             mCurState = State.Idle;
         }
-        if (inventoryUI.active)
+        if (inventoryUI.activeSelf)
         {
             mCurState = State.UseInventory;
         }
-        else if (cluesUI.active)
+        else if (cluesUI.activeSelf)
         {
             mCurState = State.UseClues;
         }
@@ -197,29 +199,36 @@ public class PlayerMove : MonoBehaviour
         cluesButton.SetActive(false);
         battleUI.SetActive(true);
         transform.parent.gameObject.SetActive(false);
+        battleManager.UpdateEquippedMask();
+        battleManager.UpdateSkillButtons();
+        battleManager.UpdatePlayerStatVisual();
     }
 
     void UpdateUseInventory()
     {
         playerAnimator.Play("PlayerIdle");
-        cluesUI.SetActive(false);
-        cluesButton.SetActive(false);
-        if (!inventoryUI.active)
+    }
+
+    public void OpenInventory()
+    {
+        if (!inventoryUI.activeSelf)
         {
-            mCurState = State.Idle;
+            cluesUI.SetActive(false);
+        }
+        
+    }
+
+    public void OpenClues()
+    {
+        if (!cluesUI.activeSelf)
+        {
+            inventoryUI.SetActive(false);
         }
     }
 
     void UpdateuseClues()
     {
         playerAnimator.Play("PlayerIdle");
-        inventoryUI.SetActive(false);
-        inventoryButton.SetActive(false);
-        if (!cluesUI.active)
-        {
-            mCurState = State.Idle;
-        }
     }
-
     
 }

@@ -8,13 +8,16 @@ using static Eye;
 using static EyeBrow;
 using static Mouth;
 using static Skill;
-using static Buff;
+using static Effect;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public const float MAX_HEALTH = 120;
+    private float MAX_HEALTH = 120;
+    public float GetMaxHealth() { return MAX_HEALTH; }
     private float currentHealth;
-    public float getCurrentHealth() {
+    private BattleManager battleManager;
+    public void SetBattleManager(BattleManager bm) { battleManager = bm; }
+    public float GetCurrentHealth() {
         return currentHealth;
     } 
     private float happyATK;
@@ -25,43 +28,74 @@ public class PlayerStatus : MonoBehaviour
     private float angryDEF;
     
 
-    // a list of currently active BUFFs
-    // ? a list of currently active DeBUFFs? Maybe put this on enemy status
+    // a list of currently active Effects
+    // ? a list of currently active DeEffects? Maybe put this on enemy status
 
     // Current Skills: List of size 3?4
     // idx 0: attack skill
     // idx 1: defense skill
-    // idx 2: buff/debuff skill
+    // idx 2: Effect/deEffect skill
    
-    private List<Buff> buffs;
-    public List<Buff> GetActiveBuffs() {
-        return buffs;
+    private List<Effect> effects = new List<Effect>();
+    public List<Effect> GetActiveEffects() {
+        return effects;
     } 
 
-    // process round counters for buffs and debuffs
+    // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {
-        for (int i = buffs.Count - 1; i >= 0; i--) {
-            if (buffs[i].decreaseCounter()) {
-                buffs.RemoveAt(i);
+        for (int i = effects.Count - 1; i >= 0; i--) {
+            if (effects[i].decreaseCounter()) {
+                if (effects[i].GetEffectId() == EffectId.MUTE)
+                {
+                    battleManager.UnMute();
+                }
+
+                if (effects[i].GetEffectId() == EffectId.SILENCED)
+                {
+                    battleManager.UnSlience();
+                }
+
+                if(effects[i].GetEffectId() == EffectId.DISMEMBERED)
+                {
+                    MAX_HEALTH = 120;
+                }
+
+                effects.RemoveAt(i);
             }
         }
     }
 
-    public bool ActivateBuff(Buff buff) {
-        //play buff animation here ??? 
-
-        for (int i = 0; i < buffs.Count; i++) {
-            if (buffs[i].GetBuffId() == buff.GetBuffId()) {
-                buffs[i].resetDuration();
+    public bool ActivateEffect(Effect effect) {
+        //play Effect animation here ??? 
+        for (int i = 0; i < effects.Count; i++) {
+            if (effects[i].GetEffectId() == effect.GetEffectId()) {
+                effects[i].resetDuration();
                 return true;
             }
         }
-        buffs.Insert(0, buff);
+
+        if(effect.GetEffectId() == EffectId.MUTE)
+        {
+            battleManager.ProcessMute();
+        }
+
+        if (effect.GetEffectId() == EffectId.SILENCED)
+        {
+            battleManager.ProcessSilence();
+        }
+
+        if (effect.GetEffectId() == EffectId.DISMEMBERED)
+        {
+            MAX_HEALTH = 80;
+            currentHealth /= 1.5f;
+        }
+
+        effects.Insert(0, effect);
         return false;
     }
 
-    public void ClearBuff() {
-        buffs.Clear();
+    public void ClearEffect() {
+        effects.Clear();
     }
 
     private List<Skill> skills;
@@ -85,14 +119,25 @@ public class PlayerStatus : MonoBehaviour
         ownedEyebrows.Add(equippedEyebrow);
         ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
         ownedEyebrows.Add(new EyeBrow(SkillAttribute.SAD));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.ANGRY));
         ownedEyes.Add(equippedEyes);
+        ownedEyes.Add(new Eye(SkillAttribute.HAPPY));
+        ownedEyes.Add(new Eye(SkillAttribute.SAD));
+        ownedEyes.Add(new Eye(SkillAttribute.ANGRY));
         ownedMouth.Add(equippedMouth);
+        ownedMouth.Add(new Mouth(SkillAttribute.HAPPY));
+        ownedMouth.Add(new Mouth(SkillAttribute.SAD));
+        ownedMouth.Add(new Mouth(SkillAttribute.ANGRY));
+
         updateStatus();
 
         ownedClues.Add(new Clue(0));
         ownedClues.Add(new Clue(5));
         ownedClues.Add(new Clue(6));
         ownedClues.Add(new Clue(12));
+        // Effects.Add(new Effect(EffectId.BLIND));
+        // Effects.Add(new Effect(EffectId.POISON));
+        // Effects.Add(new Effect(EffectId.IMMUNE));
         // - for test purposes
     }
 
@@ -104,22 +149,39 @@ public class PlayerStatus : MonoBehaviour
         // initialize skills based on equipments.
     }
     
-    public float TakeDamage(float damage, SkillAttribute type) {
+    public float TakeDamage(float damage, SkillAttribute attribute) {
+        // TODO: animations
+
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
-        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && type != SkillAttribute.NONE) {
+        if (effects.Contains(new Effect(EffectId.IMMUNE)) && attribute != SkillAttribute.NONE) {
             return 0;
         }
+
+        // if break, deal true damage
+        if (effects.Contains(new Effect(EffectId.BROKEN))) {
+            currentHealth -= damage;
+            if (currentHealth <= 0) {
+                currentHealth = 0;
+            }
+            return damage;
+        }
         
-        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(type)));
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(attribute)));
         currentHealth -= effectiveDamage;
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
-        return effectiveDamage;
+        Debug.Log("Damage taken by player: " + effectiveDamage);
+        return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
 
     public void ProcessHealing(float healAmount) {
+        Effect healReductionEffect = effects.Find(element => element.GetEffectId() == EffectId.HEALREDUCTION);
+        if (healReductionEffect != null) {
+            healAmount *= 0.8f;
+        }
+
         currentHealth += healAmount;
         if (currentHealth > MAX_HEALTH) {
             currentHealth = MAX_HEALTH;
@@ -127,29 +189,72 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public float getATKbyAttribute(SkillAttribute attribute) {
+        float reduction = 0;
+        
+        Effect reductionEffect = effects.Find(element => element.GetEffectId() == EffectId.REDUCED);
+        if (reductionEffect != null) {
+            reduction = reductionEffect.GetAttackReduction(attribute);
+        }
+
+        float stolen = 0;
+        Effect stolenEffect = effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
+        if (stolenEffect != null) {
+            stolen = stolenEffect.GetStolenAmount(attribute);
+        }
+
+        float attributeFromItem;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyATK;
+                attributeFromItem = happyATK;
+                break;
             case SkillAttribute.SAD:
-                return sadATK;
+                attributeFromItem = sadATK;
+                break;
             case SkillAttribute.ANGRY:
-                return angryATK;
+                attributeFromItem = angryATK;
+                break;
             default:
-                return 0.0f;
+                attributeFromItem = 0.0f;
+                break;
         }
+
+        return attributeFromItem - reduction - stolen;
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
+        if (effects.Contains(new Effect(EffectId.BROKEN))) {
+            return 0;
+        } 
+
+        float reduction = 0;
+        Effect reductionEffect = effects.Find(element => element.GetEffectId() == EffectId.WEAK);
+        if (reductionEffect != null) {
+            reduction = reductionEffect.GetDefenseReduction(attribute);
+        }
+
+        float stolen = 0;
+        Effect stolenEffect = effects.Find(element => element.GetEffectId() == EffectId.STOLEN);
+        if (stolenEffect != null) {
+            stolen = stolenEffect.GetStolenAmount(attribute);
+        }
+
+        float attributeFromItem;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                attributeFromItem = happyDEF;
+                break;
             case SkillAttribute.SAD:
-                return sadDEF;
+                attributeFromItem = sadDEF;
+                break;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                attributeFromItem = angryDEF;
+                break;
             default:
-                return 0.0f;
+                attributeFromItem = 0.0f;
+                break;
         }
+
+        return attributeFromItem - reduction - stolen;
     }
 
     public void setHappyATK(float happyATK) {
@@ -192,16 +297,16 @@ public class PlayerStatus : MonoBehaviour
         return equippedMouth;
     }
 
-    public void setEquippedMouth(Mouth m) {
-        equippedMouth = m;
+    public void setEquippedMouth(Mouth equippedMouth) {
+        this.equippedMouth = equippedMouth;
     }
 
-    public void setEquippedEyeBrow(EyeBrow eb) {
-        equippedEyebrow = eb;
+    public void setEquippedEyeBrow(EyeBrow equippedEyebrow) {
+        this.equippedEyebrow = equippedEyebrow;
     }
 
-    public void setEquippedEyes(Eye e) {
-        equippedEyes = e;
+    public void setEquippedEyes(Eye equippedEyes) {
+        this.equippedEyes = equippedEyes;
     }
 
     public void addEyebrow(SkillAttribute attribute) {
@@ -230,12 +335,12 @@ public class PlayerStatus : MonoBehaviour
 
     public void updateStatus() {
 
-        //(TODO) UPDATE NEEDS TO CHECK BUFFS 
+        //(TODO) UPDATE NEEDS TO CHECK EffectS 
 
         setHappyATK(equippedEyebrow.getHappyATK() + equippedEyes.getHappyATK() + equippedMouth.getHappyATK());
         setHappyDEF(equippedEyebrow.getHappyDEF() + equippedEyes.getHappyDEF() + equippedMouth.getHappyDEF());
         setSadATK(equippedEyebrow.getSadATK() + equippedEyes.getSadATK() + equippedMouth.getSadATK());
-        setSadDEF(equippedEyes.getSadDEF() + equippedEyes.getSadDEF() + equippedMouth.getSadDEF());
+        setSadDEF(equippedEyebrow.getSadDEF() + equippedEyes.getSadDEF() + equippedMouth.getSadDEF());
         setAngryATK(equippedEyebrow.getAngryATK() + equippedEyes.getAngryATK() + equippedMouth.getAngryATK());
         setAngryDEF(equippedEyebrow.getAngryDEF() + equippedEyes.getAngryDEF() + equippedMouth.getAngryDEF());
 
@@ -244,7 +349,7 @@ public class PlayerStatus : MonoBehaviour
         newSkills.Add(equippedEyes.getSkill());
         // idx 1: defense skill
         newSkills.Add(equippedEyebrow.getSkill());
-        // idx 2: buff/debuff skill
+        // idx 2: Effect/deEffect skill
         newSkills.Add(equippedMouth.getSkill());
         setSkills(newSkills);
     }
