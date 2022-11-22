@@ -1,55 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Buff;
+using static Effect;
 
 public class Supervisor : EnemyStatus
 {
-    int mana = 0;
-    int mana2 = 0;
+    void Awake()
+    {
+        MAX_HEALTH = 150;
+        currentHealth = MAX_HEALTH;
+    }
+
+    int ultimateCD = 9;
+    int fortifyCD = 5;
     // states
     public override void MakeMove(PlayerStatus playerStatus)
     {
         // depending on state
-        if (mana == 50) {
-            mana = 0;
+        if (ultimateCD == 10) {
+            ultimateCD = 0;
             Ultimate(playerStatus);
-        } else if (mana2 == 6) {
+        } else if (fortifyCD == 5) {
+            fortifyCD = 0;
             Secondary(playerStatus);
         } else {
-            if (Random.Range(0f, 2f) < 1) {
+            float playerAngryDEF = playerStatus.getDEFbyAttribute(SkillAttribute.ANGRY);
+            float playerSadDEF = playerStatus.getDEFbyAttribute(SkillAttribute.SAD);
+            if (playerAngryDEF < playerSadDEF) {
                 AngryATK(playerStatus);
             } else {
                 SadATK(playerStatus);
             }
         }
-
-        mana++;
-        mana2++;
+        ultimateCD++;
+        fortifyCD++;
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
-
+        Debug.Log("Boss Supervisor Uses Ultimate");
+        float damageAmount = 50;
+        Effect buff = new Effect(EffectId.BONUS_DAMAGE);
+        buff.SetBounusDamage(50);
+        ActivateEffect(buff);
+        damageAmount += buff.GetBounusDamage();
+        DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
     }
 
     private void Secondary(PlayerStatus playerStatus) {
-
+        Debug.Log("Boss Supervisor Uses Fortification");
+        ActivateEffect(new Effect(EffectId.FORTIFIED));
     }
 
     private void AngryATK(PlayerStatus playerStatus) {
-        float damageAmount = 10;
+        Debug.Log("Boss Supervisor Uses Angry Attack");
+        float damageAmount = 30;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
-        playerStatus.ActivateBuff(new Buff(BuffId.WEAK));
+        Effect effect = new Effect(EffectId.WEAK);
+        effect.SetDefenseReduction(30, SkillAttribute.SAD);
+        playerStatus.ActivateEffect(effect);
     }
 
     private void SadATK(PlayerStatus playerStatus) {
-        float damageAmount = 10;
+        Debug.Log("Boss Supervisor Uses Sad Attack");
+        float damageAmount = 30;
         DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        playerStatus.ActivateBuff(new Buff(BuffId.WEAK));
+        Effect effect = new Effect(EffectId.WEAK);
+        effect.SetDefenseReduction(30, SkillAttribute.ANGRY);
+        playerStatus.ActivateEffect(effect);
     }
 
-    public override void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute)
-    {
-        base.DealDamage(playerStatus, damage, attribute);
-    }
 }

@@ -12,17 +12,17 @@ public class EyeBrow : Item
         
         switch (attribute) {
             case SkillAttribute.NONE:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 0;
+                happyDEF = 0;
+                sadATK = 0;
+                sadDEF = 0;
+                angryATK = 0;
+                angryDEF = 0;
                 displayName = "test eyebrow";
                 itemDescription = "test description";
-                imageSrc = imgRoot + "1EyebrowA_N";
-                highLightedImage = imgRoot + "1EyebrowA_H";
-                selectedImage = imgRoot + "1EyebrowA_S";
+                imageSrc = imgRoot + "1EyebrowDefault_N";
+                highLightedImage = imgRoot + "1EyebrowDefault_H";
+                selectedImage = imgRoot + "1EyebrowDefault_S";
                 break;
             case SkillAttribute.HAPPY:
                 happyATK = 150f;
@@ -41,7 +41,7 @@ public class EyeBrow : Item
                 happyATK = 50f;
                 happyDEF = 50f;
                 sadATK = 50f;
-                sadDEF = 50f;
+                sadDEF = 150f;
                 angryATK = 50f;
                 angryDEF = 50f;
                 displayName = "test eyebrow sad";
@@ -55,8 +55,8 @@ public class EyeBrow : Item
                 happyDEF = 50f;
                 sadATK = 50f;
                 sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                angryATK = 100f;
+                angryDEF = 100f;
                 displayName = "test eyebrow angry";
                 imageSrc = imgRoot + "1EyebrowA_N";
                 highLightedImage = imgRoot + "1EyebrowA_H";

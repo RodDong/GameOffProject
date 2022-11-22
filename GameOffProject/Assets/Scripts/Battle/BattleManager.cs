@@ -4,7 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Skill;
-using static Buff;
+using static Effect;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.EventSystems;
+using System.Linq;
+using UnityEditor.Search;
 
 public class BattleManager : MonoBehaviour
 {
@@ -26,17 +30,30 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
     [SerializeField] GameObject playerStatsUI;
+    [SerializeField] GameObject MaskUI;
+    [SerializeField] GameObject SkillButtons;
+    [SerializeField] GameObject StatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
+    List<Transform> effectIconTransforms = new List<Transform>();
+
+    int UILayer;
 
     State mCurState;
     bool isInBattle = false;
+
+    private Sprite buffIcon;
+    private Sprite debuffIcon;
+
     public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
     public bool GetIsInBattle() { return isInBattle; }
+    public List<Transform> GetEffectTransfroms() { return effectIconTransforms; }
+
 
     // Start is called before the first frame update
     void Start()
     {
+
         mCurState = State.Preparation;
         battleUI.SetActive(false);
 
@@ -44,38 +61,29 @@ public class BattleManager : MonoBehaviour
 
         // initialize player status
         playerStatus = player.GetComponent<PlayerStatus>();
+        playerStatus.SetBattleManager(this);
 
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
         if (enemyStatus == null) {
             Debug.LogWarning("No Enemy Object in Scene");
         }
+        UILayer = LayerMask.NameToLayer("EffectUI");
 
-        // mask UI
-
+        buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
+        debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
 
     }
 
     void Update()
     {
-        if (mCurState == State.Preparation) { return; }
+        //if (mCurState == State.Preparation) { return; }
         // nothing to do here.
         // all state transition is either instantanious or based on timer
         // or based user input
 
-
         handleKeyboardInput();
-        if (battleUI.activeSelf)
-        {
-            updatePlayerStatVisual();
-            EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
-            Eye equippedEyes = playerStatus.getEquippedEyes();
-            Mouth equippedMouth = playerStatus.getEquippedMouth();
-            eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getHighLightedImage());
-            eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
-            mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
-        }
-
+        UpdateStatusBar();
     }
 
     void UpdatePreparation()
@@ -85,22 +93,28 @@ public class BattleManager : MonoBehaviour
 
     void ProcessEnemyTurn()
     {
+        
         // end of player turn
-        // process end of turn buffs/effects here
-        if (playerStatus.GetActiveBuffs().Contains(new Buff(BuffId.POISON))) {
+        // process end of turn Effects/effects here
+        if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
             float poisonDmg = 5.0f;
             playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
         }
-
+        Debug.Log("Ending Player Turn");
+        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
+        
+        Debug.Log("Start Enemy Turn");
         // delay xxx sec 
         // boss speak
         // delay 
         // boss use skill
         enemyStatus.MakeMove(playerStatus);
         // delay
-
+        Debug.Log("Ending Enemy Turn");
         //Enemy Standby Phase
-
+        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
         //Enemy Battle Phase
 
         //Enemy End Phase
@@ -109,6 +123,7 @@ public class BattleManager : MonoBehaviour
         // mCurState = State.PlayerTurn;
         // enable button interactions
         // adjust alpha of all buttons
+        Debug.Log("Start Player Turn");
     }
 
     void UpdatePlayerDeath()
@@ -120,7 +135,7 @@ public class BattleManager : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = playerStatus.getCurrentHealth() / PlayerStatus.MAX_HEALTH;
+        healthBar.GetComponent<Slider>().value = playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
     }
     void UpdateWin()
     {
@@ -137,7 +152,7 @@ public class BattleManager : MonoBehaviour
         // J K L for skills
     }
 
-    void UseSkill(int skillSlotNumber)
+    public void UseSkill(int skillSlotNumber)
     {
         switch (skillSlotNumber)
         {
@@ -148,7 +163,7 @@ public class BattleManager : MonoBehaviour
                 ProcessSkill(playerStatus.getEquippedEyes().getSkill());
                 break;
             case 2: 
-                ProcessSkill(playerStatus.getEquippedEyeBrow().getSkill());
+                ProcessSkill(playerStatus.getEquippedMouth().getSkill());
                 break;
             default: return;
         }
@@ -165,102 +180,113 @@ public class BattleManager : MonoBehaviour
     #region Process Skills
 
     public void ProcessSkill(Skill skill) {
-        List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
+        List<Effect> activeEffects = playerStatus.GetActiveEffects();
 
         // Chaos changes target 
-        bool chaos = false;
-        if (activeBuffs.Contains(new Buff(BuffId.CHAOS))) {
-            chaos = true;
-        }
+        bool chaos = activeEffects.Contains(new Effect(EffectId.CHAOS));
+
+        // Watched gives negative effects
+        bool watched = activeEffects.Contains(new Effect(EffectId.WATCHED));
 
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                ProcessAttackSkill(skill, activeBuffs, chaos);
+                ProcessAttackSkill(skill, activeEffects, chaos, watched);
                 break;
             case SkillType.DEFENSE:
-                ProcessDefensiveSkill(skill, chaos);
+                ProcessDefensiveSkill(skill, chaos, watched);
                 break;
-            case SkillType.BUFF:
-                ProcessEffectSkill(skill, chaos);
+            case SkillType.EFFECT:
+                ProcessEffectSkill(skill, chaos, watched);
                 break;
+        }
+
+        // if player has watched effect, enemy must be chef, cast always success
+        if (watched) {
+            int chefPhase = ((Chef) enemyStatus).getChefPhase();
+            switch (skill.GetSkillAttribute()) {
+                case SkillAttribute.HAPPY:
+                    // if chef phase is 2 (main dish) and player uses happy skill
+                    // bleed the player for 3 turn
+                    // ?BLEED == POISON?
+                    if (chefPhase == 2) {
+                        // TODO: Is bleed = poison?
+                        playerStatus.ActivateEffect(new Effect(EffectId.POISON));
+                    }
+                    break;
+                case SkillAttribute.ANGRY:
+                    // if chef phase is 1 (appetizer) and player uses angry skill
+                    // silence the player for 1 turn
+                    if (chefPhase == 1) {
+                        playerStatus.ActivateEffect(new Effect(EffectId.SILENCED));
+                    }
+                    break;
+                case SkillAttribute.SAD:
+                    // if chef phase is 3 (dessert) and player uses sad skill
+                    // WEAK the player for 2 turns (differ from weak in current effects)
+                    if (chefPhase == 3) {
+                        // TODO: Add negative effect for chef phase 3
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     
     // public void ProcessSkill(Skill skill) {
-    //     List<Buff> activeBuffs = playerStatus.GetActiveBuffs();
+    //     List<Effect> activeEffects = playerStatus.GetActiveEffects();
     //     switch (skill.getSkillType()) {
     //         case SkillType.ATTACK:
-    //             ProcessAttackSkill(skill, activeBuffs);
+    //             ProcessAttackSkill(skill, activeEffects);
     //             break;
     //         case SkillType.DEFENSE:
     //             ProcessDefensiveSkill(skill);
     //             break;
-    //         case SkillType.BUFF:
+    //         case SkillType.Effect:
     //             ProcessEffectSkill(skill);
     //             break;
     //     }
     // }
 
-    private void ProcessEffectSkill(Skill skill, bool chaos)
+    private void ProcessEffectSkill(Skill skill, bool chaos, bool watched)
     {
         switch (skill.GetSkillAttribute())
         {
             case SkillAttribute.HAPPY:
                 // default target = player
                 if (chaos) {
-                    enemyStatus.ActivateBuff(new Buff(BuffId.LIFE_STEAL));
+                    enemyStatus.ActivateEffect(new Effect(EffectId.LIFE_STEAL));
                 } else {
-                    playerStatus.ActivateBuff(new Buff(BuffId.LIFE_STEAL));
+                    playerStatus.ActivateEffect(new Effect(EffectId.LIFE_STEAL));
                 }
+
                 break;
             case SkillAttribute.SAD:
-                playerStatus.ClearBuff();
-                enemyStatus.ClearBuff();
+                playerStatus.ClearEffect();
+                enemyStatus.ClearEffect();
                 break;
             case SkillAttribute.ANGRY:
-                Buff bounusDamage = new Buff(BuffId.BONUS_DAMAGE);
+                Effect bounusDamage = new Effect(EffectId.BONUS_DAMAGE);
                 float rand = Random.Range(0.0f, 1.0f);
                 bounusDamage.GenerateBounusDamage(playerStatus, rand);
-                Buff blind = new Buff(Buff.BuffId.BLIND);
+                Effect blind = new Effect(Effect.EffectId.BLIND);
                 blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-                // default buff target = player, debuff target = enemy
+                // default Effect target = player, deEffect target = enemy
                 // TODO: blind for player and bonusDMG for enemy
                 if (chaos) {
-                    break;
-                    enemyStatus.ActivateBuff(bounusDamage);
-                    playerStatus.ActivateBuff(blind);
+                    enemyStatus.ActivateEffect(bounusDamage);
+                    playerStatus.ActivateEffect(blind);
                 } else {
-                    playerStatus.ActivateBuff(bounusDamage);
-                    enemyStatus.ActivateBuff(blind);
+                    playerStatus.ActivateEffect(bounusDamage);
+                    enemyStatus.ActivateEffect(blind);
                 }
+
                 break;
         }
     }
-    // private void ProcessEffectSkill(Skill skill)
-    // {
-    //     switch (skill.GetSkillAttribute())
-    //     {
-    //         case SkillAttribute.HAPPY:
-    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.LIFE_STEAL));
-    //             break;
-    //         case SkillAttribute.SAD:
-    //             playerStatus.ClearBuff();
-    //             enemyStatus.ClearBuff();
-    //             break;
-    //         case SkillAttribute.ANGRY:
-    //             Buff bounusDamage = new Buff(Buff.BuffId.BONUS_DAMAGE);
-    //             float rand = Random.Range(0.0f, 1.0f);
-    //             bounusDamage.GenerateBounusDamage(playerStatus, rand);
-    //             playerStatus.ActivateBuff(bounusDamage);
-    //             Buff blind = new Buff(Buff.BuffId.BLIND);
-    //             blind.GenerateBlindPercentage(playerStatus, 1 - rand);
-    //             enemyStatus.ActivateBuff(blind);
-    //             break;
-    //     }
-    // }
 
-    private void ProcessDefensiveSkill(Skill skill, bool chaos)
+    private void ProcessDefensiveSkill(Skill skill, bool chaos, bool watched)
     {
         switch (skill.GetSkillAttribute())
         {
@@ -272,58 +298,42 @@ public class BattleManager : MonoBehaviour
                 } else {
                     playerStatus.ProcessHealing(healAmount);
                 }
+                
                 break;
             case SkillAttribute.SAD:
-                playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
+                playerStatus.TakeDamage(playerStatus.GetMaxHealth() / 4, SkillAttribute.NONE);
                 // default target = player
                 if (chaos) {
-                    enemyStatus.ActivateBuff(new Buff(BuffId.IMMUNE));
+                    enemyStatus.ActivateEffect(new Effect(EffectId.IMMUNE));
                 } else {
-                    playerStatus.ActivateBuff(new Buff(BuffId.IMMUNE));
+                    playerStatus.ActivateEffect(new Effect(EffectId.IMMUNE));
                 }
                 break;
             case SkillAttribute.ANGRY:
                 // default target = player
                 if (chaos) {
-                    enemyStatus.ActivateBuff(new Buff(BuffId.REFLECT));
+                    enemyStatus.ActivateEffect(new Effect(EffectId.REFLECT));
                 } else {
-                    playerStatus.ActivateBuff(new Buff(BuffId.REFLECT));
+                    playerStatus.ActivateEffect(new Effect(EffectId.REFLECT));
                 }
                 break;
         }
     }
-    // private void ProcessDefensiveSkill(Skill skill)
-    // {
-    //     switch (skill.GetSkillAttribute())
-    //     {
-    //         case SkillAttribute.HAPPY:
-    //             playerStatus.ProcessHealing(((DefenseSkill)skill).getHealAmount(playerStatus));
-    //             break;
-    //         case SkillAttribute.SAD:
-    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.IMMUNE));
-    //             playerStatus.TakeDamage(PlayerStatus.MAX_HEALTH / 4, SkillAttribute.NONE);
-    //             break;
-    //         case SkillAttribute.ANGRY:
-    //             playerStatus.ActivateBuff(new Buff(Buff.BuffId.REFLECT));
-    //             break;
-    //     }
-    // }
-
-    private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs, bool chaos)
+    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos, bool watched)
     {
         AttackSkill atkSkill = (AttackSkill)skill;
         float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
-        foreach (Buff buff in activeBuffs)
+        foreach (Effect effect in activeEffects)
         {
-            if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE)
+            if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
             {
-                effectiveDamage += buff.GetBounusDamage();
+                effectiveDamage += effect.GetBounusDamage();
             }
         }
         float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-        foreach (Buff buff in activeBuffs)
+        foreach (Effect effect in activeEffects)
         {
-            if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL)
+            if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
             {
                 // the denominator can be adjusted later depending on stats and life steal ratio
                 playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
@@ -334,33 +344,145 @@ public class BattleManager : MonoBehaviour
             playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
         }
     }
-    // private void ProcessAttackSkill(Skill skill, List<Buff> activeBuffs)
-    // {
-    //     AttackSkill atkSkill = (AttackSkill)skill;
-    //     float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
-    //     foreach (Buff buff in activeBuffs)
-    //     {
-    //         if (buff.GetBuffId() == Buff.BuffId.BONUS_DAMAGE)
-    //         {
-    //             effectiveDamage += buff.GetBounusDamage();
-    //         }
-    //     }
-    //     enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-    //     foreach (Buff buff in activeBuffs)
-    //     {
-    //         if (buff.GetBuffId() == Buff.BuffId.LIFE_STEAL)
-    //         {
-    //             playerStatus.ProcessHealing(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * effectiveDamage);
-    //         }
-    //     }
-    //     if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
-    //     {
-    //         playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
-    //     }
-    // }
+
+    public void ProcessMute()
+    {
+        Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 0.1f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    public void ProcessSilence()
+    {
+        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 0.1f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    public void UnMute()
+    {
+        Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    public void UnSlience()
+    {
+        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
     #endregion
 
     #region Update Equipment UI
+
+    public void UpdateEquippedMask()
+    {
+        EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Eye equippedEyes = playerStatus.getEquippedEyes();
+        Mouth equippedMouth = playerStatus.getEquippedMouth();
+        eyebrowUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getHighLightedImage());
+        eyeUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getHighLightedImage());
+        mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getHighLightedImage());
+    }
+
+    public void UpdateSkillButtons()
+    {
+        EyeBrow equippedEyebrow = playerStatus.getEquippedEyeBrow();
+        Eye equippedEyes = playerStatus.getEquippedEyes();
+        Mouth equippedMouth = playerStatus.getEquippedMouth();
+        Button[] buttons = SkillButtons.GetComponentsInChildren<Button>();
+        Skill DefenseSkill = equippedEyebrow.getSkill();
+        Skill AttackSkill = equippedEyes.getSkill();
+        Skill EffectSkill = equippedMouth.getSkill();
+
+
+        buttons[0].GetComponent<Image>().sprite = Resources.Load<Sprite>(DefenseSkill.getSkillImage());
+        buttons[0].GetComponentsInChildren<TextMeshProUGUI>()[0].text = DefenseSkill.getDisplayName();
+        buttons[0].GetComponentsInChildren<TextMeshProUGUI>()[1].text = DefenseSkill.getPower().ToString();
+        buttons[1].GetComponent<Image>().sprite = Resources.Load<Sprite>(AttackSkill.getSkillImage());
+        buttons[1].GetComponentsInChildren<TextMeshProUGUI>()[0].text = AttackSkill.getDisplayName();
+        buttons[1].GetComponentsInChildren<TextMeshProUGUI>()[1].text = AttackSkill.getPower().ToString();
+        buttons[2].GetComponent<Image>().sprite = Resources.Load<Sprite>(EffectSkill.getSkillImage());
+        buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[0].text = EffectSkill.getDisplayName();
+        buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[1].text = EffectSkill.getPower().ToString();
+    }
+
+    void UpdateStatusBar()
+    {
+        List<Effect> activeEffects = playerStatus.GetActiveEffects();
+        Transform[] childTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
+        
+        foreach(var child in childTransforms)
+        {
+            if (child.GetComponent<Image>())
+            {
+                effectIconTransforms.Add(child);
+            }
+        }
+
+        for (int i = 9; i >= activeEffects.Count; i--)
+        {
+            if (effectIconTransforms[i].gameObject.activeSelf)
+            {
+                effectIconTransforms[i].gameObject.SetActive(false);
+            }
+        }
+
+        for(int i = 0; i<activeEffects.Count; i++)
+        {
+            Transform effectTrans = effectIconTransforms[i];
+            if (!effectTrans.gameObject.activeSelf)
+            {
+                effectTrans.gameObject.SetActive(true);
+            }
+            if (activeEffects[i].isBuff())
+            {
+                effectTrans.GetComponent<Image>().sprite = buffIcon;
+            }
+            else
+            {
+                effectTrans.GetComponent<Image>().sprite = debuffIcon;
+            }
+        }
+    }
+
     public void rightUpdateEyebrow()
     {
         List<EyeBrow> ownedEyebrows = playerStatus.getOwnedEyeBrows();
@@ -472,7 +594,15 @@ public class BattleManager : MonoBehaviour
         {
             if (Item.Equals(equippedMouth, ownedMouths[i]))
             {
-                Mouth newMouth = ownedMouths[Mathf.Clamp(i + 1, 0, n - 1)];
+                Mouth newMouth;
+                if (i >= n - 1)
+                {
+                    newMouth = ownedMouths[0];
+                }
+                else
+                {
+                    newMouth = ownedMouths[Mathf.Clamp(i + 1, 0, n - 1)];
+                }
                 playerStatus.setEquippedMouth(newMouth);
                 playerStatus.updateStatus();
                 mouthUI.GetComponent<Image>().sprite = Resources.Load<Sprite>(newMouth.getHighLightedImage());
@@ -506,9 +636,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void updatePlayerStatVisual()
+    public void UpdatePlayerStatVisual()
     {
-        //update buff visuals
+        //update Effect visuals
 
         string happyStat = "HappyATK: " + playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) + "\n" 
         + "HappyDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY) + "\n";

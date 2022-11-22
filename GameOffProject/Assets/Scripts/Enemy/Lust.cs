@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Buff;
+using static Effect;
 
 public class Lust : EnemyStatus
 {
@@ -46,7 +46,7 @@ public class Lust : EnemyStatus
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
-        playerStatus.ActivateBuff(new Buff(BuffId.BROKEN));
+        playerStatus.ActivateEffect(new Effect(EffectId.BROKEN));
         //TODO: change equipped to sad ????
     }
 
@@ -54,7 +54,7 @@ public class Lust : EnemyStatus
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         //TODO: CHAOS in BattleManager.processSkill
-        //playerStatus.ActivateBuff(new Buff(BuffId.CHAOS));
+        //playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
     }
 
     private void HappyATK(PlayerStatus playerStatus) {
@@ -65,6 +65,6 @@ public class Lust : EnemyStatus
     private void SadATK(PlayerStatus playerStatus) {
         // float damageAmount = 10;
         // DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        playerStatus.ActivateBuff(new Buff(BuffId.POISON));
+        playerStatus.ActivateEffect(new Effect(EffectId.POISON));
     }
 }

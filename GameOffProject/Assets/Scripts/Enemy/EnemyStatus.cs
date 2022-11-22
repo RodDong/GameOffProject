@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Buff;
+using static Effect;
 
 public abstract class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
     protected float currentHealth;
+
+    public float GetCurrentHealth() {
+        return currentHealth;
+    }
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;
@@ -15,31 +19,31 @@ public abstract class EnemyStatus: MonoBehaviour
     protected float angryDEF;
     protected int hitsTakenCounter;
     protected int attackCounter;
-    protected List<Buff> buffs;
+    protected List<Effect> Effects = new List<Effect>();
 
-    // process round counters for buffs and debuffs
+    // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {
-        for (int i = buffs.Count - 1; i >= 0; i--) {
-            if (buffs[i].decreaseCounter()) {
-                buffs.RemoveAt(i);
+        for (int i = Effects.Count - 1; i >= 0; i--) {
+            if (Effects[i].decreaseCounter()) {
+                Effects.RemoveAt(i);
             }
         }
     }
 
-    public bool ActivateBuff(Buff buff) {
+    public bool ActivateEffect(Effect Effect) {
         
-        for (int i = 0; i < buffs.Count; i++) {
-            if (buffs[i].GetBuffId() == buff.GetBuffId()) {
-                buffs[i].resetDuration();
+        for (int i = 0; i < Effects.Count; i++) {
+            if (Effects[i].GetEffectId() == Effect.GetEffectId()) {
+                Effects[i].resetDuration();
                 return true;
             }
         }
-        buffs.Insert(0, buff);
+        Effects.Insert(0, Effect);
         return false;
     }
 
-    public void ClearBuff() {
-        buffs.Clear();
+    public void ClearEffect() {
+        Effects.Clear();
     }
 
     private void Awake() {
@@ -58,7 +62,7 @@ public abstract class EnemyStatus: MonoBehaviour
      public virtual float TakeDamage(float damage, SkillAttribute attribute) {
         // if immune, takes no damage, 
         // unless attribute is NONE, which means it is the effect of using immune
-        if (buffs.Contains(new Buff(Buff.BuffId.IMMUNE)) && attribute != SkillAttribute.NONE) {
+        if (Effects.Contains(new Effect(Effect.EffectId.IMMUNE)) && attribute != SkillAttribute.NONE) {
             return 0;
         }
         
@@ -67,7 +71,8 @@ public abstract class EnemyStatus: MonoBehaviour
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
-        return effectiveDamage;
+        Debug.Log("Damage taken by enemy: " + effectiveDamage);
+        return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
 
     public void ProcessHealing(float healAmount) {
@@ -93,41 +98,45 @@ public abstract class EnemyStatus: MonoBehaviour
     public float getDEFbyAttribute(SkillAttribute attribute) {
         
         float fortifiedDEF = 0; 
-        if (buffs.Contains(new Buff(BuffId.FORTIFIED))) {
+        if (Effects.Contains(new Effect(EffectId.FORTIFIED))) {
             // temp value for testing
             fortifiedDEF += 100.0f;
         }
 
+        float baseDEF;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                return happyDEF + fortifiedDEF;
             case SkillAttribute.SAD:
-                return sadDEF;
+                return sadDEF + fortifiedDEF;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                return angryDEF + fortifiedDEF;
             default:
-                return 0.0f + fortifiedDEF;
+                baseDEF = 0.0f;
+                break;
         }
+
+        return baseDEF + fortifiedDEF;
     }
 
     public abstract void MakeMove(PlayerStatus playerStatus);
 
     public virtual void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
-        Buff blind = buffs.Find((Buff b) => { return b.GetBuffId() == BuffId.BLIND; });
+        Effect blind = Effects.Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             return; // MISS
         }
         float dealtDamage = playerStatus.TakeDamage(damage, attribute);
         // if has lifesteal by effect of chaos, heal percentage is based on player stats
-        foreach (Buff buff in buffs)
+        foreach (Effect Effect in Effects)
         {
-            if (buff.GetBuffId() == BuffId.LIFE_STEAL)
+            if (Effect.GetEffectId() == EffectId.LIFE_STEAL)
             {
                 // the denominator can be adjusted later depending on stats and life steal ratio
                 ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
             }
         }
-        if (playerStatus.GetActiveBuffs().Contains(new Buff(BuffId.REFLECT))){
+        if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.REFLECT))){
             TakeDamage(damage, attribute);
         }
     }
