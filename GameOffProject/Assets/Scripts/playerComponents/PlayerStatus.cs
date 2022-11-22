@@ -55,6 +55,10 @@ public class PlayerStatus : MonoBehaviour
                     battleManager.UnSlience();
                 }
 
+                if (effects[i].GetEffectId() == EffectId.TAUNTED) {
+                    battleManager.UnTaunted();
+                }
+
                 if(effects[i].GetEffectId() == EffectId.DISMEMBERED)
                 {
                     MAX_HEALTH = 120;
@@ -84,13 +88,18 @@ public class PlayerStatus : MonoBehaviour
             battleManager.ProcessSilence();
         }
 
+        if (effect.GetEffectId() == EffectId.TAUNTED)
+        {
+            battleManager.ProcessTaunted();
+        }
+
         if (effect.GetEffectId() == EffectId.DISMEMBERED)
         {
             MAX_HEALTH = 80;
             currentHealth /= 1.5f;
         }
 
-        effects.Insert(0, effect);
+        effects.Add(effect);
         return false;
     }
 
@@ -172,6 +181,11 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
+
+        if (GetActiveEffects().Contains(new Effect(EffectId.FRAGILE))) {
+            effectiveDamage *= 1.2f;
+        }
+
         Debug.Log("Damage taken by player: " + effectiveDamage);
         return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
@@ -331,6 +345,15 @@ public class PlayerStatus : MonoBehaviour
 
     public List<Mouth> getOwnedMouths() {
         return ownedMouth;
+    }
+
+    public Effect GetEffect(EffectId id) {
+        foreach (Effect effect in effects) {
+            if (effect.GetEffectId() == id) {
+                return effect;
+            }
+        }
+        return new Effect(EffectId.NONE);
     }
 
     public void updateStatus() {

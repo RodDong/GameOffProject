@@ -6,7 +6,7 @@ public class Effect
 {
     public enum EffectId
     {
-        TEST_EFFECT_1,
+        NONE,
         IMMUNE, // Ignore all incoming damage
         REFLECT, // When taking damage, deal same damage to source
         BONUS_DAMAGE, // Attack deals additional damage
@@ -25,6 +25,7 @@ public class Effect
         STOLEN, // Player reduce attribute, increase enemy attribute
         HEALREDUCTION, // Player reduce heal amount
         TAUNTED, // Player can only use attack skill
+        FRAGILE, // Final damage dealt (enemy damage intake) -20%, final damage intake +20%
     }
 
     private EffectId id;
@@ -71,6 +72,7 @@ public class Effect
             case EffectId.STOLEN: duration = 3; break;
             case EffectId.HEALREDUCTION: duration = 3; break;
             case EffectId.TAUNTED: duration = 2; break;
+            case EffectId.FRAGILE: duration = 4; break;
             default: break;
         }
     }
@@ -109,6 +111,7 @@ public class Effect
             case EffectId.STOLEN: return false;
             case EffectId.HEALREDUCTION: return false;
             case EffectId.TAUNTED: return false;
+            case EffectId.FRAGILE: return false;
             default: return true;
         }
     }
@@ -135,6 +138,7 @@ public class Effect
             case EffectId.STOLEN: return "Stolen";
             case EffectId.HEALREDUCTION: return "Heal Reduction";
             case EffectId.TAUNTED: return "Taunted";
+            case EffectId.FRAGILE: return "Fragile";
             default: return "";
         }
     }
@@ -246,6 +250,40 @@ public class Effect
             return stolenAmount[attribute];
         else
             Debug.LogWarning("This method is not available for this type of Effect");
+        return 0;
+    }
+
+#endregion
+
+#region Poison
+
+    private SkillAttribute poisonAttribute;
+    private float poisonAmount;
+
+    public void SetPoison(SkillAttribute poisonAttribute, float poisonAmount) {
+        if (id == EffectId.POISON) {
+            this.poisonAttribute = poisonAttribute;
+            this.poisonAmount = poisonAmount;
+        } else {
+            Debug.LogWarning("This method is not available for this type of Effect");
+        }
+    }
+
+    public SkillAttribute GetPoisonAttribute() {
+        if (id == EffectId.POISON) {
+            return poisonAttribute;
+        } else {
+            Debug.LogWarning("This method is not available for this type of Effect");
+        }
+        return SkillAttribute.NONE;
+    }
+
+    public float GetPoisonAmount() {
+        if (id == EffectId.POISON) {
+            return poisonAmount;
+        } else {
+            Debug.LogWarning("This method is not available for this type of Effect");
+        }
         return 0;
     }
 
