@@ -145,6 +145,14 @@ public class Effect
         bounusDamageAmount = damage;
     }
 
+    public void SetBounusDamage(float damage)
+    {
+         if (id == EffectId.BONUS_DAMAGE)
+            bounusDamageAmount = damage;
+        else
+            Debug.LogWarning("This method is not available for this type of Effect");
+        
+    }
     public void GenerateBounusDamage(PlayerStatus playerStatus, float random)
     {
         if (id == EffectId.BONUS_DAMAGE)
@@ -209,8 +217,12 @@ public class Effect
     }
 
     public float GetDefenseReduction(SkillAttribute attribute){
-         if (id == EffectId.WEAK)
-            return weakenedAmount[attribute];
+         if (id == EffectId.WEAK) {
+            if (weakenedAmount.ContainsKey(attribute))
+                return weakenedAmount[attribute];
+            else 
+                return 0;
+         }
         else
             Debug.LogWarning("This method is not available for this type of Effect");
         return 0;
