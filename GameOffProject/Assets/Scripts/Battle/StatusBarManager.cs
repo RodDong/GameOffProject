@@ -24,7 +24,7 @@ public class StatusBarManager : MonoBehaviour
 
     public void ShowBuffDeBuffDetails(int index)
     {
-        GameObject effectIcon = battleManager.GetEffectTransfroms()[index].gameObject;
+        GameObject effectIcon = battleManager.GetPlayerEffectTransfroms()[index].gameObject;
         GameObject descriptionMenu = effectIcon.GetComponentsInChildren<RectTransform>(true)[1].gameObject;
         descriptionMenu.SetActive(true);
         string description = playerStatus.GetActiveEffects()[index].GetDescription();
@@ -34,7 +34,7 @@ public class StatusBarManager : MonoBehaviour
 
     public void HideBuffDeBuffDetails(int index)
     {
-        GameObject effectIcon = battleManager.GetEffectTransfroms()[index].gameObject;
+        GameObject effectIcon = battleManager.GetPlayerEffectTransfroms()[index].gameObject;
         GameObject descriptionMenu = effectIcon.GetComponentsInChildren<RectTransform>(true)[1].gameObject;
         descriptionMenu.SetActive(false);
     }

@@ -123,6 +123,7 @@ public class BattleManager : MonoBehaviour
         // adjust alpha of all buttons
         Debug.Log("Start Player Turn");
         UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
     }
 
     void UpdatePlayerDeath()
@@ -137,7 +138,7 @@ public class BattleManager : MonoBehaviour
         float playerCurHealth = playerStatus.GetCurrentHealth();
         float playerMaxHealth = playerStatus.GetMaxHealth();
         playerHealthBar.GetComponentInChildren<Slider>().value = playerCurHealth / playerMaxHealth;
-        playerHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = playerCurHealth + " / " + playerMaxHealth;
+        playerHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = (int)playerCurHealth + " / " + playerMaxHealth;
     }
 
     void UpdateEnemyHealthBar()
@@ -145,7 +146,7 @@ public class BattleManager : MonoBehaviour
         float enemyCurHealth = enemyStatus.GetCurrentHealth();
         float enemyMaxHealth = enemyStatus.GetMaxHealth();
         enemyHealthBar.GetComponentInChildren<Slider>().value = enemyCurHealth / enemyMaxHealth;
-        enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = enemyCurHealth.ToString() + " / " + enemyMaxHealth.ToString();
+        enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = (int)enemyCurHealth + " / " + enemyMaxHealth;
     }
     void UpdateWin()
     {
