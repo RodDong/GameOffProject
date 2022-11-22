@@ -12,6 +12,11 @@ public class Doctor : EnemyStatus
         currentHealth = MAX_HEALTH;
     }
     public override void MakeMove(PlayerStatus playerStatus) {
+
+        if (currentHealth <= 0) {
+            ProcessDeath();
+        }
+
         if (UltimateCd == 0) {
             Ultimate(playerStatus);
             UltimateCd = 10;
@@ -20,20 +25,7 @@ public class Doctor : EnemyStatus
 
         if (castOrder.Count != 0)
         {
-            int skillId = castOrder.Dequeue();
-            switch(skillId) {
-                case 0:
-                    Secondary(playerStatus);
-                    break;
-                case 1:
-                    DefReduceAttack(playerStatus);
-                    break;
-                case 2:
-                    AtkReduceAttack(playerStatus);
-                    break;
-                default:
-                    break;
-            }
+            UseSkill(castOrder.Dequeue(), playerStatus);
         } else {
             int roundsBeforeSed = Random.Range(3,4);
             bool hasReducedDef = false;
@@ -49,11 +41,32 @@ public class Doctor : EnemyStatus
                 }
             }
             castOrder.Enqueue(0);
+
+            UseSkill(castOrder.Dequeue(), playerStatus);
         }
 
         UltimateCd -= 1;
     }
 
+    private void UseSkill(int skillId, PlayerStatus playerStatus) {
+            switch(skillId) {
+                case 0:
+                    Secondary(playerStatus);
+                    break;
+                case 1:
+                    DefReduceAttack(playerStatus);
+                    break;
+                case 2:
+                    AtkReduceAttack(playerStatus);
+                    break;
+                default:
+                    break;
+            }
+    }
+
+    private void ProcessDeath() {
+        Debug.Log("boss has died");
+    }
 
 #region doctor skills
 
