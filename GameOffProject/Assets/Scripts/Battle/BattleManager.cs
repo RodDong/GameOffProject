@@ -12,7 +12,7 @@ using UnityEditor.Search;
 
 public class BattleManager : MonoBehaviour
 {
-    enum State
+    public enum State
     {
         Preparation,
         Battle,
@@ -45,15 +45,12 @@ public class BattleManager : MonoBehaviour
     private Sprite buffIcon;
     private Sprite debuffIcon;
 
-    public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
-    public bool GetIsInBattle() { return isInBattle; }
     public List<Transform> GetEffectTransfroms() { return effectIconTransforms; }
-
+    public void SetBattleState(State state) { mCurState = state; }
 
     // Start is called before the first frame update
     void Start()
     {
-
         mCurState = State.Preparation;
         battleUI.SetActive(false);
 
