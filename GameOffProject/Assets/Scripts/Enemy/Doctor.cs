@@ -12,6 +12,11 @@ public class Doctor : EnemyStatus
         currentHealth = MAX_HEALTH;
     }
     public override void MakeMove(PlayerStatus playerStatus) {
+
+        if (currentHealth <= 0) {
+            ProcessDeath();
+        }
+
         if (UltimateCd == 0) {
             Ultimate(playerStatus);
             UltimateCd = 10;
@@ -57,6 +62,10 @@ public class Doctor : EnemyStatus
                 default:
                     break;
             }
+    }
+
+    private void ProcessDeath() {
+        Debug.Log("boss has died");
     }
 
 #region doctor skills
