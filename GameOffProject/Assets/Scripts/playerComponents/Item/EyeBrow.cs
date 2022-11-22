@@ -25,12 +25,12 @@ public class EyeBrow : Item
                 selectedImage = imgRoot + "1EyebrowDefault_S";
                 break;
             case SkillAttribute.HAPPY:
-                happyATK = 150f;
-                happyDEF = 150f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 0f;
+                happyDEF = 50f;
+                sadATK = 0f;
+                sadDEF = 30f;
+                angryATK = 0f;
+                angryDEF = 10f;
                 displayName = "test eyebrow happy";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "1EyebrowH_N";
@@ -38,12 +38,12 @@ public class EyeBrow : Item
                 selectedImage = imgRoot + "1EyebrowH_S";
                 break;
             case SkillAttribute.SAD:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 150f;
-                angryATK = 50f;
-                angryDEF = 50f;
+                happyATK = 0f;
+                happyDEF = 0f;
+                sadATK = 20f;
+                sadDEF = 50f;
+                angryATK = 0f;
+                angryDEF = 10f;
                 displayName = "test eyebrow sad";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "1EyebrowS_N";
@@ -51,12 +51,12 @@ public class EyeBrow : Item
                 selectedImage = imgRoot + "1EyebrowS_S";
                 break;
             case SkillAttribute.ANGRY:
-                happyATK = 50f;
-                happyDEF = 50f;
-                sadATK = 50f;
-                sadDEF = 50f;
-                angryATK = 100f;
-                angryDEF = 100f;
+                happyATK = 30f;
+                happyDEF = 0f;
+                sadATK = 30f;
+                sadDEF = 0f;
+                angryATK = 0f;
+                angryDEF = 50f;
                 displayName = "test eyebrow angry";
                 imageSrc = imgRoot + "1EyebrowA_N";
                 highLightedImage = imgRoot + "1EyebrowA_H";
