@@ -17,7 +17,7 @@ public class PlayerStatus : MonoBehaviour
     private float currentHealth;
     private BattleManager battleManager;
     public void SetBattleManager(BattleManager bm) { battleManager = bm; }
-    public float getCurrentHealth() {
+    public float GetCurrentHealth() {
         return currentHealth;
     } 
     private float happyATK;
@@ -119,17 +119,25 @@ public class PlayerStatus : MonoBehaviour
         ownedEyebrows.Add(equippedEyebrow);
         ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
         ownedEyebrows.Add(new EyeBrow(SkillAttribute.SAD));
+        ownedEyebrows.Add(new EyeBrow(SkillAttribute.ANGRY));
         ownedEyes.Add(equippedEyes);
+        ownedEyes.Add(new Eye(SkillAttribute.HAPPY));
+        ownedEyes.Add(new Eye(SkillAttribute.SAD));
+        ownedEyes.Add(new Eye(SkillAttribute.ANGRY));
         ownedMouth.Add(equippedMouth);
+        ownedMouth.Add(new Mouth(SkillAttribute.HAPPY));
+        ownedMouth.Add(new Mouth(SkillAttribute.SAD));
+        ownedMouth.Add(new Mouth(SkillAttribute.ANGRY));
+
         updateStatus();
 
         ownedClues.Add(new Clue(0));
         ownedClues.Add(new Clue(5));
         ownedClues.Add(new Clue(6));
         ownedClues.Add(new Clue(12));
-        Effects.Add(new Effect(EffectId.BLIND));
-        Effects.Add(new Effect(EffectId.POISON));
-        Effects.Add(new Effect(EffectId.IMMUNE));
+        // Effects.Add(new Effect(EffectId.BLIND));
+        // Effects.Add(new Effect(EffectId.POISON));
+        // Effects.Add(new Effect(EffectId.IMMUNE));
         // - for test purposes
     }
 
@@ -164,7 +172,7 @@ public class PlayerStatus : MonoBehaviour
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
-        
+        Debug.Log("Damage taken by player: " + effectiveDamage);
         return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
 
@@ -332,7 +340,7 @@ public class PlayerStatus : MonoBehaviour
         setHappyATK(equippedEyebrow.getHappyATK() + equippedEyes.getHappyATK() + equippedMouth.getHappyATK());
         setHappyDEF(equippedEyebrow.getHappyDEF() + equippedEyes.getHappyDEF() + equippedMouth.getHappyDEF());
         setSadATK(equippedEyebrow.getSadATK() + equippedEyes.getSadATK() + equippedMouth.getSadATK());
-        setSadDEF(equippedEyes.getSadDEF() + equippedEyes.getSadDEF() + equippedMouth.getSadDEF());
+        setSadDEF(equippedEyebrow.getSadDEF() + equippedEyes.getSadDEF() + equippedMouth.getSadDEF());
         setAngryATK(equippedEyebrow.getAngryATK() + equippedEyes.getAngryATK() + equippedMouth.getAngryATK());
         setAngryDEF(equippedEyebrow.getAngryDEF() + equippedEyes.getAngryDEF() + equippedMouth.getAngryDEF());
 
