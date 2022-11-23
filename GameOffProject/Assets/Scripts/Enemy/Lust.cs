@@ -48,14 +48,22 @@ public class Lust : EnemyStatus
 
     private void Ultimate(PlayerStatus playerStatus) {
         playerStatus.ActivateEffect(new Effect(EffectId.BROKEN));
-        //TODO: change equipped to sad ????
+        // force items to be sad, even if the player does not own them
+        playerStatus.setEquippedEyeBrow(new EyeBrow(SkillAttribute.SAD));
+        playerStatus.setEquippedEyes(new Eye(SkillAttribute.SAD));
+        playerStatus.setEquippedMouth(new Mouth(SkillAttribute.SAD));
+        playerStatus.updateStatus();
+        playerStatus.updateMask();
+        // cannot change items
+        // REQUIRES mute and broken to have same duration
+        playerStatus.ActivateEffect(new Effect(EffectId.MUTE));
+        // note that this does not switch back equipped items once effect wears off
     }
 
     private void Secondary(PlayerStatus playerStatus) {
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
-        //TODO: CHAOS in BattleManager.processSkill
-        //playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
+        playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
     }
 
     private void HappyATK(PlayerStatus playerStatus) {
