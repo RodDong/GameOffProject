@@ -108,11 +108,13 @@ public class BattleManager : MonoBehaviour
     {
         
         // end of player turn
-        // process end of turn Effects/effects here
-        if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
-            float poisonDmg = 5.0f;
-            playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
-        }
+        // process end of turn effects here
+
+        // obsolete: Replaced by poison in ProcessSkill
+        // if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
+        //     float poisonDmg = 5.0f;
+        //     playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
+        // }
         Debug.Log("Ending Player Turn");
 
 /*        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
@@ -349,37 +351,59 @@ public class BattleManager : MonoBehaviour
     }
     private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos)
     {
-        AttackSkill attackSkill = (AttackSkill) skill;
-        float effectiveDamage = attackSkill.getAttackSkillDamage(playerStatus);
-        foreach (Effect effect in activeEffects)
-        {
-            if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
+        // if player has blind by chaos, has a chance to miss
+        Effect blind = activeEffects.Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });
+        if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
+            // play missed animation?
+            return; // MISS
+        } else {
+            // did not miss -> proceed as normal
+            AttackSkill attackSkill = (AttackSkill) skill;
+            float effectiveDamage = attackSkill.getAttackSkillDamage(playerStatus);
+            foreach (Effect effect in activeEffects)
             {
-                effectiveDamage += effect.GetBounusDamage();
+                if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
+                {
+                    effectiveDamage += effect.GetBounusDamage();
+                }
+            }
+
+            if (activeEffects.Contains(new Effect(EffectId.FRAGILE))) {
+                effectiveDamage *= 0.8f;
+            }
+            
+            float dealtDamage;
+            // default target = enemy
+            if (chaos) {
+                dealtDamage = playerStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+            } else {
+                dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+            }
+
+            // if player atks player still heal if player has life steal regardless of chaos
+            foreach (Effect effect in activeEffects)
+            {
+                if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
+                {
+                    // the denominator can be adjusted later depending on stats and life steal ratio
+                    float lifestealBaseStat = 100.0f;
+                    playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / lifestealBaseStat) * dealtDamage);
+                }
             }
         }
-
-        if (activeEffects.Contains(new Effect(EffectId.FRAGILE))) {
-            effectiveDamage *= 0.8f;
-        }
-
-        float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
-
-        foreach (Effect effect in activeEffects)
-        {
-            if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
-            {
-                // the denominator can be adjusted later depending on stats and life steal ratio
-                playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
-            }
-        }
+        // player should take dmg for angryATK regardless of missing due to blind
         if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
         {
-            playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
+            float sacrificeRatio = 4.0f;
+            playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY) / sacrificeRatio, SkillAttribute.ANGRY);
         }
 
         UpdateEnemyHealthBar();
     }
+
+    #endregion
+
+    #region Process Skill-induced UI changes
 
     public void ProcessMute()
     {

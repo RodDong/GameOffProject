@@ -390,4 +390,9 @@ public class PlayerStatus : MonoBehaviour
         }
         return new Clue(-1);
     }
+
+    public void updateMask()
+    {
+        battleManager.UpdateEquippedMask();
+    }
 }
