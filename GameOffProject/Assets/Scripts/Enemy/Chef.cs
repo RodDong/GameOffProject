@@ -12,7 +12,7 @@ public class Chef : EnemyStatus
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
     }
-    public override void MakeMove(PlayerStatus playerStatus) {
+    public override (string, string, string) MakeMove(PlayerStatus playerStatus) {
 
         if (playerStatus.GetCurrentHealth() <= playerStatus.GetMaxHealth() * 0.7) {
             skillRandom -= 0.2f;
@@ -24,7 +24,7 @@ public class Chef : EnemyStatus
             // start
             case 0:
                 ChangePhase(playerStatus);
-                break;
+                return ("Change Phase1", "Change Phase2", "Change Phase3");
 
             // appetizer
             // skill list: mix damage & taunt(angry) attack
@@ -33,12 +33,12 @@ public class Chef : EnemyStatus
                     ChangePhase(playerStatus);
                 } else {
                     if (Random.Range(0.0f, 1.0f) <= skillRandom) {
-                        MixDamage(playerStatus);
+                        return MixDamage(playerStatus);
                     } else {
-                        TauntAttack(playerStatus);
+                        return TauntAttack(playerStatus);
                     }
                 }
-                break;
+                return ("Error", "Error", "Error");
 
             // main dish
             // skill list: mix damage & heal reduction(happy) attack
@@ -47,12 +47,12 @@ public class Chef : EnemyStatus
                     ChangePhase(playerStatus);
                 } else {
                     if (Random.Range(0.0f, 1.0f) <= skillRandom) {
-                        MixDamage(playerStatus);
+                       return MixDamage(playerStatus);
                     } else {
-                        HealReductionAttack(playerStatus);
+                        return HealReductionAttack(playerStatus);
                     }
                 }
-                break;
+                return ("Error", "Error", "Error");
 
             // dessert
             // skill list: mix damage & taunt(angry) attack
@@ -62,15 +62,15 @@ public class Chef : EnemyStatus
                     ProcessDeath(playerStatus);
                 } else {
                     if (Random.Range(0.0f, 1.0f) <= skillRandom) {
-                        MixDamage(playerStatus);
+                        return MixDamage(playerStatus);
                     } else {
-                        TauntAttack(playerStatus);
+                        return TauntAttack(playerStatus);
                     }
                 }
-                break;
+                return ("Error", "Error", "Error");
 
             default:
-                break;
+                return ("Error", "Error", "Error");
         }
     }
 
@@ -83,24 +83,26 @@ public class Chef : EnemyStatus
         currentHealth = MAX_HEALTH;
     }
 
-    private void MixDamage(PlayerStatus playerStatus) {
+    private (string, string, string) MixDamage(PlayerStatus playerStatus) {
         Debug.Log("Enemy cast mix damage");
         Debug.Log("Current enemy phase: " + chefPhase);
         float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
+        return ("Mix1", "Mix2", "Mix3");
     }
 
-    private void HealReductionAttack(PlayerStatus playerStatus) {
+    private (string, string, string) HealReductionAttack(PlayerStatus playerStatus) {
         Debug.Log("Enemy cast heal reduction");
         Debug.Log("Current enemy phase: " + chefPhase);
         skillRandom += 0.3f;
         float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.HEALREDUCTION));
+        return ("Happy1", "Happy2", "Happy3");
     }
 
-    private void TauntAttack(PlayerStatus playerStatus) {
+    private (string, string, string) TauntAttack(PlayerStatus playerStatus) {
         Debug.Log("Enemy cast taunt");
         Debug.Log("Current enemy phase: " + chefPhase);
         skillRandom += 0.3f;
@@ -109,6 +111,7 @@ public class Chef : EnemyStatus
         if (!playerStatus.GetActiveEffects().Contains(new Effect(EffectId.SILENCED))) {
             playerStatus.ActivateEffect(new Effect(EffectId.TAUNTED));
         }
+        return ("Angry1", "Angry2", "Angry3");
     }
 
 #endregion

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,16 +37,25 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject SkillButtons;
     [SerializeField] GameObject PlayerStatusBar;
     [SerializeField] GameObject EnemyStatusBar;
+    [SerializeField] GameObject PlayerMessageBox;
+    [SerializeField] GameObject EnemyMessageBox;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
     List<Transform> playerEffectIconTransforms = new List<Transform>();
     List<Transform> enemyEffectIconTransforms = new List<Transform>();
+
+    SkillAttribute playerPrevSkillAttribute;
+    (string, string, string) enemySentences = ("sentence1", "sentence2", "sentence3");
 
     State mCurState;
     bool isInBattle = false;
 
     private Sprite buffIcon;
     private Sprite debuffIcon;
+
+    private EyeBrow playerPrevEyeBrow;
+    private Eye playerPrevEye;
+    private Mouth playerPrevMouth;
 
     public List<Transform> GetPlayerEffectTransfroms() { return playerEffectIconTransforms; }
     public List<Transform> GetEnemyEffectTransfroms() { return enemyEffectIconTransforms; }
@@ -73,7 +83,8 @@ public class BattleManager : MonoBehaviour
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
         UpdatePlayerHealthBar();
         UpdateEnemyHealthBar();
-
+        UpdatePlayerStatusBar();
+        UpdateEnemyStatusBar();
     }
 
     void Update()
@@ -84,7 +95,7 @@ public class BattleManager : MonoBehaviour
         // or based user input
 
         handleKeyboardInput();
-        UpdatePlayerStatusBar();
+        
         UpdateEnemyStatusBar();
     }
 
@@ -103,21 +114,23 @@ public class BattleManager : MonoBehaviour
             playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
         }
         Debug.Log("Ending Player Turn");
-        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
-        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
+
+/*        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());*/
         
         Debug.Log("Start Enemy Turn");
-        Debug.Log(enemyStatus.GetActiveEffects().Count);
         // delay xxx sec 
         // boss speak
+        EnemyTalk();
         // delay 
         // boss use skill
-        enemyStatus.MakeMove(playerStatus);
+        enemySentences = enemyStatus.MakeMove(playerStatus);
+        UpdatePlayerStatusBar();
         // delay
         Debug.Log("Ending Enemy Turn");
         //Enemy Standby Phase
-        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
-        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
+        /*Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());*/
         //Enemy Battle Phase
 
         //Enemy End Phase
@@ -189,6 +202,7 @@ public class BattleManager : MonoBehaviour
         // disable all interactable buttons
         // lower alpha of buttons
         ProcessEnemyTurn();
+        UpdatePlayerStatusBar();
     }
 
     #endregion
@@ -196,6 +210,10 @@ public class BattleManager : MonoBehaviour
     #region Process Skills
 
     public void ProcessSkill(Skill skill) {
+
+        //Update playerPrevskill attribute for usage in enemy turn
+        playerPrevSkillAttribute = skill.GetSkillAttribute();
+
         List<Effect> activeEffects = playerStatus.GetActiveEffects();
 
         // Chaos changes target 
@@ -379,7 +397,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void ProcessSilence()
+    public async void ProcessSilence()
     {
         Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
         foreach (var button in buttons)
@@ -393,6 +411,42 @@ public class BattleManager : MonoBehaviour
                 buttonSprite.color = tempColor;
             }
         }
+
+        
+        foreach(Transform arrow in MaskUI.transform)
+        {
+            if (arrow.GetComponent<Button>())
+            {
+                arrow.GetComponent<Button>().interactable = false;
+                Image arrowSprite = arrow.gameObject.GetComponent<Image>();
+                Color tempColor = arrowSprite.color;
+                tempColor.a = 0.1f;
+                arrowSprite.color = tempColor;
+            }
+        }
+
+        await Task.Delay(2000);
+
+        playerPrevEyeBrow = playerStatus.getEquippedEyeBrow();
+        playerPrevEye = playerStatus.getEquippedEyes();
+        playerPrevMouth = playerStatus.getEquippedMouth();
+
+        playerStatus.setEquippedEyeBrow(new EyeBrow(SkillAttribute.NONE));
+        playerStatus.setEquippedEyes(new Eye(SkillAttribute.NONE));
+        playerStatus.setEquippedMouth(new Mouth(SkillAttribute.NONE));
+        foreach (var button in buttons)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
+        UpdateSkillButtons();
+
     }
 
     public void ProcessTaunted()
@@ -430,17 +484,25 @@ public class BattleManager : MonoBehaviour
     public void UnSlience()
     {
         Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
-        foreach (var button in buttons)
+
+        foreach (Transform arrow in MaskUI.transform)
         {
-            if (button.GetComponent<Button>())
+            if (arrow.GetComponent<Button>())
             {
-                button.GetComponent<Button>().interactable = true;
-                Image buttonSprite = button.gameObject.GetComponent<Image>();
-                Color tempColor = buttonSprite.color;
+                arrow.GetComponent<Button>().interactable = true;
+                Image arrowSprite = arrow.gameObject.GetComponent<Image>();
+                Color tempColor = arrowSprite.color;
                 tempColor.a = 255.0f;
-                buttonSprite.color = tempColor;
+                arrowSprite.color = tempColor;
             }
         }
+
+        playerStatus.setEquippedEyeBrow(playerPrevEyeBrow);
+        playerStatus.setEquippedEyes(playerPrevEye);
+        playerStatus.setEquippedMouth(playerPrevMouth);
+
+        UpdateSkillButtons();
+
     }
 
     public void UnTaunted()
@@ -739,5 +801,54 @@ public class BattleManager : MonoBehaviour
         + "SadDEF: " + playerStatus.getDEFbyAttribute(SkillAttribute.SAD) + "\n";
         playerStatsUI.GetComponent<TextMeshProUGUI>().text = happyStat + angryStat + sadStat;
     }
+    
     #endregion
+
+    void PlayerTalk()
+    {
+        PlayerMessageBox.SetActive(true);
+        TextMeshProUGUI textBox = PlayerMessageBox.GetComponentInChildren<TextMeshProUGUI>(true);
+        textBox.text = "PlayerTalk";
+
+    }
+
+    void PlayerStopTalk()
+    {
+        PlayerMessageBox.SetActive(false);
+    }
+
+    public async void PlayerOnClickTalkEvent()
+    {
+        PlayerTalk();
+        await Task.Delay(2000);
+        PlayerStopTalk();
+    }
+
+    async void EnemyTalk()
+    {
+        EnemyMessageBox.SetActive(true);
+        Debug.Log("talk");
+        TextMeshProUGUI textBox = EnemyMessageBox.GetComponentInChildren<TextMeshProUGUI>(true);
+
+        switch (playerPrevSkillAttribute)
+        {
+            case SkillAttribute.HAPPY:
+                textBox.text = enemySentences.Item1;
+                break;
+            case SkillAttribute.SAD:
+                textBox.text = enemySentences.Item2;
+                break;
+            case SkillAttribute.ANGRY:
+                textBox.text = enemySentences.Item3;
+                break;
+            default:
+                textBox.text = "Error";
+                break;
+        }
+
+
+        await Task.Delay(2000);
+
+        EnemyMessageBox.SetActive(false);
+    }
 }

@@ -126,8 +126,8 @@ public abstract class EnemyStatus: MonoBehaviour
 
         return baseDEF + fortifiedDEF;
     }
-
-    public abstract void MakeMove(PlayerStatus playerStatus);
+    //return the skill attribute that was used
+    public abstract (string, string, string) MakeMove(PlayerStatus playerStatus);
 
     public virtual void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
         Effect blind = Effects.Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });

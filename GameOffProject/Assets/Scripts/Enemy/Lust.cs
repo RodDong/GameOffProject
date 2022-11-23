@@ -5,13 +5,14 @@ using static Effect;
 
 public class Lust : EnemyStatus
 {
-    public override void MakeMove(PlayerStatus playerStatus)
+    public override (string, string, string) MakeMove(PlayerStatus playerStatus)
     {
         Queue<int> castOrder = new Queue<int>();
         while (castOrder.Count != 0)
         {
             int skillId = castOrder.Dequeue();
         }
+        return ("", "", "");
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
