@@ -9,10 +9,11 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEditor.Search;
+using Unity.VisualScripting;
 
 public class BattleManager : MonoBehaviour
 {
-    enum State
+    public enum State
     {
         Preparation,
         Battle,
@@ -24,7 +25,8 @@ public class BattleManager : MonoBehaviour
     GameObject player;
 
     [SerializeField] GameObject battleUI;
-    [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject playerHealthBar;
+    [SerializeField] GameObject enemyHealthBar;
     [SerializeField] GameObject gamObjectsInScene;
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
@@ -32,12 +34,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject playerStatsUI;
     [SerializeField] GameObject MaskUI;
     [SerializeField] GameObject SkillButtons;
-    [SerializeField] GameObject StatusBar;
+    [SerializeField] GameObject PlayerStatusBar;
+    [SerializeField] GameObject EnemyStatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
-    List<Transform> effectIconTransforms = new List<Transform>();
-
-    int UILayer;
+    List<Transform> playerEffectIconTransforms = new List<Transform>();
+    List<Transform> enemyEffectIconTransforms = new List<Transform>();
 
     State mCurState;
     bool isInBattle = false;
@@ -45,15 +47,13 @@ public class BattleManager : MonoBehaviour
     private Sprite buffIcon;
     private Sprite debuffIcon;
 
-    public void SetIsInBattle(bool inBattle) { isInBattle = inBattle; }
-    public bool GetIsInBattle() { return isInBattle; }
-    public List<Transform> GetEffectTransfroms() { return effectIconTransforms; }
-
+    public List<Transform> GetPlayerEffectTransfroms() { return playerEffectIconTransforms; }
+    public List<Transform> GetEnemyEffectTransfroms() { return enemyEffectIconTransforms; }
+    public void SetBattleState(State state) { mCurState = state; }
 
     // Start is called before the first frame update
     void Start()
     {
-
         mCurState = State.Preparation;
         battleUI.SetActive(false);
 
@@ -68,10 +68,11 @@ public class BattleManager : MonoBehaviour
         if (enemyStatus == null) {
             Debug.LogWarning("No Enemy Object in Scene");
         }
-        UILayer = LayerMask.NameToLayer("EffectUI");
 
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
 
     }
 
@@ -83,7 +84,8 @@ public class BattleManager : MonoBehaviour
         // or based user input
 
         handleKeyboardInput();
-        UpdateStatusBar();
+        UpdatePlayerStatusBar();
+        UpdateEnemyStatusBar();
     }
 
     void UpdatePreparation()
@@ -105,6 +107,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
         
         Debug.Log("Start Enemy Turn");
+        Debug.Log(enemyStatus.GetActiveEffects().Count);
         // delay xxx sec 
         // boss speak
         // delay 
@@ -124,6 +127,8 @@ public class BattleManager : MonoBehaviour
         // enable button interactions
         // adjust alpha of all buttons
         Debug.Log("Start Player Turn");
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
     }
 
     void UpdatePlayerDeath()
@@ -133,9 +138,20 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
     }
 
-    void UpdateHealthBar()
+    void UpdatePlayerHealthBar()
     {
-        healthBar.GetComponent<Slider>().value = playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
+        float playerCurHealth = playerStatus.GetCurrentHealth();
+        float playerMaxHealth = playerStatus.GetMaxHealth();
+        playerHealthBar.GetComponentInChildren<Slider>().value = playerCurHealth / playerMaxHealth;
+        playerHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = (int)playerCurHealth + " / " + playerMaxHealth;
+    }
+
+    void UpdateEnemyHealthBar()
+    {
+        float enemyCurHealth = enemyStatus.GetCurrentHealth();
+        float enemyMaxHealth = enemyStatus.GetMaxHealth();
+        enemyHealthBar.GetComponentInChildren<Slider>().value = enemyCurHealth / enemyMaxHealth;
+        enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = (int)enemyCurHealth + " / " + enemyMaxHealth;
     }
     void UpdateWin()
     {
@@ -190,13 +206,13 @@ public class BattleManager : MonoBehaviour
 
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                ProcessAttackSkill(skill, activeEffects, chaos, watched);
+                ProcessAttackSkill(skill, activeEffects, chaos);
                 break;
             case SkillType.DEFENSE:
-                ProcessDefensiveSkill(skill, chaos, watched);
+                ProcessDefensiveSkill(skill, chaos);
                 break;
             case SkillType.EFFECT:
-                ProcessEffectSkill(skill, chaos, watched);
+                ProcessEffectSkill(skill, chaos);
                 break;
         }
 
@@ -210,7 +226,9 @@ public class BattleManager : MonoBehaviour
                     // ?BLEED == POISON?
                     if (chefPhase == 2) {
                         // TODO: Is bleed = poison?
-                        playerStatus.ActivateEffect(new Effect(EffectId.POISON));
+                        Effect poisonEffect = new Effect(EffectId.POISON);
+                        poisonEffect.SetPoison(SkillAttribute.ANGRY, 5.0f);
+                        playerStatus.ActivateEffect(poisonEffect);
                     }
                     break;
                 case SkillAttribute.ANGRY:
@@ -225,31 +243,23 @@ public class BattleManager : MonoBehaviour
                     // WEAK the player for 2 turns (differ from weak in current effects)
                     if (chefPhase == 3) {
                         // TODO: Add negative effect for chef phase 3
+                        playerStatus.ActivateEffect(new Effect(EffectId.FRAGILE));
                     }
                     break;
                 default:
                     break;
             }
         }
+
+        // poison is processed at the end phase of player turn
+        Effect poison = playerStatus.GetEffect(EffectId.POISON);
+        if (poison.GetEffectId() != EffectId.NONE) {
+            Debug.Log("Player get poison damage by: " + poison.GetPoisonAmount());
+            playerStatus.TakeDamage(poison.GetPoisonAmount(), poison.GetPoisonAttribute());
+        }
     }
 
-    
-    // public void ProcessSkill(Skill skill) {
-    //     List<Effect> activeEffects = playerStatus.GetActiveEffects();
-    //     switch (skill.getSkillType()) {
-    //         case SkillType.ATTACK:
-    //             ProcessAttackSkill(skill, activeEffects);
-    //             break;
-    //         case SkillType.DEFENSE:
-    //             ProcessDefensiveSkill(skill);
-    //             break;
-    //         case SkillType.Effect:
-    //             ProcessEffectSkill(skill);
-    //             break;
-    //     }
-    // }
-
-    private void ProcessEffectSkill(Skill skill, bool chaos, bool watched)
+    private void ProcessEffectSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
@@ -286,7 +296,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void ProcessDefensiveSkill(Skill skill, bool chaos, bool watched)
+    private void ProcessDefensiveSkill(Skill skill, bool chaos)
     {
         switch (skill.GetSkillAttribute())
         {
@@ -319,10 +329,10 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos, bool watched)
+    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos)
     {
-        AttackSkill atkSkill = (AttackSkill)skill;
-        float effectiveDamage = atkSkill.getAttackSkillDamage(playerStatus);
+        AttackSkill attackSkill = (AttackSkill) skill;
+        float effectiveDamage = attackSkill.getAttackSkillDamage(playerStatus);
         foreach (Effect effect in activeEffects)
         {
             if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
@@ -330,7 +340,13 @@ public class BattleManager : MonoBehaviour
                 effectiveDamage += effect.GetBounusDamage();
             }
         }
+
+        if (activeEffects.Contains(new Effect(EffectId.FRAGILE))) {
+            effectiveDamage *= 0.8f;
+        }
+
         float dealtDamage = enemyStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
+
         foreach (Effect effect in activeEffects)
         {
             if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
@@ -343,6 +359,8 @@ public class BattleManager : MonoBehaviour
         {
             playerStatus.TakeDamage(playerStatus.getATKbyAttribute(SkillAttribute.ANGRY), SkillAttribute.ANGRY);
         }
+
+        UpdateEnemyHealthBar();
     }
 
     public void ProcessMute()
@@ -377,6 +395,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void ProcessTaunted()
+    {
+        int index = 0;
+        foreach (Transform button in SkillButtons.transform) {
+            if (index != 1) {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+
+            index++;
+        }
+    }
+
     public void UnMute()
     {
         Transform[] buttons = MaskUI.GetComponentsInChildren<Transform>();
@@ -406,6 +440,22 @@ public class BattleManager : MonoBehaviour
                 tempColor.a = 255.0f;
                 buttonSprite.color = tempColor;
             }
+        }
+    }
+
+    public void UnTaunted()
+    {
+        int index = 0;
+        foreach (Transform button in SkillButtons.transform) {
+            if (index != 1) {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+
+            index++;
         }
     }
     #endregion
@@ -444,30 +494,30 @@ public class BattleManager : MonoBehaviour
         buttons[2].GetComponentsInChildren<TextMeshProUGUI>()[1].text = EffectSkill.getPower().ToString();
     }
 
-    void UpdateStatusBar()
+    void UpdatePlayerStatusBar()
     {
         List<Effect> activeEffects = playerStatus.GetActiveEffects();
-        Transform[] childTransforms = StatusBar.GetComponentsInChildren<Transform>(true);
+        Transform[] childTransforms = PlayerStatusBar.GetComponentsInChildren<Transform>(true);
         
         foreach(var child in childTransforms)
         {
             if (child.GetComponent<Image>())
             {
-                effectIconTransforms.Add(child);
+                playerEffectIconTransforms.Add(child);
             }
         }
 
         for (int i = 9; i >= activeEffects.Count; i--)
         {
-            if (effectIconTransforms[i].gameObject.activeSelf)
+            if (playerEffectIconTransforms[i].gameObject.activeSelf)
             {
-                effectIconTransforms[i].gameObject.SetActive(false);
+                playerEffectIconTransforms[i].gameObject.SetActive(false);
             }
         }
 
-        for(int i = 0; i<activeEffects.Count; i++)
+        for(int i = 0; i < activeEffects.Count; i++)
         {
-            Transform effectTrans = effectIconTransforms[i];
+            Transform effectTrans = playerEffectIconTransforms[i];
             if (!effectTrans.gameObject.activeSelf)
             {
                 effectTrans.gameObject.SetActive(true);
@@ -482,6 +532,47 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+
+    void UpdateEnemyStatusBar()
+    {
+        List<Effect> activeEffects = enemyStatus.GetActiveEffects();
+        Transform[] childTransforms = EnemyStatusBar.GetComponentsInChildren<Transform>(true);
+
+        foreach (var child in childTransforms)
+        {
+            if (child.GetComponent<Image>())
+            {
+                enemyEffectIconTransforms.Add(child);
+            }
+        }
+
+        for (int i = 9; i >= activeEffects.Count; i--)
+        {
+            if (enemyEffectIconTransforms[i].gameObject.activeSelf)
+            {
+                enemyEffectIconTransforms[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < activeEffects.Count; i++)
+        {
+            Transform effectTrans = enemyEffectIconTransforms[i];
+            if (!effectTrans.gameObject.activeSelf)
+            {
+                effectTrans.gameObject.SetActive(true);
+            }
+            if (activeEffects[i].isBuff())
+            {
+                effectTrans.GetComponent<Image>().sprite = buffIcon;
+            }
+            else
+            {
+                effectTrans.GetComponent<Image>().sprite = debuffIcon;
+            }
+        }
+    }
+
+
 
     public void rightUpdateEyebrow()
     {

@@ -12,7 +12,7 @@ public class EffectSkill : Skill
         switch(attribute) {
             case SkillAttribute.NONE:
                 displayName = "test Effect";
-                skillImage = imgRoot + "EmptyButton/" + "bubuff_angry";
+                skillImage = imgRoot + "EmptyButton/" + "buff_default";
                 power = 50;
                 break;
             case SkillAttribute.ANGRY:

@@ -20,6 +20,8 @@ public class InventoryManager : MonoBehaviour
     private GameObject player;
     private PlayerStatus playerStatus;
 
+    const float posX = -372.0f;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -81,7 +83,6 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateEyebrowDisplay()
     {
-        float posX = -372.0f;
         float posY = 0.0f;
         List<EyeBrow> ownedEyeBrows = playerStatus.getOwnedEyeBrows();
         Item equippedEyes = playerStatus.getEquippedEyes();
@@ -100,6 +101,7 @@ public class InventoryManager : MonoBehaviour
             newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
             newButtonTransform.localScale = new Vector3(1.0f, 1.0f, 0);
             EyeBrow curItem = ownedEyeBrows[i];
+
             newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
             newButton.onClick.AddListener(delegate { playerStatus.setEquippedEyeBrow((EyeBrow)curItem); });
             newButton.onClick.AddListener(delegate { UpdateEquippedItems();});
@@ -121,7 +123,6 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateEyesDisplay()
     {
-        float posX = -372.0f;
         float posY = 0.0f;
         List<Eye> ownedEyes = playerStatus.getOwnedEyes();
         Item equippedEyebrow = playerStatus.getEquippedEyeBrow();
@@ -142,6 +143,7 @@ public class InventoryManager : MonoBehaviour
             newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
             newButtonTransform.localScale = new Vector3(1.0f, 1.0f, 0);
             Eye curItem = ownedEyes[i];
+
             newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
             newButton.onClick.AddListener(delegate { playerStatus.setEquippedEyes((Eye)curItem); });
             newButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
@@ -163,7 +165,6 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateMouthDisplay()
     {
-        float posX = -372.0f;
         float posY = 0.0f;
         List<Mouth> ownedMouth = playerStatus.getOwnedMouths();
         Item equippedEyebrow = playerStatus.getEquippedEyeBrow();
@@ -182,6 +183,7 @@ public class InventoryManager : MonoBehaviour
             newButtonTransform.localPosition = new Vector3(posX, posY, 0.0f);
             newButtonTransform.localScale = new Vector3(1.0f, 1.0f, 0);
             Mouth curItem = ownedMouth[i];
+
             newButton.onClick.AddListener(delegate { UpdateDescription(curItem); });
             newButton.onClick.AddListener(delegate { playerStatus.setEquippedMouth((Mouth)curItem); });
             newButton.onClick.AddListener(delegate { UpdateEquippedItems(); });
@@ -190,7 +192,6 @@ public class InventoryManager : MonoBehaviour
             newButton.onClick.AddListener(delegate { HighlightItemDetail(newButton, curItem);});
             newButton.onClick.AddListener(delegate { HighlightItemIcon(mouthButton, curItem); });
             newButton.onClick.AddListener(delegate { InitializeButtonSpriteState(Buttons.GetComponentInChildren<Button>(), ownedMouth[0]); });
-            
             InitializeButtonSpriteState(newButton, curItem);
             if (curItem.Equals(playerStatus.getEquippedMouth()))
             {
