@@ -13,7 +13,7 @@ public class AttackSkill : Skill
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.ANGRY;
                 displayName = "test attack";
-                skillImage = imgRoot + "EmptyButton/" + "atk_angry";
+                skillImage = imgRoot + "EmptyButton/" + "atk_default";
                 power = 30;
                 break;
             case SkillAttribute.ANGRY:

@@ -35,9 +35,11 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject MaskUI;
     [SerializeField] GameObject SkillButtons;
     [SerializeField] GameObject PlayerStatusBar;
+    [SerializeField] GameObject EnemyStatusBar;
     PlayerStatus playerStatus;
     EnemyStatus enemyStatus;
     List<Transform> playerEffectIconTransforms = new List<Transform>();
+    List<Transform> enemyEffectIconTransforms = new List<Transform>();
 
     State mCurState;
     bool isInBattle = false;
@@ -46,6 +48,7 @@ public class BattleManager : MonoBehaviour
     private Sprite debuffIcon;
 
     public List<Transform> GetPlayerEffectTransfroms() { return playerEffectIconTransforms; }
+    public List<Transform> GetEnemyEffectTransfroms() { return enemyEffectIconTransforms; }
     public void SetBattleState(State state) { mCurState = state; }
 
     // Start is called before the first frame update
@@ -82,6 +85,7 @@ public class BattleManager : MonoBehaviour
 
         handleKeyboardInput();
         UpdatePlayerStatusBar();
+        UpdateEnemyStatusBar();
     }
 
     void UpdatePreparation()
@@ -103,6 +107,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());
         
         Debug.Log("Start Enemy Turn");
+        Debug.Log(enemyStatus.GetActiveEffects().Count);
         // delay xxx sec 
         // boss speak
         // delay 
@@ -527,6 +532,47 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+
+    void UpdateEnemyStatusBar()
+    {
+        List<Effect> activeEffects = enemyStatus.GetActiveEffects();
+        Transform[] childTransforms = EnemyStatusBar.GetComponentsInChildren<Transform>(true);
+
+        foreach (var child in childTransforms)
+        {
+            if (child.GetComponent<Image>())
+            {
+                enemyEffectIconTransforms.Add(child);
+            }
+        }
+
+        for (int i = 9; i >= activeEffects.Count; i--)
+        {
+            if (enemyEffectIconTransforms[i].gameObject.activeSelf)
+            {
+                enemyEffectIconTransforms[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < activeEffects.Count; i++)
+        {
+            Transform effectTrans = enemyEffectIconTransforms[i];
+            if (!effectTrans.gameObject.activeSelf)
+            {
+                effectTrans.gameObject.SetActive(true);
+            }
+            if (activeEffects[i].isBuff())
+            {
+                effectTrans.GetComponent<Image>().sprite = buffIcon;
+            }
+            else
+            {
+                effectTrans.GetComponent<Image>().sprite = debuffIcon;
+            }
+        }
+    }
+
+
 
     public void rightUpdateEyebrow()
     {

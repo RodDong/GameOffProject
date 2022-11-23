@@ -26,6 +26,8 @@ public abstract class EnemyStatus: MonoBehaviour
     protected int attackCounter;
     protected List<Effect> Effects = new List<Effect>();
 
+    public List<Effect> GetActiveEffects() { return Effects; }
+
     // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {
         for (int i = Effects.Count - 1; i >= 0; i--) {
