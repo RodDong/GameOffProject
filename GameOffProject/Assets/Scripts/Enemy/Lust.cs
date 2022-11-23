@@ -47,6 +47,7 @@ public class Lust : EnemyStatus
     }
 
     private void Ultimate(PlayerStatus playerStatus) {
+        Debug.Log("Boss Lust Uses Ultimate");
         playerStatus.ActivateEffect(new Effect(EffectId.BROKEN));
         // force items to be sad, even if the player does not own them
         playerStatus.setEquippedEyeBrow(new EyeBrow(SkillAttribute.SAD));
@@ -61,17 +62,20 @@ public class Lust : EnemyStatus
     }
 
     private void Secondary(PlayerStatus playerStatus) {
+        Debug.Log("Boss Lust Uses Secondary");
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
     }
 
     private void HappyATK(PlayerStatus playerStatus) {
+        Debug.Log("Boss Lust Uses HappyATK");
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
     }
 
     private void SadATK(PlayerStatus playerStatus) {
+        Debug.Log("Boss Lust Uses SadATK");
         // float damageAmount = 10;
         // DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
         playerStatus.ActivateEffect(new Effect(EffectId.POISON));
