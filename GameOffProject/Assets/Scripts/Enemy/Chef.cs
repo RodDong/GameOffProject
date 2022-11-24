@@ -12,6 +12,11 @@ public class Chef : EnemyStatus
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
     }
+
+    public void ResetChefPhase()
+    {
+        chefPhase = 0;
+    }
     public override (string, string, string) MakeMove(PlayerStatus playerStatus) {
 
         if (playerStatus.GetCurrentHealth() <= playerStatus.GetMaxHealth() * 0.7) {
