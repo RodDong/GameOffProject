@@ -45,7 +45,6 @@ public class Supervisor : EnemyStatus
         Effect buff = new Effect(EffectId.BONUS_DAMAGE);
         buff.SetBounusDamage(50);
         ActivateEffect(buff);
-        damageAmount += buff.GetBounusDamage();
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
 
         return ("Ultimate1", "Ultimate2", "Ultimate3");
