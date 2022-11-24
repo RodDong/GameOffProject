@@ -47,7 +47,7 @@ public class StatusBarManager : MonoBehaviour
             GameObject effectIcon = battleManager.GetEnemyEffectTransfroms()[index - 1].gameObject;
             GameObject descriptionMenu = effectIcon.GetComponentsInChildren<RectTransform>(true)[1].gameObject;
             descriptionMenu.SetActive(true);
-            string description = playerStatus.GetActiveEffects()[index - 1].GetDescription();
+            string description = enemyStatus.GetActiveEffects()[index - 1].GetDescription();
             descriptionMenu.GetComponent<TextMeshProUGUI>().text = description;
             descriptionMenu.GetComponent<RectTransform>().position = new Vector2(Input.mousePosition.x + 10.0f, Input.mousePosition.y + 10.0f);
         }

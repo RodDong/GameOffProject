@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] BattleManager battleManager;
     Animator playerAnimator;
 
-    enum State{
+    public enum State{
         Idle,
         Walk,
         Sit,
@@ -31,8 +31,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]float mPlayerSpeed = 3.0f;
     //true is right, false is left, start with left
     bool faceRight;
-    [SerializeField]State mCurState = State.Idle;
+    State mCurState = State.Idle;
 
+    public void SetCurState(State state) { mCurState = state; }
 
     void Start()
     {

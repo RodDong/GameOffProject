@@ -40,6 +40,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject PlayerMessageBox;
     [SerializeField] GameObject EnemyMessageBox;
     PlayerStatus playerStatus;
+    PlayerMove playerMove;
     EnemyStatus enemyStatus;
     List<Transform> playerEffectIconTransforms = new List<Transform>();
     List<Transform> enemyEffectIconTransforms = new List<Transform>();
@@ -73,6 +74,9 @@ public class BattleManager : MonoBehaviour
         playerStatus = player.GetComponent<PlayerStatus>();
         playerStatus.SetBattleManager(this);
 
+        //initialize player move
+        playerMove = player.GetComponent<PlayerMove>();
+
         // initialize enemy status
         enemyStatus = GameObject.FindObjectOfType<EnemyStatus>();
         if (enemyStatus == null) {
@@ -94,8 +98,18 @@ public class BattleManager : MonoBehaviour
         // all state transition is either instantanious or based on timer
         // or based user input
 
+        if (enemyStatus.GetCurrentHealth() <= 0.0f)
+        {
+            UpdateWin();
+        }
+
+        if (playerStatus.GetCurrentHealth() <= 0.0f)
+        {
+            UpdatePlayerDeath();
+        }
+
         handleKeyboardInput();
-        
+        UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
     }
 
@@ -104,17 +118,27 @@ public class BattleManager : MonoBehaviour
         mCurState = State.Battle;
     }
 
-    void ProcessEnemyTurn()
+    async void ProcessEnemyTurn()
     {
-        
+        List<Effect> activeEffects = playerStatus.GetActiveEffects();
+        Effect taunted = activeEffects.Find((Effect b) => { return b.GetEffectId() == EffectId.TAUNTED; });
+        Effect silenced = activeEffects.Find((Effect b) => { return b.GetEffectId() == EffectId.SILENCED; });
+        Effect mute = activeEffects.Find((Effect b) => { return b.GetEffectId() == EffectId.MUTE; });
         // end of player turn
         // process end of turn effects here
-
+        if(taunted == null && silenced == null && mute == null)
+        {
+            DisablePlayerSkillButtons();
+        }
+        
         // obsolete: Replaced by poison in ProcessSkill
         // if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
         //     float poisonDmg = 5.0f;
         //     playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
         // }
+
+        
+
         Debug.Log("Ending Player Turn");
 
 /*        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
@@ -124,10 +148,16 @@ public class BattleManager : MonoBehaviour
         // delay xxx sec 
         // boss speak
         EnemyTalk();
+        await Task.Delay(1000);
+
+        if (taunted == null && silenced == null && mute == null)
+        {
+            EnablePlayerSkillButtons();
+        }
+        EnemyMessageBox.SetActive(false);
         // delay 
         // boss use skill
         enemySentences = enemyStatus.MakeMove(playerStatus);
-        UpdatePlayerStatusBar();
         // delay
         Debug.Log("Ending Enemy Turn");
         //Enemy Standby Phase
@@ -142,15 +172,70 @@ public class BattleManager : MonoBehaviour
         // enable button interactions
         // adjust alpha of all buttons
         Debug.Log("Start Player Turn");
+
         UpdatePlayerHealthBar();
         UpdateEnemyHealthBar();
+        
     }
 
     void UpdatePlayerDeath()
     {
-        mCurState = State.Death;
         gamObjectsInScene.SetActive(true);
+        playerStatus.ResetCurrentHealth();
+        enemyStatus.ResetCurrentHealth();
+        playerStatus.ClearEffect();
+        enemyStatus.ClearEffect();
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
+        UpdatePlayerStatusBar();
+        UpdateEnemyStatusBar();
         battleUI.SetActive(false);
+        playerMove.SetCurState(PlayerMove.State.Idle);
+    }
+
+    void UpdateWin()
+    {
+        gamObjectsInScene.SetActive(true);
+        playerStatus.ResetCurrentHealth();
+        enemyStatus.ResetCurrentHealth();
+        playerStatus.ClearEffect();
+        enemyStatus.ClearEffect();
+        UpdatePlayerHealthBar();
+        UpdateEnemyHealthBar();
+        UpdatePlayerStatusBar();
+        UpdateEnemyStatusBar();
+        battleUI.SetActive(false);
+        playerMove.SetCurState(PlayerMove.State.Idle);
+    }
+
+    void DisablePlayerSkillButtons()
+    {
+        foreach (Transform button in SkillButtons.transform)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = false;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 0.1f;
+                buttonSprite.color = tempColor;
+            }
+        }
+    }
+
+    void EnablePlayerSkillButtons()
+    {
+        foreach (Transform button in SkillButtons.transform)
+        {
+            if (button.GetComponent<Button>())
+            {
+                button.GetComponent<Button>().interactable = true;
+                Image buttonSprite = button.gameObject.GetComponent<Image>();
+                Color tempColor = buttonSprite.color;
+                tempColor.a = 255.0f;
+                buttonSprite.color = tempColor;
+            }
+        }
     }
 
     void UpdatePlayerHealthBar()
@@ -167,11 +252,6 @@ public class BattleManager : MonoBehaviour
         float enemyMaxHealth = enemyStatus.GetMaxHealth();
         enemyHealthBar.GetComponentInChildren<Slider>().value = enemyCurHealth / enemyMaxHealth;
         enemyHealthBar.GetComponentInChildren<TextMeshProUGUI>().text = (int)enemyCurHealth + " / " + enemyMaxHealth;
-    }
-    void UpdateWin()
-    {
-        gamObjectsInScene.SetActive(true);
-        battleUI.SetActive(false);
     }
 
     #region Handle Skill Button Click
@@ -204,7 +284,7 @@ public class BattleManager : MonoBehaviour
         // disable all interactable buttons
         // lower alpha of buttons
         ProcessEnemyTurn();
-        UpdatePlayerStatusBar();
+        UpdatePlayerHealthBar();
     }
 
     #endregion
@@ -423,19 +503,7 @@ public class BattleManager : MonoBehaviour
 
     public async void ProcessSilence()
     {
-        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
-        foreach (var button in buttons)
-        {
-            if (button.GetComponent<Button>())
-            {
-                button.GetComponent<Button>().interactable = false;
-                Image buttonSprite = button.gameObject.GetComponent<Image>();
-                Color tempColor = buttonSprite.color;
-                tempColor.a = 0.1f;
-                buttonSprite.color = tempColor;
-            }
-        }
-
+        DisablePlayerSkillButtons();
         
         foreach(Transform arrow in MaskUI.transform)
         {
@@ -458,17 +526,7 @@ public class BattleManager : MonoBehaviour
         playerStatus.setEquippedEyeBrow(new EyeBrow(SkillAttribute.NONE));
         playerStatus.setEquippedEyes(new Eye(SkillAttribute.NONE));
         playerStatus.setEquippedMouth(new Mouth(SkillAttribute.NONE));
-        foreach (var button in buttons)
-        {
-            if (button.GetComponent<Button>())
-            {
-                button.GetComponent<Button>().interactable = true;
-                Image buttonSprite = button.gameObject.GetComponent<Image>();
-                Color tempColor = buttonSprite.color;
-                tempColor.a = 255.0f;
-                buttonSprite.color = tempColor;
-            }
-        }
+        EnablePlayerSkillButtons();
         UpdateSkillButtons();
 
     }
@@ -507,8 +565,6 @@ public class BattleManager : MonoBehaviour
 
     public void UnSlience()
     {
-        Transform[] buttons = SkillButtons.GetComponentsInChildren<Transform>();
-
         foreach (Transform arrow in MaskUI.transform)
         {
             if (arrow.GetComponent<Button>())
@@ -848,7 +904,7 @@ public class BattleManager : MonoBehaviour
         PlayerStopTalk();
     }
 
-    async void EnemyTalk()
+    void EnemyTalk()
     {
         EnemyMessageBox.SetActive(true);
         Debug.Log("talk");
@@ -869,10 +925,5 @@ public class BattleManager : MonoBehaviour
                 textBox.text = "Error";
                 break;
         }
-
-
-        await Task.Delay(2000);
-
-        EnemyMessageBox.SetActive(false);
     }
 }

@@ -16,6 +16,11 @@ public abstract class EnemyStatus: MonoBehaviour
     {
         return MAX_HEALTH;
     }
+
+    public void ResetCurrentHealth()
+    {
+        currentHealth = MAX_HEALTH;
+    }
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;
@@ -136,7 +141,11 @@ public abstract class EnemyStatus: MonoBehaviour
         }
         // if has bonusDMG by chaos, add to original damage
         Effect bonusDMG = Effects.Find((Effect b) => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
-        damage += bonusDMG.GetBounusDamage();
+        if (bonusDMG != null)
+        {
+            damage += bonusDMG.GetBounusDamage();
+        }
+        
         
         float dealtDamage = playerStatus.TakeDamage(damage, attribute);
         // if has lifesteal by effect of chaos, heal percentage is based on player stats

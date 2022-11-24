@@ -9510,7 +9510,6 @@ MonoBehaviour:
   cluesButton: {fileID: 2093296659}
   battleManager: {fileID: 1271687760}
   mPlayerSpeed: 1.8
-  mCurState: 0
 --- !u!95 &1054226329
 Animator:
   serializedVersion: 4

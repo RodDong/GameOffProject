@@ -5,12 +5,11 @@ using static Effect;
 
 public class Lust : EnemyStatus
 {
-    float LUST_MAXHEALTH = 150.0f;
     Queue<int> castOrder = new Queue<int>();
-
     void Awake() 
     {
-        currentHealth = LUST_MAXHEALTH;
+        MAX_HEALTH = 150.0f;
+        currentHealth = MAX_HEALTH;
     }
 
     public override (string, string, string) MakeMove(PlayerStatus playerStatus)
@@ -30,24 +29,19 @@ public class Lust : EnemyStatus
         switch (skillId)
         {
             case 0:
-                HappyATK(playerStatus);
-                break;
+                return HappyATK(playerStatus);
             case 1:
-                SadATK(playerStatus);
-                break;
+                return SadATK(playerStatus);
             case 2:
-                Secondary(playerStatus);
-                break;
+                return Secondary(playerStatus);
             case 3:
-                Ultimate(playerStatus);
-                break;
+                return Ultimate(playerStatus);
             default:
-                break;
+                return ("Error", "Error", "Error");
         }
-        return ("", "", "");
     }
 
-    private void Ultimate(PlayerStatus playerStatus) {
+    private (string, string, string) Ultimate(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses Ultimate");
         playerStatus.ActivateEffect(new Effect(EffectId.BROKEN));
         // force items to be sad, even if the player does not own them
@@ -60,25 +54,31 @@ public class Lust : EnemyStatus
         // REQUIRES mute and broken to have same duration
         playerStatus.ActivateEffect(new Effect(EffectId.MUTE));
         // note that this does not switch back equipped items once effect wears off
+        return ("Ultimate1", "Ultimate2", "Ultimate3");
     }
 
-    private void Secondary(PlayerStatus playerStatus) {
+    private (string, string, string) Secondary(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses Secondary");
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
+        return ("Happy1", "Happy2", "Happy3");
     }
 
-    private void HappyATK(PlayerStatus playerStatus) {
+    private (string, string, string) HappyATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses HappyATK");
         float damageAmount = 10.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
+        return ("Happy1", "Happy2", "Happy3");
     }
 
-    private void SadATK(PlayerStatus playerStatus) {
+    private (string, string, string) SadATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses SadATK");
         // float damageAmount = 10;
         // DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        playerStatus.ActivateEffect(new Effect(EffectId.POISON));
+        Effect poisonEffect = new Effect(EffectId.POISON);
+        poisonEffect.SetPoison(SkillAttribute.SAD, 5.0f);
+        playerStatus.ActivateEffect(poisonEffect);
+        return ("Sad1", "Sad2", "Sad3");
     }
 }

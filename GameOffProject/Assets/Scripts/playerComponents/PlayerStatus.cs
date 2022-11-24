@@ -20,6 +20,12 @@ public class PlayerStatus : MonoBehaviour
     public float GetCurrentHealth() {
         return currentHealth;
     } 
+
+    public void ResetCurrentHealth()
+    {
+        currentHealth = MAX_HEALTH;
+    }
+
     private float happyATK;
     private float happyDEF;
     private float sadATK;
