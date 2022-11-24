@@ -100,6 +100,9 @@ public class PlayerMove : MonoBehaviour
         } else {
             mCurState = State.Idle;
         }
+    }
+
+    public void EnterBattleMode() {
         mCurState = State.Battle;
         battleManager.SetBattleState(BattleManager.State.Battle);
     }

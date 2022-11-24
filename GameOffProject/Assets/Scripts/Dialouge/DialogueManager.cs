@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -24,6 +26,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
 
+    private bool toBattle = false;
+
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
 
@@ -40,7 +44,7 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
     private const string TACHIE_TAG = "tachie";
-    private const string LAYOUT_TAG = "layout";
+    private const string BATTLE_TAG = "battle";
 
     private void Awake() 
     {
@@ -100,10 +104,9 @@ public class DialogueManager : MonoBehaviour
         panelFadeIn = true;
         dialoguePanel.SetActive(true);
 
-        // reset portrait, layout, and speaker
+        // reset portrait and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
-        // layoutAnimator.Play("right");
 
         ContinueStory();
     }
@@ -119,6 +122,10 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
 
         player.ExitDialogueMode();
+        
+        if (toBattle) {
+            player.EnterBattleMode();
+        }
     }
 
     private void UpdateDialoguePanel()
@@ -267,8 +274,8 @@ public class DialogueManager : MonoBehaviour
                     tachieObject.SetActive(tagValue != "none");
                     tachieAnimator.Play(tagValue);
                     break;
-                case LAYOUT_TAG:
-                    // layoutAnimator.Play(tagValue);
+                case BATTLE_TAG:
+                    toBattle = true;
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
