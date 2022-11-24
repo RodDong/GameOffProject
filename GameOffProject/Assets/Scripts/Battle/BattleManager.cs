@@ -296,17 +296,15 @@ public class BattleManager : MonoBehaviour
         //Update playerPrevskill attribute for usage in enemy turn
         playerPrevSkillAttribute = skill.GetSkillAttribute();
 
-        List<Effect> activeEffects = playerStatus.GetActiveEffects();
-
         // Chaos changes target 
-        bool chaos = activeEffects.Contains(new Effect(EffectId.CHAOS));
+        bool chaos = playerStatus.GetActiveEffects().Contains(new Effect(EffectId.CHAOS));
 
         // Watched gives negative effects
-        bool watched = activeEffects.Contains(new Effect(EffectId.WATCHED));
+        bool watched = playerStatus.GetActiveEffects().Contains(new Effect(EffectId.WATCHED));
 
         switch (skill.getSkillType()) {
             case SkillType.ATTACK:
-                ProcessAttackSkill(skill, activeEffects, chaos);
+                ProcessAttackSkill(skill, chaos);
                 break;
             case SkillType.DEFENSE:
                 ProcessDefensiveSkill(skill, chaos);
@@ -429,10 +427,10 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    private void ProcessAttackSkill(Skill skill, List<Effect> activeEffects, bool chaos)
+    private void ProcessAttackSkill(Skill skill, bool chaos)
     {
         // if player has blind by chaos, has a chance to miss
-        Effect blind = activeEffects.Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });
+        Effect blind = playerStatus.GetActiveEffects().Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });
         if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
             // play missed animation?
             return; // MISS
@@ -440,7 +438,7 @@ public class BattleManager : MonoBehaviour
             // did not miss -> proceed as normal
             AttackSkill attackSkill = (AttackSkill) skill;
             float effectiveDamage = attackSkill.getAttackSkillDamage(playerStatus);
-            foreach (Effect effect in activeEffects)
+            foreach (Effect effect in playerStatus.GetActiveEffects())
             {
                 if (effect.GetEffectId() == Effect.EffectId.BONUS_DAMAGE)
                 {
@@ -448,7 +446,7 @@ public class BattleManager : MonoBehaviour
                 }
             }
 
-            if (activeEffects.Contains(new Effect(EffectId.FRAGILE))) {
+            if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.FRAGILE))) {
                 effectiveDamage *= 0.8f;
             }
             
@@ -461,7 +459,7 @@ public class BattleManager : MonoBehaviour
             }
 
             // if player atks player still heal if player has life steal regardless of chaos
-            foreach (Effect effect in activeEffects)
+            foreach (Effect effect in playerStatus.GetActiveEffects())
             {
                 if (effect.GetEffectId() == Effect.EffectId.LIFE_STEAL)
                 {
@@ -470,6 +468,14 @@ public class BattleManager : MonoBehaviour
                     playerStatus.ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / lifestealBaseStat) * dealtDamage);
                 }
             }
+            if (!chaos) // if !chaos, player hit enemy
+                foreach (Effect effect in enemyStatus.GetActiveEffects())
+                {
+                    if (effect.GetEffectId() == Effect.EffectId.REFLECT) // if enemt has reflect
+                    {   // damage reflected
+                        playerStatus.TakeDamage(dealtDamage, skill.GetSkillAttribute());
+                    }
+                }
         }
         // player should take dmg for angryATK regardless of missing due to blind
         if (skill.GetSkillAttribute() == SkillAttribute.ANGRY)
