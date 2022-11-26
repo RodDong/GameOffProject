@@ -5,6 +5,8 @@ using static Effect;
 
 public class Self : EnemyStatus
 {
+    private int moveCycle = 0;
+
     void Awake()
     {
         MAX_HEALTH = 300;
@@ -17,7 +19,41 @@ public class Self : EnemyStatus
         (string, string, string) curSentences = ("?","?","?");
 
         // depending on state
+        switch (moveCycle) {
+            case 0: case 3:
+                if (currentHealth > 0.8 * MAX_HEALTH) {
+                    curSentences = BonusDamageAndBlind(playerStatus);
+                } else {
+                    float rand = Random.Range(0f,1f);
+                    curSentences = (rand < currentHealth / MAX_HEALTH) 
+                    ? BonusDamageAndBlind(playerStatus) : LifeSteal(playerStatus);
+                }
+                break;
+            case 1: case 4: 
+                float playerHappyDEF = playerStatus.getDEFbyAttribute(SkillAttribute.HAPPY);
+                float playerAngryDEF = playerStatus.getDEFbyAttribute(SkillAttribute.ANGRY);
+                float playerSadDEF = playerStatus.getDEFbyAttribute(SkillAttribute.SAD);
+                if (playerAngryDEF < playerSadDEF && playerAngryDEF < playerHappyDEF) {
+                    curSentences = AngryATK(playerStatus);
+                } else if (playerSadDEF < playerAngryDEF && playerSadDEF < playerHappyDEF) {
+                    curSentences = SadATK(playerStatus);
+                } else {
+                    curSentences = HappyATK(playerStatus);
+                }
+                break;
+            case 2: 
+                if (currentHealth > 0.8 * MAX_HEALTH) {
+                    curSentences = Reflect(playerStatus);
+                } else {
+                    float rand = Random.Range(0f,1f);
+                    curSentences = (rand < currentHealth / MAX_HEALTH) 
+                    ? Reflect(playerStatus) : Heal(playerStatus);
+                }
+                break;
+            default: break;
+        }
         
+        moveCycle = (moveCycle + 1) % 5;
 
         return curSentences;
     }
