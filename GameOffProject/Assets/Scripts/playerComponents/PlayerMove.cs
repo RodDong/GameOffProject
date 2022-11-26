@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     Collider2D mPlayerCollider;
     Rigidbody2D mPlayerRigidBody;
     Transform mPlayerTransform;
+    PlayerStatus mPlayerStatus;
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject inventoryUI, inventoryButton;
     [SerializeField] GameObject cluesUI, cluesButton;
@@ -28,7 +29,9 @@ public class PlayerMove : MonoBehaviour
     }
 
     float deltaTime;
-    [SerializeField]float mPlayerSpeed = 3.0f;
+    float mPlayerSpeed = 0.0f;
+    float PLAYER_MAX_SPEED = 4.0f;
+    float PLAYER_ACCELERATION = 4.0f;
     //true is right, false is left, start with left
     bool faceRight;
     State mCurState = State.Idle;
@@ -43,6 +46,7 @@ public class PlayerMove : MonoBehaviour
         mPlayerCollider = mPlayer.GetComponent<Collider2D>();
         mPlayerRigidBody = mPlayer.GetComponent<Rigidbody2D>();
         playerAnimator = gameObject.GetComponent<Animator>();
+        mPlayerStatus = gameObject.GetComponent<PlayerStatus>();
     }
 
     void Update()
@@ -104,7 +108,11 @@ public class PlayerMove : MonoBehaviour
 
     public void EnterBattleMode() {
         mCurState = State.Battle;
+        mPlayerStatus.ResetCurrentHealth();
         battleManager.SetBattleState(BattleManager.State.Battle);
+        battleManager.ResetBattleVisuals();
+        battleManager.DeactivateGameObjectsInScene();
+        mPlayer.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void UpdatePlayerHorizontalVelocity(){
@@ -116,9 +124,16 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
+        if(mPlayerSpeed < PLAYER_MAX_SPEED)
+        {
+            mPlayerSpeed += PLAYER_ACCELERATION * deltaTime;
+        }
         Vector2 tempV = mPlayerRigidBody.velocity;
         tempV.x = Input.GetAxisRaw("Horizontal") * mPlayerSpeed;
         mPlayerRigidBody.velocity = tempV;
+
+        playerAnimator.speed = Mathf.Lerp(0.5f, 1.0f, mPlayerSpeed / PLAYER_MAX_SPEED);
+
     }
 
     void UpdateState(){
@@ -149,6 +164,7 @@ public class PlayerMove : MonoBehaviour
 
     //TODO: update player based on player state
     void UpdateIdle(){
+        mPlayerSpeed = 0.0f;
         inventoryButton.SetActive(true);
         cluesButton.SetActive(true);
         if (mPlayerRigidBody.velocity != Vector2.zero){
@@ -202,7 +218,6 @@ public class PlayerMove : MonoBehaviour
         cluesUI.SetActive(false);
         cluesButton.SetActive(false);
         battleUI.SetActive(true);
-        transform.parent.gameObject.SetActive(false);
         battleManager.UpdateEquippedMask();
         battleManager.UpdateSkillButtons();
         battleManager.UpdatePlayerStatVisual();

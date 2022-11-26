@@ -85,8 +85,7 @@ public class BattleManager : MonoBehaviour
 
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
-        UpdatePlayerHealthBar();
-        UpdateEnemyHealthBar();
+
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
     }
@@ -116,6 +115,25 @@ public class BattleManager : MonoBehaviour
     void UpdatePreparation()
     {
         mCurState = State.Battle;
+    }
+
+    public void ResetBattleVisuals()
+    {
+        UpdateEnemyHealthBar();
+        UpdatePlayerHealthBar();
+        UpdatePlayerStatVisual();
+        UpdateEnemyStatusBar();
+        UpdatePlayerStatusBar();
+    }
+
+    public void DeactivateGameObjectsInScene()
+    {
+        gamObjectsInScene.SetActive(false);
+    }
+
+    public void ActivateGameObjectsInScene()
+    {
+        gamObjectsInScene.SetActive(true);
     }
 
     async void ProcessEnemyTurn()
@@ -180,7 +198,8 @@ public class BattleManager : MonoBehaviour
 
     void UpdatePlayerDeath()
     {
-        gamObjectsInScene.SetActive(true);
+        ActivateGameObjectsInScene();
+        player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();
         enemyStatus.ResetCurrentHealth();
         playerStatus.ClearEffect();
@@ -195,7 +214,8 @@ public class BattleManager : MonoBehaviour
 
     void UpdateWin()
     {
-        gamObjectsInScene.SetActive(true);
+        ActivateGameObjectsInScene();
+        player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();
         enemyStatus.ResetCurrentHealth();
         playerStatus.ClearEffect();

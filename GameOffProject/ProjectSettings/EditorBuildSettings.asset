@@ -5,7 +5,34 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/1MCRoom.unity
+    guid: 208fca7a4d44abb48b2cc0b33f994a33
+  - enabled: 1
+    path: Assets/Scenes/2outside_office.unity
+    guid: 6cc9abb8821aa694794dd57662946081
+  - enabled: 1
+    path: Assets/Scenes/3inside_office.unity
+    guid: 07d7cb7e3df40834d97a11d4a82ccbeb
+  - enabled: 1
+    path: Assets/Scenes/4outside_clinic.unity
+    guid: 5fc1a2e9c1a3cb348b5416ccb5e7372d
+  - enabled: 1
+    path: Assets/Scenes/5inside_clinic.unity
+    guid: fd032a5b829a10846b02d4f780a34372
+  - enabled: 1
+    path: Assets/Scenes/6kitchen.unity
+    guid: 1426a429baceeeb4f8e1a35b0499476d
+  - enabled: 1
+    path: Assets/Scenes/7restaurant.unity
+    guid: 25a512b469064cc41a08b90c69274b8d
+  - enabled: 1
+    path: Assets/Scenes/8bar.unity
+    guid: c0a27854c13a59440887cac89de9c79e
+  - enabled: 1
+    path: Assets/Scenes/9studio.unity
+    guid: 43abc17476ef76347aa4fe2b5d9186da
   m_configObjects: {}
