@@ -2551,7 +2551,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -19.6027, y: 0.60149956}
   m_SizeDelta: {x: -55.9323, y: -15.9623}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4641,7 +4641,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1.6491089, y: 0.34840012}
   m_SizeDelta: {x: -35.0562, y: -20.4825}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9484,7 +9484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054226326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0.22, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9564,18 +9564,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21848765, y: 0.00023913383}
+  m_Offset: {x: 0.12493935, y: 0.028712988}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.47, y: 5.47}
-    newSize: {x: 10.94, y: 10.94}
+    oldSize: {x: 6.077778, y: 6.077778}
+    newSize: {x: 6.077778, y: 6.077778}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9403191, y: 4.9200397}
+  m_Size: {x: 1.1306455, y: 5.549315}
   m_EdgeRadius: 0
 --- !u!212 &1054226332
 SpriteRenderer:
@@ -9623,10 +9623,10 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.94, y: 10.94}
+  m_Size: {x: 6.077778, y: 6.077778}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1054226333
@@ -16354,7 +16354,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1834850491
 RectTransform:
   m_ObjectHideFlags: 0
