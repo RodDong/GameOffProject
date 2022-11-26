@@ -7,12 +7,17 @@ public class DontDestroyOnLoad : MonoBehaviour
     private static DontDestroyOnLoad instance;
     private void Awake()
     {
-        if(instance == null)
+        DontDestroyOnLoad(this);
+
+        if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
-        }else if(instance != this)
-        {
+        } else {
+            while (transform.childCount > 0){
+                foreach (Transform child in transform) {
+                    DestroyImmediate(child.gameObject);
+                }
+            }
             Destroy(gameObject);
         }
     }
