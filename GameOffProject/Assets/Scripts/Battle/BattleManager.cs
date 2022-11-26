@@ -185,7 +185,6 @@ public class BattleManager : MonoBehaviour
 
         //Enemy End Phase
         playerStatus.UpdateEffectStatus();
-        enemyStatus.UpdateEffectStatus();
         // mCurState = State.PlayerTurn;
         // enable button interactions
         // adjust alpha of all buttons
@@ -303,6 +302,7 @@ public class BattleManager : MonoBehaviour
         }
         // disable all interactable buttons
         // lower alpha of buttons
+        enemyStatus.UpdateEffectStatus();
         ProcessEnemyTurn();
         UpdatePlayerHealthBar();
     }
