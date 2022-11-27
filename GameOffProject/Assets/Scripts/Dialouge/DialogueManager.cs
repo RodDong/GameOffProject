@@ -328,6 +328,12 @@ public class DialogueManager : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             
+            Choice choice =  currentStory.currentChoices[choiceIndex];
+            switch (choice.text) {
+                case "Go to restaurant with Boss":
+
+                break;
+            }
 
             ContinueStory();
         }
