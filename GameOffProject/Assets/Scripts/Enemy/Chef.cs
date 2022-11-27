@@ -11,6 +11,8 @@ public class Chef : EnemyStatus
     private void Awake() {
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
+        dropItems.Add(new EyeBrow(SkillAttribute.HAPPY));
+        dropItems.Add(new Eye(SkillAttribute.ANGRY));
     }
 
     public void ResetChefPhase()

@@ -169,4 +169,11 @@ public abstract class EnemyStatus: MonoBehaviour
 
     [Header("Ink JSON")]
     [SerializeField] public TextAsset defeatInkJSON;
+
+    protected List<Item> dropItems;
+    public void DropItems(PlayerStatus playerStatus) {
+        foreach (Item item in dropItems) {
+            playerStatus.AddItem(item);
+        }
+    } 
 }
