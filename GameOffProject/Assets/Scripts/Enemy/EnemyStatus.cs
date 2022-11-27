@@ -161,4 +161,7 @@ public abstract class EnemyStatus: MonoBehaviour
             TakeDamage(damage, attribute);
         }
     }
+
+    [Header("Ink JSON")]
+    [SerializeField] public TextAsset defeatInkJSON;
 }
