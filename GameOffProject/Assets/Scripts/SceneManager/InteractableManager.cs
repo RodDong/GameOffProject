@@ -13,7 +13,7 @@ public class InteractableManager : MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
-    GameObject player;
+    public GameObject player;
 
     private PlayerMove playerObject;
     bool playerInRange = false;
