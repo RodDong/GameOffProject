@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] BattleManager battleManager;
     Animator playerAnimator;
 
-    public enum State{
+    public enum State {
         Idle,
         Walk,
         Sit,
@@ -37,6 +37,10 @@ public class PlayerMove : MonoBehaviour
     State mCurState = State.Idle;
 
     public void SetCurState(State state) { mCurState = state; }
+
+    public bool CanUseInteractables() { 
+        return mCurState == State.Idle || mCurState == State.Walk || mCurState == State.Sit; 
+    }
 
     void Start()
     {
@@ -90,8 +94,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void EnterDialogueMode() {
-        if (mCurState == State.Talk) {
-            Debug.LogError("Trying to enter dialogue mode when already in dialogue mode");
+        if (mCurState == State.Talk || mCurState == State.Battle) {
+            Debug.LogError("Trying to enter dialogue mode when already in dialogue/battle mode");
         } else {
             mCurState = State.Talk;
         }

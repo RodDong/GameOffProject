@@ -69,7 +69,7 @@ public class InteractableManager : MonoBehaviour
         if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
-            if (Input.GetMouseButtonUp(1) && inkJSON != null)
+            if (Input.GetMouseButtonUp(1) && inkJSON != null && playerObject.CanUseInteractables())
             {
                 playerObject.EnterDialogueMode();
                 DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
