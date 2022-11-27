@@ -228,6 +228,12 @@ public class BattleManager : MonoBehaviour
         UpdateEnemyStatusBar();
         battleUI.SetActive(false);
         playerMove.SetCurState(PlayerMove.State.Idle);
+        DisplayVictoryDialogue();
+    }
+
+    void DisplayVictoryDialogue() {
+        playerMove.EnterDialogueMode();
+        DialogueManager.GetInstance().EnterDialogueMode(enemyStatus.defeatInkJSON);
     }
 
     void DisablePlayerSkillButtons()
