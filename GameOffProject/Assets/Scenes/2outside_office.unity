@@ -561,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &802089050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,6 +1118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1271194674}
   inkJSON: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1519551283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1619486864}
   inkJSON: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0
