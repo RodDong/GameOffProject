@@ -11,6 +11,14 @@ public class Doctor : EnemyStatus
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
     }
+
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        UltimateCd = 10;
+        castOrder.Clear();
+    }
+
     public override (string, string, string) MakeMove(PlayerStatus playerStatus) {
 
         (string, string, string) curSentences;

@@ -13,6 +13,12 @@ public class Self : EnemyStatus
         currentHealth = MAX_HEALTH;
     }
 
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        moveCycle = 0;
+    }
+
     // states
     public override (string, string, string) MakeMove(PlayerStatus playerStatus)
     {

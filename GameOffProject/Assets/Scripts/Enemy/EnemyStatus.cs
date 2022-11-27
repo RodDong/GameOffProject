@@ -17,13 +17,8 @@ public abstract class EnemyStatus: MonoBehaviour
         return MAX_HEALTH;
     }
 
-    public void ResetCurrentHealth()
+    public virtual void ResetCurrentHealth()
     {
-        if(this.GetType() == typeof(Chef))
-        {
-            Chef thisEnemy = (Chef)this;
-            thisEnemy.ResetChefPhase();
-        }
         currentHealth = MAX_HEALTH;
     }
     protected float happyATK;

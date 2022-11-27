@@ -12,6 +12,12 @@ public class Lust : EnemyStatus
         currentHealth = MAX_HEALTH;
     }
 
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        castOrder.Clear();
+    }
+
     public override (string, string, string) MakeMove(PlayerStatus playerStatus)
     {
         Queue<int> castOrder = new Queue<int>();

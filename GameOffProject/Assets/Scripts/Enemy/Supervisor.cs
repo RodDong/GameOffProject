@@ -13,7 +13,14 @@ public class Supervisor : EnemyStatus
 
     int ultimateCD = 9;
     int fortifyCD = 5;
-    // states
+
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        ultimateCD = 9;
+        fortifyCD = 5;
+    }
+
     public override (string, string, string) MakeMove(PlayerStatus playerStatus)
     {
         (string, string, string) curSentences;
