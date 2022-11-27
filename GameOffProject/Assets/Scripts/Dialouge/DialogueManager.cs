@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private PlayerMove player;
+    [SerializeField] private PlayerStatus playerStatus;
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
@@ -332,6 +333,49 @@ public class DialogueManager : MonoBehaviour
             switch (choice.text) {
                 case "Go to restaurant with Boss":
 
+                break;
+                case "Go Home":
+
+                break;
+                case "Go to Office":
+
+                break;
+                case "Go to Clinic":
+
+                break;
+
+                case "Go to Restaurant":
+
+                break;
+                case "Investigate Chef's Phone":
+                    playerStatus.addClue(0);
+                break;
+                case "Investigate Chef's Guest List":
+                    playerStatus.addClue(1);
+                break;
+                case "Investigate Chef's Supply List":
+                    playerStatus.addClue(2);
+                break;
+                case "Investigate Patient Information":
+                    playerStatus.addClue(3);
+                break;
+                case "Investigate The Pictures":
+                    playerStatus.addClue(4);
+                break;
+                case "Investigate Menu":
+                    playerStatus.addClue(5);
+                break;
+                case "Investigate Record of Surgeries":
+                    playerStatus.addClue(6);
+                break;
+                case "Investigate Supervisor's Notebook":
+                    playerStatus.addClue(7);
+                break;
+                case "Investigate Supervisor's Phone":
+                    playerStatus.addClue(8);
+                break;
+                case "Investigate Supervisor's Account Book":
+                    playerStatus.addClue(9);
                 break;
             }
 
