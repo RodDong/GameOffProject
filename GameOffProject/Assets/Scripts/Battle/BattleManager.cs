@@ -232,6 +232,7 @@ public class BattleManager : MonoBehaviour
     }
 
     void DisplayVictoryDialogue() {
+        enemyStatus.DropItems(playerStatus);
         playerMove.EnterDialogueMode();
         DialogueManager.GetInstance().EnterDialogueMode(enemyStatus.defeatInkJSON);
     }

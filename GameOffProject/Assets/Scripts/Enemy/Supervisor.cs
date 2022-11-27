@@ -9,6 +9,8 @@ public class Supervisor : EnemyStatus
     {
         MAX_HEALTH = 150;
         currentHealth = MAX_HEALTH;
+        dropItems.Add(new EyeBrow(SkillAttribute.ANGRY));
+        dropItems.Add(new Mouth(SkillAttribute.ANGRY));
     }
 
     int ultimateCD = 9;

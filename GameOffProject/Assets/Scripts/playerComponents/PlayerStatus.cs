@@ -123,6 +123,28 @@ public class PlayerStatus : MonoBehaviour
     private List<Eye> ownedEyes = new List<Eye>();
     private List<Mouth> ownedMouth = new List<Mouth>();
 
+    public void AddItem(Item item) {
+        if (item is EyeBrow) {
+            if (ownedEyebrows.Contains(item as EyeBrow)) {
+                Debug.LogError("Already Owned this Item");
+                return;
+            }
+            ownedEyebrows.Add(item as EyeBrow);
+        } else if (item is Eye) {
+            if (ownedEyes.Contains(item as Eye)) {
+                Debug.LogError("Already Owned this Item");
+                return;
+            }
+            ownedEyes.Add(item as Eye); 
+        } else if (item is Mouth) {
+            if (ownedMouth.Contains(item as Mouth)) {
+                Debug.LogError("Already Owned this Item");
+                return;
+            }
+            ownedMouth.Add(item as Mouth);
+        }
+    }
+
     private List<Button> skillSet = new List<Button>();
 
     private void Awake() {
