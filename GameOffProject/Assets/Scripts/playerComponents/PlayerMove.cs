@@ -75,8 +75,11 @@ public class PlayerMove : MonoBehaviour
             || mCurState == State.UseClues) {
             return;
         }
-
-        if(Input.GetKey(KeyCode.A)){
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            mCurState = State.Idle;
+        }
+        else if (Input.GetKey(KeyCode.A)){
             if(faceRight){
                 mPlayerScale.x *= -1;
             }

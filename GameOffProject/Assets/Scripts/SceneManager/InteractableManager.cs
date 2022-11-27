@@ -13,7 +13,7 @@ public class InteractableManager : MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
-    public GameObject player;
+    [HideInInspector] public GameObject player;
 
     private PlayerMove playerObject;
     bool playerInRange = false;
@@ -62,6 +62,11 @@ public class InteractableManager : MonoBehaviour
             await Task.Delay(200);
             player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
         }
+    }
+
+    private void UpdateClues()
+    {
+
     }
 
     private void UpdateDialogue()

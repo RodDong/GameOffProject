@@ -411,6 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 14427627}
   inkJSON: {fileID: 4900000, guid: b2ac2c9f564df6149a140fbaae300ceb, type: 3}
+  player: {fileID: 0}
 --- !u!1 &113887157
 GameObject:
   m_ObjectHideFlags: 3
@@ -1473,6 +1474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1117203012}
   inkJSON: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1810547146
 GameObject:
   m_ObjectHideFlags: 0
