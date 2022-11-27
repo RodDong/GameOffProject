@@ -12,13 +12,13 @@ public class DontDestroyOnLoad : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } else {
-            while (transform.childCount > 0){
+        } else if (instance != this) {
+            while (transform.childCount > 0) {
                 foreach (Transform child in transform) {
                     DestroyImmediate(child.gameObject);
                 }
             }
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
         }
     }
 }

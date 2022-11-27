@@ -23,12 +23,12 @@ public class BattleManager : MonoBehaviour
     }
 
     //public GameObject enemy;
+    public GameObject gameObjectsInScene;
     GameObject player;
 
     [SerializeField] GameObject battleUI;
     [SerializeField] GameObject playerHealthBar;
     [SerializeField] GameObject enemyHealthBar;
-    [SerializeField] GameObject gamObjectsInScene;
     [SerializeField] GameObject eyebrowUI;
     [SerializeField] GameObject eyeUI;
     [SerializeField] GameObject mouthUI;
@@ -92,6 +92,9 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
+        if (!gameObjectsInScene) {
+            gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
+        }
         //if (mCurState == State.Preparation) { return; }
         // nothing to do here.
         // all state transition is either instantanious or based on timer
@@ -128,12 +131,12 @@ public class BattleManager : MonoBehaviour
 
     public void DeactivateGameObjectsInScene()
     {
-        gamObjectsInScene.SetActive(false);
+        gameObjectsInScene.SetActive(false);
     }
 
     public void ActivateGameObjectsInScene()
     {
-        gamObjectsInScene.SetActive(true);
+        gameObjectsInScene.SetActive(true);
     }
 
     async void ProcessEnemyTurn()
