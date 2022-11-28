@@ -6,6 +6,7 @@ using Ink.Runtime;
 using UnityEngine.EventSystems;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -323,30 +324,38 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
     }
 
-    public void MakeChoice(int choiceIndex)
+    public async void MakeChoiceAsync(int choiceIndex)
     {
         if (canContinueToNextLine) 
         {
+            Choice choice = currentStory.currentChoices[choiceIndex];
             currentStory.ChooseChoiceIndex(choiceIndex);
-            // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            
-            Choice choice =  currentStory.currentChoices[choiceIndex];
             switch (choice.text) {
                 case "Go to restaurant with Boss":
 
                 break;
                 case "Go Home":
-
+                    Debug.Log("Go Home");
+                    ExitDialogueMode();
                 break;
                 case "Go to Office":
-
+                    Debug.Log("Go to Office");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("2outside_office", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    return;
+                case "Go to Bar":
+                    Debug.Log("Go to Bar");
+                    ExitDialogueMode();
                 break;
                 case "Go to Clinic":
-
+                    Debug.Log("Go to Clinic");
+                    ExitDialogueMode();
                 break;
-
                 case "Go to Restaurant":
-
+                    Debug.Log("Go to Restaurant");
+                    ExitDialogueMode();
                 break;
                 case "Investigate Chef's Phone":
                     playerStatus.addClue(0);
