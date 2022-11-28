@@ -1,4 +1,3 @@
-Where Do You Want To Go?
+? #notext:yes
 +   Go Home
-+   Go to Office
-+   Go to Clinic
++   Go to Office and Clinic

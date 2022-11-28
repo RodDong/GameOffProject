@@ -1,4 +1,3 @@
-Where Do You Want To Go?
+? #notext:yes
 +   Go Home
-+   Go to Restaurant
-+   Go to Bar
++   Go to Bar and Restaurant
