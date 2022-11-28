@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private GameObject dialogueSubPanel;
     [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
@@ -47,6 +48,7 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string TACHIE_TAG = "tachie";
     private const string BATTLE_TAG = "battle";
+    private const string NO_TEXT_TAG = "notext";
 
     private void Awake() 
     {
@@ -193,7 +195,9 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line) 
     {
-        
+        if (line.Length > 0 && !dialogueSubPanel.activeSelf) {
+            dialogueSubPanel.SetActive(true);
+        }
         // empty the dialogue text
         dialogueText.text = line;
         dialogueText.maxVisibleCharacters = 0;
@@ -279,6 +283,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case BATTLE_TAG:
                     toBattle = true;
+                    break;
+                case NO_TEXT_TAG:
+                    dialogueSubPanel.SetActive(false);
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
