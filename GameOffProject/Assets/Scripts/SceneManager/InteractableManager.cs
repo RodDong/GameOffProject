@@ -14,6 +14,7 @@ public class InteractableManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSON;
 
     [HideInInspector] public GameObject player;
+    private DialogueManager dialogueManager;
 
     private PlayerMove playerObject;
     bool playerInRange = false;
@@ -39,6 +40,10 @@ public class InteractableManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!dialogueManager)
+        {
+            dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
+        }
         UpdateTV();
         UpdateDoor();
         UpdateDialogue();
@@ -61,29 +66,33 @@ public class InteractableManager : MonoBehaviour
             SceneManager.LoadScene(name.Substring(5), LoadSceneMode.Single);
             await Task.Delay(200);
             player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+            if (name.Substring(5) == "10street_outside_home" || name.Substring(5) == "11street_outside_restaurant" || name.Substring(5) == "12street_outside_clinic")
+            {
+                player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+            }
+            else
+            {
+                player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
         }
-    }
-
-    private void UpdateClues()
-    {
-
     }
 
     private void UpdateDialogue()
     {
-        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying && name == "OnRoomEnter")
+        if(playerInRange && !dialogueManager.dialogueIsPlaying && name == "OnRoomEnter")
         {
             playerObject.EnterDialogueMode();
-            DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            dialogueManager.EnterDialogueMode(inkJSON);
             gameObject.SetActive(false);
         }
-        else if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        else if (playerInRange && !dialogueManager.dialogueIsPlaying)
         {
             visualCue.SetActive(true);
             if (Input.GetMouseButtonUp(1) && inkJSON != null && playerObject.CanUseInteractables())
             {
                 playerObject.EnterDialogueMode();
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+                Debug.Log(dialogueManager);
+                dialogueManager.EnterDialogueMode(inkJSON);
             }
         }
         else

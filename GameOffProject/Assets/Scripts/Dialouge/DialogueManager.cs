@@ -336,27 +336,44 @@ public class DialogueManager : MonoBehaviour
                 break;
                 case "Go Home":
                     Debug.Log("Go Home");
-                    ExitDialogueMode();
-                break;
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Office":
                     Debug.Log("Go to Office");
                     StartCoroutine(ExitDialogueMode());
-                    SceneManager.LoadScene("2outside_office", LoadSceneMode.Single);
+                    SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
                     await Task.Delay(200);
                     player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
                     return;
                 case "Go to Bar":
                     Debug.Log("Go to Bar");
-                    ExitDialogueMode();
-                break;
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Clinic":
                     Debug.Log("Go to Clinic");
-                    ExitDialogueMode();
-                break;
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Restaurant":
                     Debug.Log("Go to Restaurant");
-                    ExitDialogueMode();
-                break;
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Investigate Chef's Phone":
                     playerStatus.addClue(0);
                 break;

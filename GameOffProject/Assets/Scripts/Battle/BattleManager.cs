@@ -87,8 +87,6 @@ public class BattleManager : MonoBehaviour
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
 
-        
-
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
     }
