@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class InteractableManager : MonoBehaviour
 {
@@ -65,14 +66,25 @@ public class InteractableManager : MonoBehaviour
             
             SceneManager.LoadScene(name.Substring(5), LoadSceneMode.Single);
             await Task.Delay(200);
-            player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
-            if (name.Substring(5) == "10street_outside_home" || name.Substring(5) == "11street_outside_restaurant" || name.Substring(5) == "12street_outside_clinic")
+            switch (name.Substring(5))
             {
-                player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
-            }
-            else
-            {
-                player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                case "10street_outside_home":
+                    player.transform.position = new Vector3(9.0f, -4.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    break;
+                case "11street_outside_restaurant":
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    break;
+                case "12street_outside_clinic":
+                    player.transform.position = new Vector3(-14.0f, -8.0f, 1.0f) ;
+                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    break;
+                default:
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
             }
         }
     }

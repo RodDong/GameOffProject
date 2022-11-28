@@ -1874,6 +1874,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3524755195230397352, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3524755195256239116, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_Sprite
       value: 

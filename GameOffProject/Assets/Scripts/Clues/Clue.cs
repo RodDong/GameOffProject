@@ -53,7 +53,7 @@ public class Clue
             case 3:
                 clueName = "Sim's List";
                 clueDescription = "XXX, 25 years old … healthy\nXXX, 31 years old … healthy\nXXX, 29 years old … healthy";
-                clueImageSource += "Clue_3";
+                clueImageSource += "SimList";
                 break;
             case 4:
                 clueName = "Sim's Feast Menu";
