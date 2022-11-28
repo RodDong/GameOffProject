@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,9 +22,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private PlayerMove player;
+    [SerializeField] private PlayerStatus playerStatus;
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
+
+    private bool toBattle = false;
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -40,7 +45,7 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
     private const string TACHIE_TAG = "tachie";
-    private const string LAYOUT_TAG = "layout";
+    private const string BATTLE_TAG = "battle";
 
     private void Awake() 
     {
@@ -100,10 +105,9 @@ public class DialogueManager : MonoBehaviour
         panelFadeIn = true;
         dialoguePanel.SetActive(true);
 
-        // reset portrait, layout, and speaker
+        // reset portrait and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
-        // layoutAnimator.Play("right");
 
         ContinueStory();
     }
@@ -119,6 +123,10 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
 
         player.ExitDialogueMode();
+        
+        if (toBattle) {
+            player.EnterBattleMode();
+        }
     }
 
     private void UpdateDialoguePanel()
@@ -267,8 +275,8 @@ public class DialogueManager : MonoBehaviour
                     tachieObject.SetActive(tagValue != "none");
                     tachieAnimator.Play(tagValue);
                     break;
-                case LAYOUT_TAG:
-                    // layoutAnimator.Play(tagValue);
+                case BATTLE_TAG:
+                    toBattle = true;
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
@@ -321,6 +329,55 @@ public class DialogueManager : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             
+            Choice choice =  currentStory.currentChoices[choiceIndex];
+            switch (choice.text) {
+                case "Go to restaurant with Boss":
+
+                break;
+                case "Go Home":
+
+                break;
+                case "Go to Office":
+
+                break;
+                case "Go to Clinic":
+
+                break;
+
+                case "Go to Restaurant":
+
+                break;
+                case "Investigate Chef's Phone":
+                    playerStatus.addClue(0);
+                break;
+                case "Investigate Chef's Guest List":
+                    playerStatus.addClue(1);
+                break;
+                case "Investigate Chef's Supply List":
+                    playerStatus.addClue(2);
+                break;
+                case "Investigate Patient Information":
+                    playerStatus.addClue(3);
+                break;
+                case "Investigate The Pictures":
+                    playerStatus.addClue(4);
+                break;
+                case "Investigate Menu":
+                    playerStatus.addClue(5);
+                break;
+                case "Investigate Record of Surgeries":
+                    playerStatus.addClue(6);
+                break;
+                case "Investigate Supervisor's Notebook":
+                    playerStatus.addClue(7);
+                break;
+                case "Investigate Supervisor's Phone":
+                    playerStatus.addClue(8);
+                break;
+                case "Investigate Supervisor's Account Book":
+                    playerStatus.addClue(9);
+                break;
+            }
 
             ContinueStory();
         }

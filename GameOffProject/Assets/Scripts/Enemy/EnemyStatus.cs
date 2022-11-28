@@ -1,12 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Skill;
+using static Effect;
 
 public abstract class EnemyStatus: MonoBehaviour
 {
     protected float MAX_HEALTH;
-    protected float health;
+    protected float currentHealth;
+
+    public float GetCurrentHealth() {
+        return currentHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+
+    public void ResetCurrentHealth()
+    {
+        if(this.GetType() == typeof(Chef))
+        {
+            Chef thisEnemy = (Chef)this;
+            thisEnemy.ResetChefPhase();
+        }
+        currentHealth = MAX_HEALTH;
+    }
     protected float happyATK;
     protected float happyDEF;
     protected float sadATK;
@@ -15,42 +34,39 @@ public abstract class EnemyStatus: MonoBehaviour
     protected float angryDEF;
     protected int hitsTakenCounter;
     protected int attackCounter;
-    protected List<Buff> buffs;
-    protected List<Debuff> debuffs;   
+    protected List<Effect> Effects = new List<Effect>();
 
-    // process round counters for buffs and debuffs
-    public void updateBuffDebuffStatus() {
-        for (int i = buffs.Count - 1; i >= 0; i--) {
-            if (buffs[i].decreaseCounter()) {
-                buffs.RemoveAt(i);
-            }
-        }
-        for (int i = debuffs.Count - 1; i >= 0; i--) {
-            if (debuffs[i].decreaseCounter()) {
-                debuffs.RemoveAt(i);
+    public List<Effect> GetActiveEffects() { return Effects; }
+
+    // process round counters for Effects and deEffects
+    public void UpdateEffectStatus() {
+        for (int i = Effects.Count - 1; i >= 0; i--) {
+            if (Effects[i].decreaseCounter()) {
+                Effects.RemoveAt(i);
             }
         }
     }
 
-    public bool activateBuff(Buff buff) {
-        for (int i = 0; i < buffs.Count; i++) {
-            if (buffs[i].GetBuffId() == buff.GetBuffId()) {
-                buffs[i].resetDuration();
+    public bool ActivateEffect(Effect effect) {
+        
+        for (int i = 0; i < Effects.Count; i++) {
+            if (Effects[i].GetEffectId() == effect.GetEffectId()) {
+                Effects[i].resetDuration();
                 return true;
             }
         }
-        buffs.Insert(0, buff);
+        Effects.Add(effect);
         return false;
     }
 
-    public void clearBuff() {
-        buffs.Clear();
+    public void ClearEffect() {
+        Effects.Clear();
     }
 
     private void Awake() {
         // for test purposes -
         MAX_HEALTH = 500.0f;
-        health = MAX_HEALTH;
+        currentHealth = MAX_HEALTH;
         happyATK = 50.0f;
         happyDEF = 50.0f;
         sadATK = 50.0f;
@@ -60,16 +76,30 @@ public abstract class EnemyStatus: MonoBehaviour
         // - for test purposes
     }
 
-    public bool TakeDamage(float damage) {
-        if (health <= damage) {
-            health = 0;
-            return true;
-        } else {
-            health -= damage;
-            return false;
+     public virtual float TakeDamage(float damage, SkillAttribute attribute) {
+        // if immune, takes no damage, 
+        // unless attribute is NONE, which means it is the effect of using immune
+        if (Effects.Contains(new Effect(Effect.EffectId.IMMUNE)) && attribute != SkillAttribute.NONE) {
+            return 0;
         }
+        
+        float effectiveDamage = damage * (50f / (50f + getDEFbyAttribute(attribute)));
+        currentHealth -= effectiveDamage;
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+        }
+
+        Debug.Log("Damage taken by enemy: " + effectiveDamage);
+        return effectiveDamage * Random.Range(0.95f, 1.05f);
     }
 
+    public void ProcessHealing(float healAmount) {
+        currentHealth += healAmount;
+        if (currentHealth > MAX_HEALTH) {
+            currentHealth = MAX_HEALTH;
+        }
+    }
+    
     public float getATKbyAttribute(SkillAttribute attribute) {
         switch(attribute) {
             case SkillAttribute.HAPPY:
@@ -84,17 +114,66 @@ public abstract class EnemyStatus: MonoBehaviour
     }
 
     public float getDEFbyAttribute(SkillAttribute attribute) {
+        
+        float fortifiedDEF = 0; 
+        if (Effects.Contains(new Effect(EffectId.FORTIFIED))) {
+            // temp value for testing
+            fortifiedDEF += 100.0f;
+        }
+
+        float baseDEF;
         switch(attribute) {
             case SkillAttribute.HAPPY:
-                return happyDEF;
+                return happyDEF + fortifiedDEF;
             case SkillAttribute.SAD:
-                return sadDEF;
+                return sadDEF + fortifiedDEF;
             case SkillAttribute.ANGRY:
-                return angryDEF;
+                return angryDEF + fortifiedDEF;
             default:
-                return 0.0f;
+                baseDEF = 0.0f;
+                break;
+        }
+
+        return baseDEF + fortifiedDEF;
+    }
+    //return the skill attribute that was used
+    public abstract (string, string, string) MakeMove(PlayerStatus playerStatus);
+
+    public virtual void DealDamage(PlayerStatus playerStatus, float damage, SkillAttribute attribute) {
+        Effect blind = Effects.Find((Effect b) => { return b.GetEffectId() == EffectId.BLIND; });
+        if (blind != null && Random.Range(0f, 1f) < blind.GetBlindPercentage()) {
+            return; // MISS
+        }
+        // if has bonusDMG by chaos, add to original damage
+        Effect bonusDMG = Effects.Find((Effect b) => { return b.GetEffectId() == EffectId.BONUS_DAMAGE; });
+        if (bonusDMG != null)
+        {
+            damage += bonusDMG.GetBounusDamage();
+        }
+        
+        
+        float dealtDamage = playerStatus.TakeDamage(damage, attribute);
+        // if has lifesteal by effect of chaos, heal percentage is based on player stats
+        foreach (Effect Effect in Effects)
+        {
+            if (Effect.GetEffectId() == EffectId.LIFE_STEAL)
+            {
+                // the denominator can be adjusted later depending on stats and life steal ratio
+                ProcessHealing((playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) / 100.0f) * dealtDamage);
+            }
+        }
+        if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.REFLECT))){
+            TakeDamage(damage, attribute);
         }
     }
 
-    public abstract void makeMove(PlayerStatus playerStatus);
+    [Header("Ink JSON")]
+    [SerializeField] public TextAsset defeatInkJSON;
+
+    protected List<Item> dropItems;
+    public void DropItems(PlayerStatus playerStatus) {
+        foreach (Item item in dropItems) {
+            playerStatus.AddItem(item);
+        }
+    } 
 }

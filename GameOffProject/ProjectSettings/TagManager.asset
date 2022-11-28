@@ -3,15 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Black
+  - ObjectsToHide
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EffectUI
   - Water
   - UI
-  - 
+  - CameraConfiner
   - 
   - 
   - 

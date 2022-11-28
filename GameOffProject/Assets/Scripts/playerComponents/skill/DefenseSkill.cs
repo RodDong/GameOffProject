@@ -9,12 +9,31 @@ public class DefenseSkill : Skill
     private int reflectCounter;
     public DefenseSkill(SkillAttribute attribute) {
         this.attribute = attribute;
+        
+        type = SkillType.DEFENSE;
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                type = SkillType.DEFENSE;
-                attribute = SkillAttribute.HAPPY;
                 displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_default";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.ANGRY:
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_angry";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.SAD:
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "def_sad";
+                power = 50;
+                immuneCounter = 1;
+                break;
+            case SkillAttribute.HAPPY:
+                displayName = "test defense";
+                skillImage = imgRoot + "EmptyButton/" + "heal_happy";
                 power = 50;
                 immuneCounter = 1;
                 break;
