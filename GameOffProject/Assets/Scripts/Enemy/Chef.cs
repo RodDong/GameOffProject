@@ -13,6 +13,7 @@ public class Chef : EnemyStatus
         currentHealth = MAX_HEALTH;
         dropItems.Add(new EyeBrow(SkillAttribute.HAPPY));
         dropItems.Add(new Eye(SkillAttribute.ANGRY));
+        enemyImage = imgRoot + "Chef_Battle";
     }
 
     public void ResetChefPhase()

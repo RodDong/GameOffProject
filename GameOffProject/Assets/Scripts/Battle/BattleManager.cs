@@ -27,6 +27,7 @@ public class BattleManager : MonoBehaviour
     GameObject player;
 
     [SerializeField] GameObject battleUI;
+    [SerializeField] GameObject EnemyImage;
     [SerializeField] GameObject playerHealthBar;
     [SerializeField] GameObject enemyHealthBar;
     [SerializeField] GameObject eyebrowUI;
@@ -86,6 +87,8 @@ public class BattleManager : MonoBehaviour
         buffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/buff");
         debuffIcon = Resources.Load<Sprite>("Art/UI/buffIcons/debuff");
 
+        
+
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
     }
@@ -109,6 +112,8 @@ public class BattleManager : MonoBehaviour
         {
             UpdatePlayerDeath();
         }
+
+        EnemyImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(enemyStatus.enemyImage);
 
         handleKeyboardInput();
         UpdatePlayerStatusBar();
@@ -421,6 +426,13 @@ public class BattleManager : MonoBehaviour
                 }
 
                 break;
+            case SkillAttribute.NONE:
+                Effect reducedEffect = new Effect(EffectId.REDUCED);
+                reducedEffect.SetAttackReduction(10.0f, SkillAttribute.SAD);
+                reducedEffect.SetAttackReduction(10.0f, SkillAttribute.HAPPY);
+                reducedEffect.SetAttackReduction(10.0f, SkillAttribute.ANGRY);
+                enemyStatus.ActivateEffect(reducedEffect);
+                break;
         }
     }
 
@@ -455,6 +467,13 @@ public class BattleManager : MonoBehaviour
                     playerStatus.ActivateEffect(new Effect(EffectId.REFLECT));
                 }
                 break;
+            case SkillAttribute.NONE:
+                if (chaos) {
+                    enemyStatus.ActivateEffect(new Effect(EffectId.FORTIFIED));
+                } else {
+                    playerStatus.ActivateEffect(new Effect(EffectId.FORTIFIED));
+                }
+                break;
         }
     }
     private void ProcessAttackSkill(Skill skill, bool chaos)
@@ -482,6 +501,18 @@ public class BattleManager : MonoBehaviour
             
             float dealtDamage;
             // default target = enemy
+            SkillAttribute attr = skill.GetSkillAttribute();
+            if (attr == SkillAttribute.NONE) {
+                float rand = Random.Range(0,3);
+                if (rand < 1) {
+                    attr = SkillAttribute.HAPPY;
+                } else if (rand < 2) {
+                    attr = SkillAttribute.SAD;
+                } else {
+                    attr = SkillAttribute.ANGRY;
+                }
+            }
+
             if (chaos) {
                 dealtDamage = playerStatus.TakeDamage(effectiveDamage, skill.GetSkillAttribute());
             } else {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DefenseSkill : Skill
 {
-    private const float k = 1.0f;
+    private const float k = 0.5f;
     private int immuneCounter;
     private int reflectCounter;
     public DefenseSkill(SkillAttribute attribute) {
@@ -22,19 +22,19 @@ public class DefenseSkill : Skill
             case SkillAttribute.ANGRY:
                 displayName = "test defense";
                 skillImage = imgRoot + "EmptyButton/" + "def_angry";
-                power = 50;
+                power = 1;
                 immuneCounter = 1;
                 break;
             case SkillAttribute.SAD:
                 displayName = "test defense";
                 skillImage = imgRoot + "EmptyButton/" + "def_sad";
-                power = 50;
+                power = 1;
                 immuneCounter = 1;
                 break;
             case SkillAttribute.HAPPY:
                 displayName = "test defense";
                 skillImage = imgRoot + "EmptyButton/" + "heal_happy";
-                power = 50;
+                power = 1;
                 immuneCounter = 1;
                 break;
         }
