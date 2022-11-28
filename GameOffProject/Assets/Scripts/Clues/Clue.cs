@@ -78,7 +78,7 @@ public class Clue
                 break;
             case 8:
                 clueName = "Boss' Phone";
-                clueDescription = "Phone is locked. There is an unread message: ";
+                clueDescription = "Phone is locked. There is an unread message: \n From Sim: Wanna have a joyful night together? See you at the same place~";
                 clueImageSource += "Boss_phone";
                 break;
             case 9:
@@ -90,17 +90,17 @@ public class Clue
                 clueName = "Doctor's Phone";
                 clueDescription = "The Doctor's phone. Someone is sending him a message. \n " + 
                 "Mr. L: \"See you outside Thyrsus, as always. Remember to bring my pay-checks. Also, don't forget to let me know what to get next month.\"";
-                clueImageSource += "Cat_Phone";
+                clueImageSource += "Doctor_phone";
                 break;
             case 11:
                 clueName = "Doctor's Name List";
                 clueDescription = "Proud sponsors and Investors of Maston Clinics. Has the boss's name on it with a decent amount of money.";
-                clueImageSource += "Clue_11";
+                clueImageSource += "Doctor_notebook";
                 break;
             case 12:
                 clueName = "Doctor's Cargo";
                 clueDescription = "Deliver to FEAST. \n In need of lungs... hearts...";
-                clueImageSource += "Clue_12";
+                clueImageSource += "Doctor_file";
                 break;
             default:
                 clueName = "";

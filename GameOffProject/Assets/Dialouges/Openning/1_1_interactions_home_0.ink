@@ -6,7 +6,6 @@
     * sit at table.
     ->sit_0
     * go to door.
-    -> to_work_0
 -> interactions_0
 
 -(tv_0)
