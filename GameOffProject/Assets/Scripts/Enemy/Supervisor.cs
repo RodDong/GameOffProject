@@ -12,6 +12,7 @@ public class Supervisor : EnemyStatus
         tachie = "Art/BossTachie/Supervisor";
         dropItems.Add(new EyeBrow(SkillAttribute.ANGRY));
         dropItems.Add(new Mouth(SkillAttribute.ANGRY));
+        enemyImage = imgRoot + "Boss_Battle";
     }
 
     int ultimateCD = 9;
@@ -53,7 +54,7 @@ public class Supervisor : EnemyStatus
         Debug.Log("Boss Supervisor Uses Ultimate");
         float damageAmount = 50;
         Effect buff = new Effect(EffectId.BONUS_DAMAGE);
-        buff.SetBounusDamage(50);
+        buff.SetBounusDamage(20);
         ActivateEffect(buff);
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
 
@@ -69,20 +70,20 @@ public class Supervisor : EnemyStatus
 
     private (string, string, string) AngryATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Supervisor Uses Angry Attack");
-        float damageAmount = 30;
+        float damageAmount = 10;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
         Effect effect = new Effect(EffectId.WEAK);
-        effect.SetDefenseReduction(30, SkillAttribute.SAD);
+        effect.SetDefenseReduction(20, SkillAttribute.SAD);
         playerStatus.ActivateEffect(effect);
         return ("AngryATK1", "AngryATK2", "AngryATK3");
     }
 
     private (string, string, string) SadATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Supervisor Uses Sad Attack");
-        float damageAmount = 30;
+        float damageAmount = 10;
         DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
         Effect effect = new Effect(EffectId.WEAK);
-        effect.SetDefenseReduction(30, SkillAttribute.ANGRY);
+        effect.SetDefenseReduction(20, SkillAttribute.ANGRY);
         playerStatus.ActivateEffect(effect);
         return ("SadATK1", "SadATK2", "SadATK3");
     }

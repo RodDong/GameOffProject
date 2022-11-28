@@ -51,53 +51,54 @@ public class Clue
                 clueImageSource += "Clue_2";
                 break;
             case 3:
-                clueName = "List of Patient Information";
-                clueDescription = "“XXX, 25 years old … healthy\nXXX, 31 years old … healthy\nXXX, 29 years old … healthy";
+                clueName = "Sim's List";
+                clueDescription = "XXX, 25 years old … healthy\nXXX, 31 years old … healthy\nXXX, 29 years old … healthy";
                 clueImageSource += "Clue_3";
                 break;
             case 4:
-                clueName = "Some Pictures of Organs";
+                clueName = "Sim's Pictures";
                 clueDescription = "heart? Lung? brain? What are these for?";
                 clueImageSource += "Clue_4";
                 break;
             case 5:
-                clueName = "Feast Menu";
+                clueName = "Sim's Feast Menu";
                 clueDescription = "The one that he told me before. But the menu looks not like a usual restaurant.";
                 clueImageSource += "Clue_5";
                 break;
             case 6:
-                clueName = "Record of Surgeries";
-                clueDescription = "Surgeries? This signature looks familiar.";
+                clueName = "Sim's Records";
+                clueDescription = "A list of surgery records. This signature looks familiar.";
                 clueImageSource += "Clue_6";
                 break;
             case 7:
-                clueName = "Supervisor's Notebook";
+                clueName = "Boss' Notebook";
                 clueDescription = "Content of Clue 7";
                 clueImageSource += "Clue_7";
                 break;
             case 8:
-                clueName = "Supervisor's Phone";
+                clueName = "Boss' Phone";
                 clueDescription = "Phone is locked. There is an unread message: ";
                 clueImageSource += "Clue_8";
                 break;
             case 9:
-                clueName = "Account Book";
+                clueName = "Boss' Ledger";
                 clueDescription = "It is a ledger that records the embezzlement of public funds by Mr. L to subsidize the doctor.";
                 clueImageSource += "Clue_9";
                 break;
             case 10:
-                clueName = "Clue 10";
-                clueDescription = "Content of Clue 10";
+                clueName = "Doctor's Phone";
+                clueDescription = "The Doctor's phone. Someone is sending him a message. \n " + 
+                "Mr. L: \"See you outside Thyrsus, as always. Remember to bring my pay-checks. Also, don't forget to let me know what to get next month.\"";
                 clueImageSource += "Clue_10";
                 break;
             case 11:
-                clueName = "Clue 11";
-                clueDescription = "Content of Clue 11";
+                clueName = "Doctor's Name List";
+                clueDescription = "Proud sponsors and Investors of Maston Clinics. Has the boss's name on it with a decent amount of money.";
                 clueImageSource += "Clue_11";
                 break;
             case 12:
-                clueName = "Clue 12";
-                clueDescription = "Content of Clue 12";
+                clueName = "Doctor's Cargo";
+                clueDescription = "Deliver to FEAST. \n In need of lungs... hearts...";
                 clueImageSource += "Clue_12";
                 break;
             default:

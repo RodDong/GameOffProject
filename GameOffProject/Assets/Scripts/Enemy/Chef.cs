@@ -14,6 +14,7 @@ public class Chef : EnemyStatus
         tachie = "Art/BossTachie/Chef";
         dropItems.Add(new EyeBrow(SkillAttribute.HAPPY));
         dropItems.Add(new Eye(SkillAttribute.ANGRY));
+        enemyImage = imgRoot + "Chef_Battle";
     }
 
     public override void ResetCurrentHealth()

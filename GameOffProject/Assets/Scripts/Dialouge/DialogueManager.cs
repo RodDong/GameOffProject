@@ -6,6 +6,7 @@ using Ink.Runtime;
 using UnityEngine.EventSystems;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -125,6 +126,7 @@ public class DialogueManager : MonoBehaviour
         player.ExitDialogueMode();
         
         if (toBattle) {
+            toBattle = false;
             player.EnterBattleMode();
         }
     }
@@ -322,31 +324,56 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
     }
 
-    public void MakeChoice(int choiceIndex)
+    public async void MakeChoiceAsync(int choiceIndex)
     {
         if (canContinueToNextLine) 
         {
+            Choice choice = currentStory.currentChoices[choiceIndex];
             currentStory.ChooseChoiceIndex(choiceIndex);
-            // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            
-            Choice choice =  currentStory.currentChoices[choiceIndex];
             switch (choice.text) {
                 case "Go to restaurant with Boss":
 
                 break;
                 case "Go Home":
-
-                break;
+                    Debug.Log("Go Home");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Office":
-
-                break;
+                    Debug.Log("Go to Office");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    return;
+                case "Go to Bar":
+                    Debug.Log("Go to Bar");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Clinic":
-
-                break;
-
+                    Debug.Log("Go to Clinic");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Go to Restaurant":
-
-                break;
+                    Debug.Log("Go to Restaurant");
+                    StartCoroutine(ExitDialogueMode());
+                    SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                    await Task.Delay(200);
+                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+                    player.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    break;
                 case "Investigate Chef's Phone":
                     playerStatus.addClue(0);
                 break;
@@ -376,6 +403,15 @@ public class DialogueManager : MonoBehaviour
                 break;
                 case "Investigate Supervisor's Account Book":
                     playerStatus.addClue(9);
+                break;
+                case "Investigate Doctor's Phone":
+                    playerStatus.addClue(10);
+                break;
+                case "Investigate Doctor's Sponsor List":
+                    playerStatus.addClue(11);
+                break;
+                case "Investigate Doctor's Cargo":
+                    playerStatus.addClue(12);
                 break;
             }
 

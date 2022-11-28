@@ -1971,7 +1971,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3524755195804349190}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: MakeChoice
+        m_MethodName: MakeChoiceAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2600,6 +2600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectsInScene: {fileID: 0}
   battleUI: {fileID: 3524755195678495037}
+  EnemyImage: {fileID: 3524755194621190683}
   playerHealthBar: {fileID: 3524755194489588842}
   enemyHealthBar: {fileID: 3524755195889379624}
   eyebrowUI: {fileID: 3524755195386931961}
@@ -3491,7 +3492,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3524755195804349190}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: MakeChoice
+        m_MethodName: MakeChoiceAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3854,7 +3855,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3524755195804349190}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: MakeChoice
+        m_MethodName: MakeChoiceAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7183,14 +7184,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3524755195804349190}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: MakeChoice
+        m_MethodName: MakeChoiceAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3524755194599651603
@@ -7251,7 +7252,7 @@ GameObject:
   - component: {fileID: 3524755194621190676}
   - component: {fileID: 3524755194621190679}
   - component: {fileID: 3524755194621190678}
-  - component: {fileID: 3524755194621190677}
+  - component: {fileID: 1179152445}
   m_Layer: 5
   m_Name: Tachie
   m_TagString: Untagged
@@ -7276,8 +7277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 250}
+  m_AnchoredPosition: {x: 0, y: 58}
+  m_SizeDelta: {x: 565.1992, y: 565.1992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3524755194621190679
 CanvasRenderer:
@@ -7307,7 +7308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc9d76a0416cdac4e9f0e78e15796aed, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7317,26 +7318,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &3524755194621190677
-Animator:
-  serializedVersion: 4
+--- !u!223 &1179152445
+Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3524755194621190683}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 154b185ebfc0bc8428aa6fc15b5c7fb0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &3524755194663424056
 GameObject:
   m_ObjectHideFlags: 0
@@ -7596,7 +7598,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3524755195804349190}
         m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-        m_MethodName: MakeChoice
+        m_MethodName: MakeChoiceAsync
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12447,7 +12449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc9d76a0416cdac4e9f0e78e15796aed, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -114,7 +114,7 @@ public abstract class EnemyStatus: MonoBehaviour
         float fortifiedDEF = 0; 
         if (Effects.Contains(new Effect(EffectId.FORTIFIED))) {
             // temp value for testing
-            fortifiedDEF += 100.0f;
+            fortifiedDEF += 50.0f;
         }
 
         float baseDEF;
@@ -147,6 +147,10 @@ public abstract class EnemyStatus: MonoBehaviour
             damage += bonusDMG.GetBounusDamage();
         }
         
+        Effect reductionEffect = Effects.Find(element => element.GetEffectId() == EffectId.REDUCED);
+        if (reductionEffect != null) {
+            damage -= reductionEffect.GetAttackReduction(attribute);
+        }
         
         float dealtDamage = playerStatus.TakeDamage(damage, attribute);
         // if has lifesteal by effect of chaos, heal percentage is based on player stats
@@ -166,10 +170,13 @@ public abstract class EnemyStatus: MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField] public TextAsset defeatInkJSON;
 
-    protected List<Item> dropItems;
+    protected List<Item> dropItems = new List<Item>();
     public void DropItems(PlayerStatus playerStatus) {
         foreach (Item item in dropItems) {
             playerStatus.AddItem(item);
         }
-    }
+    } 
+
+    protected string imgRoot = "Art/Tachies/";
+    public string enemyImage;
 }

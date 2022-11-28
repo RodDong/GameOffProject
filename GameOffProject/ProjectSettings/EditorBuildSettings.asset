@@ -35,4 +35,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/9studio.unity
     guid: 43abc17476ef76347aa4fe2b5d9186da
+  - enabled: 1
+    path: Assets/Scenes/10street_outside_home.unity
+    guid: f252fe94f05768e4ab8ce0538989859f
+  - enabled: 1
+    path: Assets/Scenes/11street_outside_restaurant.unity
+    guid: 59404de908d290843820996ce1d06374
+  - enabled: 1
+    path: Assets/Scenes/12street_outside_clinic.unity
+    guid: 56a7ea93173fca849ae38008a7a67f98
   m_configObjects: {}

@@ -155,23 +155,20 @@ public class PlayerStatus : MonoBehaviour
 
         ownedEyebrows.Add(equippedEyebrow);
         ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
-        ownedEyebrows.Add(new EyeBrow(SkillAttribute.SAD));
-        ownedEyebrows.Add(new EyeBrow(SkillAttribute.ANGRY));
         ownedEyes.Add(equippedEyes);
-        ownedEyes.Add(new Eye(SkillAttribute.HAPPY));
-        ownedEyes.Add(new Eye(SkillAttribute.SAD));
-        ownedEyes.Add(new Eye(SkillAttribute.ANGRY));
+        // ownedEyes.Add(new Eye(SkillAttribute.HAPPY));
+        // ownedEyes.Add(new Eye(SkillAttribute.SAD));
+        // ownedEyes.Add(new Eye(SkillAttribute.ANGRY));
         ownedMouth.Add(equippedMouth);
-        ownedMouth.Add(new Mouth(SkillAttribute.HAPPY));
-        ownedMouth.Add(new Mouth(SkillAttribute.SAD));
-        ownedMouth.Add(new Mouth(SkillAttribute.ANGRY));
+        // ownedMouth.Add(new Mouth(SkillAttribute.HAPPY));
+        // ownedMouth.Add(new Mouth(SkillAttribute.SAD));
+        // ownedMouth.Add(new Mouth(SkillAttribute.ANGRY));
 
         updateStatus();
 
-        ownedClues.Add(new Clue(0));
-        ownedClues.Add(new Clue(5));
-        ownedClues.Add(new Clue(6));
-        ownedClues.Add(new Clue(12));
+        for (int i = 0; i <= 12; i++) {
+            ownedClues.Add(new Clue(i));
+        }
         // Effects.Add(new Effect(EffectId.BLIND));
         // Effects.Add(new Effect(EffectId.POISON));
         // Effects.Add(new Effect(EffectId.IMMUNE));
@@ -280,6 +277,12 @@ public class PlayerStatus : MonoBehaviour
             stolen = stolenEffect.GetStolenAmount(attribute);
         }
 
+        float fortifiedDEF = 0; 
+        if (effects.Contains(new Effect(EffectId.FORTIFIED))) {
+            // temp value for testing
+            fortifiedDEF += 20.0f;
+        }
+
         float attributeFromItem;
         switch(attribute) {
             case SkillAttribute.HAPPY:
@@ -296,7 +299,7 @@ public class PlayerStatus : MonoBehaviour
                 break;
         }
 
-        return attributeFromItem - reduction - stolen;
+        return attributeFromItem - reduction - stolen + fortifiedDEF;
     }
 
     public void setHappyATK(float happyATK) {
