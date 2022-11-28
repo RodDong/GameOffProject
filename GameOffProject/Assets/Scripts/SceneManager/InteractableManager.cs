@@ -71,7 +71,13 @@ public class InteractableManager : MonoBehaviour
 
     private void UpdateDialogue()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying && name == "OnRoomEnter")
+        {
+            playerObject.EnterDialogueMode();
+            DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+            gameObject.SetActive(false);
+        }
+        else if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
             if (Input.GetMouseButtonUp(1) && inkJSON != null && playerObject.CanUseInteractables())

@@ -23,6 +23,7 @@ public class Eye : Item
                 imageSrc = imgRoot + "2EyeDefault_N";
                 highLightedImage = imgRoot + "2EyeDefault_H";
                 selectedImage = imgRoot + "2EyeDefault_S";
+                playerMaskImageSrc = playerMaskRoot + "2EyeDefault_N";
                 break;
             case SkillAttribute.HAPPY:
                 happyATK = 50f;
@@ -37,6 +38,7 @@ public class Eye : Item
                 imageSrc = imgRoot + "2EyeH_N";
                 highLightedImage = imgRoot + "2EyeH_H";
                 selectedImage = imgRoot + "2EyeH_S";
+                playerMaskImageSrc = playerMaskRoot + "2EyeH_N";
                 break;
             case SkillAttribute.SAD:
                 happyATK = 10f;
@@ -51,6 +53,7 @@ public class Eye : Item
                 imageSrc = imgRoot + "2EyeS_N";
                 highLightedImage = imgRoot + "2EyeS_H";
                 selectedImage = imgRoot + "2EyeS_S";
+                playerMaskImageSrc = playerMaskRoot + "2EyeS_N";
                 break;
             case SkillAttribute.ANGRY:
                 happyATK = 30f;
@@ -65,6 +68,7 @@ public class Eye : Item
                 imageSrc = imgRoot + "2EyeA_N";
                 highLightedImage = imgRoot + "2EyeA_H";
                 selectedImage = imgRoot + "2EyeA_S";
+                playerMaskImageSrc = playerMaskRoot + "2EyeA_N";
                 break;
         }
     }

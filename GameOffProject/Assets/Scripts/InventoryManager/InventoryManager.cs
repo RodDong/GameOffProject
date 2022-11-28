@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Data;
+using Mono.Cecil;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Button eyeButton;
     [SerializeField] private Button eyeBrowButton;
     [SerializeField] private Button mouthButton;
+    [SerializeField] private GameObject eyeBrowMask;
+    [SerializeField] private GameObject mouthMask;
+    [SerializeField] private GameObject eyeMask;
     private GameObject player;
     private PlayerStatus playerStatus;
 
@@ -79,6 +83,10 @@ public class InventoryManager : MonoBehaviour
         InitializeButtonSpriteState(eyeBrowButton, equippedEyebrow);
         InitializeButtonSpriteState(eyeButton, equippedEyes);
         InitializeButtonSpriteState(mouthButton, equippedMouth);
+        Debug.Log(equippedEyes.getPlayerMaskImage());
+        eyeMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getPlayerMaskImage());
+        eyeBrowMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getPlayerMaskImage());
+        mouthMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getPlayerMaskImage());
     }
 
     public void UpdateEyebrowDisplay()

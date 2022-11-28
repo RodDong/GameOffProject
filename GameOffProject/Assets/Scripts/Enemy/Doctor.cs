@@ -10,6 +10,7 @@ public class Doctor : EnemyStatus
     private void Awake() {
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
+        tachie = "Art/BossTachie/Doctor";
         dropItems.Add(new Eye(SkillAttribute.SAD));
         dropItems.Add(new Mouth(SkillAttribute.SAD));
     }

@@ -1437,7 +1437,7 @@ GameObject:
   - component: {fileID: 1792673431}
   - component: {fileID: 1792673432}
   m_Layer: 0
-  m_Name: Door_1MCRoom
+  m_Name: Door_12street_outside_clinic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

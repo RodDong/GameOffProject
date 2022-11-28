@@ -15,8 +15,10 @@ public abstract class Item
     protected string imageSrc;
     protected string highLightedImage;
     protected string selectedImage;
+    protected string playerMaskImageSrc;
     protected string itemDescription;
     protected string imgRoot = "Art/UI/Buttons/";
+    protected string playerMaskRoot = "Art/PlayerTachie/";
     protected string itemType;
     protected SkillAttribute attribute;
 
@@ -57,6 +59,11 @@ public abstract class Item
     public string getSelectedImage()
     {
         return selectedImage;
+    }
+
+    public string getPlayerMaskImage()
+    {
+        return playerMaskImageSrc;
     }
     public string getDescription()
     {

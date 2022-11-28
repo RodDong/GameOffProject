@@ -23,6 +23,7 @@ public class EyeBrow : Item
                 imageSrc = imgRoot + "1EyebrowDefault_N";
                 highLightedImage = imgRoot + "1EyebrowDefault_H";
                 selectedImage = imgRoot + "1EyebrowDefault_S";
+                playerMaskImageSrc = playerMaskRoot + "1EyebrowDefault_N";
                 break;
             case SkillAttribute.HAPPY:
                 happyATK = 0f;
@@ -36,6 +37,7 @@ public class EyeBrow : Item
                 imageSrc = imgRoot + "1EyebrowH_N";
                 highLightedImage = imgRoot + "1EyebrowH_H";
                 selectedImage = imgRoot + "1EyebrowH_S";
+                playerMaskImageSrc = playerMaskRoot + "1EyebrowH_N";
                 break;
             case SkillAttribute.SAD:
                 happyATK = 0f;
@@ -49,6 +51,7 @@ public class EyeBrow : Item
                 imageSrc = imgRoot + "1EyebrowS_N";
                 highLightedImage = imgRoot + "1EyebrowS_H";
                 selectedImage = imgRoot + "1EyebrowS_S";
+                playerMaskImageSrc = playerMaskRoot + "1EyebrowS_N";
                 break;
             case SkillAttribute.ANGRY:
                 happyATK = 30f;
@@ -61,6 +64,7 @@ public class EyeBrow : Item
                 imageSrc = imgRoot + "1EyebrowA_N";
                 highLightedImage = imgRoot + "1EyebrowA_H";
                 selectedImage = imgRoot + "1EyebrowA_S";
+                playerMaskImageSrc = playerMaskRoot + "1EyebrowA_N";
                 break;
         }
         

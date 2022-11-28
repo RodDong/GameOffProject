@@ -10,6 +10,7 @@ public class Lust : EnemyStatus
     {
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
+        tachie = "Art/BossTachie/Lust";
         dropItems.Add(new EyeBrow(SkillAttribute.SAD));
         dropItems.Add(new Eye(SkillAttribute.HAPPY));
         dropItems.Add(new Mouth(SkillAttribute.HAPPY));

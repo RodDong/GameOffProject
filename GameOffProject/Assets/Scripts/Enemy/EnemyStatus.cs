@@ -29,6 +29,7 @@ public abstract class EnemyStatus: MonoBehaviour
     protected float angryDEF;
     protected int hitsTakenCounter;
     protected int attackCounter;
+    protected string tachie = "";
     protected List<Effect> Effects = new List<Effect>();
 
     public List<Effect> GetActiveEffects() { return Effects; }
@@ -170,5 +171,5 @@ public abstract class EnemyStatus: MonoBehaviour
         foreach (Item item in dropItems) {
             playerStatus.AddItem(item);
         }
-    } 
+    }
 }

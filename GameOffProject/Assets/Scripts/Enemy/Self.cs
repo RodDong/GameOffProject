@@ -10,6 +10,7 @@ public class Self : EnemyStatus
     void Awake()
     {
         MAX_HEALTH = 300;
+        tachie = "Art/BossTachie/Self";
         currentHealth = MAX_HEALTH;
     }
 
