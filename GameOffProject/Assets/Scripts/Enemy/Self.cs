@@ -10,7 +10,14 @@ public class Self : EnemyStatus
     void Awake()
     {
         MAX_HEALTH = 300;
+        tachie = "Art/BossTachie/Self";
         currentHealth = MAX_HEALTH;
+    }
+
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        moveCycle = 0;
     }
 
     // states

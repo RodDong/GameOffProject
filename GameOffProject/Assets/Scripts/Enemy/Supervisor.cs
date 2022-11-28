@@ -9,6 +9,7 @@ public class Supervisor : EnemyStatus
     {
         MAX_HEALTH = 150;
         currentHealth = MAX_HEALTH;
+        tachie = "Art/BossTachie/Supervisor";
         dropItems.Add(new EyeBrow(SkillAttribute.ANGRY));
         dropItems.Add(new Mouth(SkillAttribute.ANGRY));
         enemyImage = imgRoot + "Boss_Battle";
@@ -16,7 +17,14 @@ public class Supervisor : EnemyStatus
 
     int ultimateCD = 9;
     int fortifyCD = 5;
-    // states
+
+    public override void ResetCurrentHealth()
+    {
+        base.ResetCurrentHealth();
+        ultimateCD = 9;
+        fortifyCD = 5;
+    }
+
     public override (string, string, string) MakeMove(PlayerStatus playerStatus)
     {
         (string, string, string) curSentences;

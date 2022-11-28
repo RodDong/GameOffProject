@@ -11,13 +11,15 @@ public class Chef : EnemyStatus
     private void Awake() {
         MAX_HEALTH = 150.0f;
         currentHealth = MAX_HEALTH;
+        tachie = "Art/BossTachie/Chef";
         dropItems.Add(new EyeBrow(SkillAttribute.HAPPY));
         dropItems.Add(new Eye(SkillAttribute.ANGRY));
         enemyImage = imgRoot + "Chef_Battle";
     }
 
-    public void ResetChefPhase()
+    public override void ResetCurrentHealth()
     {
+        base.ResetCurrentHealth();
         chefPhase = 0;
     }
     public override (string, string, string) MakeMove(PlayerStatus playerStatus) {
