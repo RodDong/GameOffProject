@@ -125,6 +125,7 @@ public class DialogueManager : MonoBehaviour
         player.ExitDialogueMode();
         
         if (toBattle) {
+            toBattle = false;
             player.EnterBattleMode();
         }
     }
@@ -376,6 +377,15 @@ public class DialogueManager : MonoBehaviour
                 break;
                 case "Investigate Supervisor's Account Book":
                     playerStatus.addClue(9);
+                break;
+                case "Investigate Doctor's Phone":
+                    playerStatus.addClue(10);
+                break;
+                case "Investigate Doctor's Sponsor List":
+                    playerStatus.addClue(11);
+                break;
+                case "Investigate Doctor's Cargo":
+                    playerStatus.addClue(12);
                 break;
             }
 
