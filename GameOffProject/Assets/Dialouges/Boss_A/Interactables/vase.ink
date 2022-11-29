@@ -1,0 +1,3 @@
+// (门口花瓶) 
+-(vase)
+Such a big vase, it seems like an…antique? Just for decoration? Oh there’s a tag here. It says: jardiniere. Hmmm…
