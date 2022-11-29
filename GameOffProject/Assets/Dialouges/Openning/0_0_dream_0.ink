@@ -15,7 +15,7 @@ You stared at that bulb of light, of flesh, of yourself.
 You were staring back at you. A you.
 YOU, much more primitive, much more advanced.
 Fuller, beams with love and hate and want and all the things you failed to recognize.
-Definitely not nothingness, eh? #TODO
+Definitely not nothingness, eh? 
 What are those things that lightened you? You, that YOU in front of this you.
 You are overwhelmed with things completely outside of your understanding.
 Love of what and hate of what? One who carries all of these feelings and is consumed by them?
@@ -33,8 +33,9 @@ It comes closer.
 
 You gasped. 
 
-“Here, go on. Drive me away all you will.”#speaker:P #portrait:neutural #tachie:none #  TODO 
+“Here, go on. Drive me away all you will.”#speaker:P #portrait:neutural #tachie:none
 “Drive yourself away? A bit too courageous for you, don’t you think?” #speaker:??? #portrait:neutural #tachie:none
 “Oh, poor, poor, poor you.”#speaker:??? #portrait:neutural #tachie:none
-“Because you have nothing, as far as I see.”#speaker:??? #portrait:neutural #tachie:none
+“Because you have nothing, as far as I see.”#speaker:??? #portrait:neutural #tachie:none #battle:start
 
+-> DONE

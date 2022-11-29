@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     State mCurState = State.Idle;
 
     public void SetCurState(State state) { mCurState = state; }
-
+    public State GetCurState() { return mCurState; }
     public bool CanUseInteractables() { 
         return mCurState == State.Idle || mCurState == State.Walk || mCurState == State.Sit; 
     }

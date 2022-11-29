@@ -11,6 +11,8 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEditor.Search;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class BattleManager : MonoBehaviour
 {
@@ -89,6 +91,7 @@ public class BattleManager : MonoBehaviour
 
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
+
     }
 
     void Update()
@@ -201,7 +204,7 @@ public class BattleManager : MonoBehaviour
         
     }
 
-    void UpdatePlayerDeath()
+    async void UpdatePlayerDeath()
     {
         ActivateGameObjectsInScene();
         player.GetComponent<SpriteRenderer>().enabled = true;
@@ -215,6 +218,12 @@ public class BattleManager : MonoBehaviour
         UpdateEnemyStatusBar();
         battleUI.SetActive(false);
         playerMove.SetCurState(PlayerMove.State.Idle);
+        if (FindObjectOfType<OpeningManager>(true) != null)
+        {
+            SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+            await Task.Delay(200);
+            player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+        }
     }
 
     void UpdateWin()

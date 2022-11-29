@@ -9,7 +9,7 @@ public class Supervisor : EnemyStatus
     {
         MAX_HEALTH = 150;
         currentHealth = MAX_HEALTH;
-        tachie = "Art/BossTachie/Supervisor";
+        tachie = "Art/BossTachie/Boss";
         dropItems.Add(new EyeBrow(SkillAttribute.ANGRY));
         dropItems.Add(new Mouth(SkillAttribute.ANGRY));
         enemyImage = imgRoot + "Boss_Battle";

@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualCue: {fileID: 0}
+  visualCue: {fileID: 926184444}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
 --- !u!61 &626493361
@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualCue: {fileID: 0}
+  visualCue: {fileID: 1310935333}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
 --- !u!61 &1910900174

@@ -106,8 +106,8 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         panelFadeIn = true;
+        panelFadeOut = false;
         dialoguePanel.SetActive(true);
-
         // reset portrait and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
@@ -121,6 +121,7 @@ public class DialogueManager : MonoBehaviour
         
         dialogueIsPlaying = false;
         panelFadeOut = true;
+        panelFadeIn = false;
         dialoguePanel.SetActive(false);
         
         dialogueText.text = "";
@@ -139,8 +140,7 @@ public class DialogueManager : MonoBehaviour
         {
             FadeIn();
         }
-
-        if (panelFadeOut)
+        else if (panelFadeOut)
         {
             FadeOut();
         }
@@ -149,24 +149,23 @@ public class DialogueManager : MonoBehaviour
     private void FadeIn()
     {
         CanvasGroup dialoguePanelCanvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
-        
         if(dialoguePanelCanvasGroup.alpha < 1.0f)
         {
-            dialoguePanelCanvasGroup.alpha += Time.deltaTime;
+            dialoguePanelCanvasGroup.alpha += Time.deltaTime * 5.0f;
         }
         else
         {
             panelFadeIn = false;
         }
+
     }
 
     private void FadeOut()
     {
         CanvasGroup dialoguePanelCanvasGroup = dialoguePanel.GetComponent<CanvasGroup>();
-        
-        if(dialoguePanelCanvasGroup.alpha > 0.0f)
+        if (dialoguePanelCanvasGroup.alpha > 0.0f)
         {
-            dialoguePanelCanvasGroup.alpha -= Time.deltaTime;
+            dialoguePanelCanvasGroup.alpha -= Time.deltaTime * 5.0f;
         }
         else
         {
@@ -283,6 +282,7 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case BATTLE_TAG:
                     toBattle = true;
+                    ExitDialogueMode();
                     break;
                 case NO_TEXT_TAG:
                     dialogueSubPanel.SetActive(false);

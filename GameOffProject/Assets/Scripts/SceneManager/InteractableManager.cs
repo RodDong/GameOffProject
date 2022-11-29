@@ -63,7 +63,7 @@ public class InteractableManager : MonoBehaviour
         string name = gameObject.name;
         if (name.StartsWith("Door_") && playerInRange && Input.GetMouseButtonUp(1))
         {
-            
+            string curScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(name.Substring(5), LoadSceneMode.Single);
             await Task.Delay(200);
             switch (name.Substring(5))
@@ -73,12 +73,91 @@ public class InteractableManager : MonoBehaviour
                     player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                     break;
                 case "11street_outside_restaurant":
-                    player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
-                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    if(curScene == "7restaurant")
+                    {
+                        player.transform.position = new Vector3(-2.69f, 0.0f, 1.0f);
+                        player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    }
+                    else
+                    {
+                        player.transform.position = new Vector3(2.62f, 0.0f, 1.0f);
+                        player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    }
                     break;
                 case "12street_outside_clinic":
-                    player.transform.position = new Vector3(-14.0f, -8.0f, 1.0f) ;
-                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    Debug.Log(curScene);
+                    if(curScene == "2outside_office")
+                    {
+                        player.transform.position = new Vector3(12.5f, -2.0f, 1.0f);
+                        player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    }else if(curScene == "4outside_clinic")
+                    {
+                        player.transform.position = new Vector3(-7.57f, -2.0f, 1.0f);
+                        player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    }
+                    
+                    break;
+                case "1MCRoom":
+                    player.transform.position = new Vector3(6.7f, -2.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case "2outside_office":
+                    if(curScene == "3inside_office")
+                    {
+                        player.transform.position = new Vector3(19.33f, -2.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    else
+                    {
+                        player.transform.position = new Vector3(-20.9f, -2.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    
+                    break;
+                case "4outside_clinic":
+                    if (curScene == "5inside_clinic")
+                    {
+                        player.transform.position = new Vector3(1.45f, -1.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    else
+                    {
+                        player.transform.position = new Vector3(8.24f, 0.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    
+                    break;
+                case "3inside_office":
+                    player.transform.position = new Vector3(7.83f, -2.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case "5inside_clinic":
+                    player.transform.position = new Vector3(-10.7f, -2.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case "6kitchen":
+                    player.transform.position = new Vector3(-11.4f, -1.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case "7restaurant":
+                    player.transform.position = new Vector3(-13.5f, -1.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case "8bar":
+                    if(curScene == "11street_outside_restaurant")
+                    {
+                        player.transform.position = new Vector3(14.79f, -1.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    else
+                    {
+                        player.transform.position = new Vector3(-14.79f, -1.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    }
+                    break;
+                case "9studio":
+                    player.transform.position = new Vector3(13.47f, -1.0f, 1.0f);
+                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 default:
                     player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);

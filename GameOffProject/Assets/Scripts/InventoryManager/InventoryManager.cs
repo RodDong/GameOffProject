@@ -83,7 +83,6 @@ public class InventoryManager : MonoBehaviour
         InitializeButtonSpriteState(eyeBrowButton, equippedEyebrow);
         InitializeButtonSpriteState(eyeButton, equippedEyes);
         InitializeButtonSpriteState(mouthButton, equippedMouth);
-        Debug.Log(equippedEyes.getPlayerMaskImage());
         eyeMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyes.getPlayerMaskImage());
         eyeBrowMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedEyebrow.getPlayerMaskImage());
         mouthMask.GetComponent<Image>().sprite = Resources.Load<Sprite>(equippedMouth.getPlayerMaskImage());

@@ -13,6 +13,7 @@ public class Doctor : EnemyStatus
         tachie = "Art/BossTachie/Doctor";
         dropItems.Add(new Eye(SkillAttribute.SAD));
         dropItems.Add(new Mouth(SkillAttribute.SAD));
+        enemyImage = imgRoot + "Doctor_Battle";
     }
 
     public override void ResetCurrentHealth()

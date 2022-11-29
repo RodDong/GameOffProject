@@ -14,6 +14,7 @@ public class Lust : EnemyStatus
         dropItems.Add(new EyeBrow(SkillAttribute.SAD));
         dropItems.Add(new Eye(SkillAttribute.HAPPY));
         dropItems.Add(new Mouth(SkillAttribute.HAPPY));
+        enemyImage = imgRoot + "Lust_Battle";
     }
 
     public override void ResetCurrentHealth()

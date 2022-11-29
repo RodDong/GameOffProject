@@ -12,6 +12,7 @@ public class Self : EnemyStatus
         MAX_HEALTH = 300;
         tachie = "Art/BossTachie/Self";
         currentHealth = MAX_HEALTH;
+        enemyImage = imgRoot + "Self_Battle";
     }
 
     public override void ResetCurrentHealth()
