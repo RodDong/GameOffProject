@@ -632,7 +632,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 776c7cc397a2ed1489b78ff05edb5db1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -931,7 +931,6 @@ GameObject:
   - component: {fileID: 1601781083}
   - component: {fileID: 1601781082}
   - component: {fileID: 1601781084}
-  - component: {fileID: 1601781085}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -1008,18 +1007,6 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 636367417}
   m_Damping: 0.5
   m_MaxWindowSize: -1
---- !u!114 &1601781085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601781081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfc279665ab48f648b306c3c3dd02d09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1640382888
 GameObject:
   m_ObjectHideFlags: 0

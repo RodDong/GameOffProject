@@ -220,9 +220,11 @@ public class BattleManager : MonoBehaviour
         playerMove.SetCurState(PlayerMove.State.Idle);
         if (FindObjectOfType<OpeningManager>(true) != null)
         {
+            player.GetComponent<SpriteRenderer>().enabled = false;
             SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
             await Task.Delay(200);
             player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+            player.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 

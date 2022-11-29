@@ -16,7 +16,7 @@ public class OpeningManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
         blackScreen = GameObject.FindGameObjectWithTag("Black");
-        
+        player.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame

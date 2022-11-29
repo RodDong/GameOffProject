@@ -282,7 +282,6 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case BATTLE_TAG:
                     toBattle = true;
-                    ExitDialogueMode();
                     break;
                 case NO_TEXT_TAG:
                     dialogueSubPanel.SetActive(false);

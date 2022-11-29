@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
     float PLAYER_ACCELERATION = 4.0f;
     //true is right, false is left, start with left
     bool faceRight;
-    State mCurState = State.Idle;
+    [SerializeField]State mCurState = State.Idle;
 
     public void SetCurState(State state) { mCurState = state; }
     public State GetCurState() { return mCurState; }
