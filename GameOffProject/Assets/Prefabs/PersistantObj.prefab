@@ -3026,6 +3026,7 @@ Transform:
   - {fileID: 3524755194065649147}
   - {fileID: 3524755195773128510}
   - {fileID: 3524755193854398954}
+  - {fileID: 8524612457614651498}
   m_Father: {fileID: 3524755194599651596}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16929,7 +16930,6 @@ MonoBehaviour:
   continueIcon: {fileID: 3524755195243857995}
   dialogueText: {fileID: 3524755195855640585}
   displayNameText: {fileID: 3524755193898465681}
-  portraitAnimator: {fileID: 0}
   tachieObject: {fileID: 3524755195256239121}
   tachieAnimator: {fileID: 3524755195256239123}
   player: {fileID: 1563613737}
@@ -18188,3 +18188,48 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &7830690020055453793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8524612457614651498}
+  - component: {fileID: 2867478533324104054}
+  m_Layer: 0
+  m_Name: ProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8524612457614651498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830690020055453793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3524755194142744876}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2867478533324104054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830690020055453793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6373177267f19834e836c70dc6713fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentProgress: 0
