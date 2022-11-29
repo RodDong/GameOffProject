@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 14427627}
-  inkJSON: {fileID: 4900000, guid: 303b05f4988b9b44a90f7ae12d8b9e1e, type: 3}
+  inkJSON: {fileID: 4900000, guid: 4dbe89143382aaf4294ad711e567f62c, type: 3}
   player: {fileID: 0}
 --- !u!1 &113887157
 GameObject:
@@ -759,9 +759,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1563613737, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: walkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 998addfe11aaaf94e8e42546edd4947b, type: 3}
+    - target: {fileID: 1563613737, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: walkingOutsideClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 54aa111b4e59f8545be29d2a0d4c34b7, type: 3}
     - target: {fileID: 1563613739, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_GravityScale
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755193898465681, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_margin.x
+      value: 7.736591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755193898465681, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_margin.z
+      value: -729.591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755193898465681, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755193898465681, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3524755194065649141, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: isOpening

@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class OpeningManager : MonoBehaviour
 {
     GameObject player;
     private DialogueManager dialogueManager;
     GameObject blackScreen;
-    [SerializeField] TextAsset inkJson;
+    [SerializeField] TextAsset dreamJson;
+    [SerializeField] TextAsset endDreamJson;
+    [SerializeField] GameObject canvas;
+    bool endDream = false;
     float timer = 0.0f;
     // Start is called before the first frame update
     void Start()
@@ -33,16 +38,31 @@ public class OpeningManager : MonoBehaviour
 
         PlayerMove.State curState = player.GetComponent<PlayerMove>().GetCurState();
 
-        if (curState == PlayerMove.State.Battle)
-        {
-            gameObject.SetActive(false);
-        }
-
-        
         if (curState != PlayerMove.State.Talk && curState != PlayerMove.State.Battle)
         {
-            player.GetComponent<PlayerMove>().EnterDialogueMode();
-            dialogueManager.EnterDialogueMode(inkJson);
+            if (endDream) {
+                exitEndDream();
+            } else {
+                player.GetComponent<PlayerMove>().EnterDialogueMode();
+                dialogueManager.EnterDialogueMode(dreamJson);
+            }
         }
+
+    }
+
+    public void playEndDream() {
+        endDream = true;
+        player.GetComponent<SpriteRenderer>().enabled = false;
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(endDreamJson);
+    }
+
+    async void exitEndDream() {
+        canvas.SetActive(false);
+        SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+        await Task.Delay(200);
+        player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+        player.GetComponent<SpriteRenderer>().enabled = true;
+        canvas.SetActive(true);
     }
 }

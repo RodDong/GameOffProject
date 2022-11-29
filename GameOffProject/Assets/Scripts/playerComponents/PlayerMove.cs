@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] GameObject inventoryUI, inventoryButton;
     [SerializeField] GameObject cluesUI, cluesButton;
     [SerializeField] BattleManager battleManager;
+    [SerializeField] public AudioClip walkingClip, walkingOutsideClip;
     Animator playerAnimator;
+    AudioSource walkingAudio;
 
     public enum State {
         Idle,
@@ -34,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     float PLAYER_ACCELERATION = 4.0f;
     //true is right, false is left, start with left
     bool faceRight;
-    [SerializeField]State mCurState = State.Idle;
+    [SerializeField] State mCurState = State.Idle;
 
     public void SetCurState(State state) { mCurState = state; }
     public State GetCurState() { return mCurState; }
@@ -51,6 +54,7 @@ public class PlayerMove : MonoBehaviour
         mPlayerRigidBody = mPlayer.GetComponent<Rigidbody2D>();
         playerAnimator = gameObject.GetComponent<Animator>();
         mPlayerStatus = gameObject.GetComponent<PlayerStatus>();
+        walkingAudio = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -83,13 +87,19 @@ public class PlayerMove : MonoBehaviour
             if(faceRight){
                 mPlayerScale.x *= -1;
             }
-            mCurState = State.Walk;
+            if (!walkingAudio.isPlaying) {
+                walkingAudio.Play();
+                mCurState = State.Walk;
+            }
         }
         else if(Input.GetKey(KeyCode.D)){
             if(!faceRight){
                 mPlayerScale.x *= -1;
             }
-            mCurState = State.Walk;
+            if (!walkingAudio.isPlaying) {
+                walkingAudio.Play();
+                mCurState = State.Walk;
+            }
         }
 
         //update player rotation using scaleX
@@ -97,6 +107,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void EnterDialogueMode() {
+        walkingAudio.time = 0.0f;
+        walkingAudio.Stop();
         if (mCurState == State.Talk || mCurState == State.Battle) {
             Debug.LogError("Trying to enter dialogue mode when already in dialogue/battle mode");
         } else {
@@ -105,7 +117,6 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void ExitDialogueMode() {
-        
         if (mCurState != State.Talk) {
             Debug.LogError("Trying to exit dialogue mode when not in dialogue mode");
         } else {
@@ -174,7 +185,7 @@ public class PlayerMove : MonoBehaviour
         mPlayerSpeed = 0.0f;
         inventoryButton.SetActive(true);
         cluesButton.SetActive(true);
-        if (mPlayerRigidBody.velocity != Vector2.zero){
+        if (mPlayerRigidBody.velocity != Vector2.zero) {
             mCurState = State.Walk;
         }
         if (inventoryUI.activeSelf)
@@ -190,15 +201,21 @@ public class PlayerMove : MonoBehaviour
     void UpdateWalk(){
         inventoryButton.SetActive(true);
         cluesButton.SetActive(true);
-        if (mPlayerRigidBody.velocity == Vector2.zero){
+        if (mPlayerRigidBody.velocity == Vector2.zero) {
+            walkingAudio.time = 0.0f;
+            walkingAudio.Stop();
             mCurState = State.Idle;
         }
         if (inventoryUI.activeSelf)
         {
+            walkingAudio.time = 0.0f;
+            walkingAudio.Stop();
             mCurState = State.UseInventory;
         }
         else if (cluesUI.activeSelf)
         {
+            walkingAudio.time = 0.0f;
+            walkingAudio.Stop();
             mCurState = State.UseClues;
         }
         playerAnimator.Play("PlayerWalk");

@@ -12,7 +12,6 @@ using System.Linq;
 using UnityEditor.Search;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 
 public class BattleManager : MonoBehaviour
 {
@@ -204,7 +203,7 @@ public class BattleManager : MonoBehaviour
         
     }
 
-    async void UpdatePlayerDeath()
+    void UpdatePlayerDeath()
     {
         ActivateGameObjectsInScene();
         player.GetComponent<SpriteRenderer>().enabled = true;
@@ -220,11 +219,7 @@ public class BattleManager : MonoBehaviour
         playerMove.SetCurState(PlayerMove.State.Idle);
         if (FindObjectOfType<OpeningManager>(true) != null)
         {
-            player.GetComponent<SpriteRenderer>().enabled = false;
-            SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
-            await Task.Delay(200);
-            player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
-            player.GetComponent<SpriteRenderer>().enabled = true;
+            FindObjectOfType<OpeningManager>(true).playEndDream();
         }
     }
 

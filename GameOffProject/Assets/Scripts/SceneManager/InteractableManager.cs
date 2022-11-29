@@ -71,6 +71,7 @@ public class InteractableManager : MonoBehaviour
                 case "10street_outside_home":
                     player.transform.position = new Vector3(9.0f, -4.0f, 1.0f);
                     player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingOutsideClip;
                     break;
                 case "11street_outside_restaurant":
                     if(curScene == "7restaurant")
@@ -83,6 +84,7 @@ public class InteractableManager : MonoBehaviour
                         player.transform.position = new Vector3(2.62f, 0.0f, 1.0f);
                         player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                     }
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingOutsideClip;
                     break;
                 case "12street_outside_clinic":
                     Debug.Log(curScene);
@@ -95,11 +97,12 @@ public class InteractableManager : MonoBehaviour
                         player.transform.position = new Vector3(-7.57f, -2.0f, 1.0f);
                         player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                     }
-                    
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingOutsideClip;
                     break;
                 case "1MCRoom":
                     player.transform.position = new Vector3(6.7f, -2.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "2outside_office":
                     if(curScene == "3inside_office")
@@ -112,7 +115,7 @@ public class InteractableManager : MonoBehaviour
                         player.transform.position = new Vector3(-20.9f, -2.0f, 1.0f);
                         player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     }
-                    
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "4outside_clinic":
                     if (curScene == "5inside_clinic")
@@ -125,23 +128,27 @@ public class InteractableManager : MonoBehaviour
                         player.transform.position = new Vector3(8.24f, 0.0f, 1.0f);
                         player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     }
-                    
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "3inside_office":
                     player.transform.position = new Vector3(7.83f, -2.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "5inside_clinic":
                     player.transform.position = new Vector3(-10.7f, -2.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "6kitchen":
                     player.transform.position = new Vector3(-11.4f, -1.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "7restaurant":
                     player.transform.position = new Vector3(-13.5f, -1.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "8bar":
                     if(curScene == "11street_outside_restaurant")
@@ -154,10 +161,12 @@ public class InteractableManager : MonoBehaviour
                         player.transform.position = new Vector3(-14.79f, -1.0f, 1.0f);
                         player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     }
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "9studio":
                     player.transform.position = new Vector3(13.47f, -1.0f, 1.0f);
                     player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 default:
                     player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);

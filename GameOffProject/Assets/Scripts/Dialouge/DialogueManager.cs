@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
-    [SerializeField] private Animator portraitAnimator;
+    //[SerializeField] private Animator portraitAnimator;
     [SerializeField] private GameObject tachieObject;
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager instance;
 
     private const string SPEAKER_TAG = "speaker";
-    private const string PORTRAIT_TAG = "portrait";
+    //private const string PORTRAIT_TAG = "portrait";
     private const string TACHIE_TAG = "tachie";
     private const string BATTLE_TAG = "battle";
     private const string NO_TEXT_TAG = "notext";
@@ -110,7 +110,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         // reset portrait and speaker
         displayNameText.text = "???";
-        portraitAnimator.Play("default");
+        //portraitAnimator.Play("default");
 
         ContinueStory();
     }
@@ -273,9 +273,9 @@ public class DialogueManager : MonoBehaviour
                 case SPEAKER_TAG:
                     displayNameText.text = tagValue;
                     break;
-                case PORTRAIT_TAG:
-                    portraitAnimator.Play(tagValue);
-                    break;
+                // case PORTRAIT_TAG:
+                //     portraitAnimator.Play(tagValue);
+                //     break;
                 case TACHIE_TAG:
                     tachieObject.SetActive(tagValue != "none");
                     tachieAnimator.Play(tagValue);

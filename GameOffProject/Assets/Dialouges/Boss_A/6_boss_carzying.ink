@@ -1,7 +1,14 @@
 // 「上司办公室门口」
-// 「sound of something broken」
-He seems really angry…Is that the sound of smashing the ashtray?
+// location: in the office in front of the boss's door
 
-"MC, get your ass here! How many minutes can you waste?" #speaker:Boss #portrait:neutural #tachie:none
+\*sound of something broken\*
+
+\*more sound of something broken\*
+
+Is that the sound of smashing the ashtray?
+
+He seems really angry… I'd better be careful.
+
+"YOU! get your ASS here! How many minutes can you waste?" #speaker:B #portrait:neutural #tachie:none
 
 Fine, just be as improvised as possible.

@@ -334,6 +334,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatInkJSON: {fileID: 0}
   enemyImage: 
+--- !u!1 &356400917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3524755195042842958, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+  m_PrefabInstance: {fileID: 3524755194320106012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &610020872
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55efab453621fa4093822e017adbd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 4900000, guid: abc108d7ab8e47244a628eea1332d2a1, type: 3}
+  dreamJson: {fileID: 4900000, guid: 42945b3a79638284d878ab25efcfcbff, type: 3}
+  endDreamJson: {fileID: 4900000, guid: e64d4dc4597cae648bba3c3ae7f0a132, type: 3}
+  canvas: {fileID: 356400917}
 --- !u!4 &1332508187
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,6 +1531,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3524755195042842958, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3524755195230397352, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1540,6 +1551,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3524755195855640585, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 56a74c64b4dba7b4b81cc72786bcdec1, type: 2}
+    - target: {fileID: 3524755195855640585, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755195855640585, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6011997350144538697, guid: 56a74c64b4dba7b4b81cc72786bcdec1, type: 2}
     m_RemovedComponents:
     - {fileID: 3524755194621190677, guid: 38598c39c8404b646961ae61e401e441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 38598c39c8404b646961ae61e401e441, type: 3}
