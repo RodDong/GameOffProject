@@ -1293,6 +1293,7 @@ GameObject:
   - component: {fileID: 1762129719}
   - component: {fileID: 1762129718}
   - component: {fileID: 1762129717}
+  - component: {fileID: 1762129722}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1433,6 +1434,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1762129722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762129716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9ce8a3649352545b267ff3e20c75fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress1: {fileID: 4900000, guid: ba757c427e1465142a7b4ddeb5485424, type: 3}
+  clinicDoorCollider: {fileID: 447608598}
+  subwayCollider: {fileID: 1383318412}
 --- !u!1 &1830754993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1460,7 @@ GameObject:
   - component: {fileID: 1830754994}
   - component: {fileID: 1830754996}
   - component: {fileID: 1830754995}
+  - component: {fileID: 1830754997}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1509,6 +1526,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830754993}
   m_CullTransparentMesh: 1
+--- !u!114 &1830754997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830754993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a372494e3deee74cbf068e7d855f9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1933365196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1729,6 @@ GameObject:
   - component: {fileID: 2045194967}
   - component: {fileID: 2045194966}
   - component: {fileID: 2045194965}
-  - component: {fileID: 2045194964}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1708,18 +1736,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2045194964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045194963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a372494e3deee74cbf068e7d855f9bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2045194965
 MonoBehaviour:
   m_ObjectHideFlags: 0
