@@ -36,6 +36,10 @@ public class InteractableManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerObject.GetCurState() == PlayerMove.State.Talk || playerObject.GetCurState() == PlayerMove.State.Battle) {
+            return;
+        }
+        
         if (!dialogueManager)
         {
             dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
