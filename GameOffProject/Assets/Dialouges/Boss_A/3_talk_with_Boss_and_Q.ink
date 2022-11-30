@@ -1,6 +1,6 @@
 // location: restaurant
 
-There’s a lot of people gathering there, should be the one mentioned “prestigious” before. 
+There's a lot of people gathering there, should be the one mentioned "prestigious" before. 
 
 In case he calls me, I shall go there to check.
  
@@ -11,7 +11,7 @@ In case he calls me, I shall go there to check.
 
 "You did well this time." #speaker:Q #portrait:neutural #tachie:none
 
-"I can do well is because of your tips. Without your instructions, I cannot accomplish this far. And also, with your tips, I've been able to stay in this position for so long! But there is still too little I can help you now. My subordinates are so useless, and the things I can come into contact with are limited. You see…" #speaker:B #portrait:neutural #tachie:none
+"I can do well is because of your tips. Without your instructions, I cannot accomplish this far. And also, with your tips, I've been able to stay in this position for so long! But there is still too little I can help you now. My subordinates are so useless, and the things I can come into contact with are limited. You see..." #speaker:B #portrait:neutural #tachie:none
 
 "Well, if you keep enthusiastic like this, you will get what you want in a very short time." #speaker:Q #portrait:neutural #tachie:none
 
@@ -23,11 +23,11 @@ In case he calls me, I shall go there to check.
 
 Why he tries this hard. That prestigious people may just promise with blank check. What is the point of that. 
 
-Ah…I don’t really want to go there but…fine
+Ah...I don't really want to go there but...fine
 
 // 「走到上司和权贵面前」
 
-Wait there’s something on the floor…?Eh…
+Wait there's something on the floor...?Eh...
 
 \*sound of something broken\*
 
@@ -39,8 +39,6 @@ Wait there’s something on the floor…?Eh…
 
 "You stupid and useless idiot! Get out!" #speaker:B #portrait:neutural #tachie:none
 
-"O……………Ok"  #speaker:P #portrait:neutural #tachie:none
+"O...Ok"  #speaker:P #portrait:neutural #tachie:none
 
-His face looks so…twisted. I shall leave immediately.
-
-
+His face looks so...twisted. I shall leave immediately.

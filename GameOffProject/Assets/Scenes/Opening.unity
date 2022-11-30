@@ -200,6 +200,17 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &40723853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2867478533324104054, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+  m_PrefabInstance: {fileID: 3524755194320106012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6373177267f19834e836c70dc6713fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &113887157
 GameObject:
   m_ObjectHideFlags: 3
@@ -1551,6 +1562,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3524755195804349190, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: progressManager
+      value: 
+      objectReference: {fileID: 40723853}
     - target: {fileID: 3524755195855640585, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_fontAsset
       value: 
