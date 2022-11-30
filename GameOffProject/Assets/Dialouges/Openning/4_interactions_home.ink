@@ -24,7 +24,7 @@ There are hardly any other options, by the way.
 
 Offices after offices, documents after documents, bosses after bosses, clients after clients, bills after bills...
 
-A hopeless looYou get paid a little more than nothing for sitting in an air-conditioned jail 11 hours a day.
+A hopeless loop. You get paid a little more than nothing for sitting in an air-conditioned jail 11 hours a day.
 
 Besides, you'll have neither time nor energy to spend what you earn.
 

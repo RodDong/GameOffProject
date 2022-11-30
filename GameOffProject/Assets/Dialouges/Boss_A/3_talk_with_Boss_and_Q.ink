@@ -21,9 +21,9 @@ In case he calls me, I shall go there to check.
 
 (turned to Mr. Quan) "I am sorry that my subordinate is so ungraceful. He worths nothing to be cared." #speaker:B #portrait:neutural #tachie:none
 
-Why he tries this hard. That prestigious people may just promise with blank check. What is the point of that. 
+Why he tries this hard. That prestigious people may just promise with blank check. What is the point of that.  #speaker: ___
 
-Ah...I don't really want to go there but...fine
+Ah...I don't really want to go there but...fine 
 
 // 「走到上司和权贵面前」
 

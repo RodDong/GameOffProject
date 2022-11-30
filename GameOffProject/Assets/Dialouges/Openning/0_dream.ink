@@ -26,7 +26,7 @@ The simplest thing.
 "...KEEP OFF! Please! What is this place? What——"#speaker:P #tachie:none
 "This is the very place that trapped both you and me. Ugh, it disgusts me to say that. You and me." #speaker:??? #tachie:none
 "Please just let go of me, please. I will never come here, never again. I'm SORRY! I ... I-- Please, let me go, let me get back as normal! I never dared to bother you, and never again I shall! I swear!" #speaker:P #tachie:none
-"But, my dearest me, you’ve come here many, many times. Too many." #speaker:??? #tachie:none
+"But, my dearest me, you've come here many, many times. Too many." #speaker:??? #tachie:none
 "It is your boringness and emptiness that wiped out everything here and now how are you going to MAKE IT UP FOR ME?" #speaker:??? #tachie:none
 It comes closer.
 "STAY OFF FROM ME!!" #speaker:P #tachie:none
