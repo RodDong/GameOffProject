@@ -14,6 +14,7 @@ public class Doctor : EnemyStatus
         dropItems.Add(new Eye(SkillAttribute.SAD));
         dropItems.Add(new Mouth(SkillAttribute.SAD));
         enemyImage = imgRoot + "Doctor_Battle";
+        enemySentences = ("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
     }
 
     public override void ResetCurrentHealth()
@@ -72,7 +73,7 @@ public class Doctor : EnemyStatus
                 case 2:
                     return AtkReduceAttack(playerStatus);
                 default:
-                    return("Sad1", "Sad2", "Sad3");
+                    return("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
             }
     }
 
@@ -86,7 +87,7 @@ public class Doctor : EnemyStatus
         Debug.Log("Enemy cast ultimate");
         playerStatus.ActivateEffect(new Effect(EffectId.DISMEMBERED));
         ProcessHealing(playerStatus.GetMaxHealth() / 3.0f);
-        return ("Ultimate1", "Ultimate2", "Ultimate3");
+        return ("Stop that laughing!", "Good, now you know how you should feel!", "Can you do anything else than yelling like that?");
     }
 
     private (string, string, string) Secondary(PlayerStatus playerStatus) {
@@ -96,7 +97,7 @@ public class Doctor : EnemyStatus
         stolenEffect.SetStolenAmount(playerStatus.getATKbyAttribute(SkillAttribute.SAD) * 0.5f, SkillAttribute.SAD);
         stolenEffect.SetStolenAmount(playerStatus.getATKbyAttribute(SkillAttribute.HAPPY) * 0.5f, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(stolenEffect);
-        return ("Sad1", "Sad2", "Sad3");
+        return ("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
     }
 
     private (string, string, string) DefReduceAttack(PlayerStatus playerStatus) {
@@ -106,7 +107,7 @@ public class Doctor : EnemyStatus
         weakEffect.SetDefenseReduction(0.0f, SkillAttribute.HAPPY);
         weakEffect.SetDefenseReduction(0.0f, SkillAttribute.ANGRY);
         playerStatus.ActivateEffect(weakEffect);
-        return ("Sad1", "Sad2", "Sad3");
+        return ("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
     }
 
     private (string, string, string) AtkReduceAttack(PlayerStatus playerStatus) {
@@ -117,7 +118,7 @@ public class Doctor : EnemyStatus
         reducedEffect.SetAttackReduction(0.0f, SkillAttribute.ANGRY);
         playerStatus.ActivateEffect(reducedEffect);
         playerStatus.TakeDamage(20.0f, SkillAttribute.SAD);
-        return ("Sad1", "Sad2", "Sad3");
+        return ("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
     }
 
 #endregion

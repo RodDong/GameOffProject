@@ -12,28 +12,28 @@ public class AttackSkill : Skill
             case SkillAttribute.NONE:
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.ANGRY;
-                displayName = "test attack";
+                displayName = "Emotional Dice";
                 skillImage = imgRoot + "EmptyButton/" + "atk_default";
                 power = 50;
                 break;
             case SkillAttribute.ANGRY:
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.ANGRY;
-                displayName = "angry attack";
+                displayName = "Double edged attack";
                 skillImage = imgRoot + "EmptyButton/" + "atk_angry";
                 power = 80;
                 break;
             case SkillAttribute.HAPPY:
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.HAPPY;
-                displayName = "happy attack";
+                displayName = "Mental Break Down";
                 skillImage = imgRoot + "EmptyButton/" + "atk_happy";
                 power = 50;
                 break;
             case SkillAttribute.SAD:
                 type = SkillType.ATTACK;
                 attribute = SkillAttribute.SAD;
-                displayName = "sad attack";
+                displayName = "Heavy Cry";
                 skillImage = imgRoot + "EmptyButton/" + "atk_sad";
                 power = 50;
                 break;

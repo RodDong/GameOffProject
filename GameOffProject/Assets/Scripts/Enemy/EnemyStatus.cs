@@ -31,8 +31,12 @@ public abstract class EnemyStatus: MonoBehaviour
     protected int attackCounter;
     protected string tachie = "";
     protected List<Effect> Effects = new List<Effect>();
+    protected (string, string, string) enemySentences;
+    protected (string, string, string) playerSentences;
 
     public List<Effect> GetActiveEffects() { return Effects; }
+    public (string, string, string) GetEnemySentences() { return enemySentences; }
+    public (string, string, string) GetPlayerSentences() { return playerSentences; }
 
     // process round counters for Effects and deEffects
     public void UpdateEffectStatus() {

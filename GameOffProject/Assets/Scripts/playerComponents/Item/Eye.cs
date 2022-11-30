@@ -18,7 +18,7 @@ public class Eye : Item
                 angryATK = 10f;
                 angryDEF = 10f;
                 skill = new AttackSkill(SkillAttribute.NONE);
-                displayName = "test eye";
+                displayName = "Empty eyes";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "2EyeDefault_N";
                 highLightedImage = imgRoot + "2EyeDefault_H";
@@ -33,7 +33,7 @@ public class Eye : Item
                 angryATK = 0f;
                 angryDEF = 20f;
                 skill = new AttackSkill(SkillAttribute.HAPPY);
-                displayName = "test eye happy";
+                displayName = "Smiley Eyes";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "2EyeH_N";
                 highLightedImage = imgRoot + "2EyeH_H";
@@ -48,7 +48,7 @@ public class Eye : Item
                 angryATK = 0f;
                 angryDEF = 0f;
                 skill = new AttackSkill(SkillAttribute.SAD);
-                displayName = "test eye sad";
+                displayName = "Gloomy Eyes";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "2EyeS_N";
                 highLightedImage = imgRoot + "2EyeS_H";
@@ -63,7 +63,7 @@ public class Eye : Item
                 angryATK = 50f;
                 angryDEF = 0f;
                 skill = new AttackSkill(SkillAttribute.ANGRY);
-                displayName = "test eye angry";
+                displayName = "Glaring Eyes";
                 itemDescription = "test description";
                 imageSrc = imgRoot + "2EyeA_N";
                 highLightedImage = imgRoot + "2EyeA_H";
