@@ -23,6 +23,8 @@ public class ProgressManager : MonoBehaviour
     void Start()
     {
         // currentProgress to be read from json
+
+        
         nodes = new Node[100];
         for (int i = 0; i < nodes.Length; i++) {
             nodes[i] = new Node(i);
@@ -59,7 +61,7 @@ public class ProgressManager : MonoBehaviour
         nodes[21].next[1] = 18;
         nodes[22].next[1] = 23;
         nodes[22].next[0] = 24;
-        nodes[22].next[4] = 25;
+        nodes[22].next[3] = 25;
 
         nodes[24].next[0] = 26;
         nodes[24].next[3] = 28;

@@ -7178,7 +7178,7 @@ GameObject:
   - component: {fileID: 3524755194621190676}
   - component: {fileID: 3524755194621190679}
   - component: {fileID: 3524755194621190678}
-  - component: {fileID: 686527267}
+  - component: {fileID: 1179152445}
   m_Layer: 5
   m_Name: Tachie
   m_TagString: Untagged
@@ -7244,7 +7244,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!223 &686527267
+--- !u!223 &1179152445
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16847,6 +16847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feba50424c3c42d4e9a8decbf4135a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pm: {fileID: 2867478533324104054}
   typingSpeed: 0.04
   dialoguePanel: {fileID: 5506045824630158681}
   dialogueSubPanel: {fileID: 3524755194238366042}
@@ -16855,7 +16856,7 @@ MonoBehaviour:
   displayNameText: {fileID: 3524755193898465681}
   tachieObject: {fileID: 3524755195256239121}
   tachieAnimator: {fileID: 3524755195256239123}
-  progressManager: {fileID: 0}
+  progressManager: {fileID: 2867478533324104054}
   player: {fileID: 1563613737}
   playerStatus: {fileID: 0}
   choices:
