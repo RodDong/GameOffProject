@@ -1643,8 +1643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85eb0a48ff9f1dc4695eff79e355709d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackScreen: {fileID: 610185599}
   progress1: {fileID: 4900000, guid: db40212837f5c5e43ae8b37dca3db54a, type: 3}
   TVcollider: {fileID: 36066528}
+  progress2: {fileID: 4900000, guid: 728417517ff289f45b417fc630935237, type: 3}
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0

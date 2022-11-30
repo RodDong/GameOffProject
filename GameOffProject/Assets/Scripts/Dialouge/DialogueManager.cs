@@ -51,6 +51,9 @@ public class DialogueManager : MonoBehaviour
     private const string BATTLE_TAG = "battle";
     private const string NO_TEXT_TAG = "notext";
     private const string PROGRESS_TAG = "progress";
+    private const string LOAD_SCENE_TAG = "scene";
+    private const string TELEPORT_TAG = "position";
+    private const string SCALE_TAG = "scale";
 
     private void Awake() 
     {
@@ -255,7 +258,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void HandleTags(List<string> currentTags)
+    private async void HandleTags(List<string> currentTags)
     {
         // loop through each tag and handle it accordingly
         foreach (string tag in currentTags) 
@@ -291,6 +294,20 @@ public class DialogueManager : MonoBehaviour
                 case PROGRESS_TAG:
                     progressManager.currentProgress = int.Parse(tagValue);
                     break;
+                case LOAD_SCENE_TAG:
+                    ExitDialogueMode();
+                    SceneManager.LoadScene(tagValue, LoadSceneMode.Single);
+                    break;
+                case TELEPORT_TAG:
+                    await Task.Delay(200);
+                    string[] position = tag.Split(',');
+                    player.transform.position = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
+                    break;
+                case SCALE_TAG:
+                    await Task.Delay(200);
+                    string[] scale = tag.Split(',');
+                    player.transform.localScale = new Vector3(float.Parse(scale[0]), float.Parse(scale[1]), float.Parse(scale[2]));
+                    break;
                 default:
                     // Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
@@ -316,7 +333,7 @@ public class DialogueManager : MonoBehaviour
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
-            if (progressManager.currentProgress == 1 && choice.text == "Go to Office and Clinic") {
+            if ((progressManager.currentProgress == 1 || progressManager.currentProgress == 2) && choice.text == "Go to Office and Clinic") {
                 break; // at the beginning, can only go to office
             } else if (progressManager.currentProgress == 2 && choice.text == "Go Home") {
                 break;
