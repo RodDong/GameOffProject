@@ -1588,6 +1588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress1: {fileID: 4900000, guid: d6ad8f8bd4c916147bd8713d2de99a99, type: 3}
+  subwayStation: {fileID: 419171538}
 --- !u!1 &2101843426
 GameObject:
   m_ObjectHideFlags: 0

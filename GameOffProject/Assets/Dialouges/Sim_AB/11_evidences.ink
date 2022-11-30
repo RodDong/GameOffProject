@@ -18,20 +18,20 @@ you find a list of Patients information:
 // Evidence No.2 一些器官图
 
 -(photos)
-“photos of heart？ Lung？ brain?” #speaker:P #portrait:neutural #tachie:none
+“photos of heart？ Lung？ brain?” #speaker:P #portrait:neutural #tachie:none 
 “What are these organ’s photos for?” #speaker:P #portrait:neutural #tachie:none
 
 // Evidence No.3 Feast menu
 
 -(chair)
-there is a menu from "Feast" sit there silently on the chair
+there is a menu from "Feast" sit there silently on the chair #progress:2
 
 “the one that he told me before. But the menu looks not like a usual restaurant.” #speaker:P #portrait:neutural #tachie:none
 
 // 第一个抽屉里  Evidence No.4
 
 -(drawer)
-there is a record of surgeries from Doctor Maston.
+there is a record of surgeries from Doctor Maston. #progress:1
 
 “Surgeries? This signature looks familiar.” #speaker:P #portrait:neutural #tachie:none
 
@@ -39,7 +39,7 @@ there is a record of surgeries from Doctor Maston.
 // Evidence NO.5 色欲手机：里面含有三个情人的电话号码
 
 -(sims_phone)
-Sim's phone is there on the floor;
+Sim's phone is there on the floor; #speaker:P #progress:0
 
 luckily there are still some battery left, unluckily you do not know the password. 
 

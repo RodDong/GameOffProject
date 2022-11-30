@@ -50,6 +50,10 @@ public class DialogueManager : MonoBehaviour
     private const string TACHIE_TAG = "tachie";
     private const string BATTLE_TAG = "battle";
     private const string NO_TEXT_TAG = "notext";
+    private const string PROGRESS_TAG = "progress";
+    private const string LOAD_SCENE_TAG = "scene";
+    private const string TELEPORT_TAG = "position";
+    private const string SCALE_TAG = "scale";
 
     private void Awake() 
     {
@@ -254,7 +258,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void HandleTags(List<string> currentTags)
+    private async void HandleTags(List<string> currentTags)
     {
         // loop through each tag and handle it accordingly
         foreach (string tag in currentTags) 
@@ -277,18 +281,35 @@ public class DialogueManager : MonoBehaviour
                 // case PORTRAIT_TAG:
                 //     portraitAnimator.Play(tagValue);
                 //     break;
-                case TACHIE_TAG:
-                    tachieObject.SetActive(tagValue != "none");
-                    tachieAnimator.Play(tagValue);
-                    break;
+                // case TACHIE_TAG:
+                //     tachieObject.SetActive(tagValue != "none");
+                //     tachieAnimator.Play(tagValue);
+                //     break;
                 case BATTLE_TAG:
                     toBattle = true;
                     break;
                 case NO_TEXT_TAG:
                     dialogueSubPanel.SetActive(false);
                     break;
+                case PROGRESS_TAG:
+                    progressManager.transitionToNextState(int.Parse(tagValue));
+                    break;
+                case LOAD_SCENE_TAG:
+                    ExitDialogueMode();
+                    SceneManager.LoadScene(tagValue, LoadSceneMode.Single);
+                    break;
+                case TELEPORT_TAG:
+                    await Task.Delay(200);
+                    string[] position = tagValue.Split(',');
+                    player.transform.position = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
+                    break;
+                case SCALE_TAG:
+                    await Task.Delay(200);
+                    string[] scale = tagValue.Split(',');
+                    player.transform.localScale = new Vector3(float.Parse(scale[0]), float.Parse(scale[1]), float.Parse(scale[2]));
+                    break;
                 default:
-                    Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
+                    // Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
             }
         }
@@ -312,6 +333,11 @@ public class DialogueManager : MonoBehaviour
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
+            if ((progressManager.currentProgress == 1 || progressManager.currentProgress == 2) && choice.text == "Go to Office and Clinic") {
+                break; // at the beginning, can only go to office
+            } else if (progressManager.currentProgress == 2 && choice.text == "Go Home") {
+                break;
+            }
         }
         // go through the remaining choices the UI supports and make sure they're hidden
         for (int i = index; i < choices.Length; i++) 
@@ -401,18 +427,18 @@ public class DialogueManager : MonoBehaviour
                 case "Investigate Doctor's Cargo":
                     playerStatus.addClue(12);
                     break;
-                case "I'm good with that.":
-                    progressManager.transitionToNextState(0);
-                    break;
-                case "Actually I have a doctor's appointment.":
-                    progressManager.transitionToNextState(1);
-                    break;
-                case "An old friend invites me to drink.":
-                    progressManager.transitionToNextState(2);
-                    break;
-                case "Sorry, but I feel too sick today.":
-                    progressManager.transitionToNextState(3);
-                    break;
+                // case "I'm good with that.":
+                //     progressManager.transitionToNextState(0);
+                //     break;
+                // case "Actually I have a doctor's appointment.":
+                //     progressManager.transitionToNextState(1);
+                //     break;
+                // case "An old friend invites me to drink.":
+                //     progressManager.transitionToNextState(2);
+                //     break;
+                // case "Sorry, but I feel too sick today.":
+                //     progressManager.transitionToNextState(3);
+                //     break;
             }
 
             ContinueStory();
