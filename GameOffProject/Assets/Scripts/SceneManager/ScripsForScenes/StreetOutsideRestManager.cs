@@ -9,6 +9,8 @@ public class StreetOutsideRestManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress2;
+    [SerializeField] GameObject doorToBar;
+    [SerializeField] GameObject doorToRestaurant;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -24,5 +26,7 @@ public class StreetOutsideRestManager : MonoBehaviour
         await Task.Delay(200);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
+        doorToBar.SetActive(false);
+        doorToRestaurant.SetActive(false);
     }
 }

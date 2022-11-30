@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] public ProgressManager pm;
-
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.1f;
 
@@ -280,10 +278,10 @@ public class DialogueManager : MonoBehaviour
                 // case PORTRAIT_TAG:
                 //     portraitAnimator.Play(tagValue);
                 //     break;
-                case TACHIE_TAG:
-                    tachieObject.SetActive(tagValue != "none");
-                    tachieAnimator.Play(tagValue);
-                    break;
+                // case TACHIE_TAG:
+                //     tachieObject.SetActive(tagValue != "none");
+                //     tachieAnimator.Play(tagValue);
+                //     break;
                 case BATTLE_TAG:
                     toBattle = true;
                     break;
@@ -291,10 +289,10 @@ public class DialogueManager : MonoBehaviour
                     dialogueSubPanel.SetActive(false);
                     break;
                 case PROGRESS_TAG:
-                    pm.currentProgress = int.Parse(tagValue);
+                    progressManager.currentProgress = int.Parse(tagValue);
                     break;
                 default:
-                    Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
+                    // Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
             }
         }
@@ -318,6 +316,11 @@ public class DialogueManager : MonoBehaviour
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
+            if (progressManager.currentProgress == 1 && choice.text == "Go to Office and Clinic") {
+                break; // at the beginning, can only go to office
+            } else if (progressManager.currentProgress == 2 && choice.text == "Go Home") {
+                break;
+            }
         }
         // go through the remaining choices the UI supports and make sure they're hidden
         for (int i = index; i < choices.Length; i++) 
