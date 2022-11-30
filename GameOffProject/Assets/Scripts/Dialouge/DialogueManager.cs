@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] public ProgressManager pm;
+
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.1f;
 
@@ -49,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     private const string TACHIE_TAG = "tachie";
     private const string BATTLE_TAG = "battle";
     private const string NO_TEXT_TAG = "notext";
+    private const string PROGRESS_TAG = "progress";
 
     private void Awake() 
     {
@@ -285,6 +288,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case NO_TEXT_TAG:
                     dialogueSubPanel.SetActive(false);
+                    break;
+                case PROGRESS_TAG:
+                    pm.currentProgress = int.Parse(tagValue);
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);

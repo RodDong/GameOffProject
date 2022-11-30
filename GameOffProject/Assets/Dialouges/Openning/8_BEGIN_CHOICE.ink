@@ -35,7 +35,7 @@ Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May b
     
     
 -(dinner)
-"Wise choice." #speaker:B #portrait:neutural #tachie:none
+"Wise choice." #speaker:B #portrait:neutural #tachie:none #progress:0
 
 "Just follow me." #speaker:B #portrait:neutural #tachie:none
 -> placeholder
@@ -50,7 +50,7 @@ Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May b
 
 -(clinic)
 
-"Actually--I would like to come, sir, but I must hurry to an appointment with the doctor right now. " #speaker:P #portrait:neutural #tachie:none
+"Actually--I would like to come, sir, but I must hurry to an appointment with the doctor right now. " #speaker:P #portrait:neutural #tachie:none #progress:1
 
 "Ah. I see." #speaker:B #portrait:neutural #tachie:none
 
@@ -91,7 +91,7 @@ In that way, they will keep him in charge. I guess that alone is enough for him.
 
 
 -(bar)
-"Yep, a drink always make me relieved after a whole day's hard work." # speaker:P, portrait:neutural, tachie:none
+"Yep, a drink always make me relieved after a whole day's hard work." # speaker:P, portrait:neutural, tachie:none  #progress:2
 
 "The bar is not far away from here, I can take subway to there." # speaker:P, portrait:neutural, tachie:none
 -> placeholder
@@ -108,7 +108,7 @@ In that way, they will keep him in charge. I guess that alone is enough for him.
 
 
 -(home)
-“There is a family emergency that I need to attend to, see, my sister’s daughter needs to be picked up and my sister’s out of town... I do really appreciate the offer, though, that must be a wonderful place to dine. Please do enjoy it.” #speaker:P #portrait:neutural #tachie:none
+“There is a family emergency that I need to attend to, see, my sister’s daughter needs to be picked up and my sister’s out of town... I do really appreciate the offer, though, that must be a wonderful place to dine. Please do enjoy it.” #speaker:P #portrait:neutural #tachie:none  #progress:3
 
 You smiled a little, trying to be as sorry as one possibility could. You bowed down your head to not look at glare that almost broke free of his eyes.
 

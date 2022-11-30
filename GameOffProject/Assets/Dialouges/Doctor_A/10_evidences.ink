@@ -1,5 +1,5 @@
 -(dr_phone)
-The Doctor's phone. Someone is sending him a message.
+The Doctor's phone. Someone is sending him a message. #progress:3
 
 Unknown number...
 
@@ -10,7 +10,7 @@ Is it... someone working for him?
 Definitely not one of the nurses.
 
 Whoever this someone is, they must be helping him with his... secret business.
--(dr_phone_seen)
+-(dr_phone_seen) 
 The Doctor's phone. Someone is sending him a message.
 
 That number... is xxx's #TODO: fix sese name
@@ -19,7 +19,7 @@ That number... is xxx's #TODO: fix sese name
 
 So she really works for Dr. Maston.
 -(dr_namelist)
-"Proud sponsors and Investors of Maston Clinics." 
+"Proud sponsors and Investors of Maston Clinics."  #progress:0
 
 ...
 
@@ -42,7 +42,7 @@ That's my boss's name on it.
 Had I known earlier Doctor Maston has something to do with him, I would never come to this clinic.
 
 -(dr_cargo)
-"Deliver to xxxxxx"#TODO: fix restaurant name
+"Deliver to FEAST"#TODO: fix restaurant name #progress:2
 
 That's a restaurant's name. Is... is he actually providing them all these? Is anyone really consuming all these organs?
 
