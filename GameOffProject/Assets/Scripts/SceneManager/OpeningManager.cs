@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 public class OpeningManager : MonoBehaviour
 {
     GameObject player;
-    private DialogueManager dialogueManager;
     GameObject blackScreen;
+    private DialogueManager dialogueManager;
+    private ProgressManager progressManager;
     [SerializeField] TextAsset dreamJson;
     [SerializeField] TextAsset endDreamJson;
     [SerializeField] GameObject canvas;
@@ -18,6 +19,7 @@ public class OpeningManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        progressManager = FindObjectOfType<ProgressManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
         blackScreen = GameObject.FindGameObjectWithTag("Black");
@@ -60,8 +62,9 @@ public class OpeningManager : MonoBehaviour
     async void exitEndDream() {
         canvas.SetActive(false);
         SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+        progressManager.transitionToNextState(0);
         await Task.Delay(200);
-        player.transform.position = new Vector3(0.0f, 0.0f, 1.0f);
+        player.transform.position = new Vector3(-10.0f, 0.0f, 1.0f);
         player.GetComponent<SpriteRenderer>().enabled = true;
         canvas.SetActive(true);
     }
