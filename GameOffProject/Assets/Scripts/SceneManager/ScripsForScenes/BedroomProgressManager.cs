@@ -29,6 +29,22 @@ public class BedroomProgressManager : MonoBehaviour
         }
     }
 
+    private float time = 0;
+    private float triggerTime = 0;
+    async void Update() {
+        if (time < 2.0) {
+            time += Time.deltaTime;
+        } else {
+            if (!dialogueManager.dialogueIsPlaying && triggerTime == 0) {
+                triggerTime = time;
+                blackScreen.SetActive(true);
+                await Task.Delay(2000);
+                blackScreen.SetActive(false);
+            } 
+        }
+    }
+    
+
     private async void ProcessProgress_1() {
         await Task.Delay(200);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
@@ -39,9 +55,6 @@ public class BedroomProgressManager : MonoBehaviour
         await Task.Delay(200);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
-        blackScreen.SetActive(true);
-        await Task.Delay(800);
-        blackScreen.SetActive(false);
     }
 }
 

@@ -300,12 +300,12 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case TELEPORT_TAG:
                     await Task.Delay(200);
-                    string[] position = tag.Split(',');
+                    string[] position = tagValue.Split(',');
                     player.transform.position = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
                     break;
                 case SCALE_TAG:
                     await Task.Delay(200);
-                    string[] scale = tag.Split(',');
+                    string[] scale = tagValue.Split(',');
                     player.transform.localScale = new Vector3(float.Parse(scale[0]), float.Parse(scale[1]), float.Parse(scale[2]));
                     break;
                 default:
