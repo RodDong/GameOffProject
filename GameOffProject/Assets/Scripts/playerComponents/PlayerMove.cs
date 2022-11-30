@@ -280,5 +280,20 @@ public class PlayerMove : MonoBehaviour
         }
         playerAnimator.Play("PlayerIdle");
     }
+
+    public void PlayerTurnLeft() {
+        if (faceRight) {
+            Vector3 temp = transform.localScale;
+            temp.x *= -1;
+            transform.localScale = temp;
+        }
+    }
     
+    public void PlayerTurnRight() {
+        if (!faceRight) {
+            Vector3 temp = transform.localScale;
+            temp.x *= -1;
+            transform.localScale = temp;
+        }
+    }
 }

@@ -31,11 +31,6 @@ public class InteractableManager : MonoBehaviour
     {
 
         player = GameObject.FindWithTag("Player");
-        //blackScreen = GameObject.FindGameObjectWithTag("Black");
-        if (gameObject.name == "TV")
-        {
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        }
     }
 
     // Update is called once per frame
@@ -45,17 +40,8 @@ public class InteractableManager : MonoBehaviour
         {
             dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
         }
-        UpdateTV();
         UpdateDoor();
         UpdateDialogue();
-    }
-
-    private void UpdateTV()
-    {
-        if (gameObject.name == "TV" && playerInRange && Input.GetMouseButtonUp(1))
-        {
-            gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        }
     }
 
     private async void UpdateDoor()
@@ -113,7 +99,7 @@ public class InteractableManager : MonoBehaviour
                     else
                     {
                         player.transform.position = new Vector3(-20.9f, -2.0f, 1.0f);
-                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                        player.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                     }
                     player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;

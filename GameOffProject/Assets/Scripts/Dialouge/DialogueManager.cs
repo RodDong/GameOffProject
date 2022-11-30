@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject tachieObject;
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
+    [SerializeField] private ProgressManager progressManager;
     [SerializeField] private PlayerMove player;
     [SerializeField] private PlayerStatus playerStatus;
     [Header("Choices UI")]
@@ -337,9 +338,6 @@ public class DialogueManager : MonoBehaviour
             Choice choice = currentStory.currentChoices[choiceIndex];
             currentStory.ChooseChoiceIndex(choiceIndex);
             switch (choice.text) {
-                case "Go to restaurant with Boss":
-
-                break;
                 case "Go Home":
                     Debug.Log("Go Home");
                     StartCoroutine(ExitDialogueMode());
@@ -354,8 +352,8 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
                     await Task.Delay(200);
                     player.transform.position = new Vector3(-13.0f, -4.0f, 1.0f);
-                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
-                    return;
+                    player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
+                    break;
                 case "Go to Bar and Restaurant":
                     Debug.Log("Go to Bar");
                     StartCoroutine(ExitDialogueMode());
@@ -366,43 +364,55 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "Investigate Chef's Phone":
                     playerStatus.addClue(0);
-                break;
+                    break;
                 case "Investigate Chef's Guest List":
                     playerStatus.addClue(1);
-                break;
+                    break;
                 case "Investigate Chef's Supply List":
                     playerStatus.addClue(2);
-                break;
+                    break;
                 case "Investigate Patient Information":
                     playerStatus.addClue(3);
-                break;
+                    break;
                 case "Investigate The Pictures":
                     playerStatus.addClue(4);
-                break;
+                    break;
                 case "Investigate Menu":
                     playerStatus.addClue(5);
-                break;
+                    break;
                 case "Investigate Record of Surgeries":
                     playerStatus.addClue(6);
-                break;
+                    break;
                 case "Investigate Supervisor's Notebook":
                     playerStatus.addClue(7);
-                break;
+                    break;
                 case "Investigate Supervisor's Phone":
                     playerStatus.addClue(8);
-                break;
+                    break;
                 case "Investigate Supervisor's Account Book":
                     playerStatus.addClue(9);
-                break;
+                    break;
                 case "Investigate Doctor's Phone":
                     playerStatus.addClue(10);
-                break;
+                    break;
                 case "Investigate Doctor's Sponsor List":
                     playerStatus.addClue(11);
-                break;
+                    break;
                 case "Investigate Doctor's Cargo":
                     playerStatus.addClue(12);
-                break;
+                    break;
+                case "I'm good with that.":
+                    progressManager.transitionToNextState(0);
+                    break;
+                case "Actually I have a doctor's appointment.":
+                    progressManager.transitionToNextState(1);
+                    break;
+                case "An old friend invites me to drink.":
+                    progressManager.transitionToNextState(2);
+                    break;
+                case "Sorry, but I feel too sick today.":
+                    progressManager.transitionToNextState(3);
+                    break;
             }
 
             ContinueStory();
