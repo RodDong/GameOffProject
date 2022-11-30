@@ -292,7 +292,7 @@ public class DialogueManager : MonoBehaviour
                     dialogueSubPanel.SetActive(false);
                     break;
                 case PROGRESS_TAG:
-                    progressManager.currentProgress = int.Parse(tagValue);
+                    progressManager.transitionToNextState(int.Parse(tagValue));
                     break;
                 case LOAD_SCENE_TAG:
                     ExitDialogueMode();
@@ -427,18 +427,18 @@ public class DialogueManager : MonoBehaviour
                 case "Investigate Doctor's Cargo":
                     playerStatus.addClue(12);
                     break;
-                case "I'm good with that.":
-                    progressManager.transitionToNextState(0);
-                    break;
-                case "Actually I have a doctor's appointment.":
-                    progressManager.transitionToNextState(1);
-                    break;
-                case "An old friend invites me to drink.":
-                    progressManager.transitionToNextState(2);
-                    break;
-                case "Sorry, but I feel too sick today.":
-                    progressManager.transitionToNextState(3);
-                    break;
+                // case "I'm good with that.":
+                //     progressManager.transitionToNextState(0);
+                //     break;
+                // case "Actually I have a doctor's appointment.":
+                //     progressManager.transitionToNextState(1);
+                //     break;
+                // case "An old friend invites me to drink.":
+                //     progressManager.transitionToNextState(2);
+                //     break;
+                // case "Sorry, but I feel too sick today.":
+                //     progressManager.transitionToNextState(3);
+                //     break;
             }
 
             ContinueStory();

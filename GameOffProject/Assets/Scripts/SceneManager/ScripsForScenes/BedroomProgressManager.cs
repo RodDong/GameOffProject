@@ -32,15 +32,17 @@ public class BedroomProgressManager : MonoBehaviour
     private float time = 0;
     private float triggerTime = 0;
     async void Update() {
-        if (time < 2.0) {
-            time += Time.deltaTime;
-        } else {
-            if (!dialogueManager.dialogueIsPlaying && triggerTime == 0) {
-                triggerTime = time;
-                blackScreen.SetActive(true);
-                await Task.Delay(2000);
-                blackScreen.SetActive(false);
-            } 
+        if (progressManager.currentProgress == 2) {
+            if (time < 2.0) {
+                time += Time.deltaTime;
+            } else {
+                if (!dialogueManager.dialogueIsPlaying && triggerTime == 0) {
+                    triggerTime = time;
+                    blackScreen.SetActive(true);
+                    await Task.Delay(2000);
+                    blackScreen.SetActive(false);
+                } 
+            }
         }
     }
     

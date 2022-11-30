@@ -91,9 +91,9 @@ In that way, they will keep him in charge. I guess that alone is enough for him.
 
 
 -(bar)
-"Yep, a drink always make me relieved after a whole day's hard work." # speaker:P, portrait:neutural, tachie:none  #progress:2
+"Yep, a drink always make me relieved after a whole day's hard work." # speaker:P #portrait:neutural #tachie:none 
 
-"The bar is not far away from here, I can take subway to there." # speaker:P, portrait:neutural, tachie:none
+"The bar is not far away from here, I can take subway to there." #progress:2
 -> placeholder
 
 
