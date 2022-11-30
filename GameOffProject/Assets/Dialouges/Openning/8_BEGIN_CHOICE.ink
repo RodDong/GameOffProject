@@ -15,13 +15,13 @@ Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May b
 "Some of the company leaderships are gonna meet at a great dining place in town. I'm sure they would be happy to see an employee making this kind of contribution like you."#speaker:B #portrait:neutural #tachie:none
 
 -(begin_choice)
-    * "I'm good with that."
+    * I'm good with that.
     -> dinner
-    * "Actually I have a doctor's appointment."
+    * Actually I have a doctor's appointment.
     -> clinic
-    * "An old friend invites me to drink."
+    * An old friend invites me to drink.
     -> bar
-    * "Sorry, but I feel too sick today."
+    * Sorry, but I feel too sick today.
     -> home
     
     

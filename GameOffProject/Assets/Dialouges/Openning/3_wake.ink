@@ -31,7 +31,7 @@ Why would I fight myself in every dreams?
 
 "Ok. Stop thinking." #speaker:P #portrait:neutural #tachie:none
 
-"There is never an answer. If you keep wasting time here wondering,  you'd be late for work." #speaker:P #portrait:neutural #tachie:none 
+"There is never an answer. If you keep wasting time here wondering, you'd be late for work." #speaker:P #portrait:neutural #tachie:none 
 
 \* you quickly wipes dry the face and steps outside the bathroom.\* // a studio apartment, small, dark and old. simple furniture: a bed, a table, a closet. grey-ish daylights come in from the balcony, so dim and so biased in color. It is difficult to tell dawn from dusk.
 
