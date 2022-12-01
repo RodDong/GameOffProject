@@ -10,7 +10,7 @@ Your eyes were wide open before you realized. You were startled, trying to get a
 
 "Stay away from me!" #speaker:P #tachie:none
 
-The laughter, again, closing and rising, until as if sound only has filled every corner of the space and denuded your sanctuary of nothingness.
+The laughter, again, closing and rising, until as if sound only has filled every corner of the space and denuded your sanctuary of nothingness. #speaker:None 
 You stared at that bulb of light, of flesh, of yourself.
 You were staring back at you. A you.
 YOU, much more primitive, much more advanced.
@@ -31,7 +31,7 @@ The simplest thing.
 It comes closer.
 "STAY OFF FROM ME!!" #speaker:P #tachie:none
 
-You gasped. 
+You gasped. #speaker:None 
 
 "Here, go on. Drive me away all you will." #speaker:P #tachie:none
 "Drive yourself away? A bit too courageous for you, don't you think?" #speaker:??? #tachie:none

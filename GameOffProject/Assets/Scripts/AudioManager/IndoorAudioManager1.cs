@@ -5,13 +5,13 @@ using UnityEngine;
 public class IndoorAudioManager1 : MonoBehaviour
 {
     [SerializeField] AudioSource indoorAudio1, indoorAudio2, indoorAudio3;
-    float timer1 = 110.0f;
+    float timer1 = 0.0f;
     float timer2 = 0.0f;
     float TOTAL_TIME = 126.0f;
     void Start()
     {
         indoorAudio1 = GetComponent<AudioSource>();
-        indoorAudio1.time = 110.0f;
+        indoorAudio1.time = 0.0f;
         indoorAudio1.Play();
         indoorAudio3.Play();
     }
@@ -50,7 +50,7 @@ public class IndoorAudioManager1 : MonoBehaviour
             indoorAudio2.Play();
         }
 
-        if (timer2 + 10.0f >= TOTAL_TIME && indoorAudio1.isPlaying)
+        if (timer2 + 8.0f >= TOTAL_TIME && indoorAudio1.isPlaying)
         {
             indoorAudio1.Play();
         }

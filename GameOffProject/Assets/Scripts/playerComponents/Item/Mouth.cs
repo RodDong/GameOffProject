@@ -16,8 +16,8 @@ public class Mouth : Item
                 sadDEF = 0f;
                 angryATK = 0f;
                 angryDEF = 0f;
-                displayName = "test mouth";
-                itemDescription = "test description";
+                displayName = "Stiff Upper Lips";
+                itemDescription = "happyATK = 0f\r\nhappyDEF = 0\r\nsadATK = 0\r\nsadDEF = 0\r\nangryATK = 0\r\nangryDEF = 0";
                 imageSrc = imgRoot + "3MouthDefault_N";
                 highLightedImage = imgRoot + "3MouthDefault_H";
                 selectedImage = imgRoot + "3MouthDefault_S";
@@ -30,8 +30,8 @@ public class Mouth : Item
                 sadDEF = 20f;
                 angryATK = 20f;
                 angryDEF = 20f;
-                displayName = "test mouth happy";
-                itemDescription = "test description";
+                displayName = "The Stinging Laughter";
+                itemDescription = "happyATK = 30\r\nhappyDEF = 30\r\nsadATK = 20\r\nsadDEF = 20\r\nangryATK = 20\r\nangryDEF = 20";
                 imageSrc = imgRoot + "3MouthH_N";
                 highLightedImage = imgRoot + "3MouthH_H";
                 selectedImage = imgRoot + "3MouthH_S";
@@ -44,8 +44,8 @@ public class Mouth : Item
                 sadDEF = 30f;
                 angryATK = 20f;
                 angryDEF = 10f;
-                displayName = "test mouth sad";
-                itemDescription = "test description";
+                displayName = "A Bite of Sigh";
+                itemDescription = "happyATK = 10\r\nhappyDEF = 10\r\nsadATK = 10\r\nsadDEF = 30\r\nangryATK = 20\r\nangryDEF = 10";
                 imageSrc = imgRoot + "3MouthS_N";
                 highLightedImage = imgRoot + "3MouthS_H";
                 selectedImage = imgRoot + "3MouthS_S";
@@ -58,8 +58,8 @@ public class Mouth : Item
                 sadDEF = 0f;
                 angryATK = 30f;
                 angryDEF = 0f;
-                displayName = "test mouth angry";
-                itemDescription = "test description";
+                displayName = "Echo Roaring";
+                itemDescription = "happyATK = 30\r\nhappyDEF = 0\r\nsadATK = 30\r\nsadDEF = 0\r\nangryATK = 30\r\nangryDEF = 0";
                 imageSrc = imgRoot + "3MouthA_N";
                 highLightedImage = imgRoot + "3MouthA_H";
                 selectedImage = imgRoot + "3MouthA_S";

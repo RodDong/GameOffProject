@@ -332,7 +332,11 @@ public class DialogueManager : MonoBehaviour
                         player.transform.position = new Vector3(0.0f,-2.0f,1.0f);
                         player.transform.localScale = new Vector3(1.0f,1.0f,1.0f);
                     }
-                    progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
+                    else
+                    {
+                        progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
+                    }
+                    
                     break;
                 case GO_HOME_TAG:
                     goHome = true;
