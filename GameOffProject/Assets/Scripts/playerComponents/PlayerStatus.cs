@@ -23,6 +23,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void ResetCurrentHealth()
     {
+        MAX_HEALTH = 120;
         currentHealth = MAX_HEALTH;
     }
 
