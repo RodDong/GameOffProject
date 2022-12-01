@@ -60,11 +60,12 @@ public class ProgressManager : MonoBehaviour
         nodes[19].next[2] = 20;
 
         nodes[21].next[1] = 18;
-        nodes[22].next[1] = 23;
+        nodes[22].next[2] = 23;
         nodes[22].next[0] = 24;
         nodes[22].next[3] = 25;
-
-        nodes[24].next[0] = 26;
+        nodes[23].next[0] = 72;
+        nodes[23].next[3] = 66;
+        nodes[24].next[2] = 26;
         nodes[24].next[3] = 28;
         nodes[25].next[3] = 30;
         nodes[25].next[0] = 31;
@@ -123,6 +124,7 @@ public class ProgressManager : MonoBehaviour
         nodes[69].next[1] = 71;
         nodes[70].next[1] = 73;
         nodes[71].next[0] = 72;
+        nodes[72].next[3] = 58;
     }
 
     // Update is called once per frame
