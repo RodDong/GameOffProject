@@ -18,8 +18,8 @@ public class EyeBrow : Item
                 sadDEF = 0;
                 angryATK = 0;
                 angryDEF = 0;
-                displayName = "test eyebrow";
-                itemDescription = "test description";
+                displayName = "The Sweating brows";
+                itemDescription = "happyATK = 0\r\nhappyDEF = 0\r\nsadATK = 0\r\nsadDEF = 0\r\nangryATK = 0\r\nangryDEF = 0";
                 imageSrc = imgRoot + "1EyebrowDefault_N";
                 highLightedImage = imgRoot + "1EyebrowDefault_H";
                 selectedImage = imgRoot + "1EyebrowDefault_S";
@@ -32,8 +32,8 @@ public class EyeBrow : Item
                 sadDEF = 30f;
                 angryATK = 0f;
                 angryDEF = 10f;
-                displayName = "test eyebrow happy";
-                itemDescription = "test description";
+                displayName = "Roof high anxiousness";
+                itemDescription = "happyATK = 0\r\nhappyDEF = 50\r\nsadATK = 0\r\nsadDEF = 30\r\nangryATK = 0\r\nangryDEF = 10";
                 imageSrc = imgRoot + "1EyebrowH_N";
                 highLightedImage = imgRoot + "1EyebrowH_H";
                 selectedImage = imgRoot + "1EyebrowH_S";
@@ -46,8 +46,8 @@ public class EyeBrow : Item
                 sadDEF = 50f;
                 angryATK = 0f;
                 angryDEF = 10f;
-                displayName = "test eyebrow sad";
-                itemDescription = "test description";
+                displayName = "Knitting in Frown";
+                itemDescription = "happyATK = 0\r\nhappyDEF = 0\r\nsadATK = 20\r\nsadDEF = 50\r\nangryATK = 0\r\nangryDEF = 10";
                 imageSrc = imgRoot + "1EyebrowS_N";
                 highLightedImage = imgRoot + "1EyebrowS_H";
                 selectedImage = imgRoot + "1EyebrowS_S";
@@ -60,11 +60,12 @@ public class EyeBrow : Item
                 sadDEF = 0f;
                 angryATK = 0f;
                 angryDEF = 50f;
-                displayName = "test eyebrow angry";
+                displayName = "Sopracci-rossa";
                 imageSrc = imgRoot + "1EyebrowA_N";
                 highLightedImage = imgRoot + "1EyebrowA_H";
                 selectedImage = imgRoot + "1EyebrowA_S";
                 playerMaskImageSrc = playerMaskRoot + "1EyebrowA_N";
+                itemDescription = "happyATK = 30\r\nhappyDEF = 0\r\nsadATK = 30\r\nsadDEF = 0\r\nangryATK = 0\r\nangryDEF = 50";
                 break;
         }
         

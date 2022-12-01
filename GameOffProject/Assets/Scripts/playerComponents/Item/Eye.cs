@@ -19,7 +19,7 @@ public class Eye : Item
                 angryDEF = 100f;
                 skill = new AttackSkill(SkillAttribute.NONE);
                 displayName = "The Foggy Notion";
-                itemDescription = "test description";
+                itemDescription = "happyATK = 100\r\nhappyDEF = 100\r\nsadATK = 100\r\nsadDEF = 100\r\nangryATK = 100\r\nangryDEF = 100";
                 imageSrc = imgRoot + "2EyeDefault_N";
                 highLightedImage = imgRoot + "2EyeDefault_H";
                 selectedImage = imgRoot + "2EyeDefault_S";
@@ -34,7 +34,7 @@ public class Eye : Item
                 angryDEF = 20f;
                 skill = new AttackSkill(SkillAttribute.HAPPY);
                 displayName = "Blinded by the Light";
-                itemDescription = "test description";
+                itemDescription = "happyATK = 50\r\nhappyDEF = 50\r\nsadATK = 20\r\nsadDEF = 10\r\nangryATK = 0\r\nangryDEF = 20";
                 imageSrc = imgRoot + "2EyeH_N";
                 highLightedImage = imgRoot + "2EyeH_H";
                 selectedImage = imgRoot + "2EyeH_S";
@@ -49,7 +49,7 @@ public class Eye : Item
                 angryDEF = 0f;
                 skill = new AttackSkill(SkillAttribute.SAD);
                 displayName = "Pale Blue Eyes";
-                itemDescription = "test description";
+                itemDescription = "happyATK = 10\r\nhappyDEF = 20\r\nsadATK = 50\r\nsadDEF = 10\r\nangryATK = 0\r\nangryDEF = 0";
                 imageSrc = imgRoot + "2EyeS_N";
                 highLightedImage = imgRoot + "2EyeS_H";
                 selectedImage = imgRoot + "2EyeS_S";
@@ -64,7 +64,7 @@ public class Eye : Item
                 angryDEF = 0f;
                 skill = new AttackSkill(SkillAttribute.ANGRY);
                 displayName = "Shiny Crazy Diamonds";
-                itemDescription = "test description";
+                itemDescription = "happyATK = 30\r\nhappyDEF = 0\r\nsadATK = 30\r\nsadDEF = 0\r\nangryATK = 50\r\nangryDEF = 0";
                 imageSrc = imgRoot + "2EyeA_N";
                 highLightedImage = imgRoot + "2EyeA_H";
                 selectedImage = imgRoot + "2EyeA_S";

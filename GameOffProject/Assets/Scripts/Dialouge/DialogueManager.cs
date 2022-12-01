@@ -309,7 +309,11 @@ public class DialogueManager : MonoBehaviour
                     if (progressTags.Count == 0) {
                         progressManager.transitionToNextState(0);
                     }
-                    progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
+                    else
+                    {
+                        progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
+                    }
+                    
                     break;
                 case LOAD_SCENE_TAG:
                     ExitDialogueMode();
