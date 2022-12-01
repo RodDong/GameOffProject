@@ -1,4 +1,4 @@
-﻿"Mike, I told you to grab..." #speaker:Charlie #portrait:neutural #tachie:none
+"Mike, I told you to grab..." #speaker:Charlie #portrait:neutural #tachie:none
 
 She walked in, still in her chef's jacket, still the oh-so-delicate red lips and green eyes. #speaker:None
 

@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
-    private bool toBattle = false;
+    private bool toBattle = false, goHome = false, goHomeSubway = false;
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -54,6 +54,8 @@ public class DialogueManager : MonoBehaviour
     private const string LOAD_SCENE_TAG = "scene";
     private const string TELEPORT_TAG = "position";
     private const string SCALE_TAG = "scale";
+    private const string GO_HOME_TAG = "home";
+    private const string GO_HOME_SUBWAY_TAG = "home_subway";
 
     // To fix progress tag error:
     private List<int> progressTags = new List<int>();
@@ -142,6 +144,23 @@ public class DialogueManager : MonoBehaviour
             toBattle = false;
             statusBarManager.ResetEnemyStatus();
             player.EnterBattleMode();
+        }
+
+        // if (goHome) {
+        //     goHome = false;
+        //     SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+        //     player.transform.position = new Vector3(0.0f,-2.0f,1.0f);
+        //     player.transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+            
+        // }
+
+        if (goHome) {
+            goHomeSubway = false;
+            print(".....");
+            SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+            player.transform.position = new Vector3(-10.0f, -4.0f, 1.0f);
+            player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
+            
         }
     }
 
@@ -308,6 +327,10 @@ public class DialogueManager : MonoBehaviour
                 case PROGRESS_TAG:
                     if (progressTags.Count == 0) {
                         progressManager.transitionToNextState(0);
+                        SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+                        await Task.Delay(200);
+                        player.transform.position = new Vector3(0.0f,-2.0f,1.0f);
+                        player.transform.localScale = new Vector3(1.0f,1.0f,1.0f);
                     }
                     else
                     {
@@ -315,17 +338,24 @@ public class DialogueManager : MonoBehaviour
                     }
                     
                     break;
+                case GO_HOME_TAG:
+                    goHome = true;
+                    break;
+                case GO_HOME_SUBWAY_TAG:
+                    goHomeSubway = true;
+                    break;
                 case LOAD_SCENE_TAG:
                     ExitDialogueMode();
+                    await Task.Delay(2000);
                     SceneManager.LoadScene(tagValue, LoadSceneMode.Single);
                     break;
                 case TELEPORT_TAG:
-                    await Task.Delay(200);
+                    await Task.Delay(2400);
                     string[] position = tagValue.Split(',');
                     player.transform.position = new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
                     break;
                 case SCALE_TAG:
-                    await Task.Delay(200);
+                    await Task.Delay(2400);
                     string[] scale = tagValue.Split(',');
                     player.transform.localScale = new Vector3(float.Parse(scale[0]), float.Parse(scale[1]), float.Parse(scale[2]));
                     break;
@@ -481,11 +511,6 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "doctor's cargo":
                     playerStatus.addClue(11);
-                    break;
-                case "Investigate the chef":
-                    SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
-                    player.transform.position = new Vector3(-8.78f, -3.0f, 1.0f);
-                    player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
                     break;
             }
 
