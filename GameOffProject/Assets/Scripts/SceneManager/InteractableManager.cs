@@ -134,7 +134,7 @@ public class InteractableManager : MonoBehaviour
                     break;
                 case "5inside_clinic":
                     player.transform.position = new Vector3(-10.7f, -2.0f, 1.0f);
-                    player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    player.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
                     player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerMove>().walkingClip;
                     break;
                 case "6kitchen":

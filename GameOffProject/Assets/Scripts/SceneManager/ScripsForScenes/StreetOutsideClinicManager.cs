@@ -10,7 +10,7 @@ public class StreetOutsideClinicManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1;
-    [SerializeField] Collider2D clinicDoorCollider, subwayCollider;
+    [SerializeField] Collider2D clinicDoorCollider, subwayCollider, workCollider;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -21,9 +21,14 @@ public class StreetOutsideClinicManager : MonoBehaviour
             clinicDoorCollider.enabled = false;
             subwayCollider.enabled = false;
             ProcessProgress_1();
-        } else if (progressManager.currentProgress == 2) {
+        }
+        if (progressManager.currentProgress == 2) {
             clinicDoorCollider.enabled = false;
             subwayCollider.enabled = false;
+        }
+        if (progressManager.currentProgress == 22) {
+            subwayCollider.enabled = false;
+            workCollider.enabled = false;
         }
     }
 

@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class OutsideOfficeManager : MonoBehaviour
 {
-    public bool hasTriggered1;
+    public bool hasTriggered1, hasTriggered22;
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1, progress1_1;
     [SerializeField] TextAsset progress2;
+    [SerializeField] TextAsset progress22;
     [SerializeField] Collider2D door_to_outside, door_to_office, workplace;
     [SerializeField] GameObject blackScreen, bossSprite;
     void Start()
@@ -43,7 +44,10 @@ public class OutsideOfficeManager : MonoBehaviour
                     player.transform.localScale = new Vector3(-1, 1, 0);
                 }
             } else if (progressManager.currentProgress == 22) {
-                //
+                if (progressManager.date == 1 && !hasTriggered22) {
+                    hasTriggered22 = true;
+                    ProcessProgress_22();
+                }
             } else if (progressManager.currentProgress == 36) {
                 blackScreen.SetActive(true);
                 SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
@@ -68,8 +72,19 @@ public class OutsideOfficeManager : MonoBehaviour
     }
 
     private async void ProcessProgress_2() {
-        await Task.Delay(300);
+        await Task.Delay(500);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
+    }
+
+    private async void ProcessProgress_22() {
+        blackScreen.SetActive(true);
+        bossSprite.SetActive(false);
+        door_to_office.enabled = false;
+        door_to_outside.enabled = true;
+        await Task.Delay(500);
+        blackScreen.SetActive(false);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress22);
     }
 }
