@@ -14,7 +14,7 @@ public class BedroomProgressManager : MonoBehaviour
     [SerializeField] TextAsset finalText;
     [SerializeField] Collider2D TVcollider, bedCollider, doorCollider;
     [SerializeField] GameObject blackScreen;
-    bool awake = false;
+    bool awake = false, end = false;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -64,6 +64,10 @@ public class BedroomProgressManager : MonoBehaviour
                 player.GetComponent<PlayerMove>().EnterDialogueMode();
                 dialogueManager.EnterDialogueMode(progress60);
             }
+
+            if (end) {
+
+            }
         }
     }
     
@@ -91,6 +95,7 @@ public class BedroomProgressManager : MonoBehaviour
         await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(finalText);
+        end = true;
     }
 
     public async void ProcessPlayerDeath() {

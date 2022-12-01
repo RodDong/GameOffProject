@@ -8,20 +8,20 @@ What should I do now?
     * [Investigate the bar maiden]
     -> barmaiden
     * [I'm Tired. Going Home]
-    ...#speaker:None #progress:0 #scene:1MCRoom #position:0.0,-2.0,1.0 #scale:1.0,1.0,1.0
+    ...#speaker:None #progress:0
 
 -(boss)
-...#speaker:None #progress:0 #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+Better Go Home First #speaker:None #progress:0 #home:yes
 ->END
 
 -(doctor)
-...#speaker:None #progress:1 #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+Better Go Home First #speaker:None #progress:1 #home:yes
 ->END
 
 -(chef)
-...#speaker:None #progress:2 #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+Better Go Home First. #speaker:None #progress:2 #home:yes
 ->END
 
 -(barmaiden)
-...#speaker:None #progress:3 #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+Better Go Home First #speaker:None #progress:3 #home:yes
 ->END

@@ -35,7 +35,6 @@ public class StreetOutsideHomeManager : MonoBehaviour
 
         if (progressManager.date == 2) {
             subwayStation.SetActive(true);
-            door_to_home.SetActive(false);
         }
         List<int> state_fight_chef = new List<int>(){60, 5, 9, 11, 17, 20, 21, 23, 26, 30, 32, 38, 69, 47, 48};
         if(state_fight_chef.Contains(progressManager.currentProgress) && !progressManager.playerCollidedWithChef)
@@ -49,6 +48,10 @@ public class StreetOutsideHomeManager : MonoBehaviour
         }
         playerCollider = player.GetComponent<Collider2D>();
         chefCollider = chef.GetComponent<Collider2D>();
+
+        if (progressManager.currentProgress == -1) {
+            subwayStation.SetActive(false);
+        }
 
     }
 
