@@ -33,6 +33,7 @@ public class StreetOutsideRestManager : MonoBehaviour
         List<int> progressStatesWithoutChef = new List<int>(){5, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 23, 26, 27, 32, 34, 35, 38, 39, 40, 44, 45, 47, 48, 49, 50, 52, 53, 54, 55, 56, 57, 58, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73};
         if (progressStatesWithoutChef.Contains(progressManager.currentProgress)) {
             doorToRestaurant.SetActive(false);
+        }
         if(progressManager.currentProgress == 60)
         {
             subway.SetActive(false);
