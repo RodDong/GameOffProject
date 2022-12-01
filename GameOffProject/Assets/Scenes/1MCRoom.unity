@@ -1726,6 +1726,7 @@ MonoBehaviour:
   progress2_1: {fileID: 4900000, guid: 20dc61404f305c54386559dd21339327, type: 3}
   TVcollider: {fileID: 36066528}
   bedCollider: {fileID: 920004357}
+  doorCollider: {fileID: 1792673431}
   blackScreen: {fileID: 2039994662}
 --- !u!1 &1874649721
 GameObject:

@@ -11,6 +11,7 @@ public class OutsideOfficeManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1, progress1_1;
+    [SerializeField] TextAsset progress2;
     [SerializeField] Collider2D door_to_outside, door_to_office, workplace;
     [SerializeField] GameObject blackScreen, bossSprite;
     void Start()
@@ -23,6 +24,11 @@ public class OutsideOfficeManager : MonoBehaviour
             door_to_outside.enabled = false;
             door_to_office.enabled = false;
         }
+        if (progressManager.currentProgress == 2) {
+            door_to_outside.enabled = false;
+            workplace.enabled = false;
+            ProcessProgress_2();
+        }
     }
 
     private void Update() {
@@ -30,14 +36,19 @@ public class OutsideOfficeManager : MonoBehaviour
             if (progressManager.currentProgress == 1 && hasTriggered1) {
                 ProcessProgress_1();
             } else if (progressManager.currentProgress == 2) {
-                blackScreen.SetActive(true);
-                SceneManager.LoadScene("7restaurant");
-                player.transform.position = new Vector3(-12.58f, -1.23f, 0.0f);
-                player.transform.localScale = new Vector3(-1, 1, 0);
+                if (progressManager.date == 1) {
+                    blackScreen.SetActive(true);
+                    SceneManager.LoadScene("7restaurant");
+                    player.transform.position = new Vector3(-12.58f, -1.23f, 0.0f);
+                    player.transform.localScale = new Vector3(-1, 1, 0);
+                }
             } else if (progressManager.currentProgress == 22) {
                 //
             } else if (progressManager.currentProgress == 36) {
-                //
+                blackScreen.SetActive(true);
+                SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                player.transform.position = new Vector3(-13.0f, -4.0f, 1.0f);
+                player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
             } else if (progressManager.currentProgress == 60) {
                 //
             }
@@ -54,5 +65,11 @@ public class OutsideOfficeManager : MonoBehaviour
         workplace.enabled = false;
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress1_1);
+    }
+
+    private async void ProcessProgress_2() {
+        await Task.Delay(300);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress2);
     }
 }

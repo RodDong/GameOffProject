@@ -1,6 +1,5 @@
 // 「离开办公室」
-
-What should I do next? #speaker:None
+That's ... insane. What should I do next? #speaker:None
  
 -(begin_choice)
     * Call the police to tell what happened in "Feast" restaurant 

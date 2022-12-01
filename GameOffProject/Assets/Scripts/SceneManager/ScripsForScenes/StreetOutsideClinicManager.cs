@@ -28,7 +28,7 @@ public class StreetOutsideClinicManager : MonoBehaviour
     }
 
     private async void ProcessProgress_1() {
-        await Task.Delay(200);
+        await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress1);
     }

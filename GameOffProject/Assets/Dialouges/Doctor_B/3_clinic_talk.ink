@@ -1,14 +1,14 @@
-"Are you here to see Doctor Maston?" #speaker:Clinic Assistant #portrait:neutural #tachie:none
+"Are you here to see Doctor Maston?" #speaker:F #portrait:neutural #tachie:none
 
 "Yes." #speaker:P #portrait:neutural #tachie:none
 
-"For cancelling the medication and getting refund, am I right?"#speaker:Clinic Assistant #portrait:neutural #tachie:none
+"For cancelling the medication and getting refund, am I right?"#speaker:F #portrait:neutural #tachie:none
 
 "Yes."#speaker:P #portrait:neutural #tachie:none
 
 I wish this would be quick...
 
-"I'll let him know you're here. Please wait a few minutes."#speaker:Clinic Assistant #portrait:neutural #tachie:none
+"I'll let him know you're here. Please wait a few minutes."#speaker:F #portrait:neutural #tachie:none
 
 "No problem." #speaker:P #portrait:neutural #tachie:none
 
@@ -20,9 +20,9 @@ No matter how often I have been coming, I feel uncomfortable coming to this plac
 
 Hopefully I will not run into any troubles.
 
-"I have got you Doctor Maston, sir."#speaker:Clinic Assistant #portrait:neutural #tachie:none
+"I have got you Doctor Maston, sir."#speaker:F #portrait:neutural #tachie:none
 
-"Hi. I heard you wanna cancel your appointments and get your money back? What's wrong?"#speaker:Doctor #portrait:neutural #tachie:none
+"Hi. I heard you wanna cancel your appointments and get your money back? What's wrong?"#speaker:D #portrait:neutural #tachie:none
 
 Among all possibilities, this is one of the least I want to see. #speaker:None
 
@@ -36,4 +36,4 @@ What if he becomes suspecting and get me into trouble here?
 
 "Just that I have other things to do and plan not to involve in a surgery for a while."#speaker:P #portrait:neutural #tachie:none
 
-"Right. Should we go to my office? I keep all the documents in my draw there." #speaker:Doctor #portrait:neutural #tachie:none
+"Right. Should we go to my office? I keep all the documents in my assets there." #speaker:D #portrait:neutural #tachie:none

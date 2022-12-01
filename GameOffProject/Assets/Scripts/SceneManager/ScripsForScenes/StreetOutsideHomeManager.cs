@@ -8,7 +8,7 @@ public class StreetOutsideHomeManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1;
-    [SerializeField] GameObject subwayStation;
+    [SerializeField] GameObject subwayStation, door_to_home;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -16,14 +16,20 @@ public class StreetOutsideHomeManager : MonoBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
 
         if (progressManager.currentProgress == 1) {
+            door_to_home.SetActive(false);
             ProcessProgress_1();
         } else if (progressManager.currentProgress == 2) {
             ProcessProgress_2();
         }
+
+        if (progressManager.date == 2) {
+            subwayStation.SetActive(true);
+            door_to_home.SetActive(false);
+        }
     }
 
     private async void ProcessProgress_1() {
-        await Task.Delay(200);
+        await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress1);
     }
