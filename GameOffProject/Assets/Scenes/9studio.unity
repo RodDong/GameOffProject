@@ -422,8 +422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1408104440}
-  inkJSON: {fileID: 0}
+  inkJSON: {fileID: 4900000, guid: 112d9ebf1639de549b2e38aad1a2f606, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &696108890
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +565,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717892430}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
   m_Name: 
@@ -572,6 +573,7 @@ MonoBehaviour:
   visualCue: {fileID: 696108890}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &717892433
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -992,6 +994,7 @@ GameObject:
   - component: {fileID: 1139399489}
   - component: {fileID: 1139399488}
   - component: {fileID: 1139399487}
+  - component: {fileID: 1139399492}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1132,6 +1135,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1139399492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139399486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1cead30e791a141834b961ae4a6b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1063189946}
+  progress36: {fileID: 4900000, guid: 03ea93cc112b3d244b08b6131ebe9263, type: 3}
+  progress36_1: {fileID: 4900000, guid: 112d9ebf1639de549b2e38aad1a2f606, type: 3}
+  progress36_2: {fileID: 4900000, guid: 8383601806ec2ad45a922a8794714cf4, type: 3}
+  progress36_3: {fileID: 0}
+  progress36_4: {fileID: 0}
+  interactables: []
+  sim_stand: {fileID: 1222634430}
+  sim_sit: {fileID: 1957980182}
+  sim_dead: {fileID: 717892430}
+  blackScreen: {fileID: 1531376908}
+  to_bathroom: {fileID: 383971133}
+  to_bar: {fileID: 1792673431}
+  clues: {fileID: 1501811291}
+  bathroomInteractable: {fileID: 383971134}
 --- !u!1 &1169109935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1410,7 @@ GameObject:
   - component: {fileID: 1222634432}
   m_Layer: 0
   m_Name: lust_stand
-  m_TagString: Untagged
+  m_TagString: Lust
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1408,7 +1438,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222634430}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
   m_Name: 
@@ -1416,6 +1446,7 @@ MonoBehaviour:
   visualCue: {fileID: 859059917}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &1222634433
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1795,6 +1826,7 @@ MonoBehaviour:
   visualCue: {fileID: 1309103501}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1519551283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1863,82 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1531376908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1531376909}
+  - component: {fileID: 1531376911}
+  - component: {fileID: 1531376910}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1531376909
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531376908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666238398}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1531376910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531376908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1531376911
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531376908}
+  m_CullTransparentMesh: 1
 --- !u!1 &1666238393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,6 +2032,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2058823944}
+  - {fileID: 1531376909}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2186,6 +2295,7 @@ MonoBehaviour:
   visualCue: {fileID: 223843053}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,7 +2449,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957980182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
   m_Name: 
@@ -2347,6 +2457,7 @@ MonoBehaviour:
   visualCue: {fileID: 810740591}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &1957980185
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2514,3 +2625,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a372494e3deee74cbf068e7d855f9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2089839644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089839646}
+  - component: {fileID: 2089839645}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2089839645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089839644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddde7827cbc46e48af606eb8a08ffb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defeatInkJSON: {fileID: 0}
+  enemyImage: 
+--- !u!4 &2089839646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089839644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5073992, y: 1.1566368, z: 2.0710006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -90,11 +90,11 @@ public class OpeningManager : MonoBehaviour
                 player.transform.position = new Vector3(-13.5f, -1.0f, 1.0f);
                 player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 break;
-            case 90:
+            case 36:
                 SceneManager.LoadScene("8bar", LoadSceneMode.Single);
                 await Task.Delay(200);
-                player.transform.position = new Vector3(-14.79f, -1.0f, 1.0f);
-                player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player.transform.position = new Vector3(14.79f, -1.0f, 1.0f);
+                        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 break;
             case 89:
                 SceneManager.LoadScene("9studio", LoadSceneMode.Single);
