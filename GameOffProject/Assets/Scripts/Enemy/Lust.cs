@@ -71,7 +71,7 @@ public class Lust : EnemyStatus
 
     private (string, string, string) Secondary(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses Secondary");
-        float damageAmount = 10.0f;
+        float damageAmount = 20.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
         return ("Lust is part of me, why are you resisting me...", "Humans are all the same. They only trap themselves in the Swamp of Desire.", "You fear no more? What a LIE!");
@@ -79,7 +79,7 @@ public class Lust : EnemyStatus
 
     private (string, string, string) HappyATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses HappyATK");
-        float damageAmount = 10.0f;
+        float damageAmount = 20.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         return ("Lust is part of me, why are you resisting me...", "You are just one of us.", "You fear no more? What a LIE!");
     }
@@ -89,7 +89,7 @@ public class Lust : EnemyStatus
         // float damageAmount = 10;
         // DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
         Effect poisonEffect = new Effect(EffectId.POISON);
-        poisonEffect.SetPoison(SkillAttribute.SAD, 5.0f);
+        poisonEffect.SetPoison(SkillAttribute.SAD, 10.0f);
         playerStatus.ActivateEffect(poisonEffect);
         return ("HAHA, you have nowhere to go", "You thought...and you do not know what to do? that cannot be right...", "What a mess... my plan is ruined now");
     }

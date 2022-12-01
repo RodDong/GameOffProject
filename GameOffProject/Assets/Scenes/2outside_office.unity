@@ -1403,6 +1403,7 @@ MonoBehaviour:
   visualCue: {fileID: 1271194674}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1493497254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,6 +1875,7 @@ MonoBehaviour:
   visualCue: {fileID: 1619486864}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0
