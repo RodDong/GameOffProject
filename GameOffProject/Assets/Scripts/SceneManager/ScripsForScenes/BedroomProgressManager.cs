@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class BedroomProgressManager : MonoBehaviour
 {
@@ -72,6 +73,13 @@ public class BedroomProgressManager : MonoBehaviour
         await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(finalText);
+    }
+
+    public async void ProcessPlayerDeath() {
+        SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+        await Task.Delay(300);
+        player.transform.position = new Vector3(3.47f, -1.0f, 1.0f);
+        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 }
 

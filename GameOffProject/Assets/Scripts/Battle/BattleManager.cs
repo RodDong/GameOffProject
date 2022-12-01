@@ -240,6 +240,9 @@ public class BattleManager : MonoBehaviour
         if (FindObjectOfType<InsideClinicManager>(true) != null) {
             FindObjectOfType<InsideClinicManager>(true).ProcessPlayerDeath();
         }
+        if (FindObjectOfType<BedroomProgressManager>(true) != null) {
+            FindObjectOfType<BedroomProgressManager>(true).ProcessPlayerDeath();
+        }
     }
 
     void UpdateWin()

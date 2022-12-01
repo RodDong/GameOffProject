@@ -48,7 +48,7 @@ public class OpeningManager : MonoBehaviour
                 player.transform.position = new Vector3(12.5f, -2.0f, 1.0f);
                 player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                 break;
-            case 1:
+            case 1: case -1:
                 SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
                 await Task.Delay(200);
                 player.transform.position = new Vector3(6.7f, -2.0f, 1.0f);
