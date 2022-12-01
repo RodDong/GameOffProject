@@ -13,8 +13,8 @@ public class Supervisor : EnemyStatus
         dropItems.Add(new EyeBrow(SkillAttribute.ANGRY));
         dropItems.Add(new Mouth(SkillAttribute.ANGRY));
         enemyImage = imgRoot + "Boss_Battle";
-        enemySentences = ("HA? oppress the emplyees? cause that��s how the society works!", "You are so naive, the higher class won��t be willing to see more wages, young man.", "It��s human��s instinct to desire the higher power and authority!");
-        playerSentences = ("Why you always oppress the emplyees?", "You use the labor of employees just to ingratiate yourself with the higher class?", "Why not try to have a win-win solution? It��s not difficult");
+        enemySentences = ("HA? oppress the emplyees? cause that's how the society works!", "You are so naive, the higher class won't be willing to see more wages, young man.", "It's human's instinct to desire the higher power and authority!");
+        playerSentences = ("Why you always oppress the emplyees?", "You use the labor of employees just to ingratiate yourself with the higher class?", "Why not try to have a win-win solution? It's not difficult");
     }
 
     int ultimateCD = 9;
@@ -60,14 +60,14 @@ public class Supervisor : EnemyStatus
         ActivateEffect(buff);
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
 
-        return ("HA? oppress the emplyees? cause that��s how the society works!", "You are so naive, the higher class won��t be willing to see more wages, young man.", "It��s human��s instinct to desire the higher power and authority!");
+        return ("HA? oppress the emplyees? cause that's how the society works!", "You are so naive, the higher class won't be willing to see more wages, young man.", "It's human's instinct to desire the higher power and authority!");
         
     }
 
     private (string, string, string) Secondary(PlayerStatus playerStatus) {
         Debug.Log("Boss Supervisor Uses Fortification");
         ActivateEffect(new Effect(EffectId.FORTIFIED));
-        return ("Win-win solution? 'Oh I��m sorry��' You think I would say that?", "YOU never jduge my career!", "You know nothing about this society!");
+        return ("Win-win solution? 'Oh I'm sorry' You think I would say that?", "YOU never jduge my career!", "You know nothing about this society!");
     }
 
     private (string, string, string) AngryATK(PlayerStatus playerStatus) {
@@ -87,7 +87,7 @@ public class Supervisor : EnemyStatus
         Effect effect = new Effect(EffectId.WEAK);
         effect.SetDefenseReduction(20, SkillAttribute.ANGRY);
         playerStatus.ActivateEffect(effect);
-        return ("Don��t you ever compare me to those fucking rubbish!", "feel sorry when you see the employees? I have never thought about that, and I do not need to think about that ever!", "I have already chosen my way and I won��t go back.");
+        return ("Don't you ever compare me to those fucking rubbish!", "feel sorry when you see the employees? I have never thought about that, and I do not need to think about that ever!", "I have already chosen my way and I won't go back.");
     }
 
 }

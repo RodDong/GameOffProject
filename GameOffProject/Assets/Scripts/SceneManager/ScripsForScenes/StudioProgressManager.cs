@@ -45,9 +45,9 @@ public class StudioProgressManager : MonoBehaviour
                 ProcessProgress_36_1();
             } else if (trigger2 && !trigger3) {
                 sim_stand.SetActive(false);
-                if (player.GetComponent<PlayerMove>().GetCurState() != PlayerMove.State.Battle) {
+                /*if (player.GetComponent<PlayerMove>().GetCurState() != PlayerMove.State.Battle) {
                     ProcessProgress_36_2();
-                }
+                }*/
             }
 
 
@@ -93,7 +93,7 @@ public class StudioProgressManager : MonoBehaviour
         dialogueManager.EnterDialogueMode(progress36_2);
         trigger2 = true;
     }
-    private async void ProcessProgress_36_2() {
+    public async void ProcessProgress_36_2() {
         ProcessBlackScreen();
         await Task.Delay(200);
         sim_dead.SetActive(true);

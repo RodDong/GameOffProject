@@ -362,6 +362,7 @@ MonoBehaviour:
   visualCue: {fileID: 1796754918}
   inkJSON: {fileID: 4900000, guid: b2ac2c9f564df6149a140fbaae300ceb, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &814721995
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,11 +488,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1100912775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e441dc9e82a7b4a856f9faf84d2d37, type: 3}
+  m_Script: {fileID: 11500000, guid: 126b2d512c8877c4fab4ed74bfd2d713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defeatInkJSON: {fileID: 0}
   enemyImage: 
+  enemyName: 
 --- !u!1 &1212998537
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +569,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3524755194065649141, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: AttackSkillButton
+      value: 
+      objectReference: {fileID: 2007879286}
+    - target: {fileID: 3524755194523222879, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194523222879, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -614,6 +628,14 @@ PrefabInstance:
     - target: {fileID: 3524755194599651603, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_Name
       value: PersistantObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755195028296778, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755195028296778, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3524755195642139224, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_fontSize
@@ -1047,6 +1069,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2007879286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3524755194489521660, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+  m_PrefabInstance: {fileID: 1217857860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2059997648
 GameObject:
   m_ObjectHideFlags: 0

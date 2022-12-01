@@ -41,6 +41,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject EnemyStatusBar;
     [SerializeField] GameObject PlayerMessageBox;
     [SerializeField] GameObject EnemyMessageBox;
+    [SerializeField] GameObject Left1, Left2, Left3;
+    [SerializeField] GameObject Right1, Right2, Right3;
+    [SerializeField] GameObject AttackSkillButton;
     PlayerStatus playerStatus;
     PlayerMove playerMove;
     EnemyStatus enemyStatus;
@@ -147,6 +150,34 @@ public class BattleManager : MonoBehaviour
         gameObjectsInScene.SetActive(true);
     }
 
+    public void DeactivateLeftArrows()
+    {
+        Left1.SetActive(false);
+        Left2.SetActive(false);
+        Left3.SetActive(false);
+    }
+
+    public void DeactivateRightArrows()
+    {
+        Right1.SetActive(false);
+        Right2.SetActive(false);
+        Right3.SetActive(false);
+    }
+
+    public void ActivateLeftArrows()
+    {
+        Left1.SetActive(true);
+        Left2.SetActive(true);
+        Left3.SetActive(true);
+    }
+
+    public void ActivateRightArrows()
+    {
+        Right1.SetActive(true);
+        Right2.SetActive(true);
+        Right3.SetActive(true);
+    }
+
     async void ProcessEnemyTurn()
     {
         List<Effect> activeEffects = playerStatus.GetActiveEffects();
@@ -161,6 +192,8 @@ public class BattleManager : MonoBehaviour
         }
 
         PlayerOnClickTalkEvent();
+        DeactivateLeftArrows();
+        DeactivateRightArrows();
 
         if (enemyStatus.enemyImage == "Art/Tachies/Boss_Battle")
         {
@@ -185,11 +218,15 @@ public class BattleManager : MonoBehaviour
         EnemyTalk();
         await Task.Delay(1000);
 
+        ActivateLeftArrows();
+        ActivateRightArrows();
+        
         if (taunted == null && silenced == null && mute == null)
         {
             EnablePlayerSkillButtons();
         }
         EnemyMessageBox.SetActive(false);
+
         // delay 
         // boss use skill
         enemySentences = enemyStatus.MakeMove(playerStatus);
@@ -261,6 +298,11 @@ public class BattleManager : MonoBehaviour
         {
             FindObjectOfType<kitchenManager>(true).ProcessEnemyDeath();
         }
+        if(FindObjectOfType<StudioProgressManager>(true) != null)
+        {
+            FindObjectOfType<StudioProgressManager>(true).ProcessProgress_36_2();
+        }
+
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();
         enemyStatus.ResetCurrentHealth();
@@ -273,6 +315,7 @@ public class BattleManager : MonoBehaviour
         battleUI.SetActive(false);
         playerMove.SetCurState(PlayerMove.State.Idle);
         DisplayVictoryDialogue();
+
     }
 
     async void DisplayVictoryDialogue() {

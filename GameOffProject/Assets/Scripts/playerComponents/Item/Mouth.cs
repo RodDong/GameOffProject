@@ -17,7 +17,7 @@ public class Mouth : Item
                 angryATK = 0f;
                 angryDEF = 0f;
                 displayName = "Stiff Upper Lips";
-                itemDescription = "happyATK = 0f\r\nhappyDEF = 0\r\nsadATK = 0\r\nsadDEF = 0\r\nangryATK = 0\r\nangryDEF = 0";
+                itemDescription = "happyATK = 0\r\nhappyDEF = 0\r\nsadATK = 0\r\nsadDEF = 0\r\nangryATK = 0\r\nangryDEF = 0";
                 imageSrc = imgRoot + "3MouthDefault_N";
                 highLightedImage = imgRoot + "3MouthDefault_H";
                 selectedImage = imgRoot + "3MouthDefault_S";
