@@ -68,7 +68,7 @@ public class Supervisor : EnemyStatus
     private (string, string, string) Secondary(PlayerStatus playerStatus) {
         Debug.Log("Boss Supervisor Uses Fortification");
         ActivateEffect(new Effect(EffectId.FORTIFIED));
-        return ("Win-win solution? 'Oh I'm sorry' You think I would say that?", "YOU never jduge my career!", "You know nothing about this society!");
+        return ("Win-win solution? 'Oh I'm sorry!' You think I would say that?", "YOU never jduge my career!", "You know nothing about this society!");
     }
 
     private (string, string, string) AngryATK(PlayerStatus playerStatus) {

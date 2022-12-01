@@ -17,7 +17,7 @@ public class BlackScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < 0.5f)
+        if (timer < 1.0f)
         {
             timer += Time.deltaTime;
         }

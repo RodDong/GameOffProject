@@ -155,13 +155,17 @@ public class DialogueManager : MonoBehaviour
         // }
 
         if (goHome) {
-            goHomeSubway = false;
-            print(".....");
-            SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
-            player.transform.position = new Vector3(-10.0f, -4.0f, 1.0f);
-            player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
-            
+            TeleportToHomeSubway();
         }
+    }
+
+    private async void TeleportToHomeSubway() {
+        goHomeSubway = false;
+        print(".....");
+        SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+        await Task.Delay(200);
+        player.transform.position = new Vector3(-10.0f, -4.0f, 1.0f);
+        player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
     }
 
     private void UpdateDialoguePanel()

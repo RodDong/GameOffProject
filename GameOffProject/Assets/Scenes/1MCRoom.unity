@@ -541,12 +541,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 277357897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126b2d512c8877c4fab4ed74bfd2d713, type: 3}
+  m_Script: {fileID: 11500000, guid: 449842115f8d39c46b52548ac17d44a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defeatInkJSON: {fileID: 0}
+  defeatInkJSON: {fileID: 4900000, guid: 401aaf3784363684e8f17efd127830e1, type: 3}
   enemyImage: 
-  enemyName: 
+  enemyName: P
 --- !u!1 &610020872
 GameObject:
   m_ObjectHideFlags: 0

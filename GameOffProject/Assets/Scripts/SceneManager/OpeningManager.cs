@@ -24,6 +24,7 @@ public class OpeningManager : MonoBehaviour
         dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
         blackScreen = GameObject.FindGameObjectWithTag("Black");
         player.GetComponent<SpriteRenderer>().enabled = false;
+        progressManager.currentProgress = 0;
         TeleportBasedOnProgress();
     }
 
