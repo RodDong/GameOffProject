@@ -25,7 +25,6 @@ public class StatusBarManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void ShowBuffDeBuffDetails(int index)
@@ -71,5 +70,9 @@ public class StatusBarManager : MonoBehaviour
             GameObject descriptionMenu = effectIcon.GetComponentsInChildren<RectTransform>(true)[1].gameObject;
             descriptionMenu.SetActive(false);
         }
+    }
+
+    public void ResetEnemyStatus() {
+        enemyStatus = FindObjectOfType<EnemyStatus>();
     }
 }

@@ -53,7 +53,7 @@ public class RestaurantProgressManager : MonoBehaviour
     }
 
     private async void ProcessProgress_2() {
-        await Task.Delay(200);
+        await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
         hasEndedTalk2_0 = true;

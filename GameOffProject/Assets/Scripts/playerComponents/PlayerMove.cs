@@ -127,6 +127,7 @@ public class PlayerMove : MonoBehaviour
     public void EnterBattleMode() {
         mCurState = State.Battle;
         mPlayerStatus.ResetCurrentHealth();
+        battleManager.ResetEnemyStatus();
         battleManager.SetBattleState(BattleManager.State.Battle);
         battleManager.ResetBattleVisuals();
         battleManager.DeactivateGameObjectsInScene();

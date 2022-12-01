@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
 
     State mCurState;
     bool isInBattle = false;
-
+    private ProgressManager progressManager;
     private Sprite buffIcon;
     private Sprite debuffIcon;
 
@@ -93,6 +93,8 @@ public class BattleManager : MonoBehaviour
         UpdateEnemyStatusBar();
         enemySentences = enemyStatus.GetEnemySentences();
         playerSentences = enemyStatus.GetPlayerSentences();
+
+        progressManager = FindObjectOfType<ProgressManager>();
     }
 
     void Update()
@@ -229,11 +231,17 @@ public class BattleManager : MonoBehaviour
         {
             FindObjectOfType<OpeningManager>(true).playEndDream();
         }
+        if (FindObjectOfType<InsideOfficeManager>(true) != null) {
+            FindObjectOfType<InsideOfficeManager>(true).ProcessPlayerDeath();
+        }
     }
 
     void UpdateWin()
     {
         ActivateGameObjectsInScene();
+        if (FindObjectOfType<InsideOfficeManager>(true) != null) {
+            FindObjectOfType<InsideOfficeManager>(true).ProcessEnemyDeath();
+        }
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();
         enemyStatus.ResetCurrentHealth();
@@ -1047,5 +1055,9 @@ public class BattleManager : MonoBehaviour
                 
                 break;
         }
+    }
+
+    public void ResetEnemyStatus() {
+        enemyStatus = FindObjectOfType<EnemyStatus>();
     }
 }
