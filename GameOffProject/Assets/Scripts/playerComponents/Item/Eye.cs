@@ -11,15 +11,15 @@ public class Eye : Item
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                happyATK = 100f;
+                happyATK = 70f;
                 happyDEF = 100f;
-                sadATK = 100f;
+                sadATK = 70f;
                 sadDEF = 100f;
-                angryATK = 100f;
+                angryATK = 70f;
                 angryDEF = 100f;
                 skill = new AttackSkill(SkillAttribute.NONE);
                 displayName = "The Foggy Notion";
-                itemDescription = "happyATK = 100\r\nhappyDEF = 100\r\nsadATK = 100\r\nsadDEF = 100\r\nangryATK = 100\r\nangryDEF = 100";
+                itemDescription = "happyATK = 70\r\nhappyDEF = 100\r\nsadATK = 70\r\nsadDEF = 100\r\nangryATK = 70\r\nangryDEF = 100";
                 imageSrc = imgRoot + "2EyeDefault_N";
                 highLightedImage = imgRoot + "2EyeDefault_H";
                 selectedImage = imgRoot + "2EyeDefault_S";
