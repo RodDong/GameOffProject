@@ -1151,8 +1151,7 @@ MonoBehaviour:
   progress36: {fileID: 4900000, guid: 03ea93cc112b3d244b08b6131ebe9263, type: 3}
   progress36_1: {fileID: 4900000, guid: 112d9ebf1639de549b2e38aad1a2f606, type: 3}
   progress36_2: {fileID: 4900000, guid: 8383601806ec2ad45a922a8794714cf4, type: 3}
-  progress36_3: {fileID: 0}
-  progress36_4: {fileID: 0}
+  makeChoiceJson: {fileID: 4900000, guid: 9996c41d0be6592479d902d52feb123c, type: 3}
   interactables: []
   sim_stand: {fileID: 1222634430}
   sim_sit: {fileID: 1957980182}
@@ -1824,7 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1309103501}
-  inkJSON: {fileID: 0}
+  inkJSON: {fileID: 4900000, guid: e49a1f6ff8cf46a4981ea63d48e4656b, type: 3}
   player: {fileID: 0}
   isInBath: 0
 --- !u!1 &1519551283
