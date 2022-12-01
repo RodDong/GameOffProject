@@ -1,7 +1,7 @@
 -(dr_phone)
 The Doctor's phone. Someone is sending him a message. #progress:3
 
-Unknown number...
+Unknown number... #speaker:None
 
 "See you outside Thyrsus, as always. Remember to bring my pay-checks. Also, don't forget to let me know what to get next month."
 
@@ -53,9 +53,9 @@ That's... astounding. Although not as much as what I saw with my own eyes.
 Whatever this place is, I hope they can close forever soon.
 
 -(dr_cargo_seen)
-"Deliver to xxxxxx"
+"Deliver to Charlie"
 
-So xxx gets all the spooky supplies of food from Doctor Maton.#TODO:fix chef name
+So Charlie gets all the spooky supplies of food from Doctor Mastson.#TODO:fix chef name
 
 Had I known earlier I would never come to this clinic.
 

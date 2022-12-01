@@ -4,7 +4,7 @@
 
 "Ah. I see." #speaker:Boss #portrait:neutural #tachie:none
 
-A quick shadow of dismay just flew across his face.
+A quick shadow of dismay just flew across his face. #speaker:None
 
 "What a pity. I tell you those old men who has all the stocks will definitely like to see someone doing as good as you." #speaker:Boss #portrait:neutural #tachie:none
 
@@ -14,7 +14,7 @@ A quick shadow of dismay just flew across his face.
 
 "See you, sir." #speaker:P #portrait:neutural #tachie:none
 
-That said, I am very sure that he does not want me to be there at all.
+That said, I am very sure that he does not want me to be there at all. #speaker:None
 
 Thinking of how he yells and bristles and banishes people from the office, it is more likely that he wants no one to follow him to his dinner, where he would be among the gold-owners and boasting about the progress that we are actually not making.
 

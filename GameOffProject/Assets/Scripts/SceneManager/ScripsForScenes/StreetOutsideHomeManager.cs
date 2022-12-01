@@ -29,6 +29,6 @@ public class StreetOutsideHomeManager : MonoBehaviour
     }
 
     private void ProcessProgress_2() {
-        subwayStation.SetActive(false);        
+        //subwayStation.SetActive(false);        
     }
 }

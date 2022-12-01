@@ -1,18 +1,18 @@
-"Off from work?" #speaker:B #portrait:neutural #tachie:none
+"Off from work?" #speaker:Boss #portrait:neutural #tachie:none
 
 "Kind of..." #speaker:P #portrait:neutural #tachie:none
 
-"You know what? You've been doing good this month."#speaker:B #portrait:neutural #tachie:none
+"You know what? You've been doing good this month."#speaker:Boss #portrait:neutural #tachie:none
 
-"I think you did outperform 80% people in the department. Very impressive. I'll consider promoting you by the end of the year."#speaker:B #portrait:neutural #tachie:none
+"I think you did outperform 80% people in the department. Very impressive. I'll consider promoting you by the end of the year."#speaker:Boss #portrait:neutural #tachie:none
 
 "T-Thanks, sir. Good to know that."#speaker:P #portrait:neutural #tachie:none
 
-Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May be too much exaggregation.
+Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May be too much exaggregation. #speaker:None
 
-"I was thinking -- maybe you are interested in going to dinner with me?"#speaker:B #portrait:neutural #tachie:none
+"I was thinking -- maybe you are interested in going to dinner with me?"#speaker:Boss #portrait:neutural #tachie:none
 
-"Some of the company leaderships are gonna meet at a great dining place in town. I'm sure they would be happy to see an employee making this kind of contribution like you."#speaker:B #portrait:neutural #tachie:none
+"Some of the company leaderships are gonna meet at a great dining place in town. I'm sure they would be happy to see an employee making this kind of contribution like you."#speaker:Boss #portrait:neutural #tachie:none
 
 -(begin_choice)
     * I'm good with that.
@@ -35,9 +35,9 @@ Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May b
     
     
 -(dinner)
-"Wise choice." #speaker:B #portrait:neutural #tachie:none #progress:0
+"Wise choice." #speaker:Boss #portrait:neutural #tachie:none #progress:0
 
-"Just follow me." #speaker:B #portrait:neutural #tachie:none
+"Just follow me." #speaker:Boss #portrait:neutural #tachie:none
 -> placeholder
 
 
@@ -52,19 +52,19 @@ Am I doing well? Relatively speaking, probably, yes. Am I doing THAT well? May b
 
 "Actually--I would like to come, sir, but I must hurry to an appointment with the doctor right now. " #speaker:P #portrait:neutural #tachie:none #progress:1
 
-"Ah. I see." #speaker:B #portrait:neutural #tachie:none
+"Ah. I see." #speaker:Boss #portrait:neutural #tachie:none
 
 \*A quick shadow of dismay just flew across his face.\*
 
-"What a pity. I tell you those old men who has all the stocks will definitely like to see someone doing as good as you." #speaker:B #portrait:neutural #tachie:none
+"What a pity. I tell you those old men who has all the stocks will definitely like to see someone doing as good as you." #speaker:Boss #portrait:neutural #tachie:none
 
-"It's your loss not to see them anyway." #speaker:B #portrait:neutural #tachie:none
+"It's your loss not to see them anyway." #speaker:Boss #portrait:neutural #tachie:none
 
-"See you around then." #speaker:B #portrait:neutural #tachie:none
+"See you around then." #speaker:Boss #portrait:neutural #tachie:none
 
 "See you, sir." #speaker:P #portrait:neutural #tachie:none
 
-That said, I am very sure that he does not want me to be there at all.
+That said, I am very sure that he does not want me to be there at all. #speaker:None
 
 Thinking of how he yells and bristles and banishes people from the office, it is more likely that he wants no one to follow him to his dinner, where he would be among the gold-owners and boasting about the progress that we are actually not making.
 
@@ -93,7 +93,7 @@ In that way, they will keep him in charge. I guess that alone is enough for him.
 -(bar)
 "Yep, a drink always make me relieved after a whole day's hard work." # speaker:P #portrait:neutural #tachie:none 
 
-"The bar is not far away from here, I can take subway to there." #progress:2
+"The bar is not far away from here, I can take subway to there." #progress:3
 -> placeholder
 
 
@@ -108,7 +108,7 @@ In that way, they will keep him in charge. I guess that alone is enough for him.
 
 
 -(home)
-“There is a family emergency that I need to attend to, see, my sister’s daughter needs to be picked up and my sister’s out of town... I do really appreciate the offer, though, that must be a wonderful place to dine. Please do enjoy it.” #speaker:P #portrait:neutural #tachie:none  #progress:3
+“There is a family emergency that I need to attend to, see, my sister’s daughter needs to be picked up and my sister’s out of town... I do really appreciate the offer, though, that must be a wonderful place to dine. Please do enjoy it.” #speaker:P #portrait:neutural #tachie:none  #progress:2
 
 You smiled a little, trying to be as sorry as one possibility could. You bowed down your head to not look at glare that almost broke free of his eyes.
 

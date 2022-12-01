@@ -1,6 +1,6 @@
 -(dr_b_walk_clinic_boss)
 
-It has been days since the last.. incident... happened.
+It has been days since the last.. incident... happened. #speaker:None
 
 Things seem to be getting even more bizzare and monstrous after I saw Doctor Maston's name in that office.
 

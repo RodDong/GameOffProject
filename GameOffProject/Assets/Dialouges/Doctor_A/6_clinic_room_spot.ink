@@ -1,6 +1,6 @@
 -(doctor_in)
 
-Through the gap of the door I can look into the hallway, where the clinic assistant I just saw is pushing a hospital bed.
+Through the gap of the door I can look into the hallway, where the clinic assistant I just saw is pushing a hospital bed. #speaker:None
 
 At first glance it is loaded with lungs and liver in small plastic bags, as if they just came fresh from a butcher's shop.
 
@@ -12,7 +12,7 @@ On the other side of the bed, a white blanket covers a small pile of things--fro
 
 "!!!"#speaker:P #portrait:neutural #tachie:none
 
-I have to try very hard not to scream and vomit.
+I have to try very hard not to scream and vomit.# speaker:None
 
 What... what is Doctor Maston doing?
 
@@ -28,11 +28,11 @@ I... I want to get away from here... from this...
 
 Just... for now, pretend I saw nothing.
 
-"Yes, Doctor." #speaker:Clinic Assistant 1 #portrait:neutural #tachie:none
+"Yes, Doctor." #speaker:Nurse #portrait:neutural #tachie:none
 
 "Now go the other way around from the backdoor."#speaker:Doctor #portrait:neutural #tachie:none
 
-...
+... #speaker:None
 
 He's about to come in.
 

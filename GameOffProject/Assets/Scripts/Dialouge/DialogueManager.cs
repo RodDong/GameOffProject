@@ -276,7 +276,15 @@ public class DialogueManager : MonoBehaviour
             switch (tagKey) 
             {
                 case SPEAKER_TAG:
-                    displayNameText.text = tagValue;
+                    if (tagValue == "None")
+                    {
+                        displayNameText.text = "";
+                        break;
+                    }
+                    else
+                    {
+                        displayNameText.text = tagValue;
+                    }
                     break;
                 // case PORTRAIT_TAG:
                 //     portraitAnimator.Play(tagValue);

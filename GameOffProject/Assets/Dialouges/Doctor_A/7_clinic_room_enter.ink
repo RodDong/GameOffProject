@@ -4,7 +4,7 @@
 
 "Will you lie on that operating table over there?"#speaker:Doctor #portrait:neutural #tachie:none
 
-I will definitely not.
+I will definitely not. #speaker:None
 
 Knowing that he bags the parts he cuts off from the patients to "make use", I cannot be more afraid to turn my back to him with a knife.
 
@@ -18,37 +18,37 @@ Knowing that he bags the parts he cuts off from the patients to "make use", I ca
 
 "Plus it will be really quick. I told you--not very longer than 30 minutes and everything will be fine." #speaker:Doctor #portrait:neutural #tachie:none
 
-I bet he said the same thing to his other patients. No wonder there are so few negative comments about this place.
+I bet he said the same thing to his other patients. No wonder there are so few negative comments about this place. #speaker:None
 
 "Well, I just don't want to do it today."#speaker:P #portrait:neutural #tachie:none
 
-I see the doctor squinting.
+I see the doctor squinting. #speaker:None
 
 "..."#speaker:P #portrait:neutural #tachie:none
 
 For a moment he is speechless. He keeps staring right into my face. I suddenly realized that, if he thinks it is necessary not to let me leave this room, he has plenty of ways to do that.
 
-Does he think I saw what they were doing? Does he know?
+Does he think I saw what they were doing? Does he know? #speaker:None
 
 "I- Actually I need to do things later soon, so--"#speaker:P #portrait:neutural #tachie:none
 
 "You saw it, didn't you?"#speaker:Dorctors #portrait:neutural #tachie:none
 
-It's over.
+It's over. #speaker:None
 
 "W-What are you talking about?"#speaker:P #portrait:neutural #tachie:none
 
-At this moment I wish I chose to go to the dinner with my supervisor. Or maybe I should have went home. I wish that I never came here.
+At this moment I wish I chose to go to the dinner with my supervisor. Or maybe I should have went home. I wish that I never came here. #speaker:None
 
 "I'm talking about what you heard. Thinking about it, you must have heard the business we are doing, isn't it?"#speaker:Doctor #portrait:neutural #tachie:none
 
 "It would be strange if you didn't. We were just outside this door afterall."#speaker:Doctor #portrait:neutural #tachie:none
 
-I need help. I need to get away from here. The clinic assistants, will they help me out? Will the police come if something happens?
+I need help. I need to get away from here. The clinic assistants, will they help me out? Will the police come if something happens? #speaker:None
 
 "P-Please. I won't say a word. Please, let me leave. I'll keep my mouth shut, I swear."#speaker:P #portrait:neutural #tachie:none
 
-The doctor chuckles.
+The doctor chuckles. #speaker:None
 
 "Oh--no. Don't you really believe I'll let you go with that?"#speaker:Doctor #portrait:neutural #tachie:none
 

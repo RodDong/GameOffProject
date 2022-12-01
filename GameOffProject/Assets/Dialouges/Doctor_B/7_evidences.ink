@@ -1,5 +1,5 @@
 -(dr_phone)
-The Doctor's phone. Someone is sending him a message.
+The Doctor's phone. Someone is sending him a message. #speaker:None
 
 Unknown number...
 
@@ -53,9 +53,9 @@ That's... astounding. Although not as much as what I saw with my own eyes.
 Whatever this place is, I hope they can close forever soon.
 
 -(dr_cargo_seen)
-"Deliver to xxxxxx"
+"Deliver to Charlie"
 
-So xxx gets all the spooky supplies of food from Doctor Maton.#TODO:fix chef name
+So Charlie gets all the spooky supplies of food from Doctor Maton.#TODO:fix chef name
 
 Had I known earlier I would never come to this clinic.
 

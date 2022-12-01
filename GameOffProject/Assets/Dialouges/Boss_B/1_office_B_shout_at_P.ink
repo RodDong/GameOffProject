@@ -15,6 +15,6 @@ What should I say…what should come will always come?
 
 He seems really angry…Is that the sound of smashing the ashtray?
 
-MC, get your ass here! How many minutes can you waste? #speaker:Boss #portrait:neutural #tachie:none
+"MC, get your ass here! How many minutes can you waste?" #speaker:Boss #portrait:neutural #tachie:none
 
-Fine, just be as improvised as possible.
+Fine, just be as improvised as possible. #speaker:None

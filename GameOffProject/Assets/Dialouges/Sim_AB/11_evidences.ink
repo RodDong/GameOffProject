@@ -5,7 +5,7 @@
 
 -(bedside_table)
 
-you find a list of Patients information:
+you find a list of Patients information: #speaker:None
 “XXX, 25 years old … healthy; XXX, 31 years old … healthy; XXX, 29 years old … healthy”
 
 “A list of patients information and healthy reports?”  #speaker:P #portrait:neutural #tachie:none
@@ -24,14 +24,14 @@ you find a list of Patients information:
 // Evidence No.3 Feast menu
 
 -(chair)
-there is a menu from "Feast" sit there silently on the chair #progress:2
+there is a menu from "Feast" sit there silently on the chair #progress:2 #speaker:None
 
 “the one that he told me before. But the menu looks not like a usual restaurant.” #speaker:P #portrait:neutural #tachie:none
 
 // 第一个抽屉里  Evidence No.4
 
 -(drawer)
-there is a record of surgeries from Doctor Maston. #progress:1
+there is a record of surgeries from Doctor Maston. #progress:1 #speaker:None
 
 “Surgeries? This signature looks familiar.” #speaker:P #portrait:neutural #tachie:none
 
@@ -39,7 +39,7 @@ there is a record of surgeries from Doctor Maston. #progress:1
 // Evidence NO.5 色欲手机：里面含有三个情人的电话号码
 
 -(sims_phone)
-Sim's phone is there on the floor; #speaker:P #progress:0
+Sim's phone is there on the floor; #speaker:None #progress:0
 
 luckily there are still some battery left, unluckily you do not know the password. 
 

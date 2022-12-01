@@ -2,13 +2,13 @@
 // location: in the boss room
 
 -(pieces_on_floor)
-The fragment of ashtray or other fragile ornaments, seems like glass, better not touch it.
+The fragment of ashtray or other fragile ornaments, seems like glass, better not touch it. #speaker:None
 
 -(trash_can)
-It is full of waste paper with a stream of abuse to the subordinates.
+It is full of waste paper with a stream of abuse to the subordinates. #speaker:None
 
 -(on_table)
-It is really chaotic here…Wait, there is a note, a phone, and a ledger? 
+It is really chaotic here…Wait, there is a note, a phone, and a ledger? #speaker:None
     * [note] ->note
     * [phone] ->phone
     * [ledger] ->ledger

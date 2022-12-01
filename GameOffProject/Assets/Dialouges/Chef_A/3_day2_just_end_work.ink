@@ -1,6 +1,6 @@
 // location: in the office
 
-It was late and Boss was mad. He’s done yelling about 10 minutes ago, now panting and muttering swearing took over him.
+It was late and Boss was mad. He’s done yelling about 10 minutes ago, now panting and muttering swearing took over him. #speaker:None
 
 You can leave now, there’s that. The work was finally finished with almost six hours of overtime. The last train of the day roamed away an hour ago. 
 
