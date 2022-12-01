@@ -525,7 +525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 508697613}
   - component: {fileID: 508697612}
-  - component: {fileID: 508697614}
   - component: {fileID: 508697611}
   m_Layer: 0
   m_Name: doctor_stand
@@ -627,20 +626,6 @@ Transform:
   m_Father: {fileID: 572032545}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &508697614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508697610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f69c899fff093004eb77050a1ffa4f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defeatInkJSON: {fileID: 4900000, guid: 70bc698e65a33704cb3f6af3b11dc03c, type: 3}
-  enemyImage: 
 --- !u!1 &572032544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,6 +2062,7 @@ GameObject:
   - component: {fileID: 1906751639}
   - component: {fileID: 1906751638}
   - component: {fileID: 1906751643}
+  - component: {fileID: 1906751644}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2241,6 +2227,20 @@ MonoBehaviour:
   progress22: {fileID: 4900000, guid: 3bf0bf60e010d9d4880a12f73434cb17, type: 3}
   progress22_1: {fileID: 4900000, guid: 6b921d6b79ce59340a133615b39fa11e, type: 3}
   progress_doc_end: {fileID: 4900000, guid: 9996c41d0be6592479d902d52feb123c, type: 3}
+--- !u!114 &1906751644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906751637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69c899fff093004eb77050a1ffa4f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defeatInkJSON: {fileID: 4900000, guid: 70bc698e65a33704cb3f6af3b11dc03c, type: 3}
+  enemyImage: 
 --- !u!1 &1949309209
 GameObject:
   m_ObjectHideFlags: 0
