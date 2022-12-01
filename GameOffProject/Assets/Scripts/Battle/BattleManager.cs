@@ -99,6 +99,10 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
+        if (!enemyStatus)
+        {
+            return;
+        }
         if (!gameObjectsInScene) {
             gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
         }
@@ -770,6 +774,10 @@ public class BattleManager : MonoBehaviour
 
     void UpdateEnemyStatusBar()
     {
+        if (!enemyStatus)
+        {
+            return;
+        }
         List<Effect> activeEffects = enemyStatus.GetActiveEffects();
         Transform[] childTransforms = EnemyStatusBar.GetComponentsInChildren<Transform>(true);
 
