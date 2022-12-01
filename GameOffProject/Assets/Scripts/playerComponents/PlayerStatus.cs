@@ -154,7 +154,7 @@ public class PlayerStatus : MonoBehaviour
         equippedMouth = new Mouth(SkillAttribute.NONE);
 
         ownedEyebrows.Add(equippedEyebrow);
-        ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
+        // ownedEyebrows.Add(new EyeBrow(SkillAttribute.HAPPY));
         ownedEyes.Add(equippedEyes);
         // ownedEyes.Add(new Eye(SkillAttribute.HAPPY));
         // ownedEyes.Add(new Eye(SkillAttribute.SAD));
