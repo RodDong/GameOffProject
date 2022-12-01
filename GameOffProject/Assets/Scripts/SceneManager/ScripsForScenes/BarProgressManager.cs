@@ -29,10 +29,8 @@ public class BarProgressManager : MonoBehaviour
             }
         }
 
-        if (progressManager.currentProgress == 36) {
-            
-            ProcessProgress_36();
-        }
+        ProcessProgress_36();
+        
     }
 
 

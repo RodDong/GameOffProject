@@ -7,7 +7,7 @@
 
 Is that the sound of smashing the ashtray?
 
-He seems really angry… I'd better be careful.
+He seems really angry... I'd better be careful.
 
 "YOU! get your ASS here! How many minutes can you waste?" #speaker:B #portrait:neutural #tachie:none
 

@@ -4,9 +4,9 @@
 
 "Fine."#speaker:P #portrait:neutural #tachie:none
 
-The check he returns me is much fewer in amount than I paid him. Appearantly Doctor Maston is... reluctant... to end this business. #speaker:None
+The check he returns me is much fewer in amount than I paid him. Appearantly Doctor Maston is... reluctant... to end this business.
 
-However, for such an outlaw of his kind, I guess this is not at all too mean. 
+However, for such an outlaw of his kind, I guess this is not at all too mean.
 
 As long as I can get clean from this.
 
@@ -14,7 +14,7 @@ As long as I can get clean from this.
 
 "Is it done?"#speaker:P #portrait:neutural #tachie:none
 
-He stares at me, speaking not a word. There is something in this room that makes feel nervous. #speaker:None
+He stares at me, speaking not a word. There is something in this room that makes feel nervous. 
 
 Is it only that it looks... old... and dusky...
 
@@ -32,7 +32,7 @@ No. No-no-no-no-no-
 
 "Come on. I know you did. You ruined my business by knocking them out, which led to some innocent police officers to check them out. I know all that."#speaker:D #portrait:neutural #tachie:none
 
-He grins a grin. #speaker:None
+He grins a grin.
 
 "Have it ever occured to you, after you've known about all these--that how did I manage to keep this 'business' running and remain never questioned by the jury a singl time?"#speaker:D #portrait:neutural #tachie:none
 

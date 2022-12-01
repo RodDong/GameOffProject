@@ -43,8 +43,8 @@ public class ProgressManager : MonoBehaviour
         nodes[2].next[3] = 6; // chef dead
 
         nodes[4].next[0] = 7;
-        nodes[4].next[2] = 8; // lust dead
-        nodes[4].next[3] = 9; // chef dead
+        nodes[4].next[2] = 9; // lust dead
+        nodes[4].next[3] = 8; // chef dead
         nodes[5].next[3] = 13;
         nodes[5].next[1] = 14;
         nodes[6].next[1] = 17;

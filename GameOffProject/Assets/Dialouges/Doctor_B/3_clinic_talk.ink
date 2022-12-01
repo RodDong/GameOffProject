@@ -12,7 +12,7 @@ I wish this would be quick...
 
 "No problem." #speaker:P #portrait:neutural #tachie:none
 
-Ever since I moved to this city I have been seeing Dorctor Maston every once in a while for a number of reasons. #speaker:None
+Ever since I moved to this city I have been seeing Dorctor Maston every once in a while for a number of reasons.
 
 No matter how often I have been coming, I feel uncomfortable coming to this place every time.
 
@@ -24,13 +24,13 @@ Hopefully I will not run into any troubles.
 
 "Hi. I heard you wanna cancel your appointments and get your money back? What's wrong?"#speaker:D #portrait:neutural #tachie:none
 
-Among all possibilities, this is one of the least I want to see. #speaker:None
+Among all possibilities, this is one of the least I want to see.
 
 Simply talking to the assistants is fine...
 
 However, Doctor Maston himself is a problem. I have no idea if he already knows that I have known about his... secrets. If he THINKS I know.
 
-What if he becomes suspecting and get me into trouble here? 
+What if he becomes suspecting and get me into trouble here?
 
 "Well-- Not really."#speaker:P #portrait:neutural #tachie:none
 
