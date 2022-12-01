@@ -1,6 +1,6 @@
 -(doctor_room)
 
-Okay, take a breathe...
+Okay, take a breathe... #speaker:None
 
 "I've seen the report about your last examination." #speaker:D #portrait:neutural #tachie:none
 

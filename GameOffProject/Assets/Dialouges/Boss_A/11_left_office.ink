@@ -1,4 +1,4 @@
-That's ... insane. What should I do next?
+That's ... insane. What should I do next? #speaker:None
     * Call police // (lead to the chef b side story)
     * Go home
     * Have a drink // (lead to S b side story)

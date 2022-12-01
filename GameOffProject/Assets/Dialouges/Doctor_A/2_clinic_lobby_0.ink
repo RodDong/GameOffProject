@@ -1,12 +1,12 @@
-"Are you here to see Doctor Maston?" #speaker:F #portrait:neutural #tachie:none
+"Are you here to see Doctor Maston?" #speaker:Nurse #portrait:neutural #tachie:none
 
 "Yes." #speaker:P #portrait:neutural #tachie:none
 
-"I'll check you in and let him know you're here. Please wait a few minutes."#speaker:Clinic Assistant #portrait:neutural #tachie:none
+"I'll check you in and let him know you're here. Please wait a few minutes."#speaker:Nurse #portrait:neutural #tachie:none
 
 "..." #speaker:P #portrait:neutural #tachie:none
 
-I feel uncomfortable coming to this place every time.
+I feel uncomfortable coming to this place every time. #speaker:None
 
 Ever since I moved to this city I have been seeing Dorctor Maston every once in a while for a number of reasons.
 

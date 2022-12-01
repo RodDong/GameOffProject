@@ -275,6 +275,7 @@ MonoBehaviour:
   visualCue: {fileID: 1717760163}
   inkJSON: {fileID: 4900000, guid: 9ffc61245334a094ebd305cbf7887944, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &49556995
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +917,7 @@ MonoBehaviour:
   visualCue: {fileID: 1768828642}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &519368633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,6 +1178,7 @@ MonoBehaviour:
   - {fileID: 757483822}
   boss_stand: {fileID: 69060295}
   boss_sit: {fileID: 1752389476}
+  chef: {fileID: 1378175513}
   blackScreen: {fileID: 1951894644}
   door_to_street: {fileID: 1792673431}
   door_to_kitchen: {fileID: 510667559}
@@ -1287,6 +1290,7 @@ MonoBehaviour:
   visualCue: {fileID: 487316428}
   inkJSON: {fileID: 4900000, guid: 12318cd4985cf8943bbd8dafe8ccc24d, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &824983476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1419,7 @@ MonoBehaviour:
   visualCue: {fileID: 519368633}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &847930838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1553,7 @@ MonoBehaviour:
   visualCue: {fileID: 463126518}
   inkJSON: {fileID: 4900000, guid: 1de41b904786f5a4ab731a1be10b3f20, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &994376480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1815,7 +1821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1378175514
 Transform:
   m_ObjectHideFlags: 0
@@ -2602,6 +2608,7 @@ MonoBehaviour:
   visualCue: {fileID: 1777075562}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0

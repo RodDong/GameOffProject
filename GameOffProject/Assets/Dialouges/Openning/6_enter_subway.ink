@@ -1,6 +1,6 @@
 "Gee..." #speaker:P #portrait:neutural #tachie:none
 
-Why are these people so slow? 
+Why are these people so slow? #speaker:None 
 
 If they are not in a hurry, they should give way to people who do, instead of wandering in the middle of the sidewalk.
 

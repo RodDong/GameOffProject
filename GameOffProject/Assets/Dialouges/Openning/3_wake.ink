@@ -8,7 +8,7 @@
 
 "What was it... again? "#speaker:P #portrait:neutural #tachie:none
 
-A sigh.
+A sigh. #speaker:None 
 
 For these months I have been struggling with someone every two nights or so.
 
@@ -35,6 +35,6 @@ Why would I fight myself in every dreams?
 
 \* you quickly wipes dry the face and steps outside the bathroom.\* // a studio apartment, small, dark and old. simple furniture: a bed, a table, a closet. grey-ish daylights come in from the balcony, so dim and so biased in color. It is difficult to tell dawn from dusk.
 
-Tuesday, or any of the days. 
+Tuesday, or any of the days. #speaker:None 
 
 "Still got time to eat. But I'm also ok not to." #speaker:P #portrait:neutural #tachie:none

@@ -25,6 +25,7 @@ public class StreetOutsideClinicManager : MonoBehaviour
             clinicDoorCollider.enabled = false;
             subwayCollider.enabled = false;
         }
+
     }
 
     private async void ProcessProgress_1() {

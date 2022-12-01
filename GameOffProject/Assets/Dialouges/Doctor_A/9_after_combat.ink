@@ -1,6 +1,6 @@
 -(dr_after_combat)
 
-Well...
+Well... #speaker:None
 
 I should get away from here really quick. Just to avoid troubles.
 

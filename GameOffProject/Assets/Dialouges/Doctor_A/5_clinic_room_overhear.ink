@@ -2,7 +2,7 @@
 
 ...
 
-The doctor is going to prepare for the surgery. So he says. He seems to be in such a hurry.
+The doctor is going to prepare for the surgery. So he says. He seems to be in such a hurry. #speaker:None
 
 \--That means, as always.
 
@@ -22,23 +22,23 @@ Not something I should care about as long as he can quickly solve mine.
 
 、*you hear something through the bulk of metallic door, it is not clear but the voice is enough for you to hear something\*
 
-"...so are we going to get rid of these? This much?" #speaker:F #portrait:neutural #tachie:none
+"...so are we going to get rid of these? This much?" #speaker:Nurse #portrait:neutural #tachie:none
 
 "Yes, all of them."#speaker:M #portrait:neutural #tachie:none
 
 "\*sigh\*"#speaker:F #portrait:neutural #tachie:none
 
-"I wonder until when can the doctor keep doing this without being discovered."#speaker:F #portrait:neutural #tachie:none
+"I wonder until when can the doctor keep doing this without being discovered."#speaker:Nurse #portrait:neutural #tachie:none
 
-...Being discovered? What does that mean?
+...Being discovered? What does that mean? #speaker:None
 
-"Well, I guess we really don't have a choice but to help him with this."#speaker:M #portrait:neutural #tachie:none
+"Well, I guess we really don't have a choice but to help him with this."#speaker:Clinic Assistant #portrait:neutural #tachie:none
 
-"Just quickly wrap them with a waterproof bag and send them to the van downstairs." #speaker:M #portrait:neutural #tachie:none
+"Just quickly wrap them with a waterproof bag and send them to the van downstairs." #speaker:Clinic Assistant #portrait:neutural #tachie:none
 
-"Simply taking them out from the cold storage is already making me throwing my lunch out."#speaker:M #portrait:neutural #tachie:none
+"Simply taking them out from the cold storage is already making me throwing my lunch out."#speaker:Clinic Assistant #portrait:neutural #tachie:none
 
-There are sounds of a hospital bed rolling down the hallway.
+There are sounds of a hospital bed rolling down the hallway. #speaker:None
 
 As it rises, the air begins to smell... shifty, greasy, and streangely... sweet...
 
