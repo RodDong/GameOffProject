@@ -9,7 +9,8 @@ public class InsideOfficeManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
-    [SerializeField] TextAsset progress2, progress2_1;
+    private List<int> state_fight_bossB = new List<int>(){24, 30, 34, 42, 61, 70, 67, 52};
+    [SerializeField] TextAsset progress2, progress2_1, progress2B;
     [SerializeField] GameObject boss_sit, boss_stand, boss_die;
     [SerializeField] GameObject door_to_outside, table;
     [SerializeField] GameObject blackScreen;
@@ -24,6 +25,11 @@ public class InsideOfficeManager : MonoBehaviour
             door_to_outside.SetActive(false);
             table.SetActive(false);
             ProcessProgress_2();
+        }
+        if (state_fight_bossB.Contains(progressManager.currentProgress)) {
+            door_to_outside.SetActive(false);
+            table.SetActive(false);
+            ProcessProgress2B();
         }
     }
 
@@ -41,6 +47,13 @@ public class InsideOfficeManager : MonoBehaviour
         await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
+    }
+
+    private async void ProcessProgress2B() {
+        boss_stand.SetActive(true);
+        await Task.Delay(300);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress2B);
     }
 
     private async void ProcessProgress2_1() {

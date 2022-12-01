@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class InsideClinicManager : MonoBehaviour
 {
-    public bool hasTalkedDoctor, hasSpotted;
+    public bool hasTalkedDoctor, hasSpotted, hasTriggeredClue;
     private ProgressManager progressManager;
     private GameObject player;
     private PlayerMove playerObject;
     private DialogueManager dialogueManager;
     private bool hasTriggered22;
     [SerializeField] GameObject doctor_sit, doctor_stand, doctor_died, blackScreen, door_outside, clues;
-    [SerializeField] TextAsset progress22, progress22_1;
+    [SerializeField] TextAsset progress22, progress22_1, progress_doc_end;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -40,6 +40,9 @@ public class InsideClinicManager : MonoBehaviour
             if (hasSpotted) {
                 hasSpotted = false;
                 ProcessProgress22_2();
+            }
+            if (hasTriggeredClue) {
+                ProcessDoctorClues();
             }
         }
     }
@@ -88,5 +91,12 @@ public class InsideClinicManager : MonoBehaviour
         player.transform.position = new Vector3(-9.97f, -0.6679425f, 0.0f);
         playerObject.PlayerTurnRight();
         SceneManager.LoadScene("5inside_clinic");
+    }
+
+    private async void ProcessDoctorClues() {
+        hasTriggeredClue = false;
+        await Task.Delay(400);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress_doc_end);
     }
 }

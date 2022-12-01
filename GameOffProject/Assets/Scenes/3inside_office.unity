@@ -1359,7 +1359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTriggeredClue: 0
   progress2: {fileID: 4900000, guid: 700ef0de5984a0c43b56677a91ed5fac, type: 3}
-  progress2_1: {fileID: 4900000, guid: d5ad93ccae8bdef44b6be47344d98964, type: 3}
+  progress2_1: {fileID: 4900000, guid: 9996c41d0be6592479d902d52feb123c, type: 3}
+  progress2B: {fileID: 4900000, guid: 4b40e5ecb8f1c3a45bd57e446d4caa9e, type: 3}
   boss_sit: {fileID: 2112699737}
   boss_stand: {fileID: 1894062480}
   boss_die: {fileID: 660164845}
@@ -1853,6 +1854,7 @@ MonoBehaviour:
   visualCue: {fileID: 1095413202}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!222 &1792673434
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2100,6 +2102,7 @@ MonoBehaviour:
   visualCue: {fileID: 1200318306}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1916465316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,3 +2315,4 @@ MonoBehaviour:
   visualCue: {fileID: 1916465316}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0

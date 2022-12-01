@@ -542,6 +542,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &599982960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599982961}
+  - component: {fileID: 599982963}
+  - component: {fileID: 599982962}
+  m_Layer: 0
+  m_Name: Day2EventTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599982961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599982960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.89, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1519551284}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &599982962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599982960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86a5a7afdee7254fac6e079e305148d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress2B: {fileID: 4900000, guid: 83fa64d2b6440a647b4f2322d08877f3, type: 3}
+--- !u!61 &599982963
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599982960}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -3.365385, y: -0.43016195}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.3785439, y: 6.21255}
+  m_EdgeRadius: 0
 --- !u!1 &605090535
 GameObject:
   m_ObjectHideFlags: 3
@@ -797,9 +869,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTriggered1: 0
+  hasTriggered22: 0
   progress1: {fileID: 4900000, guid: 77ef826bce8b544449ae4b38d747710a, type: 3}
   progress1_1: {fileID: 4900000, guid: 52b32a89fb9311c46a805a9841612605, type: 3}
   progress2: {fileID: 4900000, guid: 77e12e3e063428e45b2d971829068950, type: 3}
+  progress2B: {fileID: 4900000, guid: 279df9b31837a6645820e92df218cade, type: 3}
   progress22: {fileID: 4900000, guid: b52456cc46f9214498a3548584c7cb43, type: 3}
   door_to_outside: {fileID: 1792673431}
   door_to_office: {fileID: 1391323414}
@@ -1514,6 +1588,7 @@ Transform:
   - {fileID: 1792673430}
   - {fileID: 1391323413}
   - {fileID: 38695453}
+  - {fileID: 599982961}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
