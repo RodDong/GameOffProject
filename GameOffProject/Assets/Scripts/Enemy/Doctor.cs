@@ -15,6 +15,7 @@ public class Doctor : EnemyStatus
         dropItems.Add(new Mouth(SkillAttribute.SAD));
         enemyImage = imgRoot + "Doctor_Battle";
         enemySentences = ("Do you know you sound ugly when you laugh?", "So you are in despair now, too?", "Rage, rage. It damages your health and gets your killed.");
+        enemyName = "Doctor";
     }
 
     public override void ResetCurrentHealth()

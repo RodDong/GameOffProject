@@ -16,6 +16,7 @@ public class Chef : EnemyStatus
         dropItems.Add(new Eye(SkillAttribute.ANGRY));
         enemyImage = imgRoot + "Chef_Battle";
         enemySentences = ("Here comes the appetizer!", "Here comes the appetizer!", "Here comes the appetizer!");
+        enemyName = "Chef";
     }
 
     public override void ResetCurrentHealth()

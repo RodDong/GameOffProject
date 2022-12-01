@@ -16,6 +16,7 @@ public class Lust : EnemyStatus
         dropItems.Add(new Mouth(SkillAttribute.HAPPY));
         enemyImage = imgRoot + "Lust_Battle";
         enemySentences = ("Lust is part of me, why are you resisting me...", "You are just one of us.", "You fear no more? What a LIE!");
+        enemyName = "Lust";
     }
 
     public override void ResetCurrentHealth()

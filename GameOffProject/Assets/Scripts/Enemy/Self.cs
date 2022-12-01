@@ -14,6 +14,7 @@ public class Self : EnemyStatus
         currentHealth = MAX_HEALTH;
         enemyImage = imgRoot + "Self_Battle";
         enemySentences = ("Ha, you are just self-deceiving", "What have you done!", "You do not know what you are talking about!");
+        enemyName = "Self";
     }
 
     public override void ResetCurrentHealth()

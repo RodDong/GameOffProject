@@ -478,6 +478,11 @@ public class DialogueManager : MonoBehaviour
                 case "doctor's cargo":
                     playerStatus.addClue(11);
                     break;
+                case "Investigate the chef":
+                    SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+                    player.transform.position = new Vector3(-8.78f, -3.0f, 1.0f);
+                    player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
+                    break;
             }
 
             ContinueStory();
