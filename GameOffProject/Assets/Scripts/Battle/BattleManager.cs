@@ -234,6 +234,9 @@ public class BattleManager : MonoBehaviour
         if (FindObjectOfType<InsideOfficeManager>(true) != null) {
             FindObjectOfType<InsideOfficeManager>(true).ProcessPlayerDeath();
         }
+        if (FindObjectOfType<InsideClinicManager>(true) != null) {
+            FindObjectOfType<InsideClinicManager>(true).ProcessPlayerDeath();
+        }
     }
 
     void UpdateWin()
@@ -241,6 +244,9 @@ public class BattleManager : MonoBehaviour
         ActivateGameObjectsInScene();
         if (FindObjectOfType<InsideOfficeManager>(true) != null) {
             FindObjectOfType<InsideOfficeManager>(true).ProcessEnemyDeath();
+        }
+        if (FindObjectOfType<InsideClinicManager>(true) != null) {
+            FindObjectOfType<InsideClinicManager>(true).ProcessEnemyDeath();
         }
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();
