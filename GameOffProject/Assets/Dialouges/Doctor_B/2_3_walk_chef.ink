@@ -1,6 +1,6 @@
 -(dr_b_walk_clinic_chef)
 
-It has been days since the last.. incident... happened. #speaker:None
+It has been days since the last.. incident... happened.
 
 Things seem to be getting even more bizzare and monstrous after I saw Doctor Maston's name in that restaurant.
 

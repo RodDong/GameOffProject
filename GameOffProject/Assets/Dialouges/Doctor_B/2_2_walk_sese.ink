@@ -1,6 +1,6 @@
 -(dr_b_walk_clinic_sese)
 
-It has been days since the last.. incident... happened. #speaker:None
+It has been days since the last.. incident... happened.
 
 Things seem to be getting even more bizzare and monstrous after I saw Doctor Maston's name in that studio.
 
@@ -22,4 +22,4 @@ Talking with a... fraud? Such a "butcher"?
 
 But I guess it's still okay just to go there and get all my documents and refund money.
 
-And leave really quickly. 
+And leave really quickly.
