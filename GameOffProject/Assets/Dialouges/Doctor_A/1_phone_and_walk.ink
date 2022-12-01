@@ -2,7 +2,7 @@
 
 -(clinic_walk)
 
-I better call the clinic to let them know I am to go.
+I better call the clinic to let them know I am to go. #speaker:None
 
 \*you take out your phone and dial the number in your number book.\*
 
@@ -10,7 +10,7 @@ I better call the clinic to let them know I am to go.
 
 "Can you quickly check if the doctor is still in? " #speaker:P #portrait:neutural #tachie:none
 
-[Clinic speaking] "He is. Are you coming to see him?" #speaker:F #portrait:neutural #tachie:none
+[Clinic speaking] "He is. Are you coming to see him?" #speaker:Nurse #portrait:neutural #tachie:none
 
 "I'll arrive in ten minutes." #speaker:P #portrait:neutural #tachie:none
 

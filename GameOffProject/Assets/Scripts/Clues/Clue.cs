@@ -32,7 +32,7 @@ public class Clue
         {
             case -1:
                 clueName = "???";
-                clueDescription = "no description";
+                clueDescription = "???";
                 clueImageSource += "Clue_Not_Found";
                 break;
             case 0:

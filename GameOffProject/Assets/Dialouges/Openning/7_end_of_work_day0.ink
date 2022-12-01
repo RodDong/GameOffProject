@@ -12,7 +12,7 @@
 "I might be as well leaving." #speaker:P #portrait:neutural #tachie:none
 "Ugh..."#speaker:P #portrait:neutural #tachie:none
 
-My spine hurts from top to bottom. Every joint is aching.
+My spine hurts from top to bottom. Every joint is aching. #speaker:None 
 
 What else can you expect after crouching at the desk for the whole day, 6 days a week?
 
@@ -30,28 +30,28 @@ They are not even sure if they can schedule an appointment three months from now
 
 Actually, I can check with them one more time now. //#he dials the phone.
 
-"Maston clinics. How may I help you?"#speaker:F #portrait:neutural #tachie:none
+"Maston clinics. How may I help you?"#speaker:Nurse #portrait:neutural #tachie:none
 
 "Can you check for me the time slots available for spine health examiniations?" #speaker:P #portrait:neutural #tachie:none
 
-"Just a moment, please." #speaker:F #portrait:neutural #tachie:none
+"Just a moment, please." #speaker:Nurse #portrait:neutural #tachie:none
 
 "..."
 
-Wage slaves get sick, doctors make the money.
+Wage slaves get sick, doctors make the money. #speaker:None
 
-"Hello?"#speaker:F #portrait:neutural #tachie:none
+"Hello?"#speaker:Nurse #portrait:neutural #tachie:none
 
 "Yes." #speaker:P #portrait:neutural #tachie:none
 
 "As a matter of fact, the doctor happens to be available right now, tonight. One of our patients cannot make it here for some reason, but Dr. Maston is still gonna stay here till late."#speaker:F #portrait:neutural #tachie:none
 
-"If you just come over, he will be able to see you."#speaker:F #portrait:neutural #tachie:none
+"If you just come over, he will be able to see you."#speaker:Nurse #portrait:neutural #tachie:none
 
 "Right. Thanks." #speaker:P #portrait:neutural #tachie:none
 
 "Maybe I really can go there now." #speaker:P #portrait:neutural #tachie:none
 
-Or maybe not. Thinking about it, the news about that murder story is a little scary afterall.
+Or maybe not. Thinking about it, the news about that murder story is a little scary afterall. #speaker:None
 
 "I'll know by the time I arrive at the station."#speaker:P #portrait:neutural #tachie:none 

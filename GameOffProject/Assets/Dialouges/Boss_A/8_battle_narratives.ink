@@ -64,7 +64,7 @@
 -(sad_sad)
 // 悲伤，悲伤： 
 // Why would things have to be like this? There should be a better solution. #speaker:P #portrait:neutural #tachie:none
-"I have already chosen my way and I won't go back." #speaker:B #portrait:neutural #tachie:none
+"I have already chosen my way and I won't go back." #speaker:Boss #portrait:neutural #tachie:none
 
 
 

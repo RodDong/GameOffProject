@@ -1,12 +1,12 @@
 -(openning)
 
-You gasped, soundlessly, powerlessly.
+You gasped, soundlessly, powerlessly. #speaker:None 
 You were lying still in the middle of nothing.
 Nothing, except the giant bulb of light slowly rising, probably floating. 
 You squinted, not fast enough to block the light that have forced through your eyeballs. Tears began to form around that delicate part of your body.
 Laughter. High-pitched, trembling, hysterical, familiar. You know that voice. You know it, for some unpleasant reason which you have no clue about.
 And that face, and that touch, and that warmth from the coarse fingertip. Fingernail scratched the thin layer of skin that were now tightening painfully around your trembling arm.
-Your eyes were wide open before you realized. You were startled, trying to get away from that omnipresent…being. How impossible.
+Your eyes were wide open before you realized. You were startled, trying to get away from that omnipresent…being. How impossible. #speaker:None 
 
 "Stay away from me!" #speaker:P #tachie:none
 

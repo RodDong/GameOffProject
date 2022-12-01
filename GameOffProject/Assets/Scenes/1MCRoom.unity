@@ -1554,6 +1554,7 @@ MonoBehaviour:
   visualCue: {fileID: 1117203012}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1810547146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTriggered2: 0
+  hasTriggered2_1: 0
   progress1: {fileID: 4900000, guid: db40212837f5c5e43ae8b37dca3db54a, type: 3}
   progress2_0: {fileID: 4900000, guid: 7bef8dfba8dd44f45874ea28661cfb8d, type: 3}
   progress2_1: {fileID: 4900000, guid: 20dc61404f305c54386559dd21339327, type: 3}

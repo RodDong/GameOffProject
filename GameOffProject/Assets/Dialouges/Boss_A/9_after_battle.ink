@@ -1,7 +1,7 @@
 // 「战斗结束，背景回到办公室」
 Maybe he's right, it is people's instinct to desire more power and to express the dissatisfaction.
 
-I might also face the possible desire and emotion inside myself? Just, maybe not that extreme…?
+I might also face the possible desire and emotion inside myself? Just, maybe not that extreme…? #speaker:None
 
 \*you feel like you understood the source of anger from your Boss, some special emotion came up into your mind\*
 

@@ -1,1 +1,1 @@
-I was really scared by L yesterday... but I don't want to lose my job, so let's just go work and hope nothing would happen
+I was really scared by L yesterday... but I don't want to lose my job, so let's just go work and hope nothing would happen #speaker:None

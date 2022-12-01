@@ -1,6 +1,6 @@
 // location: kitchen
 
-One good thing: you smelled food. Yay!
+One good thing: you smelled food. Yay! #speaker:None
 
 It’s not feeling right though. It’s… too cold. Too quiet.
 
@@ -14,7 +14,7 @@ No tables, no chairs, no customers.
 
 No, this is nowhere near a restaurant. 
 
-Wait.
+Wait. #speaker:None
 
 Oh, it’s the kitchen. It’s the fucking kitchen.
 
@@ -60,10 +60,10 @@ You fumbled, trying to make way to that dark corridor that leads you here. You n
 
 The door cracked.
 
-“Mike, I told you to grab…” #speaker:C #portrait:neutural #tachie:none
+"Mike, I told you to grab..." #speaker:Charlie #portrait:neutural #tachie:none
 
-She walked in, still in her chef’s jacket, still the oh-so-delicate red lips and green eyes.
+She walked in, still in her chef's jacket, still the oh-so-delicate red lips and green eyes. #speaker:None
 
 She paused, staring at you in surprise before thrusting towards you with a force that you are sure is going to crush you. 
 
-It’s too late to run. You have to fight. 
+It's too late to run. You have to fight. 
