@@ -14,6 +14,7 @@ public class BossFightAudio : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerMove = player.GetComponent<PlayerMove>();
         enemy = GameObject.FindObjectOfType<EnemyStatus>();
+        
     }
 
     // Update is called once per frame

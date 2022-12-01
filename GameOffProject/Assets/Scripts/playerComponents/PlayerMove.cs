@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] public AudioClip walkingClip, walkingOutsideClip;
     Animator playerAnimator;
     AudioSource walkingAudio;
+    AudioSource[] audioSources;
 
     public enum State {
         Idle,
@@ -126,6 +127,11 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void EnterBattleMode() {
+        audioSources = GameObject.FindObjectsOfType<AudioSource>();
+        foreach(var audio in audioSources)
+        {
+            audio.Stop();
+        }
         mCurState = State.Battle;
         mPlayerStatus.ResetCurrentHealth();
         battleManager.ResetEnemyStatus();
