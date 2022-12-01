@@ -345,23 +345,27 @@ public class DialogueManager : MonoBehaviour
             
             List<int> progressStates;
             if (choice.text == "Investigate the boss") {
-                progressStates = new List<int>(){};
+                progressStates = new List<int>(){2, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 26, 27, 28, 31, 35, 39, 42, 43, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 61, 64, 65, 67, 70, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
                     continue;
                 }
             } else if (choice.text == "Investigate the doctor") {
-                progressStates = new List<int>(){};
+                progressStates = new List<int>(){4, 8, 9, 11, 12, 14, 15, 16, 18, 19, 20, 22, 24, 25, 26, 27, 28, 31, 32, 34, 35, 40, 41, 44, 45, 46, 47, 49, 50, 54, 55, 56, 57, 58, 62, 65, 66, 67, 71, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
                     continue;
                 }
             } else if (choice.text == "Investigate the chef") {
-                progressStates = new List<int>(){};
+                progressStates = new List<int>(){5, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 23, 26, 27, 32, 34, 35, 38, 39, 40, 44, 45, 47, 48, 49, 50, 52, 53, 54, 55, 56, 57, 58, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
                     continue;
                 }
             } else if (choice.text == "Investigate the bar maiden") {
-                progressStates = new List<int>(){36};
+                progressStates = new List<int>(){36, 6, 19, 17, 8, 11, 12, 10, 13, 15, 16, 18, 20, 27, 28, 25, 35, 31, 32, 34, 36, 69, 41, 42, 43, 49, 44, 46, 45, 47, 64, 65, 66, 67, 63, 39, 40, 58};
                 if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "I'm Tired. Going Home") {
+                if (index != 0) {
                     continue;
                 }
             }
@@ -457,27 +461,15 @@ public class DialogueManager : MonoBehaviour
                 case "ledger":
                     playerStatus.addClue(8);
                     break;
-                case "Investigate Doctor's Phone":
-                    playerStatus.addClue(9);
-                    break;
-                case "Investigate Doctor's Sponsor List":
+                case "doctor's phone":
                     playerStatus.addClue(10);
                     break;
-                case "Investigate Doctor's Cargo":
+                case "doctor's namelist":
                     playerStatus.addClue(11);
                     break;
-                // case "I'm good with that.":
-                //     progressManager.transitionToNextState(0);
-                //     break;
-                // case "Actually I have a doctor's appointment.":
-                //     progressManager.transitionToNextState(1);
-                //     break;
-                // case "An old friend invites me to drink.":
-                //     progressManager.transitionToNextState(2);
-                //     break;
-                // case "Sorry, but I feel too sick today.":
-                //     progressManager.transitionToNextState(3);
-                //     break;
+                case "doctor's cargo":
+                    playerStatus.addClue(12);
+                    break;
             }
 
             ContinueStory();

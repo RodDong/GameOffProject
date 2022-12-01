@@ -1,3 +1,3 @@
 ? #notext:yes
-+   Go Home
-+   Go to Bar and Restaurant
++   [Go Home]
++   [Go to Bar and Restaurant]

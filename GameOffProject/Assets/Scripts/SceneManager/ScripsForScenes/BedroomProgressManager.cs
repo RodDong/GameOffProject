@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class BedroomProgressManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BedroomProgressManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1, progress2_0, progress2_1, progress60;
+    [SerializeField] TextAsset finalText;
     [SerializeField] Collider2D TVcollider, bedCollider, doorCollider;
     [SerializeField] GameObject blackScreen;
     void Start()
@@ -25,6 +27,9 @@ public class BedroomProgressManager : MonoBehaviour
         if (progressManager.currentProgress == 2) {
             bedCollider.enabled = true;
             ProcessProgress_2();
+        }
+        if (progressManager.currentProgress == -1) {
+            ProcessProgress_final();
         }
         if (progressManager.currentProgress == 60)
         {
@@ -75,6 +80,19 @@ public class BedroomProgressManager : MonoBehaviour
         blackScreen.SetActive(true);
         await Task.Delay(400);
         blackScreen.SetActive(false);
+    }
+
+    private async void ProcessProgress_final() {
+        await Task.Delay(300);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(finalText);
+    }
+
+    public async void ProcessPlayerDeath() {
+        SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
+        await Task.Delay(300);
+        player.transform.position = new Vector3(3.47f, -1.0f, 1.0f);
+        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 }
 

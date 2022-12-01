@@ -93,7 +93,7 @@ public class Self : EnemyStatus
     private (string, string, string) Heal(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Heal");
         ProcessHealing(50);
-        return ("I do not want to disappear from this world¡­", "I do not want to disappear from this world¡­", "I do not want to disappear from this world¡­");
+        return ("I do not want to disappear from this worldï¿½ï¿½", "I do not want to disappear from this worldï¿½ï¿½", "I do not want to disappear from this worldï¿½ï¿½");
     }
 
     private (string, string, string) Immune(PlayerStatus playerStatus) {

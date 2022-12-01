@@ -46,8 +46,8 @@ public class StudioProgressManager : MonoBehaviour
             if (trigger1 && !trigger2) {
                 ProcessProgress_36_1();
             } else if (trigger2 && !trigger3) {
+                sim_stand.SetActive(false);
                 if (player.GetComponent<PlayerMove>().GetCurState() != PlayerMove.State.Battle) {
-                    sim_stand.SetActive(false);
                     ProcessProgress_36_2();
                 }
             }
@@ -57,6 +57,8 @@ public class StudioProgressManager : MonoBehaviour
             }
         } else {
             if (bathroomInteractable.isInBath && !trigger1 && player.activeSelf) {
+                ProcessBlackScreen();
+                sim_stand.transform.position = new Vector3(-6f, -1.2f,0f);
                 player.SetActive(false);
                 camera.FollowObjectWithName("Lust");
             }

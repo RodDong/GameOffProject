@@ -190,7 +190,7 @@ public class Effect
 
 #region Reduced
 
-    private Dictionary<SkillAttribute, float> reducedAmount = new Dictionary<SkillAttribute, float>();
+    private Dictionary<SkillAttribute, float> reducedAmount = new Dictionary<SkillAttribute, float>(){{SkillAttribute.NONE, 0.0f}};
 
     public void SetAttackReduction(float amount, SkillAttribute attribute){
         if (id == EffectId.REDUCED)
@@ -211,7 +211,7 @@ public class Effect
 
 #region Weak
 
-    private Dictionary<SkillAttribute, float> weakenedAmount = new Dictionary<SkillAttribute, float>();
+    private Dictionary<SkillAttribute, float> weakenedAmount = new Dictionary<SkillAttribute, float>(){{SkillAttribute.NONE, 0.0f}};
 
     public void SetDefenseReduction(float amount, SkillAttribute attribute){
         if (id == EffectId.WEAK)
@@ -236,7 +236,7 @@ public class Effect
 
 #region Stolen
 
-    private Dictionary<SkillAttribute, float> stolenAmount = new Dictionary<SkillAttribute, float>();
+    private Dictionary<SkillAttribute, float> stolenAmount = new Dictionary<SkillAttribute, float>(){{SkillAttribute.NONE, 0.0f}};
 
     public void SetStolenAmount(float amount, SkillAttribute attribute){
         if (id == EffectId.STOLEN)

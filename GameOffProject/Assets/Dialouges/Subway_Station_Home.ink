@@ -1,3 +1,3 @@
 ? #notext:yes
-+   Go to Office and Clinic
-+   Go to Bar and Restaurant
++   [Go to Office and Clinic]
++   [Go to Bar and Restaurant]
