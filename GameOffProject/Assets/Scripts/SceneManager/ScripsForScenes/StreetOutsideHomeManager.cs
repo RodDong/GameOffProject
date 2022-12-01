@@ -23,13 +23,15 @@ public class StreetOutsideHomeManager : MonoBehaviour
             ProcessProgress_1();
         } else if (progressManager.currentProgress == 2) {
             ProcessProgress_2();
+            if (progressManager.date == 1) {
+                subwayStation.SetActive(false);
+            }
         }
 
         if (progressManager.date == 2) {
             subwayStation.SetActive(true);
             door_to_home.SetActive(false);
         }
-        Debug.Log(progressManager.playerCollidedWithChef);
         if(progressManager.currentProgress == 60 && !progressManager.playerCollidedWithChef)
         {
             chef.SetActive(true);
