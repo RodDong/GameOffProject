@@ -422,27 +422,15 @@ public class DialogueManager : MonoBehaviour
                 case "ledger":
                     playerStatus.addClue(9);
                     break;
-                case "Investigate Doctor's Phone":
+                case "doctor's phone":
                     playerStatus.addClue(10);
                     break;
-                case "Investigate Doctor's Sponsor List":
+                case "doctor's namelist":
                     playerStatus.addClue(11);
                     break;
-                case "Investigate Doctor's Cargo":
+                case "doctor's cargo":
                     playerStatus.addClue(12);
                     break;
-                // case "I'm good with that.":
-                //     progressManager.transitionToNextState(0);
-                //     break;
-                // case "Actually I have a doctor's appointment.":
-                //     progressManager.transitionToNextState(1);
-                //     break;
-                // case "An old friend invites me to drink.":
-                //     progressManager.transitionToNextState(2);
-                //     break;
-                // case "Sorry, but I feel too sick today.":
-                //     progressManager.transitionToNextState(3);
-                //     break;
             }
 
             ContinueStory();
