@@ -8,10 +8,10 @@ public class StreetOutsideHomeManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1;
-    [SerializeField] TextAsset chefAEncounter;
     [SerializeField] GameObject subwayStation, door_to_home;
     [SerializeField] GameObject chef;
-    bool playerCollidedWithChef = false;
+    Collider2D chefCollider, playerCollider;
+    [SerializeField] TextAsset chefAEncounter;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -29,12 +29,24 @@ public class StreetOutsideHomeManager : MonoBehaviour
             subwayStation.SetActive(true);
             door_to_home.SetActive(false);
         }
-
-        if(progressManager.currentProgress == 60 && !playerCollidedWithChef)
+        Debug.Log(progressManager.playerCollidedWithChef);
+        if(progressManager.currentProgress == 60 && !progressManager.playerCollidedWithChef)
         {
             chef.SetActive(true);
+            subwayStation.SetActive(false);
         }
+        else
+        {
+            chef.SetActive(false);
+        }
+        playerCollider = player.GetComponent<Collider2D>();
+        chefCollider = chef.GetComponent<Collider2D>();
 
+    }
+
+    private void Update()
+    {
+        ProcessProgress_60();
     }
 
     private async void ProcessProgress_1() {
@@ -47,15 +59,15 @@ public class StreetOutsideHomeManager : MonoBehaviour
         //subwayStation.SetActive(false);        
     }
 
-    private async void ProcessProgress_60()
+    private void ProcessProgress_60()
     {
-        await Task.Delay(300);
-        bool playerCollideWithChef = chef.GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>());
-        if (playerCollideWithChef && !playerCollidedWithChef)
+        
+        if (chefCollider.IsTouching(playerCollider) && !dialogueManager.dialogueIsPlaying)
         {
             player.GetComponent<PlayerMove>().EnterDialogueMode();
             dialogueManager.EnterDialogueMode(chefAEncounter);
-            playerCollidedWithChef = true;
+            progressManager.playerCollidedWithChef = true;
         }
     }
+
 }

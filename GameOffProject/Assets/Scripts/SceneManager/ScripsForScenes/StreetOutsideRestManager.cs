@@ -9,9 +9,10 @@ public class StreetOutsideRestManager : MonoBehaviour
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress2;
-    [SerializeField] TextAsset progress36;
+    [SerializeField] TextAsset progress36, progress60;
     [SerializeField] GameObject doorToBar;
-    [SerializeField] GameObject doorToRestaurant;
+    [SerializeField] GameObject doorToRestaurant, subway;
+    [SerializeField] GameObject backGroundLight, characterLight;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -23,6 +24,18 @@ public class StreetOutsideRestManager : MonoBehaviour
         }
         if (progressManager.currentProgress == 36) {
             ProcessProgress_36();
+        }
+        if(progressManager.currentProgress == 60)
+        {
+            subway.SetActive(false);
+            backGroundLight.GetComponent<Light>().color = new Color(48, 58, 84);
+            characterLight.GetComponent<Light>().color = new Color(48, 58, 84);
+        }
+        else
+        {
+            backGroundLight.GetComponent<Light>().color = new Color(255, 255, 255);
+            characterLight.GetComponent<Light>().color = new Color(255, 255, 255);
+            ProcessProgress_60();
         }
     }
 
@@ -39,5 +52,12 @@ public class StreetOutsideRestManager : MonoBehaviour
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress36);
         doorToRestaurant.SetActive(false);
+    }
+
+    private async void ProcessProgress_60()
+    {
+        await Task.Delay(300);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress60);
     }
 }

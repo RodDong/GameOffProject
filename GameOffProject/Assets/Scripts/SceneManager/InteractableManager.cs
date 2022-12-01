@@ -32,7 +32,8 @@ public class InteractableManager : MonoBehaviour
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
-        
+
+
     }
 
     // Update is called once per frame

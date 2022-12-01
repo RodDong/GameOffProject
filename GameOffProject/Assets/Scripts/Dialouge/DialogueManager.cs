@@ -370,10 +370,15 @@ public class DialogueManager : MonoBehaviour
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
+
+            progressStates = new List<int>() { 2,60 };
+            if (progressStates.Contains(progressManager.currentProgress) && choice.text == "Go Home")
+            {
+                break;
+            }
+
             if ((progressManager.currentProgress == 1 || progressManager.currentProgress == 2) && choice.text == "Go to Office and Clinic") {
                 break; // at the beginning, can only go to office
-            } else if (progressManager.currentProgress == 2 && choice.text == "Go Home") {
-                break;
             }
         }
         // go through the remaining choices the UI supports and make sure they're hidden

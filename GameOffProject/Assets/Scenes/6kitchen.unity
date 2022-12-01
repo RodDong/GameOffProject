@@ -275,6 +275,7 @@ MonoBehaviour:
   visualCue: {fileID: 1665259090}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &245921704
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   visualCue: {fileID: 926184444}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &626493361
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1001,6 +1003,7 @@ MonoBehaviour:
   visualCue: {fileID: 1024391358}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1024391358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2023,7 @@ MonoBehaviour:
   visualCue: {fileID: 1373791601}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &1874649721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2185,7 @@ MonoBehaviour:
   visualCue: {fileID: 1310935333}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &1910900174
 BoxCollider2D:
   m_ObjectHideFlags: 0

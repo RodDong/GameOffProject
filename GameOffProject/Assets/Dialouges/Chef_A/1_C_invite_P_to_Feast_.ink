@@ -44,7 +44,9 @@ The name of the restaurant though, you cannot help but wonder how such a fancy r
 
 "Excellent! Now, I will leave you to enjoy this meal. Do come down to Feast later this week for an even better experience, please?" #speaker:Charlie #portrait:neutural #tachie:none
 
-She winked a little. You know she knows she looked cute doing that. #speaker:None #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+She winked a little. You know she knows she looked cute doing that. 
+
+...#speaker:None #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
 
 
 

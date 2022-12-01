@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ProgressManager : MonoBehaviour
 {
     public int date = 1;
+    public bool playerCollidedWithChef = false;
     public int currentProgress = 0;
     // Start is called before the first frame update
     public Node[] nodes;
