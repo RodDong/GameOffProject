@@ -38,6 +38,7 @@ public class StatusBarManager : MonoBehaviour
             descriptionMenu.SetActive(true);
             string description = playerStatus.GetActiveEffects()[index - 1].GetDescription();
             descriptionMenu.GetComponent<TextMeshProUGUI>().text = description;
+            SetTextMaterial(descriptionMenu.GetComponent<TextMeshProUGUI>());
             descriptionMenu.GetComponent<RectTransform>().position = new Vector2(Input.mousePosition.x + 10.0f, Input.mousePosition.y + 10.0f);
         }
         else
@@ -48,6 +49,7 @@ public class StatusBarManager : MonoBehaviour
             descriptionMenu.SetActive(true);
             string description = enemyStatus.GetActiveEffects()[index - 1].GetDescription();
             descriptionMenu.GetComponent<TextMeshProUGUI>().text = description;
+            SetTextMaterial(descriptionMenu.GetComponent<TextMeshProUGUI>());
             descriptionMenu.GetComponent<RectTransform>().position = new Vector2(Input.mousePosition.x + 10.0f, Input.mousePosition.y + 10.0f);
         }
         
@@ -74,5 +76,12 @@ public class StatusBarManager : MonoBehaviour
 
     public void ResetEnemyStatus() {
         enemyStatus = FindObjectOfType<EnemyStatus>();
+    }
+
+    private void SetTextMaterial(TextMeshProUGUI text)
+    {
+        text.color = Color.cyan;
+        text.fontStyle = FontStyles.Bold;
+        text.fontSize = 15.0f;
     }
 }
