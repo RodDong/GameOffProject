@@ -11,12 +11,12 @@ public class Eye : Item
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                happyATK = 10f;
-                happyDEF = 10f;
-                sadATK = 10f;
-                sadDEF = 10f;
-                angryATK = 10f;
-                angryDEF = 10f;
+                happyATK = 100f;
+                happyDEF = 100f;
+                sadATK = 100f;
+                sadDEF = 100f;
+                angryATK = 100f;
+                angryDEF = 100f;
                 skill = new AttackSkill(SkillAttribute.NONE);
                 displayName = "Empty eyes";
                 itemDescription = "test description";
