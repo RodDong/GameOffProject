@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TableProgress2 : MonoBehaviour
+public class DoctorClues : MonoBehaviour
 {
     [Header("Visual Cue")]
     [SerializeField] private GameObject visualCue;
@@ -13,7 +13,7 @@ public class TableProgress2 : MonoBehaviour
     private DialogueManager dialogueManager;
     private PlayerMove playerObject;
     bool playerInRange = false;
-    private InsideOfficeManager insideOfficeManager;
+    private InsideClinicManager insideClinicManager;
     private void Awake()
     {
         playerInRange = false;
@@ -22,7 +22,7 @@ public class TableProgress2 : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        insideOfficeManager = FindObjectOfType<InsideOfficeManager>();
+        insideClinicManager = FindObjectOfType<InsideClinicManager>();
         dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
     }
 
@@ -60,9 +60,10 @@ public class TableProgress2 : MonoBehaviour
         {
             visualCue.SetActive(true);
             if (Input.GetMouseButtonUp(1) && playerObject.CanUseInteractables()) {
-                insideOfficeManager.hasTriggeredClue = true;
+                insideClinicManager.hasTriggeredClue = true;
                 playerObject.EnterDialogueMode();
                 dialogueManager.EnterDialogueMode(inkJSON);
+                GetComponent<Collider2D>().enabled = false;
             }
         } else
         {

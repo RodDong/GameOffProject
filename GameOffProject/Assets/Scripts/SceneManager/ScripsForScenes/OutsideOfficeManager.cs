@@ -10,8 +10,9 @@ public class OutsideOfficeManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
+    private List<int> state_fight_bossB = new List<int>(){24, 30, 34, 42, 61, 70, 67, 52};
     [SerializeField] TextAsset progress1, progress1_1;
-    [SerializeField] TextAsset progress2;
+    [SerializeField] TextAsset progress2, progress2B;
     [SerializeField] TextAsset progress22;
     [SerializeField] Collider2D door_to_outside, door_to_office, workplace;
     [SerializeField] GameObject blackScreen, bossSprite;
@@ -29,6 +30,11 @@ public class OutsideOfficeManager : MonoBehaviour
             door_to_outside.enabled = false;
             workplace.enabled = false;
             ProcessProgress_2();
+        }
+        if (state_fight_bossB.Contains(progressManager.currentProgress)) {
+            door_to_outside.enabled = false;
+            workplace.enabled = false;
+            Processprogress2B();
         }
     }
 
@@ -75,6 +81,12 @@ public class OutsideOfficeManager : MonoBehaviour
         await Task.Delay(500);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2);
+    }
+
+    private async void Processprogress2B() {
+        await Task.Delay(500);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(progress2B);
     }
 
     private async void ProcessProgress_22() {

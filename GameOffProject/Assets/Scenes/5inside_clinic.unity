@@ -269,13 +269,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 36066526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a180b4a03232593479fd674f13e0b6aa, type: 3}
+  m_Script: {fileID: 11500000, guid: f7c6561e66bd94a448c61aa904cdb346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 948185415}
   inkJSON: {fileID: 4900000, guid: 2eeb5e40d47160948a452676b39d240c, type: 3}
   player: {fileID: 0}
-  isInBath: 0
 --- !u!1 &277473330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTalkedDoctor: 0
   hasSpotted: 0
+  hasTriggeredClue: 0
   doctor_sit: {fileID: 1319312987}
   doctor_stand: {fileID: 508697610}
   doctor_died: {fileID: 1692402109}
@@ -2240,6 +2240,7 @@ MonoBehaviour:
   clues: {fileID: 36066526}
   progress22: {fileID: 4900000, guid: 3bf0bf60e010d9d4880a12f73434cb17, type: 3}
   progress22_1: {fileID: 4900000, guid: 6b921d6b79ce59340a133615b39fa11e, type: 3}
+  progress_doc_end: {fileID: 4900000, guid: 9996c41d0be6592479d902d52feb123c, type: 3}
 --- !u!1 &1949309209
 GameObject:
   m_ObjectHideFlags: 0

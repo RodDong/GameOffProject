@@ -102,10 +102,6 @@ public class BattleManager : MonoBehaviour
         if (!gameObjectsInScene) {
             gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
         }
-        //if (mCurState == State.Preparation) { return; }
-        // nothing to do here.
-        // all state transition is either instantanious or based on timer
-        // or based user input
 
         if (enemyStatus.GetCurrentHealth() <= 0.0f)
         {
@@ -123,14 +119,10 @@ public class BattleManager : MonoBehaviour
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
     }
-
-    void UpdatePreparation()
-    {
-        mCurState = State.Battle;
-    }
-
     public void ResetBattleVisuals()
     {
+        enemySentences = enemyStatus.GetEnemySentences();
+        playerSentences = enemyStatus.GetPlayerSentences();
         UpdateEnemyHealthBar();
         UpdatePlayerHealthBar();
         UpdatePlayerStatVisual();
