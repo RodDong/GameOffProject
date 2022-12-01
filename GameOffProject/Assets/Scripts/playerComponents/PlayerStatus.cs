@@ -166,9 +166,9 @@ public class PlayerStatus : MonoBehaviour
 
         updateStatus();
 
-        for (int i = 0; i <= 12; i++) {
-            ownedClues.Add(new Clue(i));
-        }
+        // for (int i = 0; i <= 12; i++) {
+        //     ownedClues.Add(new Clue(i));
+        // }
         // Effects.Add(new Effect(EffectId.BLIND));
         // Effects.Add(new Effect(EffectId.POISON));
         // Effects.Add(new Effect(EffectId.IMMUNE));
@@ -420,6 +420,15 @@ public class PlayerStatus : MonoBehaviour
             }
         }
         return new Clue(-1);
+    }
+
+    public bool hasClue(int id) {
+        for (int i = 0; i < ownedClues.Count; i++) {
+            if (ownedClues[i].getClueId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateMask()
