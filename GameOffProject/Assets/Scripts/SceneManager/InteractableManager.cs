@@ -31,13 +31,22 @@ public class InteractableManager : MonoBehaviour
     void Start()
     {
 
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (!playerObject)
+        {
+            playerObject = GameObject.FindObjectOfType<PlayerMove>(true);
+        }
+        
+        if (playerObject.GetCurState() == PlayerMove.State.Talk || playerObject.GetCurState() == PlayerMove.State.Battle) {
+            return;
+        }
+        
         if (!dialogueManager)
         {
             dialogueManager = GameObject.FindObjectOfType<DialogueManager>();

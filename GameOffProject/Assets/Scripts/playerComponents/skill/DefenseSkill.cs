@@ -14,25 +14,25 @@ public class DefenseSkill : Skill
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                displayName = "test defense";
+                displayName = "Fortify";
                 skillImage = imgRoot + "EmptyButton/" + "def_default";
                 power = 50;
                 immuneCounter = 1;
                 break;
             case SkillAttribute.ANGRY:
-                displayName = "test defense";
+                displayName = "Reflect";
                 skillImage = imgRoot + "EmptyButton/" + "def_angry";
                 power = 1;
                 immuneCounter = 1;
                 break;
             case SkillAttribute.SAD:
-                displayName = "test defense";
+                displayName = "Immune";
                 skillImage = imgRoot + "EmptyButton/" + "def_sad";
                 power = 1;
                 immuneCounter = 1;
                 break;
             case SkillAttribute.HAPPY:
-                displayName = "test defense";
+                displayName = "Heal";
                 skillImage = imgRoot + "EmptyButton/" + "heal_happy";
                 power = 1;
                 immuneCounter = 1;

@@ -41,7 +41,7 @@ public class RestaurantProgressManager : MonoBehaviour
             if (hasTriggered2 && progressManager.currentProgress == 2) {
                 blackScreen.SetActive(true);
                 player.transform.position = new Vector3(2.55f, -3.45f, 0.0f);
-                player.transform.localScale = new Vector3(1, 1, 1);
+                player.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 SceneManager.LoadScene("11street_outside_restaurant");
             } else if (hasEndedTalk2_0) {
                 hasEndedTalk2_0 = false;
@@ -61,7 +61,7 @@ public class RestaurantProgressManager : MonoBehaviour
 
     private async void ProcessBlackScreen() {
         blackScreen.SetActive(true);
-        await Task.Delay(200);
+        await Task.Delay(400);
         blackScreen.SetActive(false);
     }
 }

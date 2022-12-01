@@ -13,6 +13,7 @@ public class Self : EnemyStatus
         tachie = "Art/BossTachie/Self";
         currentHealth = MAX_HEALTH;
         enemyImage = imgRoot + "Self_Battle";
+        enemySentences = ("Ha, you are just self-deceiving", "What have you done!", "You do not know what you are talking about!");
     }
 
     public override void ResetCurrentHealth()
@@ -71,19 +72,19 @@ public class Self : EnemyStatus
         Debug.Log("Boss Self Uses Happy Attack");
         float damageAmount = 50;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
-        return ("HappyATK1", "HappyATK2", "HappyATK3");
+        return ("Ha, you are just self-deceiving", "What have you done!", "You do not know what you are talking about!");
     }
     private (string, string, string) SadATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Sad Attack");
         float damageAmount = 50;
         DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
-        return ("SadATK1", "SadATK2", "SadATK3");
+        return ("I should not abandon my desires before", "Wait, where is my power!", "You utilize your desires to create pain");
     }
     private (string, string, string) AngryATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Angry Attack");
         float damageAmount = 50;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
-        return ("AngryATK1", "AngryATK2", "AngryATK3");
+        return ("HAHA, like a little mouse runs in the maze.", "Oh, boy, you do not know what a life is", "You do not know what you are talking about!");
     }
 #endregion
 
@@ -92,19 +93,19 @@ public class Self : EnemyStatus
     private (string, string, string) Heal(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Heal");
         ProcessHealing(50);
-        return ("Heal1", "Heal2", "Heal3");
+        return ("I do not want to disappear from this world¡­", "I do not want to disappear from this world¡­", "I do not want to disappear from this world¡­");
     }
 
     private (string, string, string) Immune(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses immune");
         ActivateEffect(new Effect(EffectId.IMMUNE));
-        return ("Immune1", "Immune2", "Immune3");
+        return ("YOU CAN'T HURT ME!", "YOU CAN'T HURT ME!", "YOU CAN'T HURT ME! ");
     }
 
     private (string, string, string) Reflect(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses reflect");
         ActivateEffect(new Effect(EffectId.REFLECT));
-        return ("Reflect1", "Reflect2", "Reflect3");
+        return ("HAHAHAH! YOU ARE HURTING YOURSELF", "HAHAHAH! YOU ARE HURTING YOURSELF", "HAHAHAH! YOU ARE HURTING YOURSELF");
     }
 
     
@@ -115,14 +116,14 @@ public class Self : EnemyStatus
     private (string, string, string) LifeSteal(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Lifesteal");
         ActivateEffect(new Effect(EffectId.LIFE_STEAL));
-        return ("Lifesteal1", "Lifesteal2", "Lifesteal3");
+        return ("Looks familiar?", "Looks familiar?", "Looks familiar?");
     }
 
     private (string, string, string) Purge(PlayerStatus playerStatus) {
         Debug.Log("Boss Self Uses Purge");
         playerStatus.ClearEffect();
         ClearEffect();
-        return ("Purge1", "Purge2", "Purge3");
+        return ("We have nothing!", "We have nothing!", "We have nothing!");
     }
 
     private (string, string, string) BonusDamageAndBlind(PlayerStatus playerStatus) {
@@ -134,7 +135,7 @@ public class Self : EnemyStatus
         blind.GenerateBlindPercentage(playerStatus, 1 - rand);
         playerStatus.ActivateEffect(blind);
         ActivateEffect(bounusDamage);
-        return ("BonusDamageAndBlind1", "BonusDamageAndBlind2", "BonusDamageAndBlind3");
+        return ("How dare you to stare at me!", "How dare you to stare at me!", "How dare you to stare at me!");
     }
 
 #endregion

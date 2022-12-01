@@ -11,22 +11,22 @@ public class EffectSkill : Skill
 
         switch(attribute) {
             case SkillAttribute.NONE:
-                displayName = "test Effect";
+                displayName = "Weaken";
                 skillImage = imgRoot + "EmptyButton/" + "buff_default";
                 power = 50;
                 break;
             case SkillAttribute.ANGRY:
-                displayName = "angry buff";
+                displayName = "Blind";
                 skillImage = imgRoot + "EmptyButton/" + "bubuff_angry";
                 power = 50;
                 break;
             case SkillAttribute.HAPPY:
-                displayName = "happy buff";
+                displayName = "Health Drain";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_happy";
                 power = 50;
                 break;
             case SkillAttribute.SAD:
-                displayName = "sad buff";
+                displayName = "Clarity";
                 skillImage = imgRoot + "EmptyButton/" + "debuff_sad";
                 power = 50;
                 break;

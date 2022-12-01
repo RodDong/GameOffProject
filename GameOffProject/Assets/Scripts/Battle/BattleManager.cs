@@ -49,6 +49,7 @@ public class BattleManager : MonoBehaviour
 
     SkillAttribute playerPrevSkillAttribute;
     (string, string, string) enemySentences = ("sentence1", "sentence2", "sentence3");
+    (string, string, string) playerSentences = ("playertalk1", "playertalk2", "playertalk3");
 
     State mCurState;
     bool isInBattle = false;
@@ -90,7 +91,8 @@ public class BattleManager : MonoBehaviour
 
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
-
+        enemySentences = enemyStatus.GetEnemySentences();
+        playerSentences = enemyStatus.GetPlayerSentences();
     }
 
     void Update()
@@ -156,20 +158,26 @@ public class BattleManager : MonoBehaviour
         {
             DisablePlayerSkillButtons();
         }
-        
+
+        PlayerOnClickTalkEvent();
+
+        if (enemyStatus.enemyImage == "Art/Tachies/Boss_Battle")
+        {
+            await Task.Delay(1000); ;
+        }
         // obsolete: Replaced by poison in ProcessSkill
         // if (playerStatus.GetActiveEffects().Contains(new Effect(EffectId.POISON))) {
         //     float poisonDmg = 5.0f;
         //     playerStatus.TakeDamage(poisonDmg, SkillAttribute.SAD);
         // }
 
-        
+
 
         Debug.Log("Ending Player Turn");
 
-/*        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
-        Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());*/
-        
+        /*        Debug.Log("Player HP： " + playerStatus.GetCurrentHealth());
+                Debug.Log("Enemy HP： " + enemyStatus.GetCurrentHealth());*/
+
         Debug.Log("Start Enemy Turn");
         // delay xxx sec 
         // boss speak
@@ -959,7 +967,34 @@ public class BattleManager : MonoBehaviour
     {
         PlayerMessageBox.SetActive(true);
         TextMeshProUGUI textBox = PlayerMessageBox.GetComponentInChildren<TextMeshProUGUI>(true);
-        textBox.text = "PlayerTalk";
+        int i = Random.Range(0, 3);
+        switch (playerPrevSkillAttribute)
+        {
+            case SkillAttribute.HAPPY:
+                textBox.text = playerSentences.Item1;
+                break;
+            case SkillAttribute.SAD:
+                textBox.text = playerSentences.Item2;
+                break;
+            case SkillAttribute.ANGRY:
+                textBox.text = playerSentences.Item3;
+                break;
+            case SkillAttribute.NONE:
+                if (i <= 0)
+                {
+                    textBox.text = playerSentences.Item1;
+                }
+                else if (i <= 1)
+                {
+                    textBox.text = playerSentences.Item2;
+                }
+                else
+                {
+                    textBox.text = playerSentences.Item3;
+                }
+
+                break;
+        }
 
     }
 
@@ -970,9 +1005,14 @@ public class BattleManager : MonoBehaviour
 
     public async void PlayerOnClickTalkEvent()
     {
+        if(enemyStatus.enemyImage != "Art/Tachies/Boss_Battle")
+        {
+            return;
+        }
         PlayerTalk();
-        await Task.Delay(2000);
+        await Task.Delay(1000);
         PlayerStopTalk();
+        await Task.Delay(2000);
     }
 
     void EnemyTalk()
@@ -980,7 +1020,7 @@ public class BattleManager : MonoBehaviour
         EnemyMessageBox.SetActive(true);
         Debug.Log("talk");
         TextMeshProUGUI textBox = EnemyMessageBox.GetComponentInChildren<TextMeshProUGUI>(true);
-
+        int i = Random.Range(0, 3);
         switch (playerPrevSkillAttribute)
         {
             case SkillAttribute.HAPPY:
@@ -992,8 +1032,19 @@ public class BattleManager : MonoBehaviour
             case SkillAttribute.ANGRY:
                 textBox.text = enemySentences.Item3;
                 break;
-            default:
-                textBox.text = "Error";
+            case  SkillAttribute.NONE:
+                if (i <= 0) {
+                    textBox.text = enemySentences.Item1;
+                }
+                else if (i <= 1)
+                {
+                    textBox.text = enemySentences.Item2;
+                }
+                else
+                {
+                    textBox.text = enemySentences.Item3;
+                }
+                
                 break;
         }
     }
