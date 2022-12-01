@@ -55,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
         mPlayerStatus = gameObject.GetComponent<PlayerStatus>();
         walkingAudio = gameObject.GetComponent<AudioSource>();
+        Application.targetFrameRate = 60;
     }
 
     void Update()

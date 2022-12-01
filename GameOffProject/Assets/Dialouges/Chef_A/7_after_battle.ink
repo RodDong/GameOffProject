@@ -4,7 +4,7 @@
 
 \*however, the human hands, ears, and legs are there to remind you the things happened were not dreaming\* 
 
-"what a coincidence..." #speaker:Charlie #portrait:neutural #tachie:none
+"What a coincidence..." #speaker:Charlie #portrait:neutural #tachie:none
 
 "I did not mean to intrude here, I just accidentally entered a wierd place without noticing what's here."  #speaker:Charlie #portrait:neutural #tachie:none
 

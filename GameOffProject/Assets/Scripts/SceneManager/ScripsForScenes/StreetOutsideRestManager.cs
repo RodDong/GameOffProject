@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using System.Threading.Tasks;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class StreetOutsideRestManager : MonoBehaviour
 {
@@ -13,6 +16,7 @@ public class StreetOutsideRestManager : MonoBehaviour
     [SerializeField] GameObject doorToBar;
     [SerializeField] GameObject doorToRestaurant, subway;
     [SerializeField] GameObject backGroundLight, characterLight;
+    bool startDialogue = false;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
@@ -27,16 +31,27 @@ public class StreetOutsideRestManager : MonoBehaviour
         }
         if(progressManager.currentProgress == 60)
         {
+            doorToBar.SetActive(false);
             subway.SetActive(false);
-            backGroundLight.GetComponent<Light>().color = new Color(48, 58, 84);
-            characterLight.GetComponent<Light>().color = new Color(48, 58, 84);
-        }
-        else
-        {
-            backGroundLight.GetComponent<Light>().color = new Color(255, 255, 255);
-            characterLight.GetComponent<Light>().color = new Color(255, 255, 255);
             ProcessProgress_60();
         }
+    }
+
+    private void Update()
+    {
+        if(!dialogueManager.dialogueIsPlaying && startDialogue)
+        {
+            Teleport();
+        }
+    }
+
+    private async void Teleport()
+    {
+        startDialogue = false;
+        SceneManager.LoadScene("6kitchen");
+        await Task.Delay(300);
+        player.transform.position = new Vector3(-11.04f, -0.8f, 1.0f);
+        player.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
     }
 
     private async void ProcessProgress_2() {
@@ -59,5 +74,6 @@ public class StreetOutsideRestManager : MonoBehaviour
         await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress60);
+        startDialogue = true;
     }
 }

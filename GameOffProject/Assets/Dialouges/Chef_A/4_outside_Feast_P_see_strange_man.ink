@@ -24,4 +24,6 @@ Huh! Maybe this really is one of those speakeasy bars type of things. Maybe this
 
 The man went left of the building, seems like there were more things for him to pick up. You couldn’t care less. Your stomach had been protesting for the past half an hour.
 
-You bent over a little, slid into the darkness behind the opened door. #scene:6kitchen #position:-11.04,-0.8,1.0 #scale:1.0,1.0,1.0
+You bent over a little, slid into the darkness behind the opened door. 
+
+#speaker:None

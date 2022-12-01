@@ -43,6 +43,6 @@ Relaxing.
 "Come! It's right around the corner." #speaker:Charlie #portrait:neutural #tachie:none
 
 You were dragged alongside her before any protest could come out. 
-...#speaker:None #scene:7restaurant #position:-8.32,0.0,1.0 #scale:1.0,1.0,1.0
+#speaker:None
 
 ->END

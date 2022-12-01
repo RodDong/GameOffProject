@@ -54,7 +54,10 @@ public class OutsideOfficeManager : MonoBehaviour
                 player.transform.position = new Vector3(-13.0f, -4.0f, 1.0f);
                 player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
             } else if (progressManager.currentProgress == 60) {
-                //
+                blackScreen.SetActive(true);
+                SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
+                player.transform.position = new Vector3(-8.78f, -3.0f, 1.0f);
+                player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
             }
         }
     }

@@ -50,20 +50,4 @@ You tried to run away but couldn’t resist looking further. And not to your sur
 
 Were they…was that delicate lady, the owner of this place, serving human body parts?
 
-\*LEAVE\*
 
-You tried to run. You don’t know where this place is but it’s obviously doing something that’s beyond your comprehension and obviously law. It’s not too late for you to leave before you are caught staring at the biggest evidence itself. 
-
-\*RUN\*
-
-You fumbled, trying to make way to that dark corridor that leads you here. You need to be back on the street and probably police or something and never step foot in here again.
-
-The door cracked.
-
-"Mike, I told you to grab..." #speaker:Charlie #portrait:neutural #tachie:none
-
-She walked in, still in her chef's jacket, still the oh-so-delicate red lips and green eyes. #speaker:None
-
-She paused, staring at you in surprise before thrusting towards you with a force that you are sure is going to crush you. 
-
-It's too late to run. You have to fight. 

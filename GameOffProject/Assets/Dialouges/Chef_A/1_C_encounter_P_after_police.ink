@@ -1,6 +1,6 @@
 // 场景二，玩家选择A选项后：
 
- "Hello there…I have some evidence that relates to the crime… yes, I am sure."
+"Hello there…I have some evidence that relates to the crime… yes, I am sure."
 "OK, I will wait here. Please, come quickly." #speaker:P #portrait:neutural #tachie:none
 
 // 「...大致五分钟后」

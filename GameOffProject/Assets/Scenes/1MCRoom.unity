@@ -546,6 +546,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatInkJSON: {fileID: 0}
   enemyImage: 
+--- !u!1001 &446387089
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1563613735, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563613735, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867478533324104054, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: currentProgress
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.7310653
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.319515
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.81223184
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524755194599651603, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_Name
+      value: PersistantObj
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 38598c39c8404b646961ae61e401e441, type: 3}
 --- !u!1 &610020872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1796,7 @@ MonoBehaviour:
   progress2_0: {fileID: 4900000, guid: 7bef8dfba8dd44f45874ea28661cfb8d, type: 3}
   progress2_1: {fileID: 4900000, guid: 20dc61404f305c54386559dd21339327, type: 3}
   progress60: {fileID: 4900000, guid: e2a1fa872d3e0a24cb247637d237a317, type: 3}
+  finalText: {fileID: 0}
   TVcollider: {fileID: 36066528}
   bedCollider: {fileID: 920004357}
   doorCollider: {fileID: 1792673431}

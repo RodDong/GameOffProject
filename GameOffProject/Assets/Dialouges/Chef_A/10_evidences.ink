@@ -1,13 +1,16 @@
+
 -(chef_phone)
 A black, clean design. Probably going to cost half your monthly paycheck.  #speaker:P #progress:3
 MC: “That chef’s phone, is it? She definitely makes a lot of money. Where’d she get that money from?” 
 MC: “She’s really trying to keep up this extravagant lifestyle, huh.” 
 
 
+
 -(chef_namelist)
 A list of names. An invitation letter, maybe? Those last names…some seem familiar, you’ve seen them in newspapers before, those big, power families.  #speaker:P #progress:0
 MC: “Wait, is that my boss’s name…?”
 MC: “Of course he’s dined here before. That man’s always trying to keep his class.”
+
 
 -(chef_supply)
 A supply list, sent from the doctor Maston. #speaker:P #progress:1

@@ -35,13 +35,14 @@ public class Chef : EnemyStatus
             // start
             case 0:
                 ChangePhase(playerStatus);
-                return ("Here comes the appetizer!", "What a feast!", "It's time for dessert!");
+                return ("Here comes the appetizer!", "Here comes the appetizer!", "Here comes the appetizer!");
 
             // appetizer
             // skill list: mix damage & taunt(angry) attack
             case 1:
                 if (currentHealth <= 0.4 * MAX_HEALTH) {
                     ChangePhase(playerStatus);
+                    return ("What a feast!", "What a feast!", "What a feast!");
                 } else {
                     if (Random.Range(0.0f, 1.0f) <= skillRandom) {
                         return MixDamage(playerStatus);
@@ -58,6 +59,7 @@ public class Chef : EnemyStatus
             case 2:
                 if (currentHealth <= 0.5 * MAX_HEALTH) {
                     ChangePhase(playerStatus);
+                    return ("It's time for dessert!", "It's time for dessert!", "It's time for dessert!");
                 } else {
                     if (Random.Range(0.0f, 1.0f) <= skillRandom) {
                        return MixDamage(playerStatus);
@@ -67,7 +69,7 @@ public class Chef : EnemyStatus
                 }
                 return ("Awww, you seem so happy, happy that you can escape from me? Happy that you are about to taste this pan-seared human belly? ",
                     "You know, I am in a good mood and don¡¯t think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
-                    "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Which is exactly why I would let anyone take it away from me. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
+                    "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
 
             // dessert
             // skill list: mix damage & taunt(angry) attack
@@ -122,7 +124,7 @@ public class Chef : EnemyStatus
         playerStatus.ActivateEffect(new Effect(EffectId.HEALREDUCTION));
         return ("Awww, you seem so happy, happy that you can escape from me? Happy that you are about to taste this pan-seared human belly? ",
                     "You know, I am in a good mood and don¡¯t think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
-                    "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Which is exactly why I would let anyone take it away from me. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
+                    "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
     }
 
     private (string, string, string) TauntAttack(PlayerStatus playerStatus) {

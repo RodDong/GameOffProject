@@ -46,7 +46,7 @@ The name of the restaurant though, you cannot help but wonder how such a fancy r
 
 She winked a little. You know she knows she looked cute doing that. 
 
-...#speaker:None #scene:1MCRoom #position:6.7,-2.0,1.0 #scale:1.0,1.0,1.0
+#speaker:None
 
 
 

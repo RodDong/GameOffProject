@@ -16,6 +16,7 @@ public class RestaurantProgressManager : MonoBehaviour
     [SerializeField] GameObject chef;
     [SerializeField] GameObject blackScreen;
     [SerializeField] Collider2D door_to_street, door_to_kitchen;
+    bool spokenToChef = false;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();   
@@ -58,6 +59,19 @@ public class RestaurantProgressManager : MonoBehaviour
                 boss_sit.SetActive(true);
                 ProcessBlackScreen();
             }
+        }else if(progressManager.currentProgress == 60 && dialogueManager.dialogueIsPlaying)
+        {
+            spokenToChef = true;
+        }
+
+        if(spokenToChef && !dialogueManager.dialogueIsPlaying)
+        {
+            chef.SetActive(false);
+            spokenToChef = false;
+            blackScreen.SetActive(true);
+            player.transform.position = new Vector3(6.7f, -2.0f, 1.0f);
+            player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            SceneManager.LoadScene("1MCRoom");
         }
     }
 

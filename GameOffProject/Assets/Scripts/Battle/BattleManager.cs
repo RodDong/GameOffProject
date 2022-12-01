@@ -91,8 +91,11 @@ public class BattleManager : MonoBehaviour
 
         UpdatePlayerStatusBar();
         UpdateEnemyStatusBar();
-        enemySentences = enemyStatus.GetEnemySentences();
-        playerSentences = enemyStatus.GetPlayerSentences();
+        if (enemyStatus)
+        {
+            enemySentences = enemyStatus.GetEnemySentences();
+            playerSentences = enemyStatus.GetPlayerSentences();
+        }
 
         progressManager = FindObjectOfType<ProgressManager>();
     }
@@ -247,6 +250,10 @@ public class BattleManager : MonoBehaviour
         if (FindObjectOfType<BedroomProgressManager>(true) != null) {
             FindObjectOfType<BedroomProgressManager>(true).ProcessPlayerDeath();
         }
+        if (FindObjectOfType<kitchenManager>(true) != null)
+        {
+            FindObjectOfType<kitchenManager>(true).ProcessPlayerDeath();
+        }
     }
 
     void UpdateWin()
@@ -257,6 +264,10 @@ public class BattleManager : MonoBehaviour
         }
         if (FindObjectOfType<InsideClinicManager>(true) != null) {
             FindObjectOfType<InsideClinicManager>(true).ProcessEnemyDeath();
+        }
+        if (FindObjectOfType<kitchenManager>(true) != null)
+        {
+            FindObjectOfType<kitchenManager>(true).ProcessEnemyDeath();
         }
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerStatus.ResetCurrentHealth();

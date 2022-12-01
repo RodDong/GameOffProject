@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
+
 public class StreetOutsideHomeManager : MonoBehaviour
 {
     private ProgressManager progressManager;
@@ -12,12 +14,15 @@ public class StreetOutsideHomeManager : MonoBehaviour
     [SerializeField] GameObject chef;
     Collider2D chefCollider, playerCollider;
     [SerializeField] TextAsset chefAEncounter;
+    [SerializeField] GameObject blackCanvas;
+    bool enteredDialogue = false;
     void Start()
     {
         progressManager = FindObjectOfType<ProgressManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         dialogueManager = FindObjectOfType<DialogueManager>();
         chef.SetActive(false);
+        blackCanvas.SetActive(false);
         if (progressManager.currentProgress == 1) {
             door_to_home.SetActive(false);
             ProcessProgress_1();
@@ -29,7 +34,6 @@ public class StreetOutsideHomeManager : MonoBehaviour
             subwayStation.SetActive(true);
             door_to_home.SetActive(false);
         }
-        Debug.Log(progressManager.playerCollidedWithChef);
         if(progressManager.currentProgress == 60 && !progressManager.playerCollidedWithChef)
         {
             chef.SetActive(true);
@@ -62,12 +66,27 @@ public class StreetOutsideHomeManager : MonoBehaviour
     private void ProcessProgress_60()
     {
         
-        if (chefCollider.IsTouching(playerCollider) && !dialogueManager.dialogueIsPlaying)
+        if (chefCollider.IsTouching(playerCollider) && !dialogueManager.dialogueIsPlaying && !enteredDialogue)
         {
             player.GetComponent<PlayerMove>().EnterDialogueMode();
             dialogueManager.EnterDialogueMode(chefAEncounter);
             progressManager.playerCollidedWithChef = true;
+            enteredDialogue = true;
         }
+        if (!dialogueManager.dialogueIsPlaying && enteredDialogue)
+        {
+            blackCanvas.SetActive(true);
+            TeleportToRestaurant();
+        }
+    }
+
+    public async void TeleportToRestaurant()
+    {
+        enteredDialogue = false;
+        SceneManager.LoadScene("7restaurant");
+        await Task.Delay(300);
+        player.transform.position = new Vector3(-14.32f, 0.0f, 1.0f);
+        player.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
     }
 
 }
