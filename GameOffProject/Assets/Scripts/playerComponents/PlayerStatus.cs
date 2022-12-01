@@ -281,7 +281,7 @@ public class PlayerStatus : MonoBehaviour
         float fortifiedDEF = 0; 
         if (effects.Contains(new Effect(EffectId.FORTIFIED))) {
             // temp value for testing
-            fortifiedDEF += 20.0f;
+            fortifiedDEF += 40.0f;
         }
 
         float attributeFromItem;
