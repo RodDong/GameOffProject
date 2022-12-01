@@ -1421,6 +1421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress2: {fileID: 4900000, guid: 04e225a2c6b932c4c9c2ca139548491d, type: 3}
+  progress36: {fileID: 4900000, guid: e5caa4ed4a88df54688196a76852161d, type: 3}
   doorToBar: {fileID: 664437259}
   doorToRestaurant: {fileID: 1957497286}
 --- !u!1 &1255682055

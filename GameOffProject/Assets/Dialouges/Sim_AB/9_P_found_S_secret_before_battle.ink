@@ -8,6 +8,6 @@ cannot let him know, lie, I need to lie to him… #speaker:S #portrait:neutural 
 
 “Are those hallucinogens? Wtf… who are you?” #speaker:P #portrait:neutural #tachie:none
 
-“Now you see the truth.. You can never leave the room alive.” #speaker:S #portrait:neutural #tachie:none
+“Now you see the truth.. You can never leave the room alive.” #speaker:S #portrait:neutural #tachie:none #battle:yes 
 
 // enter battle

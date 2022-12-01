@@ -10,4 +10,8 @@ public class SetCienmamachineFollow : MonoBehaviour
     {
         GetComponent<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
     }
+
+    public void FollowObjectWithName(string name) {
+        GetComponent<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag(name).transform;
+    }
 }

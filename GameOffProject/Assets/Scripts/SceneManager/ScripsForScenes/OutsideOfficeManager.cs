@@ -37,7 +37,10 @@ public class OutsideOfficeManager : MonoBehaviour
             } else if (progressManager.currentProgress == 22) {
                 //
             } else if (progressManager.currentProgress == 36) {
-                //
+                blackScreen.SetActive(true);
+                SceneManager.LoadScene("11street_outside_restaurant", LoadSceneMode.Single);
+                player.transform.position = new Vector3(-13.0f, -4.0f, 1.0f);
+                player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
             } else if (progressManager.currentProgress == 60) {
                 //
             }

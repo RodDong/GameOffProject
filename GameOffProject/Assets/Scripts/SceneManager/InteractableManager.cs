@@ -19,6 +19,7 @@ public class InteractableManager : MonoBehaviour
 
     private PlayerMove playerObject;
     bool playerInRange = false;
+    public bool isInBath = false;
 
     private void Awake()
     {
@@ -36,10 +37,7 @@ public class InteractableManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerObject.GetCurState() == PlayerMove.State.Talk || playerObject.GetCurState() == PlayerMove.State.Battle) {
-            return;
-        }
-        
+
         if (!dialogueManager)
         {
             dialogueManager = GameObject.FindObjectOfType<DialogueManager>();
@@ -174,7 +172,7 @@ public class InteractableManager : MonoBehaviour
             playerObject.EnterDialogueMode();
             dialogueManager.EnterDialogueMode(inkJSON);
             gameObject.SetActive(false);
-        }
+        } 
         else if (playerInRange && !dialogueManager.dialogueIsPlaying)
         {
             visualCue.SetActive(true);
@@ -183,12 +181,17 @@ public class InteractableManager : MonoBehaviour
                 playerObject.EnterDialogueMode();
                 Debug.Log(dialogueManager);
                 dialogueManager.EnterDialogueMode(inkJSON);
+
+                if (name == "dressingRoom") {
+                    isInBath = true;
+                }
             }
         }
         else
         {
             visualCue.SetActive(false);
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -206,7 +209,7 @@ public class InteractableManager : MonoBehaviour
         {
             playerObject = null;
             playerInRange = false;
-        }
+        } 
     }
 
 }
