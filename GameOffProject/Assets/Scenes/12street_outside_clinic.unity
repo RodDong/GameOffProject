@@ -424,6 +424,7 @@ MonoBehaviour:
   visualCue: {fileID: 350622002}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &501042502
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +672,7 @@ MonoBehaviour:
   visualCue: {fileID: 501042502}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &609654533
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +959,7 @@ MonoBehaviour:
   visualCue: {fileID: 1554992831}
   inkJSON: {fileID: 4900000, guid: 0471a863a84bf1d4c9df44cfa3ee8946, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &1383318412
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1449,6 +1452,7 @@ MonoBehaviour:
   progress1: {fileID: 4900000, guid: ba757c427e1465142a7b4ddeb5485424, type: 3}
   clinicDoorCollider: {fileID: 447608598}
   subwayCollider: {fileID: 1383318412}
+  workCollider: {fileID: 547001796}
 --- !u!1 &1830754993
 GameObject:
   m_ObjectHideFlags: 0
