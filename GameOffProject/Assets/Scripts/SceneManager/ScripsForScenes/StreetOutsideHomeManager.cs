@@ -37,8 +37,8 @@ public class StreetOutsideHomeManager : MonoBehaviour
             subwayStation.SetActive(true);
             door_to_home.SetActive(false);
         }
-        private List<int> state_fight_chef = new List<int>(){22, 4, 14, 15, 40, 41, 49, 50, 57, 62, 65, 71, 73};
-        if(progressManager.currentProgress == 60 && !progressManager.playerCollidedWithChef)
+        List<int> state_fight_chef = new List<int>(){60, 5, 9, 11, 17, 20, 21, 23, 26, 30, 32, 38, 69, 47, 48};
+        if(state_fight_chef.Contains(progressManager.currentProgress) && !progressManager.playerCollidedWithChef)
         {
             chef.SetActive(true);
             subwayStation.SetActive(false);

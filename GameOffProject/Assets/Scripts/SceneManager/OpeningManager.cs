@@ -30,7 +30,7 @@ public class OpeningManager : MonoBehaviour
     public async void TeleportBasedOnProgress() {
         switch (progressManager.currentProgress)
         {
-            case 99:
+            case 11:
                 SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
                 await Task.Delay(200);
                 player.transform.position = new Vector3(9.0f, -4.0f, 1.0f);
