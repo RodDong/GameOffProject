@@ -30,7 +30,6 @@ public class DialogueManager : MonoBehaviour
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
-
     private bool toBattle = false;
 
     private Story currentStory;
@@ -55,6 +54,9 @@ public class DialogueManager : MonoBehaviour
     private const string LOAD_SCENE_TAG = "scene";
     private const string TELEPORT_TAG = "position";
     private const string SCALE_TAG = "scale";
+
+    // To fix progress tag error:
+    private List<int> progressTags = new List<int>();
 
     private void Awake() 
     {
@@ -304,7 +306,7 @@ public class DialogueManager : MonoBehaviour
                     dialogueSubPanel.SetActive(false);
                     break;
                 case PROGRESS_TAG:
-                    progressManager.transitionToNextState(int.Parse(tagValue));
+                    progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
                     break;
                 case LOAD_SCENE_TAG:
                     ExitDialogueMode();
@@ -339,29 +341,33 @@ public class DialogueManager : MonoBehaviour
         }
 
         int index = 0;
+        progressTags = new List<int>{0, 1, 2, 3};
         // enable and initialize the choices up to the amount of choices for this line of dialogue
         foreach(Choice choice in currentChoices) 
         {
-            
             List<int> progressStates;
             if (choice.text == "Investigate the boss") {
                 progressStates = new List<int>(){2, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 26, 27, 28, 31, 35, 39, 42, 43, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 61, 64, 65, 67, 70, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
+                    progressTags.Remove(0);
                     continue;
                 }
             } else if (choice.text == "Investigate the doctor") {
                 progressStates = new List<int>(){4, 8, 9, 11, 12, 14, 15, 16, 18, 19, 20, 22, 24, 25, 26, 27, 28, 31, 32, 34, 35, 40, 41, 44, 45, 46, 47, 49, 50, 54, 55, 56, 57, 58, 62, 65, 66, 67, 71, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
+                    progressTags.Remove(1);
                     continue;
                 }
             } else if (choice.text == "Investigate the chef") {
                 progressStates = new List<int>(){5, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 23, 26, 27, 32, 34, 35, 38, 39, 40, 44, 45, 47, 48, 49, 50, 52, 53, 54, 55, 56, 57, 58, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73};
                 if (progressStates.Contains(progressManager.currentProgress)) {
+                    progressTags.Remove(2);
                     continue;
                 }
             } else if (choice.text == "Investigate the bar maiden") {
                 progressStates = new List<int>(){36, 6, 19, 17, 8, 11, 12, 10, 13, 15, 16, 18, 20, 27, 28, 25, 35, 31, 32, 34, 36, 69, 41, 42, 43, 49, 44, 46, 45, 47, 64, 65, 66, 67, 63, 39, 40, 58};
                 if (progressStates.Contains(progressManager.currentProgress)) {
+                    progressTags.Remove(3);
                     continue;
                 }
             } else if (choice.text == "I'm Tired. Going Home") {
@@ -370,7 +376,6 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             
-
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
