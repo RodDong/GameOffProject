@@ -334,6 +334,31 @@ public class DialogueManager : MonoBehaviour
         // enable and initialize the choices up to the amount of choices for this line of dialogue
         foreach(Choice choice in currentChoices) 
         {
+            
+            List<int> progressStates;
+            if (choice.text == "Investigate the boss") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the doctor") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the chef") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the bar maiden") {
+                progressStates = new List<int>(){36};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            }
+            
+
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;

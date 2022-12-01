@@ -1,11 +1,11 @@
 What should I do now?
-    * Investigate the boss
+    * [Investigate the boss]
     -> boss
-    * Investigate the doctor
+    * [Investigate the doctor]
     -> doctor
-    * Investigate the chef
+    * [Investigate the chef]
     -> chef
-    * Investigate the bar maiden
+    * [Investigate the bar maiden]
     -> barmaiden
 
 -(boss)
