@@ -15,6 +15,7 @@ public class Supervisor : EnemyStatus
         enemyImage = imgRoot + "Boss_Battle";
         enemySentences = ("HA? oppress the emplyees? cause that¡¯s how the society works!", "You are so naive, the higher class won¡¯t be willing to see more wages, young man.", "It¡¯s human¡¯s instinct to desire the higher power and authority!");
         playerSentences = ("Why you always oppress the emplyees?", "You use the labor of employees just to ingratiate yourself with the higher class?", "Why not try to have a win-win solution? It¡¯s not difficult");
+        enemyName = "Supervisor";
     }
 
     int ultimateCD = 9;

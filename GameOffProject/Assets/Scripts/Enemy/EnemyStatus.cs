@@ -183,4 +183,5 @@ public abstract class EnemyStatus: MonoBehaviour
 
     protected string imgRoot = "Art/Tachies/";
     public string enemyImage;
+    public string enemyName;
 }

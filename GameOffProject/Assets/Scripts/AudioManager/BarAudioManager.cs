@@ -48,13 +48,13 @@ public class BarAudioManager : MonoBehaviour
             timer2 = 0.0f;
         }
 
-        if (timer1 + 4.0f >= TOTAL_TIME && !barAudio2.isPlaying)
+        if (timer1 + 4.5f >= TOTAL_TIME && !barAudio2.isPlaying)
         {
             Debug.Log(3);
             barAudio2.Play();
         }
 
-        if (timer2 + 4.0f >= TOTAL_TIME && barAudio1.isPlaying)
+        if (timer2 + 4.5f >= TOTAL_TIME && barAudio1.isPlaying)
         {
             Debug.Log(4);
             barAudio1.Play();
