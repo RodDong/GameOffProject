@@ -10,7 +10,7 @@ public class RestaurantProgressManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
-    [SerializeField] TextAsset progress2, progress2_1, progress_60;
+    [SerializeField] TextAsset progress2, progress2_1;
     [SerializeField] List<Collider2D> interactables = new List<Collider2D>();
     [SerializeField] GameObject boss_stand, boss_sit;
     [SerializeField] GameObject chef;
@@ -34,6 +34,11 @@ public class RestaurantProgressManager : MonoBehaviour
             boss_sit.SetActive(false);
             boss_stand.SetActive(true);
             ProcessProgress_2();
+        }
+
+        if(progressManager.currentProgress == 60) {
+            door_to_street.enabled = false;
+            door_to_kitchen.enabled = false;
         }
         chef.SetActive(progressManager.currentProgress == 60);
 
@@ -69,10 +74,4 @@ public class RestaurantProgressManager : MonoBehaviour
         blackScreen.SetActive(false);
     }
 
-    private async void ProcessProgress_60()
-    {
-        await Task.Delay(300);
-        player.GetComponent<PlayerMove>().EnterDialogueMode();
-        dialogueManager.EnterDialogueMode(progress_60);
-    }
 }

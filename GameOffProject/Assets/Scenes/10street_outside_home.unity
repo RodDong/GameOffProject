@@ -1086,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &965283882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 715372478}
-  inkJSON: {fileID: 4900000, guid: 3b48624986cae0749943babc0fd5fa14, type: 3}
+  inkJSON: {fileID: 0}
   player: {fileID: 0}
   isInBath: 0
 --- !u!1 &1037205143
@@ -1803,10 +1803,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress1: {fileID: 4900000, guid: d6ad8f8bd4c916147bd8713d2de99a99, type: 3}
-  chefAEncounter: {fileID: 4900000, guid: 3b48624986cae0749943babc0fd5fa14, type: 3}
   subwayStation: {fileID: 419171538}
   door_to_home: {fileID: 780882830}
   chef: {fileID: 965283881}
+  chefAEncounter: {fileID: 4900000, guid: 3b48624986cae0749943babc0fd5fa14, type: 3}
 --- !u!1 &2101843426
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class BedroomProgressManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
-    [SerializeField] TextAsset progress1, progress2_0, progress2_1;
+    [SerializeField] TextAsset progress1, progress2_0, progress2_1, progress60;
     [SerializeField] TextAsset finalText;
     [SerializeField] Collider2D TVcollider, bedCollider, doorCollider;
     [SerializeField] GameObject blackScreen;
@@ -31,6 +31,11 @@ public class BedroomProgressManager : MonoBehaviour
         if (progressManager.currentProgress == -1) {
             ProcessProgress_final();
         }
+        if (progressManager.currentProgress == 60)
+        {
+            doorCollider.enabled = false;
+            bedCollider.enabled = true;
+        }
     }
 
     private void Update() {
@@ -38,8 +43,16 @@ public class BedroomProgressManager : MonoBehaviour
             if (hasTriggered2) {
                 hasTriggered2 = false;
                 ProcessBlackScreen();
-                player.GetComponent<PlayerMove>().EnterDialogueMode();
-                dialogueManager.EnterDialogueMode(progress2_1);
+                if(progressManager.currentProgress == 2)
+                {
+                    player.GetComponent<PlayerMove>().EnterDialogueMode();
+                    dialogueManager.EnterDialogueMode(progress2_1);
+                }
+                if (progressManager.currentProgress == 60)
+                {
+                    player.GetComponent<PlayerMove>().EnterDialogueMode();
+                    dialogueManager.EnterDialogueMode(progress60);
+                }
                 hasTriggered2_1 = true;
                 progressManager.date = 2;
             } else if (hasTriggered2_1) {

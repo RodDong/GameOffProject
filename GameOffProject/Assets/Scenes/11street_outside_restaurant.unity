@@ -688,6 +688,7 @@ MonoBehaviour:
   visualCue: {fileID: 1101656070}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &705079683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,8 +1423,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress2: {fileID: 4900000, guid: 04e225a2c6b932c4c9c2ca139548491d, type: 3}
   progress36: {fileID: 4900000, guid: e5caa4ed4a88df54688196a76852161d, type: 3}
+  progress60: {fileID: 4900000, guid: 1b4ce8dde62a88e45b5dbbefe9b15519, type: 3}
   doorToBar: {fileID: 664437259}
   doorToRestaurant: {fileID: 1957497286}
+  subway: {fileID: 1255682055}
+  backGroundLight: {fileID: 309157153}
+  characterLight: {fileID: 705079683}
 --- !u!1 &1255682055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1478,7 @@ MonoBehaviour:
   visualCue: {fileID: 2028849152}
   inkJSON: {fileID: 4900000, guid: 068cfb407bfd6034b89ce1c81154457d, type: 3}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!61 &1255682058
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1735,6 +1741,7 @@ MonoBehaviour:
   visualCue: {fileID: 215075112}
   inkJSON: {fileID: 0}
   player: {fileID: 0}
+  isInBath: 0
 --- !u!1 &2028849152
 GameObject:
   m_ObjectHideFlags: 0
