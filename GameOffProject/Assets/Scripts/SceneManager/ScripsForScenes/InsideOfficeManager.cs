@@ -9,6 +9,7 @@ public class InsideOfficeManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
+    private BattleManager battleManager;
     private List<int> state_fight_bossB = new List<int>(){24, 30, 34, 42, 61, 70, 67, 52};
     [SerializeField] TextAsset progress2, progress2_1, progress2B;
     [SerializeField] GameObject boss_sit, boss_stand, boss_die;
@@ -20,6 +21,8 @@ public class InsideOfficeManager : MonoBehaviour
         progressManager = FindObjectOfType<ProgressManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         dialogueManager = FindObjectOfType<DialogueManager>();
+        battleManager = FindObjectOfType<BattleManager>();
+        battleManager.gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
 
         if (progressManager.currentProgress == 2) {
             door_to_outside.SetActive(false);

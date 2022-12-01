@@ -11,6 +11,7 @@ public class InsideClinicManager : MonoBehaviour
     private GameObject player;
     private PlayerMove playerObject;
     private DialogueManager dialogueManager;
+    private BattleManager battleManager;
     private bool hasTriggered22;
     [SerializeField] GameObject doctor_sit, doctor_stand, doctor_died, blackScreen, door_outside, clues;
     [SerializeField] TextAsset progress22, progress22_1, progress_doc_end;
@@ -20,6 +21,8 @@ public class InsideClinicManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerObject = GameObject.FindObjectOfType<PlayerMove>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        battleManager = FindObjectOfType<BattleManager>();
+        battleManager.gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
 
         if (progressManager.currentProgress == 22) {
             doctor_sit.SetActive(true);
