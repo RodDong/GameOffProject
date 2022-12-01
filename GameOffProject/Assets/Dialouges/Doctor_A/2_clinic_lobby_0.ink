@@ -1,4 +1,4 @@
-"Are you here to see Doctor Maston?" #speaker:Clinic Assistant #portrait:neutural #tachie:none
+"Are you here to see Doctor Maston?" #speaker:F #portrait:neutural #tachie:none
 
 "Yes." #speaker:P #portrait:neutural #tachie:none
 
@@ -18,7 +18,7 @@ Just as the situation I am in, Doctor Maston is hardly an affable person. But th
 
 It is not only that it looks... old... and dusky...
 
-(...and that it is stuffed with the looks of those walls that had once been painted white and then eroded for years, the sound of some old vent fans stumbling in a hidden corner, and the smell of medical preservatives mixing with cheap fragrances, which only makes it worse, and that...)
+...and that it is stuffed with the looks of those walls that had once been painted white and then eroded for years, the sound of some old vent fans stumbling in a hidden corner, and the smell of medical preservatives mixing with cheap fragrances, which only makes it worse, and that...
 
 The thing that makes it truly worse is that, keeping coming to a clinic of this kind reminds me of all the problem I have, and the fact that I can only afford this kind of... remedy... for them.
 
