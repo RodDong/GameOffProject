@@ -16,6 +16,7 @@ public class StreetOutsideHomeManager : MonoBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
 
         if (progressManager.currentProgress == 1) {
+            door_to_home.SetActive(false);
             ProcessProgress_1();
         } else if (progressManager.currentProgress == 2) {
             ProcessProgress_2();

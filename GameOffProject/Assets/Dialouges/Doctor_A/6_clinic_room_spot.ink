@@ -24,13 +24,13 @@ W-who will want these organs?
 
 I... I want to get away from here... from this...
 
-"Didn't I tell you not to go in the front?"#speaker:Doctor #portrait:neutural #tachie:none
+"Didn't I tell you not to go in the front?"#speaker:D #portrait:neutural #tachie:none
 
 Just... for now, pretend I saw nothing.
 
-"Yes, Doctor." #speaker:Clinic Assistant 1 #portrait:neutural #tachie:none
+"Yes, Doctor." #speaker:M #portrait:neutural #tachie:none
 
-"Now go the other way around from the backdoor."#speaker:Doctor #portrait:neutural #tachie:none
+"Now go the other way around from the backdoor."#speaker:D #portrait:neutural #tachie:none
 
 ...
 
