@@ -445,13 +445,13 @@ public class DialogueManager : MonoBehaviour
                     playerStatus.addClue(8);
                     break;
                 case "doctor's phone":
-                    playerStatus.addClue(10);
+                    playerStatus.addClue(9);
                     break;
                 case "doctor's namelist":
-                    playerStatus.addClue(11);
+                    playerStatus.addClue(10);
                     break;
                 case "doctor's cargo":
-                    playerStatus.addClue(12);
+                    playerStatus.addClue(11);
                     break;
             }
 
