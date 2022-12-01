@@ -24,9 +24,9 @@ public class InsideClinicManager : MonoBehaviour
         battleManager = FindObjectOfType<BattleManager>();
         battleManager.gameObjectsInScene = GameObject.FindGameObjectWithTag("ObjectsToHide");
 
-        if (progressManager.currentProgress == 22) {
+        // if (progressManager.currentProgress == 22) {
             doctor_sit.SetActive(true);
-        }
+        // }
     }
 
     void Update()

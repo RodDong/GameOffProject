@@ -37,6 +37,7 @@ public class StreetOutsideHomeManager : MonoBehaviour
             subwayStation.SetActive(true);
             door_to_home.SetActive(false);
         }
+        private List<int> state_fight_chef = new List<int>(){22, 4, 14, 15, 40, 41, 49, 50, 57, 62, 65, 71, 73};
         if(progressManager.currentProgress == 60 && !progressManager.playerCollidedWithChef)
         {
             chef.SetActive(true);

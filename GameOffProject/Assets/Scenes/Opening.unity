@@ -1401,9 +1401,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1563613741, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563613741, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -2023755405
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867478533324104054, guid: 38598c39c8404b646961ae61e401e441, type: 3}
+      propertyPath: date
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2867478533324104054, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: currentProgress
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3524755194599651596, guid: 38598c39c8404b646961ae61e401e441, type: 3}
       propertyPath: m_RootOrder

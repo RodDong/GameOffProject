@@ -21,9 +21,9 @@ public class OutsideClinicManager : MonoBehaviour
         playerObject = GameObject.FindObjectOfType<PlayerMove>();
         dialogueManager = FindObjectOfType<DialogueManager>();
 
-        if (progressManager.currentProgress == 22) {
+        //if (progressManager.currentProgress == 22) {
             nurse.enabled = true;
-        }
+        //}
     }
 
     void Update()
