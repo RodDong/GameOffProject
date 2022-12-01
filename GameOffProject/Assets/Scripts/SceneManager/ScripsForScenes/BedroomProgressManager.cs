@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 public class BedroomProgressManager : MonoBehaviour
 {
-    public bool hasTriggered2;
+    public bool hasTriggered2, hasTriggered2_1;
     private ProgressManager progressManager;
     private GameObject player;
     private DialogueManager dialogueManager;
     [SerializeField] TextAsset progress1, progress2_0, progress2_1;
-    [SerializeField] Collider2D TVcollider, bedCollider;
+    [SerializeField] Collider2D TVcollider, bedCollider, doorCollider;
     [SerializeField] GameObject blackScreen;
     void Start()
     {
@@ -35,18 +35,25 @@ public class BedroomProgressManager : MonoBehaviour
                 ProcessBlackScreen();
                 player.GetComponent<PlayerMove>().EnterDialogueMode();
                 dialogueManager.EnterDialogueMode(progress2_1);
+                hasTriggered2_1 = true;
+                progressManager.date = 2;
+            } else if (hasTriggered2_1) {
+                hasTriggered2_1 = false;
+                doorCollider.enabled = true;
+                bedCollider.enabled = false;
             }
         }
     }
     
 
     private async void ProcessProgress_1() {
-        await Task.Delay(200);
+        await Task.Delay(300);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress1);
     }
 
     private void ProcessProgress_2() {
+        doorCollider.enabled = false;
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress2_0);
     }

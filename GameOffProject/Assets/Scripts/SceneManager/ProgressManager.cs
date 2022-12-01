@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProgressManager : MonoBehaviour
 {
+    public int date = 1;
     public int currentProgress = 0;
     // Start is called before the first frame update
     public Node[] nodes;
