@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossFightAudio : MonoBehaviour
 {
-    [SerializeField] AudioSource supervisorAudio, chefAudio, lustAudio, doctorAudio;
+    [SerializeField] AudioSource supervisorAudio, chefAudio, lustAudio, doctorAudio, selfAudio;
     GameObject player;
     PlayerMove playerMove;
     EnemyStatus enemy;
@@ -46,6 +46,13 @@ public class BossFightAudio : MonoBehaviour
                     if (!supervisorAudio.isPlaying)
                     {
                         supervisorAudio.Play();
+                    }
+                    break;
+                case "Self":
+                    if (!selfAudio.isPlaying)
+                    {
+                        Debug.Log(1);
+                        selfAudio.Play();
                     }
                     break;
             }
