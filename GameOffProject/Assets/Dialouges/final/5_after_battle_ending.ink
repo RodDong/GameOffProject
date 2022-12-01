@@ -9,14 +9,14 @@
 
 “A shame like me, just like a shame like you.” #speaker:P portrait:neutural #tachie:none
 
-“You own these powers, but what a shame that you let them dominate you.” #speaker:P portrait:neutural #tachie:none
+“You own these powers, but what a shame that you let them dominate you.” #speaker:P 
 
-“A pitiful me who only sees a small part of the world.” #speaker:P portrait:neutural #tachie:none
+“A pitiful me who only sees a small part of the world.” #speaker:P 
 
 
-“NOOOO！I do not want to disappear! Get out of my place!” #speaker:??? portrait:neutural #tachie:none
+“NOOOO！I do not want to disappear! Get out of my place!” #speaker:??? 
 
-“It is you who should never intrude here again, dumbass.” #speaker:P portrait:neutural #tachie:none
+“It is you who should never intrude here again, dumbass.” #speaker:P 
 
 \*with the absurd feeling of relief, you break through the dreaming scenario;\*
 
@@ -25,7 +25,8 @@
 ........................................................................................................
 
 // MC内心觉悟：
-I contemplate the world because the desperate hope makes life so endless and worthless.
+I contemplate the world because the desperate hope makes life so endless and worthless.#speaker:None
+
 
 A boy who seeks for infinite dreams crashes the hope every step as he walks to the world.
 

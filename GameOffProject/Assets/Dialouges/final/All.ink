@@ -25,7 +25,7 @@ Aren’t they more ridiculous than what I was before?
 
 "a drink, to extinguish the fire in my heart.”  #speaker:P #portrait:neutural #tachie:none
 
-”Well, the wine slows my thinking…I should get some sleep…”  #speaker:P #portrait:neutural #tachie:none
+“Well, the wine slows my thinking…I should get some sleep…”  #speaker:P #portrait:neutural #tachie:none
 
 “what is this flame or the burn in my heart?” #speaker:P #portrait:neutural #tachie:none
 
@@ -39,23 +39,23 @@ again, the feeling of darkness, emptiness, and powerlessness
 
 // enter battle
 
-“Well, well, well. You just can't obey what people say, don’t you?” #speaker:??? portrait:neutural #tachie:none
+“Well, well, well. You just can't obey what people say, don’t you?” #speaker:???
 
-“Intrude here again? Challenge me?” #speaker:??? portrait:neutural #tachie:none
+“Intrude here again? Challenge me?” #speaker:??? #portrait:neutural #tachie:none
 
-“What makes you think you can step into this enchantment of mine? ” #speaker:??? portrait:neutural #tachie:none
+“What makes you think you can step into this enchantment of mine? ” #speaker:??? #portrait:neutural #tachie:none
 
-“Huh, there is something different about you.” #speaker:??? portrait:neutural #tachie:none
+“Huh, there is something different about you.” #speaker:??? #portrait:neutural #tachie:none
 
-“But still, still a boring ass of yourself. With nothing to hold, and nothing to use.” #speaker:??? portrait:neutural #tachie:none
+“But still, still a boring ass of yourself. With nothing to hold, and nothing to use.” #speaker:??? #portrait:neutural #tachie:none
 
 
-“I have nothing just like you.” #speaker:P portrait:neutural #tachie:none
+“I have nothing just like you.” #speaker:P #portrait:neutural #tachie:none
 
-“they just like you, no, you are a combination of them.” #speaker:P portrait:neutural #tachie:none
+“they just like you, no, you are a combination of them.” #speaker:P #portrait:neutural #tachie:none
 
-“your pride, your wrath, your lust, and your gluttony… a monster builds from those.” #speaker:P portrait:neutural #tachie:none
+“your pride, your wrath, your lust, and your gluttony… a monster builds from those.” #speaker:P #portrait:neutural #tachie:none
 
-“What a pitiful world where humans can only mourn for their desires.” #speaker:P portrait:neutural #tachie:none #battle:start
+“What a pitiful world where humans can only mourn for their desires.” #speaker:P #portrait:neutural #tachie:none #battle:start
 
 // begin battle
