@@ -12,8 +12,6 @@ It is really chaotic here…Wait, there is a note, a phone, and a ledger?
     * [note] ->note
     * [phone] ->phone
     * [ledger] ->ledger
-    
-    
 
 // 「笔记描述」
 -(note)

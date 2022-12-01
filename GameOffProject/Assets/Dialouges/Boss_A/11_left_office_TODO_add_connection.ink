@@ -1,6 +1,5 @@
 // 「离开办公室」
-
-What should I do next?
+That's ... insane. What should I do next?
  
 // Options:  
     * Call the police to tell what happened in "Feast" restaurant // (lead to the chef b side story)
