@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator tachieAnimator; // tachie is 立绘
     // private Animator layoutAnimator;
     [SerializeField] private ProgressManager progressManager;
+    [SerializeField] private StatusBarManager statusBarManager;
     [SerializeField] private PlayerMove player;
     [SerializeField] private PlayerStatus playerStatus;
     [Header("Choices UI")]
@@ -86,6 +87,8 @@ public class DialogueManager : MonoBehaviour
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
+
+        statusBarManager = FindObjectOfType<StatusBarManager>();
     }
 
     private void Update() 
@@ -135,6 +138,7 @@ public class DialogueManager : MonoBehaviour
         
         if (toBattle) {
             toBattle = false;
+            statusBarManager.ResetEnemyStatus();
             player.EnterBattleMode();
         }
     }
@@ -370,7 +374,7 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
                     await Task.Delay(200);
                     player.transform.position = new Vector3(-10.0f, -4.0f, 1.0f);
-                    player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+                    player.transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
                     break;
                 case "Go to Office and Clinic":
                     Debug.Log("Go to Office");
@@ -409,13 +413,13 @@ public class DialogueManager : MonoBehaviour
                 case "Investigate Record of Surgeries":
                     playerStatus.addClue(6);
                     break;
-                case "Investigate Supervisor's Notebook":
+                case "note":
                     playerStatus.addClue(7);
                     break;
-                case "Investigate Supervisor's Phone":
+                case "phone":
                     playerStatus.addClue(8);
                     break;
-                case "Investigate Supervisor's Account Book":
+                case "ledger":
                     playerStatus.addClue(9);
                     break;
                 case "Investigate Doctor's Phone":
