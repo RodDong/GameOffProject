@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class StudioProgressManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class StudioProgressManager : MonoBehaviour
     private ProgressManager progressManager;
     private GameObject player, lust;
     private DialogueManager dialogueManager;
-    [SerializeField] TextAsset progress36, progress36_1, progress36_2, progress36_3, progress36_4;
+    [SerializeField] TextAsset progress36, progress36_1, progress36_2, makeChoiceJson;
     [SerializeField] List<Collider2D> interactables = new List<Collider2D>();
     [SerializeField] GameObject sim_stand, sim_sit, sim_dead;
     [SerializeField] GameObject blackScreen;
@@ -40,17 +41,28 @@ public class StudioProgressManager : MonoBehaviour
                 trigger1 = true;
                 camera.FollowObjectWithName("Player");
                 bathroomInteractable.isInBath = false;
-                to_bathroom.enabled = false;
+                to_bathroom.gameObject.SetActive(false);
             }
             if (trigger1 && !trigger2) {
-                print("...........");
-                trigger2 = true;
                 ProcessProgress_36_1();
+            } else if (trigger2 && !trigger3) {
+                if (player.GetComponent<PlayerMove>().GetCurState() != PlayerMove.State.Battle) {
+                    sim_stand.SetActive(false);
+                    ProcessProgress_36_2();
+                }
+            }
+            if (trigger4 && !trigger5) {
+                trigger5 = true;
+                makeChoice();
             }
         } else {
             if (bathroomInteractable.isInBath && !trigger1 && player.activeSelf) {
                 player.SetActive(false);
                 camera.FollowObjectWithName("Lust");
+            }
+
+            if (trigger3 && !trigger4) {
+                trigger4 = true;
             }
         }
 
@@ -62,6 +74,7 @@ public class StudioProgressManager : MonoBehaviour
         sim_sit.SetActive(false);
         sim_stand.SetActive(true);
         sim_dead.SetActive(false);
+        to_bar.enabled = false;
         await Task.Delay(500);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress36);
@@ -69,44 +82,37 @@ public class StudioProgressManager : MonoBehaviour
 
     
     private void ProcessProgress_36_1() {
-        
-        print("...");
         sim_stand.transform.localScale = new Vector3(-1f,1f,1f);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(progress36_2);
-        
+        trigger2 = true;
     }
     private async void ProcessProgress_36_2() {
-        await Task.Delay(200);
         ProcessBlackScreen();
-        camera.FollowObjectWithName("Player");
-        lust.transform.position = new Vector3(3f,-1.2f,0f);
-        player.GetComponent<PlayerMove>().EnterDialogueMode();
-        dialogueManager.EnterDialogueMode(progress36_2);
+        await Task.Delay(200);
+        sim_dead.SetActive(true);
+        clues.enabled = true;
+        sim_stand.SetActive(false);
         trigger3 = true;
-    }
-
-    private async void ProcessProgress_36_3() {
-        await Task.Delay(200);
-        lust.transform.position = new Vector3(-13f,-1.2f,0f);
-        player.transform.position = new Vector3(-11f, -1.2f, 0f);
-        blackScreen.SetActive(true);
-        player.GetComponent<PlayerMove>().EnterDialogueMode();
-        dialogueManager.EnterDialogueMode(progress36_3);
-        trigger4 = true;
-    }
-
-    private async void ProcessProgress_36_4() {
-        await Task.Delay(200);
-        blackScreen.SetActive(false);
-        player.GetComponent<PlayerMove>().EnterDialogueMode();
-        dialogueManager.EnterDialogueMode(progress36_4);
-        trigger5 = true;
     }
 
     private async void ProcessBlackScreen() {
         blackScreen.SetActive(true);
         await Task.Delay(400);
         blackScreen.SetActive(false);
+    }
+
+    public async void ProcessPlayerDeath() {
+        SceneManager.LoadScene("9Studio", LoadSceneMode.Single);
+        await Task.Delay(300);
+        player.transform.position = new Vector3(13.47f, -1.0f, 1.0f);
+        player.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+    }
+
+    private void makeChoice() {
+        ProcessBlackScreen();
+        clues.gameObject.SetActive(false);
+        player.GetComponent<PlayerMove>().EnterDialogueMode();
+        dialogueManager.EnterDialogueMode(makeChoiceJson);
     }
 }

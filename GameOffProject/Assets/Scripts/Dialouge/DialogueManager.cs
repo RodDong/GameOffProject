@@ -334,6 +334,31 @@ public class DialogueManager : MonoBehaviour
         // enable and initialize the choices up to the amount of choices for this line of dialogue
         foreach(Choice choice in currentChoices) 
         {
+            
+            List<int> progressStates;
+            if (choice.text == "Investigate the boss") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the doctor") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the chef") {
+                progressStates = new List<int>(){};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            } else if (choice.text == "Investigate the bar maiden") {
+                progressStates = new List<int>(){36};
+                if (progressStates.Contains(progressManager.currentProgress)) {
+                    continue;
+                }
+            }
+            
+
             choices[index].gameObject.SetActive(true);
             choicesText[index].text = choice.text;
             index++;
@@ -401,26 +426,23 @@ public class DialogueManager : MonoBehaviour
                 case "Investigate Chef's Supply List":
                     playerStatus.addClue(2);
                     break;
-                case "Investigate Patient Information":
+                case "A Name List":
                     playerStatus.addClue(3);
                     break;
-                case "Investigate The Pictures":
+                case "A Menu":
                     playerStatus.addClue(4);
                     break;
-                case "Investigate Menu":
+                case "A Phone":
                     playerStatus.addClue(5);
                     break;
-                case "Investigate Record of Surgeries":
+                case "note":
                     playerStatus.addClue(6);
                     break;
-                case "note":
+                case "phone":
                     playerStatus.addClue(7);
                     break;
-                case "phone":
-                    playerStatus.addClue(8);
-                    break;
                 case "ledger":
-                    playerStatus.addClue(9);
+                    playerStatus.addClue(8);
                     break;
                 case "doctor's phone":
                     playerStatus.addClue(10);

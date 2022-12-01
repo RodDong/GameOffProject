@@ -233,6 +233,9 @@ public class BattleManager : MonoBehaviour
         }
         if (FindObjectOfType<InsideOfficeManager>(true) != null) {
             FindObjectOfType<InsideOfficeManager>(true).ProcessPlayerDeath();
+        } 
+        if (FindObjectOfType<StudioProgressManager>(true) != null) {
+            FindObjectOfType<StudioProgressManager>(true).ProcessPlayerDeath();
         }
         if (FindObjectOfType<InsideClinicManager>(true) != null) {
             FindObjectOfType<InsideClinicManager>(true).ProcessPlayerDeath();
@@ -264,8 +267,10 @@ public class BattleManager : MonoBehaviour
 
     void DisplayVictoryDialogue() {
         enemyStatus.DropItems(playerStatus);
-        playerMove.EnterDialogueMode();
-        DialogueManager.GetInstance().EnterDialogueMode(enemyStatus.defeatInkJSON);
+        if (enemyStatus.defeatInkJSON) {
+            playerMove.EnterDialogueMode();
+            DialogueManager.GetInstance().EnterDialogueMode(enemyStatus.defeatInkJSON);
+        }
     }
 
     void DisablePlayerSkillButtons()

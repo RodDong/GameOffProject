@@ -15,7 +15,7 @@ public class Lust : EnemyStatus
         dropItems.Add(new Eye(SkillAttribute.HAPPY));
         dropItems.Add(new Mouth(SkillAttribute.HAPPY));
         enemyImage = imgRoot + "Lust_Battle";
-        enemySentences = ("Lust is part of me, why are you resisting me¡­", "You are just one of us.", "You fear no more? What a LIE!");
+        enemySentences = ("Lust is part of me, why are you resisting meï¿½ï¿½", "You are just one of us.", "You fear no more? What a LIE!");
     }
 
     public override void ResetCurrentHealth()
@@ -66,22 +66,22 @@ public class Lust : EnemyStatus
         // REQUIRES mute and broken to have same duration
         playerStatus.ActivateEffect(new Effect(EffectId.MUTE));
         // note that this does not switch back equipped items once effect wears off
-        return ("You enjoy it, don¡¯t you?", "Oh, see what you made me do..", "Just surrender yourself to me.");
+        return ("You enjoy it, donï¿½ï¿½t you?", "Oh, see what you made me do..", "Just surrender yourself to me.");
     }
 
     private (string, string, string) Secondary(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses Secondary");
-        float damageAmount = 10.0f;
+        float damageAmount = 20.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.CHAOS));
-        return ("Lust is part of me, why are you resisting me¡­", "Humans are all the same. They only trap themselves in the Swamp of Desire.", "You fear no more? What a LIE!");
+        return ("Lust is part of me, why are you resisting meï¿½ï¿½", "Humans are all the same. They only trap themselves in the Swamp of Desire.", "You fear no more? What a LIE!");
     }
 
     private (string, string, string) HappyATK(PlayerStatus playerStatus) {
         Debug.Log("Boss Lust Uses HappyATK");
-        float damageAmount = 10.0f;
+        float damageAmount = 20.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
-        return ("Lust is part of me, why are you resisting me¡­", "You are just one of us.", "You fear no more? What a LIE!");
+        return ("Lust is part of me, why are you resisting meï¿½ï¿½", "You are just one of us.", "You fear no more? What a LIE!");
     }
 
     private (string, string, string) SadATK(PlayerStatus playerStatus) {
@@ -89,8 +89,8 @@ public class Lust : EnemyStatus
         // float damageAmount = 10;
         // DealDamage(playerStatus, damageAmount, SkillAttribute.SAD);
         Effect poisonEffect = new Effect(EffectId.POISON);
-        poisonEffect.SetPoison(SkillAttribute.SAD, 5.0f);
+        poisonEffect.SetPoison(SkillAttribute.SAD, 10.0f);
         playerStatus.ActivateEffect(poisonEffect);
-        return ("HAHA, you have nowhere to go", "You thought¡­and you do not know what to do? that cannot be right¡­", "What a mess¡­ my plan is ruined now");
+        return ("HAHA, you have nowhere to go", "You thoughtï¿½ï¿½and you do not know what to do? that cannot be rightï¿½ï¿½", "What a messï¿½ï¿½ my plan is ruined now");
     }
 }
