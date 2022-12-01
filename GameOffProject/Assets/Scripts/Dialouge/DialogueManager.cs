@@ -306,6 +306,9 @@ public class DialogueManager : MonoBehaviour
                     dialogueSubPanel.SetActive(false);
                     break;
                 case PROGRESS_TAG:
+                    if (progressTags.Count == 0) {
+                        progressManager.transitionToNextState(0);
+                    }
                     progressManager.transitionToNextState(progressTags[int.Parse(tagValue)]);
                     break;
                 case LOAD_SCENE_TAG:

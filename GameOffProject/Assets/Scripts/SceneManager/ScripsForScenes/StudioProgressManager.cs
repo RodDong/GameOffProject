@@ -25,10 +25,8 @@ public class StudioProgressManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         dialogueManager = FindObjectOfType<DialogueManager>();
 
-        if (progressManager.currentProgress == 36) {
-            
-            ProcessProgress_36();
-        }
+        ProcessProgress_36();
+        
     }
 
 
@@ -51,10 +49,13 @@ public class StudioProgressManager : MonoBehaviour
                     ProcessProgress_36_2();
                 }
             }
+
+
             if (trigger4 && !trigger5) {
                 trigger5 = true;
                 makeChoice();
             }
+
         } else {
             if (bathroomInteractable.isInBath && !trigger1 && player.activeSelf) {
                 ProcessBlackScreen();
@@ -63,9 +64,12 @@ public class StudioProgressManager : MonoBehaviour
                 camera.FollowObjectWithName("Lust");
             }
 
+
             if (trigger3 && !trigger4) {
                 trigger4 = true;
             }
+
+            
         }
 
         
@@ -112,7 +116,6 @@ public class StudioProgressManager : MonoBehaviour
     }
 
     private void makeChoice() {
-        ProcessBlackScreen();
         clues.gameObject.SetActive(false);
         player.GetComponent<PlayerMove>().EnterDialogueMode();
         dialogueManager.EnterDialogueMode(makeChoiceJson);

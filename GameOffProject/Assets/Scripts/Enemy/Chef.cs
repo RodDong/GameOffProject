@@ -51,8 +51,8 @@ public class Chef : EnemyStatus
                         return TauntAttack(playerStatus);
                     }
                 }
-                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu¡­with freshly grated meat from some thick, healthy thighs, of course!"
-                    , "You don¡¯t seem to be happy tasting my¡­carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
+                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu with freshly grated meat from some thick, healthy thighs, of course!"
+                    , "You don't seem to be happy tasting my carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
                     , "You questioned my choice of meat? You questioned my carefully designed menu? Why, you mad at me for cannibalism?");
 
             // main dish
@@ -69,7 +69,7 @@ public class Chef : EnemyStatus
                     }
                 }
                 return ("Awww, you seem so happy, happy that you can escape from me? Happy that you are about to taste this pan-seared human belly? ",
-                    "You know, I am in a good mood and don¡¯t think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
+                    "You know, I am in a good mood and don't think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
                     "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
 
             // dessert
@@ -85,13 +85,13 @@ public class Chef : EnemyStatus
                         return TauntAttack(playerStatus);
                     }
                 }
-                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu¡­with freshly grated meat from some thick, healthy thighs, of course! "
-                    , "You don¡¯t seem to be happy tasting my¡­carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work?"
+                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu with freshly grated meat from some thick, healthy thighs, of course! "
+                    , "You don't seem to be happy tasting my carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work?"
                     , "You questioned my choice of meat? You questioned my carefully designed menu? Why, you mad at me for cannibalism?");
 
             default:
-                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu¡­with freshly grated meat from some thick, healthy thighs, of course! "
-                    , "You don¡¯t seem to be happy tasting my¡­carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work?"
+                return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu with freshly grated meat from some thick, healthy thighs, of course! "
+                    , "You don't seem to be happy tasting my carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work?"
                     , "You questioned my choice of meat? You questioned my carefully designed menu? Why, you mad at me for cannibalism?");
         }
     }
@@ -111,8 +111,8 @@ public class Chef : EnemyStatus
         float damageAmount = 15.0f;
         DealDamage(playerStatus, damageAmount, SkillAttribute.ANGRY);
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
-        return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu¡­with freshly grated meat from some thick, healthy thighs, of course!"
-                    , "You don¡¯t seem to be happy tasting my¡­carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
+        return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu with freshly grated meat from some thick, healthy thighs, of course!"
+                    , "You don't seem to be happy tasting my carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
                     , "You questioned my choice of meat? You questioned my carefully designed menu? Why, you mad at me for cannibalism?");
     }
 
@@ -124,7 +124,7 @@ public class Chef : EnemyStatus
         DealDamage(playerStatus, damageAmount, SkillAttribute.HAPPY);
         playerStatus.ActivateEffect(new Effect(EffectId.HEALREDUCTION));
         return ("Awww, you seem so happy, happy that you can escape from me? Happy that you are about to taste this pan-seared human belly? ",
-                    "You know, I am in a good mood and don¡¯t think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
+                    "You know, I am in a good mood and don't think I can stand anyone frowning over my food. I was just about to experiment on making sausage from some freshly cut intestines!",
                     "Huh, yeah, I know I own the best restaurants in the world, with only the most exquisite ingredients that can carry out the true depth of my skill. Why are you so mad at me when you can sit back and relax, waiting for me to bring you a fest? ");
     }
 
@@ -137,8 +137,8 @@ public class Chef : EnemyStatus
         if (!playerStatus.GetActiveEffects().Contains(new Effect(EffectId.SILENCED))) {
             playerStatus.ActivateEffect(new Effect(EffectId.TAUNTED));
         }
-        return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu¡­with freshly grated meat from some thick, healthy thighs, of course!"
-                    , "You don¡¯t seem to be happy tasting my¡­carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
+        return ("You are smiling. Mockery, is it? How dare you. You have yet to taste that Bouillabaisse I just added to the menu with freshly grated meat from some thick, healthy thighs, of course!"
+                    , "You don't seem to be happy tasting my carefully prepared meat bourguignon. Don't you show that face of yours! How ungrate you are, not enjoying my food and my work? "
                     , "You questioned my choice of meat? You questioned my carefully designed menu? Why, you mad at me for cannibalism?");
     }
 

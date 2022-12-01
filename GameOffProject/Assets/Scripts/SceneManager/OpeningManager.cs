@@ -30,7 +30,7 @@ public class OpeningManager : MonoBehaviour
     public async void TeleportBasedOnProgress() {
         switch (progressManager.currentProgress)
         {
-            case 99:
+            case 11:
                 SceneManager.LoadScene("10street_outside_home", LoadSceneMode.Single);
                 await Task.Delay(200);
                 player.transform.position = new Vector3(9.0f, -4.0f, 1.0f);
@@ -42,13 +42,13 @@ public class OpeningManager : MonoBehaviour
                 player.transform.position = new Vector3(-2.69f, 0.0f, 1.0f);
                 player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                 break;
-            case 97 :
+            case 4:
                 SceneManager.LoadScene("12street_outside_clinic", LoadSceneMode.Single);
                 await Task.Delay(200);
                 player.transform.position = new Vector3(12.5f, -2.0f, 1.0f);
                 player.transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
                 break;
-            case 1: case -1:
+            case 1: case -1: case 8:
                 SceneManager.LoadScene("1MCRoom", LoadSceneMode.Single);
                 await Task.Delay(200);
                 player.transform.position = new Vector3(6.7f, -2.0f, 1.0f);
@@ -129,7 +129,7 @@ public class OpeningManager : MonoBehaviour
 
         PlayerMove.State curState = player.GetComponent<PlayerMove>().GetCurState();
 
-        if (curState != PlayerMove.State.Talk && curState != PlayerMove.State.Battle)
+        if (curState != PlayerMove.State.Talk && curState != PlayerMove.State.Battle && progressManager.currentProgress == 0)
         {
             if (endDream) {
                 exitEndDream();

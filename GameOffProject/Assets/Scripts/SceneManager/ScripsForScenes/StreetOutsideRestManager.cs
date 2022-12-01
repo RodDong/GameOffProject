@@ -26,7 +26,7 @@ public class StreetOutsideRestManager : MonoBehaviour
         if (progressManager.currentProgress == 2) {
             ProcessProgress_2();
         }
-        List<int> progressInvestigateSim = new List<int>(){36, 6, 10, 12, 13, 16, 25, 27, 28, 58, 63, 64, 66};
+        List<int> progressInvestigateSim = new List<int>(){36, 6, 8, 10, 12, 13, 16, 25, 27, 28, 58, 63, 64, 66};
         if (progressInvestigateSim.Contains(progressManager.currentProgress)) {
             ProcessProgress_36();
         }

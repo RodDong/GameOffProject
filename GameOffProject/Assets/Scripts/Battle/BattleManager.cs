@@ -275,10 +275,11 @@ public class BattleManager : MonoBehaviour
         DisplayVictoryDialogue();
     }
 
-    void DisplayVictoryDialogue() {
+    async void DisplayVictoryDialogue() {
         enemyStatus.DropItems(playerStatus);
         if (enemyStatus.defeatInkJSON) {
             playerMove.EnterDialogueMode();
+            await Task.Delay(200);
             DialogueManager.GetInstance().EnterDialogueMode(enemyStatus.defeatInkJSON);
         }
     }
