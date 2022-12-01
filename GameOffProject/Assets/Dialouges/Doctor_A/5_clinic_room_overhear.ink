@@ -20,7 +20,7 @@ Not something I should care about as long as he can quickly solve mine.
 
 "..."#speaker:P #portrait:neutural #tachie:none 
 
-、*you hear something through the bulk of metallic door, it is not clear but the voice is enough for you to hear something\*
+\*you hear something through the bulk of metallic door, it is not clear but the voice is enough for you to hear something\*
 
 "...so are we going to get rid of these? This much?" #speaker:Nurse #portrait:neutural #tachie:none
 
